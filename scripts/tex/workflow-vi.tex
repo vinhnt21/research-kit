@@ -54,9 +54,9 @@
   \draw[->, very thick, paperblue] (s5) -- (s6);
 
   % 4 Specialist modules placed under s2, s3, s4, s6
-  \node[specialist, below=1.2cm of s2] (e1) {\textbf{Tính toán lượng tử}\\\texttt{\footnotesize rk-quantum}\\[2pt]\tiny Mô phỏng cục bộ; QPU cần duyệt};
-  \node[specialist, below=1.2cm of s3] (e2) {\textbf{Mạng lượng tử}\\\texttt{\footnotesize rk-quantum-network}\\[2pt]\tiny Kiểm tra định tuyến liên đới};
-  \node[specialist, below=1.2cm of s4] (e3) {\textbf{Đánh giá AI/ML}\\\texttt{\footnotesize rk-ai}\\[2pt]\tiny Kiểm tra rò rỉ và baseline};
+  \node[specialist, below=1.2cm of s2] (e1) {\textbf{Tính toán lượng tử}\\\texttt{\footnotesize rk-quantum}\\[2pt]\tiny Mô phỏng tại máy; phần cứng cần duyệt};
+  \node[specialist, below=1.2cm of s3] (e2) {\textbf{Mạng lượng tử}\\\texttt{\footnotesize rk-quantum-network}\\[2pt]\tiny Kiểm tra đường truyền liên đới};
+  \node[specialist, below=1.2cm of s4] (e3) {\textbf{Đánh giá AI/ML}\\\texttt{\footnotesize rk-ai}\\[2pt]\tiny Kiểm tra rò rỉ dữ liệu};
   \node[specialist, below=1.2cm of s6] (e4) {\textbf{Trực quan \& Slide}\\\texttt{\footnotesize rk-academic-visualize}\\[2pt]\tiny Hình minh họa \& cấu trúc slide};
 
   \draw[->, thick, dashed, draw=navy!60] (e1.north) to[out=60, in=-120] (s3.south west);

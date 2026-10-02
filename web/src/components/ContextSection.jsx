@@ -28,7 +28,7 @@ export default function ContextSection({ t, lang }) {
           <div className="context-card competitor fade-in stagger-2">
             <div className="context-card-badge" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
               <AlertTriangle size={13} />
-              <span>Catalog Bloat</span>
+              <span>{t.context.competitorBadge}</span>
             </div>
             <h3 style={{ fontSize: '1.25rem', marginBottom: '8px' }}>{t.context.competitorTitle}</h3>
             <div className="context-num">{t.context.competitorTokens}</div>
@@ -39,7 +39,7 @@ export default function ContextSection({ t, lang }) {
           <div className="context-card winner fade-in stagger-3">
             <div className="context-card-badge" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
               <CheckCircle2 size={13} />
-              <span>Lean Mindset</span>
+              <span>{t.context.kitBadge}</span>
             </div>
             <h3 style={{ fontSize: '1.25rem', marginBottom: '8px' }}>{t.context.kitTitle}</h3>
             <div className="context-num">{t.context.kitTokens}</div>
@@ -53,7 +53,7 @@ export default function ContextSection({ t, lang }) {
           src={contextImg}
           alt={t.context.heading}
           label={t.context.figureLabel || (lang === 'vi' ? 'Hình 03' : 'Figure 03')}
-          title={t.context.figureTitle || (lang === 'vi' ? 'So sánh mức chiếm dụng context thường trực' : 'Permanent Context Window Footprint Benchmark')}
+          title={t.context.figureTitle || (lang === 'vi' ? 'So sánh phần context luôn được nạp' : 'Permanent Context Window Footprint Benchmark')}
           caption={t.context.figureCaption || t.context.subtitle}
           minReadableWidth={700}
           defaultMode="fit"

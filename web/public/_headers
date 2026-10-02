@@ -11,12 +11,27 @@
 /
   Cache-Control: no-cache, no-store, must-revalidate
 
+/docs
+  Cache-Control: no-cache, no-store, must-revalidate
+
+/docs/
+  Cache-Control: no-cache, no-store, must-revalidate
+
+/roadmap
+  Cache-Control: no-cache, no-store, must-revalidate
+
+/roadmap/
+  Cache-Control: no-cache, no-store, must-revalidate
+
+# Hashed Vite assets: long cache is fine, but NEVER use "immutable".
+# If Cloudflare SPA/404 fallback ever returns index.html for a missing
+# /assets/* path, "immutable" poisons the browser cache for a year and
+# triggers: Failed to load module script ... MIME type of "text/html".
 /assets/*
-  Cache-Control: public, max-age=31536000, immutable
+  Cache-Control: public, max-age=31536000, stale-while-revalidate=86400
 
 /figures/*
   Cache-Control: public, max-age=86400, stale-while-revalidate=604800
 
 /brand/*
   Cache-Control: public, max-age=86400, stale-while-revalidate=604800
-

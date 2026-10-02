@@ -38,13 +38,13 @@
 
   % Top Main Title
   \node[anchor=west, font=\large\bfseries, text=navy] at (-12.8, 6.7)
-    {COMPARISON OF TWO COLLABORATIVE PIPELINES: BLOATED CATALOG vs. RESEARCH KIT};
+    {COMPARISON OF TWO PIPELINES: FREE SKILL SET vs. RESEARCH KIT};
 
   % =========================================================================
   % ROW 1: BLOATED OPEN CATALOG (>150 SKILLS) - BOTTLENECK & HARD TO REVIEW
   % =========================================================================
   \node[anchor=west, font=\footnotesize\bfseries, fill=dangerbg, draw=danger!60, rounded corners=4pt, inner sep=4pt, text=danger] at (-12.8, 5.9)
-    {[X] PIPELINE 1: BLOATED OPEN CATALOG ($>$150 SKILLS) $\rightarrow$ ROUTING AMBIGUITY \& REVIEW BOTTLENECK};
+    {[X] PIPELINE 1: LARGE FREE SKILL SET ($>$150 SKILLS) $\rightarrow$ HARD TO PICK A SKILL \& HARD TO CHECK};
 
   % 1.1 Researcher 1
   \node[card1] (human1) at (-10.5, 3.6) {};
@@ -66,9 +66,9 @@
     \fill[danger] (0, 0.04) circle (0.04cm);
   \end{scope}
   \node[anchor=north, align=center, text=navy] at ($(skill1.north)+(0, -0.98)$) {
-    \textbf{\small BLOATED CATALOG ($>$150)}\\[6pt]
+    \textbf{\small FREE SKILL SET ($>$150)}\\[6pt]
     \footnotesize $\bullet$ Overwhelming skill options\\[3pt]
-    \footnotesize $\bullet$ Misrouting \& tool hallucination\\[3pt]
+    \footnotesize $\bullet$ Picks the wrong skill\\[3pt]
     \footnotesize $\bullet$ \textcolor{danger}{\textbf{Burns 7--10\% context}} ($\sim$14k tok)
   };
 

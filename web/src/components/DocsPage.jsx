@@ -3,6 +3,7 @@ import {
   Copy,
   Check,
   Terminal,
+  ChevronDown,
   ChevronRight,
   ExternalLink,
   Shield,
@@ -57,6 +58,7 @@ export default function DocsPage({ t, lang }) {
   const d = docsContent[lang] || docsContent.en;
   const [activeTab, setActiveTab] = useState(d.lifecycle.methods[0]?.id ?? 'skills-cli');
   const [activeSection, setActiveSection] = useState('lifecycle');
+  const [tocOpen, setTocOpen] = useState(false);
   const { copy, copiedKey } = useCopy();
   const contentRef = useRef(null);
 
@@ -116,7 +118,17 @@ export default function DocsPage({ t, lang }) {
   const scrollTo = (id) => {
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    setTocOpen(false);
   };
+
+  const tocLabel = isVI ? 'Mục lục' : 'Contents';
+  const sectionLabels = {
+    'core-skills': navGroups[1].label,
+    'domain-skills': navGroups[2].label,
+  };
+  const currentItem = navGroups.flatMap((group) => group.items).find((item) => item.id === activeSection);
+  const currentTitle = currentItem?.sub || currentItem?.label || sectionLabels[activeSection] || tocLabel;
+  const showCurrent = currentTitle.toLowerCase() !== tocLabel.toLowerCase();
 
   return (
     <div className="docs-page">
@@ -143,10 +155,28 @@ export default function DocsPage({ t, lang }) {
       {/* ── Layout ───────────────────────────────────────────── */}
       <div className="container docs-body">
         {/* Sidebar */}
+        <div className={`docs-toc-shell${tocOpen ? ' is-open' : ''}`}>
+          <button
+            type="button"
+            className="docs-toc-toggle"
+            aria-expanded={tocOpen}
+            onClick={() => setTocOpen((open) => !open)}
+          >
+            <span className="docs-toc-toggle-kicker">{tocLabel}</span>
+            {showCurrent && <span className="docs-toc-toggle-current">{currentTitle}</span>}
+            <ChevronDown size={18} className={`docs-toc-chevron${tocOpen ? ' is-open' : ''}`} aria-hidden="true" />
+          </button>
         <nav className="docs-toc" aria-label="Table of contents">
           <div className="docs-toc-inner">
             {navGroups.map((group) => (
-              <div key={group.label} className="docs-toc-group">
+              <div
+                key={group.label}
+                className={`docs-toc-group${
+                  group.items.some((item) => item.id === activeSection) || group.label === sectionLabels[activeSection]
+                    ? ' is-current'
+                    : ''
+                }`}
+              >
                 <span className="docs-toc-group-label">{group.label}</span>
                 {group.items.map((item) => (
                   <button
@@ -182,6 +212,7 @@ export default function DocsPage({ t, lang }) {
             </div>
           </div>
         </nav>
+        </div>
 
         {/* Main content */}
         <main className="docs-main" ref={contentRef} id="docs-main-content">
@@ -206,7 +237,6 @@ export default function DocsPage({ t, lang }) {
                   onClick={() => setActiveTab(m.id)}
                 >
                   {m.name}
-                  <span className="docs-tab-badge">{m.badge}</span>
                 </button>
               ))}
             </div>

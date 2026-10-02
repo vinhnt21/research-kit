@@ -98,6 +98,12 @@ npx wrangler rollback <deployment-id>
 | **Node.js Version** | 18+ / 20+ |
 | **Custom Domain** | `research-kit.vinhnguyenthanh.com` |
 | **Default Domain** | `research-kit.pages.dev` |
+| **Not Found handling** | **Single-page application** (để `/docs`, `/roadmap` serve `index.html`) |
+
+> [!IMPORTANT]
+> Giữ **Not Found handling = Single-page application** để `/docs` và `/roadmap` hoạt động.
+> `public/_headers` **không** dùng `immutable` cho `/assets/*`: nếu một request asset bị SPA fallback trả về HTML, trình duyệt sẽ không cache nhầm `text/html` cả năm (lỗi MIME module script).
+> Sau mỗi deploy, hard-refresh (Cmd+Shift+R) nếu vẫn thấy trang trắng.
 
 ## Cấu trúc Thư mục
 

@@ -27,7 +27,6 @@ export const docsContent = {
         {
           id: "skills-cli",
           name: "Skills CLI (Recommended by Vercel Labs)",
-          badge: "Universal",
           desc: "The standard agent skills manager with full CRUD support across popular coding agents.",
           installCmd: "npx skills add vinhnt21/research-kit",
           updateCmd: "npx skills update            # Check & update all\nnpx skills update -y         # Unattended (CI/auto)\nnpx skills update rk-survey  # Update single skill",
@@ -36,7 +35,6 @@ export const docsContent = {
         {
           id: "github-cli",
           name: "GitHub CLI (v2.90.0+)",
-          badge: "Native Agent Profile",
           desc: "Install directly into specific agent profiles via native GitHub CLI commands.",
           installCmd: "gh skill install vinhnt21/research-kit --agent cursor\n# Options: --agent claude-code | --agent codex | --agent antigravity",
           updateCmd: "gh skill update --dry-run    # Preview changes\ngh skill update --all        # Update all skills\ngh skill update rk-data      # Update single skill",
@@ -45,7 +43,6 @@ export const docsContent = {
         {
           id: "agent-assisted",
           name: "Agent-Assisted Installation (ZIP)",
-          badge: "Zero-Terminal",
           desc: "Download ZIP and let your AI agent extract and copy skills automatically.",
           installCmd: "# 1. Download: https://github.com/vinhnt21/research-kit/archive/refs/heads/main.zip\n# 2. Prompt your agent:\nExtract research-kit-main.zip and copy folders from skills/rk-* into your skills directory.",
           updateCmd: "Re-download the ZIP and prompt the agent to overwrite the skills directory with updated files.",
@@ -54,7 +51,6 @@ export const docsContent = {
         {
           id: "manual",
           name: "Manual Git Clone & Directory Setup",
-          badge: "Manual",
           desc: "Clone the repository and place skills directly into the agent directory.",
           installCmd: "git clone https://github.com/vinhnt21/research-kit.git\ncp -r research-kit/skills/rk-* ~/.cursor/skills/        # Cursor\n# cp -r research-kit/skills/rk-* ~/.claude/skills/        # Claude Code\n# cp -r research-kit/skills/rk-* ~/.agents/skills/        # Antigravity\n# cp -r research-kit/skills/rk-* ~/.codex/skills/         # Codex",
           updateCmd: "cd research-kit && git pull\ncp -r skills/rk-* ~/.cursor/skills/",
@@ -382,8 +378,8 @@ export const docsContent = {
       stats: [
         { label: "Quy trình", value: "6 Giai đoạn lõi" },
         { label: "Mở rộng", value: "4 Chuyên ngành" },
-        { label: "Context chiếm dụng", value: "<0,50%" },
-        { label: "Script chạy ngầm", value: "0 (SOP thuần túy)" },
+        { label: "Chiếm dụng Context", value: "<0,50%" },
+        { label: "Script chạy ngầm", value: "0 (chỉ Markdown)" },
       ],
     },
     nav: {
@@ -397,12 +393,11 @@ export const docsContent = {
     },
     lifecycle: {
       title: "Quản Trị Vòng Đời: Cài Đặt, Cập Nhật & Gỡ Bỏ",
-      desc: "Toàn bộ kỹ năng Research Kit là Quy trình vận hành chuẩn (SOP) thuần văn bản Markdown, tuân thủ quy chuẩn Agent Skills. Không cài daemon chạy ngầm, không script phụ thuộc.",
+      desc: "Toàn bộ kỹ năng Research Kit là quy trình viết bằng Markdown, tuân thủ quy chuẩn Agent Skills. Không có chương trình chạy ngầm, không script phụ thuộc.",
       methods: [
         {
           id: "skills-cli",
           name: "Skills CLI (Khuyên dùng từ Vercel Labs)",
-          badge: "Chuẩn Quốc Tế",
           desc: "Trình quản lý kỹ năng tiêu chuẩn cho các AI coding agent với đầy đủ lệnh CRUD.",
           installCmd: "npx skills add vinhnt21/research-kit",
           updateCmd: "npx skills update            # Quét & cập nhật tất cả\nnpx skills update -y         # Tự động xác nhận (CI/auto)\nnpx skills update rk-survey  # Cập nhật riêng 1 skill",
@@ -411,7 +406,6 @@ export const docsContent = {
         {
           id: "github-cli",
           name: "GitHub CLI (v2.90.0+)",
-          badge: "Tích Hợp Agent",
           desc: "Cài đặt trực tiếp vào cấu hình của Cursor, Claude Code, Codex, hoặc Antigravity.",
           installCmd: "gh skill install vinhnt21/research-kit --agent cursor\n# Tùy chọn: --agent claude-code | --agent codex | --agent antigravity",
           updateCmd: "gh skill update --dry-run    # Xem trước thay đổi\ngh skill update --all        # Cập nhật toàn bộ\ngh skill update rk-data      # Cập nhật riêng 1 skill",
@@ -420,7 +414,6 @@ export const docsContent = {
         {
           id: "agent-assisted",
           name: "Cài Đặt Tự Động Qua Agent (File ZIP)",
-          badge: "Không Cần Terminal",
           desc: "Tải file ZIP và ra lệnh cho AI agent tự động giải nén và sao chép.",
           installCmd: "# 1. Tải về: https://github.com/vinhnt21/research-kit/archive/refs/heads/main.zip\n# 2. Nhập lệnh cho Agent:\nGiải nén research-kit-main.zip và chép các thư mục skills/rk-* vào thư mục kỹ năng của bạn.",
           updateCmd: "Tải lại ZIP mới nhất và yêu cầu agent chép đè vào thư mục kỹ năng.",
@@ -429,7 +422,6 @@ export const docsContent = {
         {
           id: "manual",
           name: "Sao Chép Thủ Công Từ Git Clone",
-          badge: "Thủ Công",
           desc: "Clone repository và chép trực tiếp vào thư mục cấu hình của agent trên máy.",
           installCmd: "git clone https://github.com/vinhnt21/research-kit.git\ncp -r research-kit/skills/rk-* ~/.cursor/skills/        # Cursor\n# cp -r research-kit/skills/rk-* ~/.claude/skills/        # Claude Code\n# cp -r research-kit/skills/rk-* ~/.agents/skills/        # Antigravity\n# cp -r research-kit/skills/rk-* ~/.codex/skills/         # Codex",
           updateCmd: "cd research-kit && git pull\ncp -r skills/rk-* ~/.cursor/skills/",

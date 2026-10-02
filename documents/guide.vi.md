@@ -552,7 +552,7 @@ Tuần 6: Minh họa & Báo cáo bảo vệ
 
 ### Cạm bẫy 3: Quá tải bộ nhớ thường trực (Context Bloat)
 * **Vấn đề**: Các bộ kỹ năng khổng lồ (>160 kỹ năng) chiếm dụng hơn 14.000 token (>7% cửa sổ ngữ cảnh) ngay từ đầu, khiến mô hình dễ bị mất tập trung và quên tài liệu nghiên cứu.
-* **Phòng vệ của Research Kit**: Research Kit duy trì dấu chân siêu nhẹ <1.000 token (<0,50% ngữ cảnh), dành trọn vẹn hơn 99,5% không gian cho dữ liệu thô, bài báo gốc và mã nguồn khoa học.
+* **Phòng vệ của Research Kit**: Research Kit duy trì mức chiếm dụng siêu nhẹ <1.000 token (<0,50% ngữ cảnh), dành trọn vẹn hơn 99,5% không gian cho dữ liệu thô, bài báo gốc và mã nguồn khoa học.
 
 ### Cạm bẫy 4: Ô nhiễm chéo giữa các bài báo (Cross-Contamination)
 * **Vấn đề**: Agent làm việc trên bài báo A nhưng vô tình đọc nhầm và lấy số liệu thử nghiệm chưa kiểm chứng của bài báo B trong cùng một repository.

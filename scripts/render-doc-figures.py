@@ -195,9 +195,9 @@ WORKFLOW_TEX = {
   \draw[->, very thick, paperblue] (s5) -- (s6);
 
   % 4 Specialist modules placed under s2, s3, s4, s6
-  \node[specialist, below=1.2cm of s2] (e1) {\textbf{Tính toán lượng tử}\\\texttt{\footnotesize rk-quantum}\\[2pt]\tiny Mô phỏng cục bộ; QPU cần duyệt};
-  \node[specialist, below=1.2cm of s3] (e2) {\textbf{Mạng lượng tử}\\\texttt{\footnotesize rk-quantum-network}\\[2pt]\tiny Kiểm tra định tuyến liên đới};
-  \node[specialist, below=1.2cm of s4] (e3) {\textbf{Đánh giá AI/ML}\\\texttt{\footnotesize rk-ai}\\[2pt]\tiny Kiểm tra rò rỉ và baseline};
+  \node[specialist, below=1.2cm of s2] (e1) {\textbf{Tính toán lượng tử}\\\texttt{\footnotesize rk-quantum}\\[2pt]\tiny Mô phỏng tại máy; phần cứng cần duyệt};
+  \node[specialist, below=1.2cm of s3] (e2) {\textbf{Mạng lượng tử}\\\texttt{\footnotesize rk-quantum-network}\\[2pt]\tiny Kiểm tra đường truyền liên đới};
+  \node[specialist, below=1.2cm of s4] (e3) {\textbf{Đánh giá AI/ML}\\\texttt{\footnotesize rk-ai}\\[2pt]\tiny Kiểm tra rò rỉ dữ liệu};
   \node[specialist, below=1.2cm of s6] (e4) {\textbf{Trực quan \& Slide}\\\texttt{\footnotesize rk-academic-visualize}\\[2pt]\tiny Hình minh họa \& cấu trúc slide};
 
   \draw[->, thick, dashed, draw=navy!60] (e1.north) to[out=60, in=-120] (s3.south west);
@@ -469,10 +469,10 @@ CONTEXT_TEX = {
     \draw[draw=tableborder] ({\x*\xscale}, 0) -- ({\x*\xscale}, -0.15) node[below, font=\footnotesize, text=axiscolor] {\label};
     \draw[dashed, draw=tableborder!60] ({\x*\xscale}, 0) -- ({\x*\xscale}, 2.4);
   }
-  \node[font=\footnotesize\bfseries, text=axiscolor, anchor=north] at ({\trackw/2}, -0.65) {Phần context thường trực trong cửa sổ 200.000 token (\%)};
+  \node[font=\footnotesize\bfseries, text=axiscolor, anchor=north] at ({\trackw/2}, -0.65) {Phần hướng dẫn luôn được nạp (cửa sổ 200.000 token, \%)};
 
   % Bar 1: Monolithic (7.12%)
-  \node[anchor=east, font=\small\bfseries, text=navy] at (-0.35, 1.8) {Scientific Agent Skills -- Danh mục 163 skill};
+  \node[anchor=east, font=\small\bfseries, text=navy] at (-0.35, 1.8) {Scientific Agent Skills -- bộ 163 skill miễn phí};
   \fill[navy, rounded corners=3pt] (0, 1.45) rectangle ({7.123*\xscale}, 2.15);
   \node[anchor=west, font=\footnotesize\bfseries, text=navy] at ({7.123*\xscale + 0.2}, 1.8) {Chiếm 7,12\% context (14.246 token)};
 
@@ -528,13 +528,13 @@ HUMAN_AGENT_PIPELINE_TEX = {
 
   % Top Main Title
   \node[anchor=west, font=\large\bfseries, text=navy] at (-12.8, 6.7)
-    {COMPARISON OF TWO COLLABORATIVE PIPELINES: BLOATED CATALOG vs. RESEARCH KIT};
+    {COMPARISON OF TWO PIPELINES: FREE SKILL SET vs. RESEARCH KIT};
 
   % =========================================================================
   % ROW 1: BLOATED OPEN CATALOG (>150 SKILLS) - BOTTLENECK & HARD TO REVIEW
   % =========================================================================
   \node[anchor=west, font=\footnotesize\bfseries, fill=dangerbg, draw=danger!60, rounded corners=4pt, inner sep=4pt, text=danger] at (-12.8, 5.9)
-    {[X] PIPELINE 1: BLOATED OPEN CATALOG ($>$150 SKILLS) $\rightarrow$ ROUTING AMBIGUITY \& REVIEW BOTTLENECK};
+    {[X] PIPELINE 1: LARGE FREE SKILL SET ($>$150 SKILLS) $\rightarrow$ HARD TO PICK A SKILL \& HARD TO CHECK};
 
   % 1.1 Researcher 1
   \node[card1] (human1) at (-10.5, 3.6) {};
@@ -556,9 +556,9 @@ HUMAN_AGENT_PIPELINE_TEX = {
     \fill[danger] (0, 0.04) circle (0.04cm);
   \end{scope}
   \node[anchor=north, align=center, text=navy] at ($(skill1.north)+(0, -0.98)$) {
-    \textbf{\small BLOATED CATALOG ($>$150)}\\[6pt]
+    \textbf{\small FREE SKILL SET ($>$150)}\\[6pt]
     \footnotesize $\bullet$ Overwhelming skill options\\[3pt]
-    \footnotesize $\bullet$ Misrouting \& tool hallucination\\[3pt]
+    \footnotesize $\bullet$ Picks the wrong skill\\[3pt]
     \footnotesize $\bullet$ \textcolor{danger}{\textbf{Burns 7--10\% context}} ($\sim$14k tok)
   };
 
@@ -738,13 +738,13 @@ HUMAN_AGENT_PIPELINE_TEX = {
 
   % Top Main Title
   \node[anchor=west, font=\large\bfseries, text=navy] at (-12.8, 6.7)
-    {SO SÁNH 2 QUY TRÌNH PHỐI HỢP: CATALOG MỞ vs. RESEARCH KIT};
+    {SO SÁNH 2 QUY TRÌNH: BỘ SKILL MIỄN PHÍ vs. RESEARCH KIT};
 
   % =========================================================================
   % ROW 1: CATALOG MỞ LỚN (>150 SKILL) - RỐI ĐỊNH TUYẾN & KHÓ KIỂM SOÁT
   % =========================================================================
   \node[anchor=west, font=\footnotesize\bfseries, fill=dangerbg, draw=danger!60, rounded corners=4pt, inner sep=4pt, text=danger] at (-12.8, 5.9)
-    {[X] QUY TRÌNH 1: CATALOG MỞ LỚN ($>$150 SKILL) $\rightarrow$ RỐI ĐỊNH TUYẾN \& KHÓ KIỂM SOÁT};
+    {[X] QUY TRÌNH 1: BỘ SKILL MIỄN PHÍ ($>$150) $\rightarrow$ KHÓ CHỌN SKILL \& KHÓ KIỂM SOÁT};
 
   % 1.1 Researcher 1
   \node[card1] (human1) at (-10.5, 3.6) {};
@@ -768,8 +768,8 @@ HUMAN_AGENT_PIPELINE_TEX = {
   \node[anchor=north, align=center, text=navy] at ($(skill1.north)+(0, -0.98)$) {
     \textbf{\small NHIỀU SKILL ($>$150 - RỐI)}\\[6pt]
     \footnotesize $\bullet$ Quá nhiều lựa chọn, dễ nhầm\\[3pt]
-    \footnotesize $\bullet$ Mơ hồ chọn, định tuyến sai\\[3pt]
-    \footnotesize $\bullet$ \textcolor{danger}{\textbf{Tốn 7--10\% context}} ($\sim$14k tok)
+    \footnotesize $\bullet$ Chọn mơ hồ, gọi nhầm skill\\[3pt]
+    \footnotesize $\bullet$ \textcolor{danger}{\textbf{Tốn 7--10\% context}}
   };
 
   % 1.3 Agent 1
@@ -782,9 +782,9 @@ HUMAN_AGENT_PIPELINE_TEX = {
   \end{scope}
   \node[anchor=north, align=center, text=navy] at ($(agent1.north)+(0, -0.98)$) {
     \textbf{\small AGENT THỰC THI}\\[6pt]
-    \footnotesize $\bullet$ Chạy thiếu neo kiểm soát\\[3pt]
-    \footnotesize $\bullet$ Dễ ảo giác (hallucination)\\[3pt]
-    \footnotesize $\bullet$ Sinh log dài, khó lần vết
+    \footnotesize $\bullet$ Chạy không có mốc kiểm soát\\[3pt]
+    \footnotesize $\bullet$ Dễ bịa nguồn hoặc số liệu\\[3pt]
+    \footnotesize $\bullet$ Nhật ký dài, khó lần vết
   };
 
   % 1.4 Review 1
@@ -796,7 +796,7 @@ HUMAN_AGENT_PIPELINE_TEX = {
   \end{scope}
   \node[anchor=north, align=center, text=navy] at ($(review1.north)+(0, -0.98)$) {
     \textbf{\small KẾT QUẢ KHÓ KIỂM SOÁT}\\[6pt]
-    \footnotesize $\bullet$ Khó đối chiếu claim vs log\\[3pt]
+    \footnotesize $\bullet$ Khó đối chiếu luận điểm với nhật ký\\[3pt]
     \footnotesize $\bullet$ Mất hàng giờ mò tìm nguồn\\[3pt]
     \footnotesize $\bullet$ \textcolor{danger}{\textbf{Rủi ro sai lệch học thuật cao}}
   };
@@ -812,12 +812,12 @@ HUMAN_AGENT_PIPELINE_TEX = {
 
   \draw[{Stealth[length=2.5mm]}-{Stealth[length=2.5mm]}, line width=1.3pt, draw=danger] 
     (agent1.east) -- (review1.west)
-    node[midway, above=8pt, fill=dangerbg, draw=danger!40, rounded corners=3pt, inner sep=2.5pt, font=\scriptsize\bfseries, text=danger] {Log thô, thiếu nguồn};
+    node[midway, above=8pt, fill=dangerbg, draw=danger!40, rounded corners=3pt, inner sep=2.5pt, font=\scriptsize\bfseries, text=danger] {Nhật ký thô, thiếu nguồn};
 
   % Row 1 Feedback Loop
   \draw[{Stealth[length=2.5mm]}-{Stealth[length=2.5mm]}, line width=1.2pt, draw=danger!80, dashed] (review1.south) to[out=-145, in=-35, looseness=0.30] 
     node[midway, below, font=\scriptsize\bfseries, text=danger, fill=white, inner sep=3.5pt, rounded corners=4pt, draw=danger!50] 
-    {Quá tải đối chiếu log $\rightarrow$ Mất thời gian làm lại từ đầu (Vòng lặp bế tắc)}
+    {Quá tải khi đối chiếu $\rightarrow$ Mất thời gian làm lại từ đầu}
     (human1.south);
 
 
@@ -825,7 +825,7 @@ HUMAN_AGENT_PIPELINE_TEX = {
   % ROW 2: RESEARCH KIT (10 SKILL) - TINH GỌN, THEO GIAI ĐOẠN & DỄ REVIEW
   % =========================================================================
   \node[anchor=west, font=\footnotesize\bfseries, fill=greenbg, draw=green!60, rounded corners=4pt, inner sep=4pt, text=green!80!black] at (-12.8, -0.9)
-    {[V] QUY TRÌNH 2: RESEARCH KIT (10 SKILL) $\rightarrow$ CHỌN THEO GIAI ĐOẠN \& DỄ DÀNG REVIEW};
+    {[V] QUY TRÌNH 2: RESEARCH KIT (10 SKILL) $\rightarrow$ CHỌN THEO GIAI ĐOẠN \& DỄ KIỂM TRA};
 
   % 2.1 Researcher 2
   \node[card2] (human2) at (-10.5, -3.2) {};
@@ -836,7 +836,7 @@ HUMAN_AGENT_PIPELINE_TEX = {
   \node[anchor=north, align=center, text=navy] at ($(human2.north)+(0, -0.98)$) {
     \textbf{\small NHÀ NGHIÊN CỨU}\\[6pt]
     \footnotesize $\bullet$ Đặt câu hỏi \& giả thuyết\\[3pt]
-    \footnotesize $\bullet$ Giới hạn scope từng chặng\\[3pt]
+    \footnotesize $\bullet$ Giới hạn phạm vi từng chặng\\[3pt]
     \footnotesize $\bullet$ Chuẩn kiểm chứng rõ ràng
   };
 
@@ -850,7 +850,7 @@ HUMAN_AGENT_PIPELINE_TEX = {
   \node[anchor=north, align=center, text=navy] at ($(skill2.north)+(0, -0.98)$) {
     \textbf{\small RESEARCH KIT (10 SKILL)}\\[6pt]
     \footnotesize $\bullet$ 10 skill chia theo 6 giai đoạn\\[3pt]
-    \footnotesize $\bullet$ Ranh giới rõ: Survey $\rightarrow$ Report\\[3pt]
+    \footnotesize $\bullet$ Ranh giới rõ: Khảo sát $\rightarrow$ Báo cáo\\[3pt]
     \footnotesize $\bullet$ \textcolor{green!80!black}{\textbf{Tiết kiệm: tốn $<$0,5\% context}}
   };
 
@@ -868,7 +868,7 @@ HUMAN_AGENT_PIPELINE_TEX = {
     \textbf{\small AGENT THỰC THI}\\[6pt]
     \footnotesize $\bullet$ Tập trung đúng phạm vi\\[3pt]
     \footnotesize $\bullet$ Thực nghiệm có thể tái lập\\[3pt]
-    \footnotesize $\bullet$ Xuất log \& artifact chuẩn hóa
+    \footnotesize $\bullet$ Nhật ký và kết quả có cấu trúc
   };
 
   % 2.4 Review 2
@@ -880,8 +880,8 @@ HUMAN_AGENT_PIPELINE_TEX = {
       (-0.10, -0.03) -- (-0.03, -0.10) -- (0.11, 0.08);
   \end{scope}
   \node[anchor=north, align=center, text=navy] at ($(review2.north)+(0, -0.98)$) {
-    \textbf{\small KẾT QUẢ DỄ REVIEW}\\[6pt]
-    \footnotesize $\bullet$ Đối chiếu claim $\leftrightarrow$ evidence\\[3pt]
+    \textbf{\small KẾT QUẢ DỄ KIỂM}\\[6pt]
+    \footnotesize $\bullet$ Đối chiếu luận điểm $\leftrightarrow$ bằng chứng\\[3pt]
     \footnotesize $\bullet$ Nguồn trích dẫn đã xác thực\\[3pt]
     \footnotesize $\bullet$ \textcolor{green!80!black}{\textbf{Duyệt / Lặp lại nhanh chóng}}
   };

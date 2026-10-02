@@ -26,25 +26,25 @@ export default function ComparisonSection({ t }) {
             <thead>
               <tr>
                 <th>{headers[0]}</th>
-                <th>{headers[1]}</th>
-                <th>{headers[2]}</th>
                 <th className="col-highlight">
                   <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                     <Check size={16} strokeWidth={2.5} />
                     <span>{headers[3]}</span>
                   </div>
                 </th>
+                <th>{headers[1]}</th>
+                <th>{headers[2]}</th>
               </tr>
             </thead>
             <tbody>
               {rows.map((row, idx) => (
                 <tr key={idx}>
                   <td><strong>{row.criteria}</strong></td>
-                  <td style={{ color: 'var(--text-secondary)' }}>{row.comp1}</td>
-                  <td style={{ color: 'var(--text-secondary)' }}>{row.comp2}</td>
                   <td className="col-highlight">
                     {row.kit}
                   </td>
+                  <td style={{ color: 'var(--text-secondary)' }}>{row.comp1}</td>
+                  <td style={{ color: 'var(--text-secondary)' }}>{row.comp2}</td>
                 </tr>
               ))}
             </tbody>

@@ -12,10 +12,9 @@ export default function RoadmapPage({ t }) {
           <header className="roadmap-intro-header fade-in">
             <span className="eyebrow">{roadmap.eyebrow}</span>
             <h1 id="roadmap-title">{roadmap.title}</h1>
-            <div className="roadmap-explanation">
-              <p>{roadmap.explanation}</p>
-            </div>
-            <p className="roadmap-intro-subtitle">{roadmap.subtitle}</p>
+            <p className="roadmap-intro-subtitle">
+              {roadmap.explanation} {roadmap.subtitle}
+            </p>
           </header>
 
           <FigureViewer
