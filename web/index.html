@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="vi" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      (function() {
+        try {
+          var t = localStorage.getItem('rk_theme') || 'light';
+          document.documentElement.setAttribute('data-theme', t);
+          var l = localStorage.getItem('rk_lang') || 'vi';
+          document.documentElement.lang = l;
+        } catch (e) {}
+      })();
+    </script>
+    
+    <!-- Primary SEO Meta Tags -->
+    <title>Research Kit — Lean, Rigorous Scientific Research Skills for AI Agents</title>
+    <meta name="title" content="Research Kit — Lean, Rigorous Scientific Research Skills for AI Agents" />
+    <meta name="description" content="Lean, reproducible, and neighbor-aware scientific research skills for AI coding agents (Cursor, Claude Code, Codex, Antigravity). Enforce empirical gates with <0.50% context footprint." />
+    <meta name="keywords" content="AI agent skills, scientific research AI, Cursor skills, Claude Code skills, research paper workflow, reproducible science, prompt engineering, context efficiency, open source academic tools" />
+    <meta name="author" content="Research Kit Contributors (vinhnt21)" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://research-kit.vinhnguyenthanh.com/" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://research-kit.vinhnguyenthanh.com/" />
+    <meta property="og:site_name" content="Research Kit" />
+    <meta property="og:title" content="Research Kit — Lean, Rigorous Scientific Research Skills for AI Agents" />
+    <meta property="og:description" content="Enforce empirical rigor and stop hallucinated citations with <0.50% context footprint. Designed for Cursor, Claude Code, and Codex." />
+    <meta property="og:image" content="https://research-kit.vinhnguyenthanh.com/figures/workflow-en.png" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://research-kit.vinhnguyenthanh.com/" />
+    <meta property="twitter:title" content="Research Kit — Lean, Rigorous Scientific Research Skills for AI Agents" />
+    <meta property="twitter:description" content="Enforce empirical rigor and stop hallucinated citations with <0.50% context footprint. Designed for Cursor, Claude Code, and Codex." />
+    <meta property="twitter:image" content="https://research-kit.vinhnguyenthanh.com/figures/workflow-en.png" />
+
+    <!-- Favicon & Icons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+    <meta name="theme-color" content="#2563EB" />
+
+    <!-- Fonts preconnect: Inter, Outfit, JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet" />
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Research Kit",
+      "operatingSystem": "Cross-platform (macOS, Linux, Windows)",
+      "applicationCategory": "DeveloperApplication",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "description": "A lean, rigorous, and reproducible open-source scientific research skill suite for AI coding agents such as Cursor, Claude Code, OpenAI Codex, and Google Antigravity.",
+      "softwareVersion": "1.0.0",
+      "license": "https://opensource.org/licenses/Apache-2.0",
+      "author": {
+        "@type": "Person",
+        "name": "vinhnt21",
+        "url": "https://github.com/vinhnt21"
+      },
+      "url": "https://research-kit.vinhnguyenthanh.com/"
+    }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
