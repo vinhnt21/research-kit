@@ -1,5 +1,6 @@
 import React from 'react';
 import { Gauge, Sparkles, AlertTriangle, CheckCircle2 } from 'lucide-react';
+import FigureViewer from './FigureViewer';
 
 export default function ContextSection({ t, lang }) {
   const contextImg = `/figures/context-${lang}.svg`;
@@ -47,15 +48,19 @@ export default function ContextSection({ t, lang }) {
           </div>
         </div>
 
-        {/* Diagram Image */}
-        <div className="diagram-container fade-in-scale">
-          <img 
-            src={contextImg} 
-            alt="Context token comparison between Scientific Agent Skills and Research Kit" 
-            className="diagram-img"
-            loading="lazy"
-          />
-        </div>
+        {/* Diagram Image with FigureViewer */}
+        <FigureViewer
+          src={contextImg}
+          alt={t.context.heading}
+          label={t.context.figureLabel || (lang === 'vi' ? 'Hình 03' : 'Figure 03')}
+          title={t.context.figureTitle || (lang === 'vi' ? 'So sánh mức chiếm dụng context thường trực' : 'Permanent Context Window Footprint Benchmark')}
+          caption={t.context.figureCaption || t.context.subtitle}
+          minReadableWidth={700}
+          defaultMode="fit"
+          lang={lang}
+          viewerText={t.figureViewer}
+          className="fade-in-scale"
+        />
       </div>
     </section>
   );

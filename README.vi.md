@@ -123,6 +123,19 @@ python3 scripts/render-doc-figures.py
 
 ---
 
+## Tài liệu
+
+Tài liệu công khai nằm trong [`documents/`](documents/):
+
+| Tài liệu | Mô tả |
+| :--- | :--- |
+| [`documents/guide.md`](documents/guide.md) | Cẩm nang vận hành đầy đủ (tiếng Anh): cài đặt/cập nhật/gỡ bỏ, cô lập đa bài báo, sổ tay từng skill, playbook đầu-cuối, bảng quyết định và anti-patterns |
+| [`documents/guide.vi.md`](documents/guide.vi.md) | Cùng cẩm nang bằng tiếng Việt |
+
+Xem bản tương tác trên website: [Tài liệu](https://research-kit.vinhnguyenthanh.com/docs).
+
+---
+
 ## So sánh & Các Ưu điểm Cốt lõi
 
 Nghiên cứu khoa học với AI agent hiện nay gặp phải nhiều vấn đề: context bị lãng phí nghiêm trọng, agent "ảo giác" khi tìm kiếm công cụ, và phụ thuộc vào các framework cứng nhắc. Research Kit được thiết kế để giải quyết trực tiếp các điểm nghẽn kiến trúc tồn tại ở các thư viện trước đó như **Scientific Agent Skills** (Kassis và cộng sự, 2026) và **Science Superpowers** (K-Dense-AI).

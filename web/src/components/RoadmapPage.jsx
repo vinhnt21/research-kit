@@ -1,7 +1,9 @@
 import { ArrowRight } from 'lucide-react';
+import FigureViewer from './FigureViewer';
 
 export default function RoadmapPage({ t }) {
   const roadmap = t.roadmap;
+  const isVi = t.nav?.roadmap === 'Lộ trình';
 
   return (
     <section className="roadmap-page" aria-labelledby="roadmap-title">
@@ -16,15 +18,18 @@ export default function RoadmapPage({ t }) {
             <p className="roadmap-intro-subtitle">{roadmap.subtitle}</p>
           </header>
 
-          <figure className="roadmap-paper-figure fade-in-scale">
-            <div className="roadmap-figure-scroll">
-              <img src={roadmap.figure.src} alt={roadmap.figure.alt} />
-            </div>
-            <figcaption>
-              <span>{roadmap.figure.label}</span>
-              {roadmap.figure.caption}
-            </figcaption>
-          </figure>
+          <FigureViewer
+            src={roadmap.figure.src}
+            alt={roadmap.figure.alt}
+            label={roadmap.figure.label}
+            title={roadmap.title}
+            caption={roadmap.figure.caption}
+            minReadableWidth={880}
+            defaultMode="scroll"
+            lang={isVi ? 'vi' : 'en'}
+            viewerText={t.figureViewer}
+            className="fade-in-scale"
+          />
         </div>
       </div>
 

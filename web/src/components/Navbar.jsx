@@ -5,7 +5,7 @@ export default function Navbar({ lang, setLang, theme, setTheme, t, currentPage 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState(
-    currentPage === 'roadmap' ? 'roadmap' : 'lifecycle'
+    currentPage === 'roadmap' ? 'roadmap' : currentPage === 'docs' ? 'docs' : 'lifecycle'
   );
 
   useEffect(() => {
@@ -14,6 +14,11 @@ export default function Navbar({ lang, setLang, theme, setTheme, t, currentPage 
 
       if (currentPage === 'roadmap') {
         setActiveSection('roadmap');
+        return;
+      }
+
+      if (currentPage === 'docs') {
+        setActiveSection('docs');
         return;
       }
 
@@ -70,6 +75,7 @@ export default function Navbar({ lang, setLang, theme, setTheme, t, currentPage 
     { id: 'lifecycle', label: t.nav.intro, href: currentPage === 'home' ? '#lifecycle' : '/#lifecycle' },
     { id: 'advantages', label: t.nav.advantages, href: currentPage === 'home' ? '#advantages' : '/#advantages' },
     { id: 'roadmap', label: t.nav.roadmap, href: '/roadmap' },
+    { id: 'docs', label: t.nav.docs || (lang === 'vi' ? 'Tài liệu' : 'Docs'), href: '/docs' },
     { id: 'install', label: t.nav.install, href: currentPage === 'home' ? '#install' : '/#install' },
     { id: 'faq', label: t.nav.faq, href: currentPage === 'home' ? '#faq' : '/#faq' },
   ];
@@ -94,7 +100,7 @@ export default function Navbar({ lang, setLang, theme, setTheme, t, currentPage 
                     href={item.href}
                     className={`nav-link ${activeSection === item.id ? 'active' : ''}`}
                     onClick={() => setActiveSection(item.id)}
-                    aria-current={activeSection === item.id ? (item.id === 'roadmap' ? 'page' : 'location') : undefined}
+                    aria-current={activeSection === item.id ? (item.id === 'roadmap' || item.id === 'docs' ? 'page' : 'location') : undefined}
                   >
                     {item.label}
                   </a>
@@ -185,7 +191,7 @@ export default function Navbar({ lang, setLang, theme, setTheme, t, currentPage 
                   setActiveSection(item.id);
                   closeMobileMenu();
                 }}
-                aria-current={activeSection === item.id ? (item.id === 'roadmap' ? 'page' : 'location') : undefined}
+                aria-current={activeSection === item.id ? (item.id === 'roadmap' || item.id === 'docs' ? 'page' : 'location') : undefined}
               >
                 {item.label}
               </a>

@@ -12,10 +12,14 @@ import FAQSection from './components/FAQSection';
 import CTASection from './components/CTASection';
 import Footer from './components/Footer';
 import RoadmapPage from './components/RoadmapPage';
+import DocsPage from './components/DocsPage';
 
 export default function App() {
-  const currentPage = window.location.pathname.replace(/\/+$/, '') === '/roadmap'
+  const path = window.location.pathname.replace(/\/+$/, '');
+  const currentPage = path === '/roadmap'
     ? 'roadmap'
+    : path === '/docs'
+    ? 'docs'
     : 'home';
 
   // Mặc định là Tiếng Việt ('vi'), lưu vào localStorage để ghi nhớ lựa chọn của người dùng
@@ -41,6 +45,8 @@ export default function App() {
     document.documentElement.lang = lang;
     document.title = currentPage === 'roadmap'
       ? `${content[lang]?.nav.roadmap || 'Roadmap'} | Research Kit`
+      : currentPage === 'docs'
+      ? `${content[lang]?.nav.docs || 'Documentation'} | Research Kit`
       : 'Research Kit — Lean Research Skills for AI Agents';
     try {
       localStorage.setItem('rk_lang', lang);
@@ -101,7 +107,7 @@ export default function App() {
   const t = content[lang] || content.en;
 
   return (
-    <div className={`app-wrapper ${currentPage === 'roadmap' ? 'roadmap-view' : ''}`}>
+    <div className={`app-wrapper ${currentPage === 'roadmap' ? 'roadmap-view' : currentPage === 'docs' ? 'docs-view' : ''}`}>
       <div className="bg-grid" aria-hidden="true"></div>
       
       <Navbar 
@@ -116,6 +122,8 @@ export default function App() {
       <main id="main-content" role="main">
         {currentPage === 'roadmap' ? (
           <RoadmapPage t={t} />
+        ) : currentPage === 'docs' ? (
+          <DocsPage t={t} lang={lang} />
         ) : (
           <>
             {/* =================================================================

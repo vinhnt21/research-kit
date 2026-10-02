@@ -13,6 +13,7 @@ import {
   Presentation, 
   ShieldCheck 
 } from 'lucide-react';
+import FigureViewer from './FigureViewer';
 
 const iconMap = {
   search: Search,
@@ -42,15 +43,19 @@ export default function LifecycleSection({ t, lang }) {
           <p className="section-subtitle">{t.lifecycle.subtitle}</p>
         </div>
 
-        {/* Vector SVG Diagram */}
-        <div className="diagram-container fade-in-scale">
-          <img 
-            src={workflowImg} 
-            alt="Research Kit 6-Stage Core Workflow and 4 Domain Extensions" 
-            className="diagram-img"
-            loading="lazy"
-          />
-        </div>
+        {/* Vector SVG Diagram with Interactive Figure Viewer */}
+        <FigureViewer
+          src={workflowImg}
+          alt={t.lifecycle.heading}
+          label={t.lifecycle.figureLabel || (lang === 'vi' ? 'Hình 01' : 'Figure 01')}
+          title={t.lifecycle.figureTitle || (lang === 'vi' ? 'Quy trình 6 giai đoạn cốt lõi & 4 module mở rộng' : '6-Stage Core Research Lifecycle & 4 Pluggable Domain Extensions')}
+          caption={t.lifecycle.figureCaption || t.lifecycle.subtitle}
+          minReadableWidth={840}
+          defaultMode="scroll"
+          lang={lang}
+          viewerText={t.figureViewer}
+          className="fade-in-scale"
+        />
 
         {/* Part 1: Core 6 Skills */}
         <div className="fade-in" style={{ marginBottom: '40px' }}>

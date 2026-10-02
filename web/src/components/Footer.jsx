@@ -24,8 +24,14 @@ export default function Footer({ t }) {
               </a>
             </li>
             <li>
-              <a href="https://github.com/vinhnt21/research-kit#readme" target="_blank" rel="noopener noreferrer">
+              <a href="/docs">
                 {t.footer.docs}
+              </a>
+            </li>
+            <li>
+              <a href="https://github.com/vinhnt21/research-kit/tree/main/documents" target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+                <span>{t.footer.guides}</span>
+                <ExternalLink size={13} />
               </a>
             </li>
             <li>

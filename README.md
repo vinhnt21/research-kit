@@ -123,6 +123,19 @@ python3 scripts/render-doc-figures.py
 
 ---
 
+## Documentation
+
+Public guides live in [`documents/`](documents/):
+
+| Guide | Description |
+| :--- | :--- |
+| [`documents/guide.md`](documents/guide.md) | Full operational handbook (English): install/update/uninstall, multi-paper isolation, per-skill reference, end-to-end playbook, decision matrix, and anti-patterns |
+| [`documents/guide.vi.md`](documents/guide.vi.md) | Same handbook in Vietnamese |
+
+Browse the interactive version on the site: [Docs](https://research-kit.vinhnguyenthanh.com/docs).
+
+---
+
 ## Comparison & Key Advantages
 
 Scientific inquiry using AI agents currently suffers from severe standing context bloat, routing hallucinations, and brittle framework dependencies. Research Kit was engineered specifically to solve the architectural bottlenecks found in earlier libraries like **Scientific Agent Skills** (Kassis et al., 2026) and **Science Superpowers** (K-Dense-AI).

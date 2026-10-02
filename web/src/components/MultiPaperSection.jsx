@@ -1,5 +1,6 @@
 import React from 'react';
 import { Layers, FolderGit2, ShieldAlert, BookOpen } from 'lucide-react';
+import FigureViewer from './FigureViewer';
 
 const principleIcons = [FolderGit2, ShieldAlert, BookOpen];
 
@@ -37,14 +38,18 @@ export default function MultiPaperSection({ t, lang }) {
             })}
           </div>
 
-          <div className="diagram-container fade-in-scale">
-            <img 
-              src={papersImg} 
-              alt="Multi-paper isolation architecture and read-only literature shelf" 
-              className="diagram-img"
-              loading="lazy"
-            />
-          </div>
+          <FigureViewer
+            src={papersImg}
+            alt={t.multipaper.heading}
+            label={t.multipaper.figureLabel || (lang === 'vi' ? 'Hình 02' : 'Figure 02')}
+            title={t.multipaper.figureTitle || (lang === 'vi' ? 'Kiến trúc phân lập Active Paper & Kệ tài liệu dùng chung' : 'Active Paper Isolation & Read-Only Shared Literature Architecture')}
+            caption={t.multipaper.figureCaption || t.multipaper.subtitle}
+            minReadableWidth={740}
+            defaultMode="scroll"
+            lang={lang}
+            viewerText={t.figureViewer}
+            className="fade-in-scale"
+          />
         </div>
       </div>
     </section>
