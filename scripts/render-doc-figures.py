@@ -86,8 +86,8 @@ WORKFLOW_TEX = {
     fill=lightfill,
     rounded corners=4pt,
     thick,
-    minimum width=2.45cm,
-    minimum height=1.65cm,
+    minimum width=2.75cm,
+    minimum height=2.05cm,
     align=center,
     font=\small
   },
@@ -97,20 +97,20 @@ WORKFLOW_TEX = {
     dashed,
     rounded corners=4pt,
     thick,
-    minimum width=2.45cm,
-    minimum height=1.45cm,
+    minimum width=2.75cm,
+    minimum height=1.55cm,
     align=center,
     font=\small
   }
 ]
 
   % Core Pipeline
-  \node[stage] (s1) at (0, 0) {\textbf{01. Survey}\\\texttt{\footnotesize rk-survey}\\[3pt]\colorbox{gatebg}{\textcolor{gatecolor}{\scriptsize\bfseries [Evidence Lock]}}};
-  \node[stage, right=of s1] (s2) {\textbf{02. Idea}\\\texttt{\footnotesize rk-idea}\\[3pt]\colorbox{gatebg}{\textcolor{gatecolor}{\scriptsize\bfseries [Falsification]}}};
-  \node[stage, right=of s2] (s3) {\textbf{03. Method}\\\texttt{\footnotesize rk-method}\\[3pt]\colorbox{gatebg}{\textcolor{gatecolor}{\scriptsize\bfseries [Protocol Freeze]}}};
-  \node[stage, right=of s3] (s4) {\textbf{04. Data}\\\texttt{\footnotesize rk-data}\\[3pt]\colorbox{gatebg}{\textcolor{gatecolor}{\scriptsize\bfseries [Rerun Check]}}};
-  \node[stage, right=of s4] (s5) {\textbf{05. Write}\\\texttt{\footnotesize rk-write}\\[3pt]\colorbox{gatebg}{\textcolor{gatecolor}{\scriptsize\bfseries [Claim Align]}}};
-  \node[stage, right=of s5] (s6) {\textbf{06. Report}\\\texttt{\footnotesize rk-report}\\[3pt]\colorbox{gatebg}{\textcolor{gatecolor}{\scriptsize\bfseries [Disseminate]}}};
+  \node[stage] (s1) at (0, 0) {\textbf{01. Literature}\\[-1pt]\textbf{Survey}\\\texttt{\footnotesize rk-survey}\\[3pt]\colorbox{gatebg}{\textcolor{gatecolor}{\scriptsize\bfseries [Sources verified]}}};
+  \node[stage, right=of s1] (s2) {\textbf{02. Questions \&}\\[-1pt]\textbf{Hypotheses}\\\texttt{\footnotesize rk-idea}\\[3pt]\colorbox{gatebg}{\textcolor{gatecolor}{\scriptsize\bfseries [Rivals are testable]}}};
+  \node[stage, right=of s2] (s3) {\textbf{03. Method}\\[-1pt]\textbf{Design}\\\texttt{\footnotesize rk-method}\\[3pt]\colorbox{gatebg}{\textcolor{gatecolor}{\scriptsize\bfseries [Method recorded]}}};
+  \node[stage, right=of s3] (s4) {\textbf{04. Data Processing}\\[-1pt]\textbf{\& Verification}\\\texttt{\footnotesize rk-data}\\[3pt]\colorbox{gatebg}{\textcolor{gatecolor}{\scriptsize\bfseries [Data rerun]}}};
+  \node[stage, right=of s4] (s5) {\textbf{05. Manuscript}\\[-1pt]\textbf{Drafting}\\\texttt{\footnotesize rk-write}\\[3pt]\colorbox{gatebg}{\textcolor{gatecolor}{\scriptsize\bfseries [Claims match evidence]}}};
+  \node[stage, right=of s5] (s6) {\textbf{06. Results}\\[-1pt]\textbf{Reporting}\\\texttt{\footnotesize rk-report}\\[3pt]\colorbox{gatebg}{\textcolor{gatecolor}{\scriptsize\bfseries [Results verified]}}};
 
   \draw[->, very thick, paperblue] (s1) -- (s2);
   \draw[->, very thick, paperblue] (s2) -- (s3);
@@ -119,10 +119,10 @@ WORKFLOW_TEX = {
   \draw[->, very thick, paperblue] (s5) -- (s6);
 
   % 4 Specialist modules placed under s2, s3, s4, s6
-  \node[specialist, below=1.2cm of s2] (e1) {\textbf{Quantum}\\\texttt{\footnotesize rk-quantum}\\[2pt]\tiny Local Sim vs QPU};
-  \node[specialist, below=1.2cm of s3] (e2) {\textbf{Quantum Net}\\\texttt{\footnotesize rk-quantum-network}\\[2pt]\tiny Entanglement Routing};
-  \node[specialist, below=1.2cm of s4] (e3) {\textbf{AI / ML}\\\texttt{\footnotesize rk-ai}\\[2pt]\tiny Leakage \& Baselines};
-  \node[specialist, below=1.2cm of s6] (e4) {\textbf{Slides}\\\texttt{\footnotesize rk-academic-slides}\\[2pt]\tiny Source-Grounded};
+  \node[specialist, below=1.2cm of s2] (e1) {\textbf{Quantum Computing}\\\texttt{\footnotesize rk-quantum}\\[2pt]\tiny Local simulation; QPU by approval};
+  \node[specialist, below=1.2cm of s3] (e2) {\textbf{Quantum Networks}\\\texttt{\footnotesize rk-quantum-network}\\[2pt]\tiny Entanglement routing checks};
+  \node[specialist, below=1.2cm of s4] (e3) {\textbf{AI / ML Evaluation}\\\texttt{\footnotesize rk-ai}\\[2pt]\tiny Leakage and baseline checks};
+  \node[specialist, below=1.2cm of s6] (e4) {\textbf{Academic Slides}\\\texttt{\footnotesize rk-academic-slides}\\[2pt]\tiny Source and structure checks};
 
   \draw[->, thick, dashed, draw=navy!60] (e1.north) to[out=60, in=-120] (s3.south west);
   \draw[->, thick, dashed, draw=navy!60] (e2.north) -- (s3.south);
@@ -130,8 +130,8 @@ WORKFLOW_TEX = {
   \draw[->, thick, dashed, draw=navy!60] (e4.north) -- (s6.south);
 
   % Side Labels
-  \node[font=\scriptsize\bfseries, text=navy!80, anchor=east, align=right] at ($(s1.west)+(-0.3,0)$) {Core\\Pipeline};
-  \node[font=\scriptsize\bfseries, text=navy!80, anchor=east, align=right] at ($(s1.west)+(-0.3,-2.85)$) {Specialist\\Modules};
+  \node[font=\scriptsize\bfseries, text=navy!80, anchor=east, align=right] at ($(s1.west)+(-0.3,0)$) {Core Research\\Workflow};
+  \node[font=\scriptsize\bfseries, text=navy!80, anchor=east, align=right] at ($(s1.west)+(-0.3,-3.05)$) {Domain\\Modules};
 
 \end{tikzpicture}
 \end{document}
@@ -159,8 +159,8 @@ WORKFLOW_TEX = {
     fill=lightfill,
     rounded corners=4pt,
     thick,
-    minimum width=2.45cm,
-    minimum height=1.65cm,
+    minimum width=2.75cm,
+    minimum height=2.05cm,
     align=center,
     font=\small
   },
@@ -170,20 +170,20 @@ WORKFLOW_TEX = {
     dashed,
     rounded corners=4pt,
     thick,
-    minimum width=2.45cm,
-    minimum height=1.45cm,
+    minimum width=2.75cm,
+    minimum height=1.55cm,
     align=center,
     font=\small
   }
 ]
 
   % Core Pipeline
-  \node[stage] (s1) at (0, 0) {\textbf{01. Khảo sát}\\\texttt{\footnotesize rk-survey}\\[3pt]\colorbox{gatebg}{\textcolor{gatecolor}{\scriptsize\bfseries [Khóa bằng chứng]}}};
-  \node[stage, right=of s1] (s2) {\textbf{02. Ý tưởng}\\\texttt{\footnotesize rk-idea}\\[3pt]\colorbox{gatebg}{\textcolor{gatecolor}{\scriptsize\bfseries [Tiêu chí bác bỏ]}}};
-  \node[stage, right=of s2] (s3) {\textbf{03. Phương pháp}\\\texttt{\footnotesize rk-method}\\[3pt]\colorbox{gatebg}{\textcolor{gatecolor}{\scriptsize\bfseries [Khóa giao thức]}}};
-  \node[stage, right=of s3] (s4) {\textbf{04. Dữ liệu}\\\texttt{\footnotesize rk-data}\\[3pt]\colorbox{gatebg}{\textcolor{gatecolor}{\scriptsize\bfseries [Kiểm tra chạy lại]}}};
-  \node[stage, right=of s4] (s5) {\textbf{05. Viết bài}\\\texttt{\footnotesize rk-write}\\[3pt]\colorbox{gatebg}{\textcolor{gatecolor}{\scriptsize\bfseries [Khớp kết luận]}}};
-  \node[stage, right=of s5] (s6) {\textbf{06. Báo cáo}\\\texttt{\footnotesize rk-report}\\[3pt]\colorbox{gatebg}{\textcolor{gatecolor}{\scriptsize\bfseries [Phổ biến]}}};
+  \node[stage] (s1) at (0, 0) {\textbf{01. Khảo sát}\\[-1pt]\textbf{tài liệu}\\\texttt{\footnotesize rk-survey}\\[3pt]\colorbox{gatebg}{\textcolor{gatecolor}{\scriptsize\bfseries [Nguồn đã kiểm tra]}}};
+  \node[stage, right=of s1] (s2) {\textbf{02. Câu hỏi \&}\\[-1pt]\textbf{giả thuyết}\\\texttt{\footnotesize rk-idea}\\[3pt]\colorbox{gatebg}{\textcolor{gatecolor}{\scriptsize\bfseries [Giả thuyết có thể bác bỏ]}}};
+  \node[stage, right=of s2] (s3) {\textbf{03. Thiết kế}\\[-1pt]\textbf{phương pháp}\\\texttt{\footnotesize rk-method}\\[3pt]\colorbox{gatebg}{\textcolor{gatecolor}{\scriptsize\bfseries [Phương pháp đã ghi nhận]}}};
+  \node[stage, right=of s3] (s4) {\textbf{04. Xử lý \&}\\[-1pt]\textbf{kiểm chứng dữ liệu}\\\texttt{\footnotesize rk-data}\\[3pt]\colorbox{gatebg}{\textcolor{gatecolor}{\scriptsize\bfseries [Dữ liệu đã chạy lại]}}};
+  \node[stage, right=of s4] (s5) {\textbf{05. Soạn thảo}\\[-1pt]\textbf{bài báo}\\\texttt{\footnotesize rk-write}\\[3pt]\colorbox{gatebg}{\textcolor{gatecolor}{\scriptsize\bfseries [Luận điểm khớp bằng chứng]}}};
+  \node[stage, right=of s5] (s6) {\textbf{06. Báo cáo}\\[-1pt]\textbf{kết quả}\\\texttt{\footnotesize rk-report}\\[3pt]\colorbox{gatebg}{\textcolor{gatecolor}{\scriptsize\bfseries [Kết quả đã kiểm chứng]}}};
 
   \draw[->, very thick, paperblue] (s1) -- (s2);
   \draw[->, very thick, paperblue] (s2) -- (s3);
@@ -192,10 +192,10 @@ WORKFLOW_TEX = {
   \draw[->, very thick, paperblue] (s5) -- (s6);
 
   % 4 Specialist modules placed under s2, s3, s4, s6
-  \node[specialist, below=1.2cm of s2] (e1) {\textbf{Lượng tử}\\\texttt{\footnotesize rk-quantum}\\[2pt]\tiny Mô phỏng vs QPU};
-  \node[specialist, below=1.2cm of s3] (e2) {\textbf{Mạng lượng tử}\\\texttt{\footnotesize rk-quantum-network}\\[2pt]\tiny Định tuyến vướng víu};
-  \node[specialist, below=1.2cm of s4] (e3) {\textbf{Chuẩn AI/ML}\\\texttt{\footnotesize rk-ai}\\[2pt]\tiny Rò rỉ \& Baseline};
-  \node[specialist, below=1.2cm of s6] (e4) {\textbf{Slide học thuật}\\\texttt{\footnotesize rk-academic-slides}\\[2pt]\tiny Bám sát nguồn};
+  \node[specialist, below=1.2cm of s2] (e1) {\textbf{Tính toán lượng tử}\\\texttt{\footnotesize rk-quantum}\\[2pt]\tiny Mô phỏng cục bộ; QPU cần duyệt};
+  \node[specialist, below=1.2cm of s3] (e2) {\textbf{Mạng lượng tử}\\\texttt{\footnotesize rk-quantum-network}\\[2pt]\tiny Kiểm tra định tuyến liên đới};
+  \node[specialist, below=1.2cm of s4] (e3) {\textbf{Đánh giá AI/ML}\\\texttt{\footnotesize rk-ai}\\[2pt]\tiny Kiểm tra rò rỉ và baseline};
+  \node[specialist, below=1.2cm of s6] (e4) {\textbf{Slide học thuật}\\\texttt{\footnotesize rk-academic-slides}\\[2pt]\tiny Kiểm tra nguồn và cấu trúc};
 
   \draw[->, thick, dashed, draw=navy!60] (e1.north) to[out=60, in=-120] (s3.south west);
   \draw[->, thick, dashed, draw=navy!60] (e2.north) -- (s3.south);
@@ -203,8 +203,8 @@ WORKFLOW_TEX = {
   \draw[->, thick, dashed, draw=navy!60] (e4.north) -- (s6.south);
 
   % Side Labels
-  \node[font=\scriptsize\bfseries, text=navy!80, anchor=east, align=right] at ($(s1.west)+(-0.3,0)$) {Quy trình\\Cốt lõi};
-  \node[font=\scriptsize\bfseries, text=navy!80, anchor=east, align=right] at ($(s1.west)+(-0.3,-2.85)$) {Module\\Chuyên sâu};
+  \node[font=\scriptsize\bfseries, text=navy!80, anchor=east, align=right] at ($(s1.west)+(-0.3,0)$) {Quy trình nghiên cứu\\cốt lõi};
+  \node[font=\scriptsize\bfseries, text=navy!80, anchor=east, align=right] at ($(s1.west)+(-0.3,-3.05)$) {Module\\chuyên ngành};
 
 \end{tikzpicture}
 \end{document}
@@ -252,52 +252,52 @@ PAPERS_TEX = {
 
   % 3 Generic Paper Workspaces
   \node[paper] (p1) {
-    \textbf{\textcolor{navy}{paper-1/}}\\\scriptsize Self-Contained Workspace\\[5pt]
+    \textbf{\textcolor{navy}{paper-1/}}\\\scriptsize Workspace for Paper 1\\[5pt]
     \footnotesize
     \begin{tabular}{l}
-      $\bullet$ \texttt{AGENTS.md} (Local Context)\\
-      $\bullet$ \texttt{references/} Local Citations\\
-      $\bullet$ \texttt{src/} Experiment Code\\
-      $\bullet$ \texttt{results/} Output Logs \& Data\\
-      $\bullet$ \texttt{figures/} Publication Plots\\
-      $\bullet$ \texttt{draft/} Manuscript Text
+      $\bullet$ \texttt{AGENTS.md} -- Scope and research questions\\
+      $\bullet$ \texttt{references/} -- Verified citation sources\\
+      $\bullet$ \texttt{src/} -- Experiment code\\
+      $\bullet$ \texttt{results/} -- Stored data and outputs\\
+      $\bullet$ \texttt{figures/} -- Publication figures\\
+      $\bullet$ \texttt{draft/} -- Current manuscript
     \end{tabular}
   };
 
   \node[paper, right=of p1] (p2) {
-    \textbf{\textcolor{navy}{paper-2/}}\\\scriptsize Self-Contained Workspace\\[5pt]
+    \textbf{\textcolor{navy}{paper-2/}}\\\scriptsize Workspace for Paper 2\\[5pt]
     \footnotesize
     \begin{tabular}{l}
-      $\bullet$ \texttt{AGENTS.md} (Local Context)\\
-      $\bullet$ \texttt{references/} Local Citations\\
-      $\bullet$ \texttt{src/} Experiment Code\\
-      $\bullet$ \texttt{results/} Output Logs \& Data\\
-      $\bullet$ \texttt{figures/} Publication Plots\\
-      $\bullet$ \texttt{draft/} Manuscript Text
+      $\bullet$ \texttt{AGENTS.md} -- Scope and research questions\\
+      $\bullet$ \texttt{references/} -- Verified citation sources\\
+      $\bullet$ \texttt{src/} -- Experiment code\\
+      $\bullet$ \texttt{results/} -- Stored data and outputs\\
+      $\bullet$ \texttt{figures/} -- Publication figures\\
+      $\bullet$ \texttt{draft/} -- Current manuscript
     \end{tabular}
   };
 
   \node[paper, right=of p2] (p3) {
-    \textbf{\textcolor{navy}{paper-n/}}\\\scriptsize Self-Contained Workspace\\[5pt]
+    \textbf{\textcolor{navy}{paper-n/}}\\\scriptsize Workspace for Paper n\\[5pt]
     \footnotesize
     \begin{tabular}{l}
-      $\bullet$ \texttt{AGENTS.md} (Local Context)\\
-      $\bullet$ \texttt{references/} Local Citations\\
-      $\bullet$ \texttt{src/} Experiment Code\\
-      $\bullet$ \texttt{results/} Output Logs \& Data\\
-      $\bullet$ \texttt{figures/} Publication Plots\\
-      $\bullet$ \texttt{draft/} Manuscript Text
+      $\bullet$ \texttt{AGENTS.md} -- Scope and research questions\\
+      $\bullet$ \texttt{references/} -- Verified citation sources\\
+      $\bullet$ \texttt{src/} -- Experiment code\\
+      $\bullet$ \texttt{results/} -- Stored data and outputs\\
+      $\bullet$ \texttt{figures/} -- Publication figures\\
+      $\bullet$ \texttt{draft/} -- Current manuscript
     \end{tabular}
   };
 
   % Barrier Box
   \node[draw=barrierred, dashed, thick, rounded corners=6pt, inner sep=10pt, fit=(p1) (p2) (p3)] (barrier) {};
-  \node[fill=white, draw=barrierred, rounded corners=3pt, font=\footnotesize\bfseries, text=barrierred] at (barrier.north) {\quad Strict Workspace Isolation: Sibling folders never leak data, baselines, or unverified claims \quad};
+  \node[fill=white, draw=barrierred, rounded corners=3pt, font=\footnotesize\bfseries, text=barrierred] at (barrier.north) {\quad Each paper keeps its own data, code, results, and manuscript \quad};
 
   % Shared Shelf Below
   \node[shelf, below=0.9cm of barrier] (shelf) {
-    \textbf{\textcolor{navy}{references/ (Core Shared References - Read Only)}}\\[2pt]
-    \footnotesize Global literature shelf, survey notes, PDFs, and master BibTeX shared across papers
+    \textbf{\textcolor{navy}{references/ -- Shared Literature Library (Read Only)}}\\[2pt]
+    \footnotesize Contains checked PDFs, survey notes, and the shared BibTeX library; each citation is rechecked for the active paper
   };
 
   \draw[->, thick, dashed, draw=navy!60] (shelf.north -| p1.south) -- (p1.south) node[midway, right, font=\tiny, text=navy] {read};
@@ -347,52 +347,52 @@ PAPERS_TEX = {
 
   % 3 Generic Paper Workspaces
   \node[paper] (p1) {
-    \textbf{\textcolor{navy}{paper-1/}}\\\scriptsize Không gian độc lập bài 1\\[5pt]
+    \textbf{\textcolor{navy}{paper-1/}}\\\scriptsize Không gian làm việc riêng cho Bài 1\\[5pt]
     \footnotesize
     \begin{tabular}{l}
-      $\bullet$ \texttt{AGENTS.md} (Quy ước bài 1)\\
-      $\bullet$ \texttt{references/} Trích dẫn riêng\\
-      $\bullet$ \texttt{src/} Mã nguồn thực nghiệm\\
-      $\bullet$ \texttt{results/} Log kết quả \& Dữ liệu\\
-      $\bullet$ \texttt{figures/} Đồ thị xuất bản\\
-      $\bullet$ \texttt{draft/} Bản thảo bài báo
+      $\bullet$ \texttt{AGENTS.md} -- Phạm vi và câu hỏi nghiên cứu\\
+      $\bullet$ \texttt{references/} -- Nguồn trích dẫn đã kiểm tra\\
+      $\bullet$ \texttt{src/} -- Mã thực nghiệm\\
+      $\bullet$ \texttt{results/} -- Dữ liệu và kết quả đã lưu\\
+      $\bullet$ \texttt{figures/} -- Hình và đồ thị xuất bản\\
+      $\bullet$ \texttt{draft/} -- Bản thảo hiện hành
     \end{tabular}
   };
 
   \node[paper, right=of p1] (p2) {
-    \textbf{\textcolor{navy}{paper-2/}}\\\scriptsize Không gian độc lập bài 2\\[5pt]
+    \textbf{\textcolor{navy}{paper-2/}}\\\scriptsize Không gian làm việc riêng cho Bài 2\\[5pt]
     \footnotesize
     \begin{tabular}{l}
-      $\bullet$ \texttt{AGENTS.md} (Quy ước bài 2)\\
-      $\bullet$ \texttt{references/} Trích dẫn riêng\\
-      $\bullet$ \texttt{src/} Mã nguồn thực nghiệm\\
-      $\bullet$ \texttt{results/} Log kết quả \& Dữ liệu\\
-      $\bullet$ \texttt{figures/} Đồ thị xuất bản\\
-      $\bullet$ \texttt{draft/} Bản thảo bài báo
+      $\bullet$ \texttt{AGENTS.md} -- Phạm vi và câu hỏi nghiên cứu\\
+      $\bullet$ \texttt{references/} -- Nguồn trích dẫn đã kiểm tra\\
+      $\bullet$ \texttt{src/} -- Mã thực nghiệm\\
+      $\bullet$ \texttt{results/} -- Dữ liệu và kết quả đã lưu\\
+      $\bullet$ \texttt{figures/} -- Hình và đồ thị xuất bản\\
+      $\bullet$ \texttt{draft/} -- Bản thảo hiện hành
     \end{tabular}
   };
 
   \node[paper, right=of p2] (p3) {
-    \textbf{\textcolor{navy}{paper-n/}}\\\scriptsize Không gian độc lập bài n\\[5pt]
+    \textbf{\textcolor{navy}{paper-n/}}\\\scriptsize Không gian làm việc riêng cho Bài n\\[5pt]
     \footnotesize
     \begin{tabular}{l}
-      $\bullet$ \texttt{AGENTS.md} (Quy ước bài n)\\
-      $\bullet$ \texttt{references/} Trích dẫn riêng\\
-      $\bullet$ \texttt{src/} Mã nguồn thực nghiệm\\
-      $\bullet$ \texttt{results/} Log kết quả \& Dữ liệu\\
-      $\bullet$ \texttt{figures/} Đồ thị xuất bản\\
-      $\bullet$ \texttt{draft/} Bản thảo bài báo
+      $\bullet$ \texttt{AGENTS.md} -- Phạm vi và câu hỏi nghiên cứu\\
+      $\bullet$ \texttt{references/} -- Nguồn trích dẫn đã kiểm tra\\
+      $\bullet$ \texttt{src/} -- Mã thực nghiệm\\
+      $\bullet$ \texttt{results/} -- Dữ liệu và kết quả đã lưu\\
+      $\bullet$ \texttt{figures/} -- Hình và đồ thị xuất bản\\
+      $\bullet$ \texttt{draft/} -- Bản thảo hiện hành
     \end{tabular}
   };
 
   % Barrier Box
   \node[draw=barrierred, dashed, thick, rounded corners=6pt, inner sep=10pt, fit=(p1) (p2) (p3)] (barrier) {};
-  \node[fill=white, draw=barrierred, rounded corners=3pt, font=\footnotesize\bfseries, text=barrierred] at (barrier.north) {\quad Ranh giới cô lập: Các thư mục bài báo độc lập, không dùng lẫn số liệu, baseline hay bản thảo \quad};
+  \node[fill=white, draw=barrierred, rounded corners=3pt, font=\footnotesize\bfseries, text=barrierred] at (barrier.north) {\quad Mỗi bài báo sử dụng dữ liệu, mã nguồn, kết quả và bản thảo riêng \quad};
 
   % Shared Shelf Below
   \node[shelf, below=0.9cm of barrier] (shelf) {
-    \textbf{\textcolor{navy}{references/ (Tài liệu tham khảo chung - Chỉ đọc)}}\\[2pt]
-    \footnotesize Kệ tài liệu tham khảo chung toàn đề tài, ghi chú khảo sát, PDFs và master BibTeX
+    \textbf{\textcolor{navy}{references/ -- Thư viện tài liệu dùng chung (Chỉ đọc)}}\\[2pt]
+    \footnotesize Lưu PDF, ghi chú khảo sát và BibTeX dùng chung; mỗi trích dẫn được kiểm tra lại theo bài báo hiện hành
   };
 
   \draw[->, thick, dashed, draw=navy!60] (shelf.north -| p1.south) -- (p1.south) node[midway, right, font=\tiny, text=navy] {đọc};
@@ -428,17 +428,17 @@ CONTEXT_TEX = {
     \draw[draw=tableborder] ({\x*\xscale}, 0) -- ({\x*\xscale}, -0.15) node[below, font=\footnotesize, text=axiscolor] {\label};
     \draw[dashed, draw=tableborder!60] ({\x*\xscale}, 0) -- ({\x*\xscale}, 2.4);
   }
-  \node[font=\footnotesize\bfseries, text=axiscolor, anchor=north] at ({\trackw/2}, -0.65) {Share of 200,000-Token Context Window (\%)};
+  \node[font=\footnotesize\bfseries, text=axiscolor, anchor=north] at ({\trackw/2}, -0.65) {Persistent skill context in a 200,000-token window (\%)};
 
   % Bar 1: Monolithic (7.12%)
-  \node[anchor=east, font=\small\bfseries, text=navy] at (-0.35, 1.8) {Scientific Agent Skills (163 skills)};
+  \node[anchor=east, font=\small\bfseries, text=navy] at (-0.35, 1.8) {Scientific Agent Skills -- 163-skill catalog};
   \fill[navy, rounded corners=3pt] (0, 1.45) rectangle ({7.123*\xscale}, 2.15);
-  \node[anchor=west, font=\footnotesize\bfseries, text=navy] at ({7.123*\xscale + 0.2}, 1.8) {7.12\% (14,246 tokens)};
+  \node[anchor=west, font=\footnotesize\bfseries, text=navy] at ({7.123*\xscale + 0.2}, 1.8) {Uses 7.12\% of context (14,246 tokens)};
 
   % Bar 2: Research Kit (0.49%)
-  \node[anchor=east, font=\small\bfseries, text=tealblue] at (-0.35, 0.7) {Research Kit (10 skills)};
+  \node[anchor=east, font=\small\bfseries, text=tealblue] at (-0.35, 0.7) {Research Kit -- 10 research skills};
   \fill[tealblue!85, rounded corners=3pt] (0, 0.35) rectangle ({0.49*\xscale}, 1.05);
-  \node[anchor=west, font=\footnotesize\bfseries, text=tealblue] at ({0.49*\xscale + 0.2}, 0.7) {$<$0.50\% ($\sim$1,000 tokens)};
+  \node[anchor=west, font=\footnotesize\bfseries, text=tealblue] at ({0.49*\xscale + 0.2}, 0.7) {Uses $<$0.50\% of context ($\sim$1,000 tokens)};
 
 \end{tikzpicture}
 \end{document}
@@ -466,17 +466,17 @@ CONTEXT_TEX = {
     \draw[draw=tableborder] ({\x*\xscale}, 0) -- ({\x*\xscale}, -0.15) node[below, font=\footnotesize, text=axiscolor] {\label};
     \draw[dashed, draw=tableborder!60] ({\x*\xscale}, 0) -- ({\x*\xscale}, 2.4);
   }
-  \node[font=\footnotesize\bfseries, text=axiscolor, anchor=north] at ({\trackw/2}, -0.65) {Tỷ lệ chiếm dụng trong cửa sổ 200.000 Token (\%)};
+  \node[font=\footnotesize\bfseries, text=axiscolor, anchor=north] at ({\trackw/2}, -0.65) {Phần context thường trực trong cửa sổ 200.000 token (\%)};
 
   % Bar 1: Monolithic (7.12%)
-  \node[anchor=east, font=\small\bfseries, text=navy] at (-0.35, 1.8) {Scientific Agent Skills (163 skill)};
+  \node[anchor=east, font=\small\bfseries, text=navy] at (-0.35, 1.8) {Scientific Agent Skills -- Danh mục 163 skill};
   \fill[navy, rounded corners=3pt] (0, 1.45) rectangle ({7.123*\xscale}, 2.15);
-  \node[anchor=west, font=\footnotesize\bfseries, text=navy] at ({7.123*\xscale + 0.2}, 1.8) {7,12\% (14.246 token)};
+  \node[anchor=west, font=\footnotesize\bfseries, text=navy] at ({7.123*\xscale + 0.2}, 1.8) {Chiếm 7,12\% context (14.246 token)};
 
   % Bar 2: Research Kit (0.49%)
-  \node[anchor=east, font=\small\bfseries, text=tealblue] at (-0.35, 0.7) {Research Kit (10 skill)};
+  \node[anchor=east, font=\small\bfseries, text=tealblue] at (-0.35, 0.7) {Research Kit -- 10 skill nghiên cứu};
   \fill[tealblue!85, rounded corners=3pt] (0, 0.35) rectangle ({0.49*\xscale}, 1.05);
-  \node[anchor=west, font=\footnotesize\bfseries, text=tealblue] at ({0.49*\xscale + 0.2}, 0.7) {$<$0,50\% ($\sim$1.000 token)};
+  \node[anchor=west, font=\footnotesize\bfseries, text=tealblue] at ({0.49*\xscale + 0.2}, 0.7) {Chiếm $<$0,50\% context ($\sim$1.000 token)};
 
 \end{tikzpicture}
 \end{document}
@@ -594,4 +594,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

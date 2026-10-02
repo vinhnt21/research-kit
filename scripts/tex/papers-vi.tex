@@ -38,52 +38,52 @@
 
   % 3 Generic Paper Workspaces
   \node[paper] (p1) {
-    \textbf{\textcolor{navy}{paper-1/}}\\\scriptsize Không gian độc lập bài 1\\[5pt]
+    \textbf{\textcolor{navy}{paper-1/}}\\\scriptsize Không gian làm việc riêng cho Bài 1\\[5pt]
     \footnotesize
     \begin{tabular}{l}
-      $\bullet$ \texttt{AGENTS.md} (Quy ước bài 1)\\
-      $\bullet$ \texttt{references/} Trích dẫn riêng\\
-      $\bullet$ \texttt{src/} Mã nguồn thực nghiệm\\
-      $\bullet$ \texttt{results/} Log kết quả \& Dữ liệu\\
-      $\bullet$ \texttt{figures/} Đồ thị xuất bản\\
-      $\bullet$ \texttt{draft/} Bản thảo bài báo
+      $\bullet$ \texttt{AGENTS.md} -- Phạm vi và câu hỏi nghiên cứu\\
+      $\bullet$ \texttt{references/} -- Nguồn trích dẫn đã kiểm tra\\
+      $\bullet$ \texttt{src/} -- Mã thực nghiệm\\
+      $\bullet$ \texttt{results/} -- Dữ liệu và kết quả đã lưu\\
+      $\bullet$ \texttt{figures/} -- Hình và đồ thị xuất bản\\
+      $\bullet$ \texttt{draft/} -- Bản thảo hiện hành
     \end{tabular}
   };
 
   \node[paper, right=of p1] (p2) {
-    \textbf{\textcolor{navy}{paper-2/}}\\\scriptsize Không gian độc lập bài 2\\[5pt]
+    \textbf{\textcolor{navy}{paper-2/}}\\\scriptsize Không gian làm việc riêng cho Bài 2\\[5pt]
     \footnotesize
     \begin{tabular}{l}
-      $\bullet$ \texttt{AGENTS.md} (Quy ước bài 2)\\
-      $\bullet$ \texttt{references/} Trích dẫn riêng\\
-      $\bullet$ \texttt{src/} Mã nguồn thực nghiệm\\
-      $\bullet$ \texttt{results/} Log kết quả \& Dữ liệu\\
-      $\bullet$ \texttt{figures/} Đồ thị xuất bản\\
-      $\bullet$ \texttt{draft/} Bản thảo bài báo
+      $\bullet$ \texttt{AGENTS.md} -- Phạm vi và câu hỏi nghiên cứu\\
+      $\bullet$ \texttt{references/} -- Nguồn trích dẫn đã kiểm tra\\
+      $\bullet$ \texttt{src/} -- Mã thực nghiệm\\
+      $\bullet$ \texttt{results/} -- Dữ liệu và kết quả đã lưu\\
+      $\bullet$ \texttt{figures/} -- Hình và đồ thị xuất bản\\
+      $\bullet$ \texttt{draft/} -- Bản thảo hiện hành
     \end{tabular}
   };
 
   \node[paper, right=of p2] (p3) {
-    \textbf{\textcolor{navy}{paper-n/}}\\\scriptsize Không gian độc lập bài n\\[5pt]
+    \textbf{\textcolor{navy}{paper-n/}}\\\scriptsize Không gian làm việc riêng cho Bài n\\[5pt]
     \footnotesize
     \begin{tabular}{l}
-      $\bullet$ \texttt{AGENTS.md} (Quy ước bài n)\\
-      $\bullet$ \texttt{references/} Trích dẫn riêng\\
-      $\bullet$ \texttt{src/} Mã nguồn thực nghiệm\\
-      $\bullet$ \texttt{results/} Log kết quả \& Dữ liệu\\
-      $\bullet$ \texttt{figures/} Đồ thị xuất bản\\
-      $\bullet$ \texttt{draft/} Bản thảo bài báo
+      $\bullet$ \texttt{AGENTS.md} -- Phạm vi và câu hỏi nghiên cứu\\
+      $\bullet$ \texttt{references/} -- Nguồn trích dẫn đã kiểm tra\\
+      $\bullet$ \texttt{src/} -- Mã thực nghiệm\\
+      $\bullet$ \texttt{results/} -- Dữ liệu và kết quả đã lưu\\
+      $\bullet$ \texttt{figures/} -- Hình và đồ thị xuất bản\\
+      $\bullet$ \texttt{draft/} -- Bản thảo hiện hành
     \end{tabular}
   };
 
   % Barrier Box
   \node[draw=barrierred, dashed, thick, rounded corners=6pt, inner sep=10pt, fit=(p1) (p2) (p3)] (barrier) {};
-  \node[fill=white, draw=barrierred, rounded corners=3pt, font=\footnotesize\bfseries, text=barrierred] at (barrier.north) {\quad Ranh giới cô lập: Các thư mục bài báo độc lập, không dùng lẫn số liệu, baseline hay bản thảo \quad};
+  \node[fill=white, draw=barrierred, rounded corners=3pt, font=\footnotesize\bfseries, text=barrierred] at (barrier.north) {\quad Mỗi bài báo sử dụng dữ liệu, mã nguồn, kết quả và bản thảo riêng \quad};
 
   % Shared Shelf Below
   \node[shelf, below=0.9cm of barrier] (shelf) {
-    \textbf{\textcolor{navy}{references/ (Tài liệu tham khảo chung - Chỉ đọc)}}\\[2pt]
-    \footnotesize Kệ tài liệu tham khảo chung toàn đề tài, ghi chú khảo sát, PDFs và master BibTeX
+    \textbf{\textcolor{navy}{references/ -- Thư viện tài liệu dùng chung (Chỉ đọc)}}\\[2pt]
+    \footnotesize Lưu PDF, ghi chú khảo sát và BibTeX dùng chung; mỗi trích dẫn được kiểm tra lại theo bài báo hiện hành
   };
 
   \draw[->, thick, dashed, draw=navy!60] (shelf.north -| p1.south) -- (p1.south) node[midway, right, font=\tiny, text=navy] {đọc};

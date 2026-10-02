@@ -21,8 +21,8 @@
     fill=lightfill,
     rounded corners=4pt,
     thick,
-    minimum width=2.45cm,
-    minimum height=1.65cm,
+    minimum width=2.75cm,
+    minimum height=2.05cm,
     align=center,
     font=\small
   },
@@ -32,20 +32,20 @@
     dashed,
     rounded corners=4pt,
     thick,
-    minimum width=2.45cm,
-    minimum height=1.45cm,
+    minimum width=2.75cm,
+    minimum height=1.55cm,
     align=center,
     font=\small
   }
 ]
 
   % Core Pipeline
-  \node[stage] (s1) at (0, 0) {\textbf{01. Survey}\\\texttt{\footnotesize rk-survey}\\[3pt]\colorbox{gatebg}{\textcolor{gatecolor}{\scriptsize\bfseries [Evidence Lock]}}};
-  \node[stage, right=of s1] (s2) {\textbf{02. Idea}\\\texttt{\footnotesize rk-idea}\\[3pt]\colorbox{gatebg}{\textcolor{gatecolor}{\scriptsize\bfseries [Falsification]}}};
-  \node[stage, right=of s2] (s3) {\textbf{03. Method}\\\texttt{\footnotesize rk-method}\\[3pt]\colorbox{gatebg}{\textcolor{gatecolor}{\scriptsize\bfseries [Protocol Freeze]}}};
-  \node[stage, right=of s3] (s4) {\textbf{04. Data}\\\texttt{\footnotesize rk-data}\\[3pt]\colorbox{gatebg}{\textcolor{gatecolor}{\scriptsize\bfseries [Rerun Check]}}};
-  \node[stage, right=of s4] (s5) {\textbf{05. Write}\\\texttt{\footnotesize rk-write}\\[3pt]\colorbox{gatebg}{\textcolor{gatecolor}{\scriptsize\bfseries [Claim Align]}}};
-  \node[stage, right=of s5] (s6) {\textbf{06. Report}\\\texttt{\footnotesize rk-report}\\[3pt]\colorbox{gatebg}{\textcolor{gatecolor}{\scriptsize\bfseries [Disseminate]}}};
+  \node[stage] (s1) at (0, 0) {\textbf{01. Literature}\\[-1pt]\textbf{Survey}\\\texttt{\footnotesize rk-survey}\\[3pt]\colorbox{gatebg}{\textcolor{gatecolor}{\scriptsize\bfseries [Sources verified]}}};
+  \node[stage, right=of s1] (s2) {\textbf{02. Questions \&}\\[-1pt]\textbf{Hypotheses}\\\texttt{\footnotesize rk-idea}\\[3pt]\colorbox{gatebg}{\textcolor{gatecolor}{\scriptsize\bfseries [Rivals are testable]}}};
+  \node[stage, right=of s2] (s3) {\textbf{03. Method}\\[-1pt]\textbf{Design}\\\texttt{\footnotesize rk-method}\\[3pt]\colorbox{gatebg}{\textcolor{gatecolor}{\scriptsize\bfseries [Method recorded]}}};
+  \node[stage, right=of s3] (s4) {\textbf{04. Data Processing}\\[-1pt]\textbf{\& Verification}\\\texttt{\footnotesize rk-data}\\[3pt]\colorbox{gatebg}{\textcolor{gatecolor}{\scriptsize\bfseries [Data rerun]}}};
+  \node[stage, right=of s4] (s5) {\textbf{05. Manuscript}\\[-1pt]\textbf{Drafting}\\\texttt{\footnotesize rk-write}\\[3pt]\colorbox{gatebg}{\textcolor{gatecolor}{\scriptsize\bfseries [Claims match evidence]}}};
+  \node[stage, right=of s5] (s6) {\textbf{06. Results}\\[-1pt]\textbf{Reporting}\\\texttt{\footnotesize rk-report}\\[3pt]\colorbox{gatebg}{\textcolor{gatecolor}{\scriptsize\bfseries [Results verified]}}};
 
   \draw[->, very thick, paperblue] (s1) -- (s2);
   \draw[->, very thick, paperblue] (s2) -- (s3);
@@ -54,10 +54,10 @@
   \draw[->, very thick, paperblue] (s5) -- (s6);
 
   % 4 Specialist modules placed under s2, s3, s4, s6
-  \node[specialist, below=1.2cm of s2] (e1) {\textbf{Quantum}\\\texttt{\footnotesize rk-quantum}\\[2pt]\tiny Local Sim vs QPU};
-  \node[specialist, below=1.2cm of s3] (e2) {\textbf{Quantum Net}\\\texttt{\footnotesize rk-quantum-network}\\[2pt]\tiny Entanglement Routing};
-  \node[specialist, below=1.2cm of s4] (e3) {\textbf{AI / ML}\\\texttt{\footnotesize rk-ai}\\[2pt]\tiny Leakage \& Baselines};
-  \node[specialist, below=1.2cm of s6] (e4) {\textbf{Slides}\\\texttt{\footnotesize rk-academic-slides}\\[2pt]\tiny Source-Grounded};
+  \node[specialist, below=1.2cm of s2] (e1) {\textbf{Quantum Computing}\\\texttt{\footnotesize rk-quantum}\\[2pt]\tiny Local simulation; QPU by approval};
+  \node[specialist, below=1.2cm of s3] (e2) {\textbf{Quantum Networks}\\\texttt{\footnotesize rk-quantum-network}\\[2pt]\tiny Entanglement routing checks};
+  \node[specialist, below=1.2cm of s4] (e3) {\textbf{AI / ML Evaluation}\\\texttt{\footnotesize rk-ai}\\[2pt]\tiny Leakage and baseline checks};
+  \node[specialist, below=1.2cm of s6] (e4) {\textbf{Academic Slides}\\\texttt{\footnotesize rk-academic-slides}\\[2pt]\tiny Source and structure checks};
 
   \draw[->, thick, dashed, draw=navy!60] (e1.north) to[out=60, in=-120] (s3.south west);
   \draw[->, thick, dashed, draw=navy!60] (e2.north) -- (s3.south);
@@ -65,8 +65,8 @@
   \draw[->, thick, dashed, draw=navy!60] (e4.north) -- (s6.south);
 
   % Side Labels
-  \node[font=\scriptsize\bfseries, text=navy!80, anchor=east, align=right] at ($(s1.west)+(-0.3,0)$) {Core\\Pipeline};
-  \node[font=\scriptsize\bfseries, text=navy!80, anchor=east, align=right] at ($(s1.west)+(-0.3,-2.85)$) {Specialist\\Modules};
+  \node[font=\scriptsize\bfseries, text=navy!80, anchor=east, align=right] at ($(s1.west)+(-0.3,0)$) {Core Research\\Workflow};
+  \node[font=\scriptsize\bfseries, text=navy!80, anchor=east, align=right] at ($(s1.west)+(-0.3,-3.05)$) {Domain\\Modules};
 
 \end{tikzpicture}
 \end{document}

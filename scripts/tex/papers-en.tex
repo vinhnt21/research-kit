@@ -38,52 +38,52 @@
 
   % 3 Generic Paper Workspaces
   \node[paper] (p1) {
-    \textbf{\textcolor{navy}{paper-1/}}\\\scriptsize Self-Contained Workspace\\[5pt]
+    \textbf{\textcolor{navy}{paper-1/}}\\\scriptsize Workspace for Paper 1\\[5pt]
     \footnotesize
     \begin{tabular}{l}
-      $\bullet$ \texttt{AGENTS.md} (Local Context)\\
-      $\bullet$ \texttt{references/} Local Citations\\
-      $\bullet$ \texttt{src/} Experiment Code\\
-      $\bullet$ \texttt{results/} Output Logs \& Data\\
-      $\bullet$ \texttt{figures/} Publication Plots\\
-      $\bullet$ \texttt{draft/} Manuscript Text
+      $\bullet$ \texttt{AGENTS.md} -- Scope and research questions\\
+      $\bullet$ \texttt{references/} -- Verified citation sources\\
+      $\bullet$ \texttt{src/} -- Experiment code\\
+      $\bullet$ \texttt{results/} -- Stored data and outputs\\
+      $\bullet$ \texttt{figures/} -- Publication figures\\
+      $\bullet$ \texttt{draft/} -- Current manuscript
     \end{tabular}
   };
 
   \node[paper, right=of p1] (p2) {
-    \textbf{\textcolor{navy}{paper-2/}}\\\scriptsize Self-Contained Workspace\\[5pt]
+    \textbf{\textcolor{navy}{paper-2/}}\\\scriptsize Workspace for Paper 2\\[5pt]
     \footnotesize
     \begin{tabular}{l}
-      $\bullet$ \texttt{AGENTS.md} (Local Context)\\
-      $\bullet$ \texttt{references/} Local Citations\\
-      $\bullet$ \texttt{src/} Experiment Code\\
-      $\bullet$ \texttt{results/} Output Logs \& Data\\
-      $\bullet$ \texttt{figures/} Publication Plots\\
-      $\bullet$ \texttt{draft/} Manuscript Text
+      $\bullet$ \texttt{AGENTS.md} -- Scope and research questions\\
+      $\bullet$ \texttt{references/} -- Verified citation sources\\
+      $\bullet$ \texttt{src/} -- Experiment code\\
+      $\bullet$ \texttt{results/} -- Stored data and outputs\\
+      $\bullet$ \texttt{figures/} -- Publication figures\\
+      $\bullet$ \texttt{draft/} -- Current manuscript
     \end{tabular}
   };
 
   \node[paper, right=of p2] (p3) {
-    \textbf{\textcolor{navy}{paper-n/}}\\\scriptsize Self-Contained Workspace\\[5pt]
+    \textbf{\textcolor{navy}{paper-n/}}\\\scriptsize Workspace for Paper n\\[5pt]
     \footnotesize
     \begin{tabular}{l}
-      $\bullet$ \texttt{AGENTS.md} (Local Context)\\
-      $\bullet$ \texttt{references/} Local Citations\\
-      $\bullet$ \texttt{src/} Experiment Code\\
-      $\bullet$ \texttt{results/} Output Logs \& Data\\
-      $\bullet$ \texttt{figures/} Publication Plots\\
-      $\bullet$ \texttt{draft/} Manuscript Text
+      $\bullet$ \texttt{AGENTS.md} -- Scope and research questions\\
+      $\bullet$ \texttt{references/} -- Verified citation sources\\
+      $\bullet$ \texttt{src/} -- Experiment code\\
+      $\bullet$ \texttt{results/} -- Stored data and outputs\\
+      $\bullet$ \texttt{figures/} -- Publication figures\\
+      $\bullet$ \texttt{draft/} -- Current manuscript
     \end{tabular}
   };
 
   % Barrier Box
   \node[draw=barrierred, dashed, thick, rounded corners=6pt, inner sep=10pt, fit=(p1) (p2) (p3)] (barrier) {};
-  \node[fill=white, draw=barrierred, rounded corners=3pt, font=\footnotesize\bfseries, text=barrierred] at (barrier.north) {\quad Strict Workspace Isolation: Sibling folders never leak data, baselines, or unverified claims \quad};
+  \node[fill=white, draw=barrierred, rounded corners=3pt, font=\footnotesize\bfseries, text=barrierred] at (barrier.north) {\quad Each paper keeps its own data, code, results, and manuscript \quad};
 
   % Shared Shelf Below
   \node[shelf, below=0.9cm of barrier] (shelf) {
-    \textbf{\textcolor{navy}{references/ (Core Shared References - Read Only)}}\\[2pt]
-    \footnotesize Global literature shelf, survey notes, PDFs, and master BibTeX shared across papers
+    \textbf{\textcolor{navy}{references/ -- Shared Literature Library (Read Only)}}\\[2pt]
+    \footnotesize Contains checked PDFs, survey notes, and the shared BibTeX library; each citation is rechecked for the active paper
   };
 
   \draw[->, thick, dashed, draw=navy!60] (shelf.north -| p1.south) -- (p1.south) node[midway, right, font=\tiny, text=navy] {read};
