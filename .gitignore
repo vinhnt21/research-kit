@@ -1,0 +1,8 @@
+# Local working archive and internal notes. Kept on disk, not part of the public repository.
+/archives/
+/docs/
+/.obsidian
+/web
+/plans/
+.DS_Store
+.venv/

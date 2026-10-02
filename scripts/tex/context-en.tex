@@ -1,0 +1,37 @@
+\documentclass[tikz,border=10pt]{standalone}
+\usepackage{fontspec}
+\setmainfont{Arial}
+\usetikzlibrary{shapes,arrows.meta,positioning,calc}
+
+\definecolor{navy}{RGB}{20, 45, 80}
+\definecolor{tealblue}{RGB}{2, 132, 199}
+\definecolor{tableborder}{RGB}{203, 213, 225}
+\definecolor{axiscolor}{RGB}{100, 116, 139}
+
+\begin{document}
+\begin{tikzpicture}[>=stealth]
+
+  % Bar Chart (Scale 0 to 8%)
+  \def\xscale{1.2}
+  \def\trackw{9.6}
+
+  % Axis
+  \draw[thick, draw=tableborder] (0, 0) -- (\trackw, 0);
+  \foreach \x/\label in {0/0\%, 1/1\%, 2/2\%, 3/3\%, 4/4\%, 5/5\%, 6/6\%, 7/7\%, 8/8\%} {
+    \draw[draw=tableborder] ({\x*\xscale}, 0) -- ({\x*\xscale}, -0.15) node[below, font=\footnotesize, text=axiscolor] {\label};
+    \draw[dashed, draw=tableborder!60] ({\x*\xscale}, 0) -- ({\x*\xscale}, 2.4);
+  }
+  \node[font=\footnotesize\bfseries, text=axiscolor, anchor=north] at ({\trackw/2}, -0.65) {Share of 200,000-Token Context Window (\%)};
+
+  % Bar 1: Monolithic (7.12%)
+  \node[anchor=east, font=\small\bfseries, text=navy] at (-0.35, 1.8) {Scientific Agent Skills (163 skills)};
+  \fill[navy, rounded corners=3pt] (0, 1.45) rectangle ({7.123*\xscale}, 2.15);
+  \node[anchor=west, font=\footnotesize\bfseries, text=navy] at ({7.123*\xscale + 0.2}, 1.8) {7.12\% (14,246 tokens)};
+
+  % Bar 2: Research Kit (0.49%)
+  \node[anchor=east, font=\small\bfseries, text=tealblue] at (-0.35, 0.7) {Research Kit (10 skills)};
+  \fill[tealblue!85, rounded corners=3pt] (0, 0.35) rectangle ({0.49*\xscale}, 1.05);
+  \node[anchor=west, font=\footnotesize\bfseries, text=tealblue] at ({0.49*\xscale + 0.2}, 0.7) {$<$0.50\% ($\sim$1,000 tokens)};
+
+\end{tikzpicture}
+\end{document}
