@@ -1,5 +1,13 @@
 <div align="center">
 
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="figures/logo-dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="figures/logo-light.svg">
+    <img src="figures/logo-dark.svg" alt="Research Kit Logo" width="520">
+  </picture>
+</p>
+
 # 🔬 Research Kit: Bộ Skill Nghiên Cứu Khoa Học Tinh Gọn Cho AI Agent
 
 **Bộ skill nghiên cứu khoa học tinh gọn, chuẩn mực và có thể tái lập dành cho AI Agent — đảm bảo tính nghiêm ngặt thực nghiệm, không phình tải, và chiếm chưa đầy <0,50% context thường trực. Bộ kit gồm 6 skill quy trình cốt lõi và 4 skill chuyên ngành mở rộng.**
@@ -49,7 +57,7 @@ So với các thư viện quy mô lớn như **Scientific Agent Skills** (bản 
 | [`rk-quantum`](skills/rk-quantum/SKILL.md) | Tính toán lượng tử | Mô phỏng mạch & Hamiltonian cục bộ, thuật toán biến phân | Mặc định mô phỏng cục bộ; chạy QPU phải duyệt ngân sách |
 | [`rk-quantum-network`](skills/rk-quantum-network/SKILL.md) | Mạng lượng tử | Phân phối liên đới lượng tử, bộ nhớ trạm lặp, định tuyến & lập lịch | Kiểm tra độ trung thực & thẩm định giao thức |
 | [`rk-ai`](skills/rk-ai/SKILL.md) | AI / Học máy | Chia tập train/val/test, kiểm tra rò rỉ dữ liệu, baseline & đánh giá | Chặn rò rỉ dữ liệu & kiểm tra tái lập seed |
-| [`rk-academic-slides`](skills/rk-academic-slides/SKILL.md) | Trình bày học thuật | Tạo slide bám nguồn tài liệu & kiểm định bố cục | Kiểm tra tự động cấu trúc slide & chuẩn phong cách |
+| [`rk-academic-visualize`](skills/rk-academic-visualize/SKILL.md) | Trực quan hóa & Slide học thuật | Thiết kế hình minh họa khoa học (LaTeX/TikZ, Mermaid) & tạo slide bám nguồn | Giảm tải nhận thức, kiểm tra hở mũi tên & kiểm định cấu trúc slide |
 
 ---
 
@@ -72,6 +80,21 @@ gh skill install vinhnt21/research-kit --agent cursor
 # --agent codex
 # --agent antigravity
 ```
+
+#### Cập nhật các skill đã cài
+
+Cả hai công cụ đều có thể cập nhật các skill đã cài khi nguồn thay đổi. Hãy dùng đúng công cụ đã dùng để cài đặt:
+
+```bash
+# Skills CLI: kiểm tra và cập nhật các skill đã cài
+npx skills update
+
+# GitHub CLI: xem trước, sau đó cập nhật ở chế độ tương tác
+gh skill update --dry-run
+gh skill update
+```
+
+Skills CLI cũng chấp nhận `npx skills upgrade` như bí danh của `update`; GitHub CLI dùng `gh skill update`. Để cập nhật không cần xác nhận, dùng `npx skills update -y` hoặc `gh skill update --all`. Cả hai CLI cũng nhận tên skill để chỉ cập nhật skill được chọn, ví dụ `npx skills update rk-ai` hoặc `gh skill update rk-ai`. Skill hoàn toàn mới trong repository không được xem là bản cập nhật của skill đã cài; hãy chạy lại lệnh cài đặt tương ứng để thêm skill đó. Xem hướng dẫn chính thức về [cập nhật bằng Skills CLI](https://github.com/vercel-labs/skills#skills-update) và tài liệu [`gh skill update`](https://cli.github.com/manual/gh_skill_update).
 
 ### 3. Tải file ZIP và nhờ Agent tự cài đặt (Agent-Assisted)
 1. Tải file ZIP mã nguồn: [research-kit-main.zip](https://github.com/vinhnt21/research-kit/archive/refs/heads/main.zip).
@@ -191,7 +214,7 @@ Mỗi skill đều đi kèm tài liệu quy trình chi tiết (`references/`) v�
 | `rk-quantum` | `references/model-checks.md`, `references/execution-boundary.md`<br>`assets/quantum-run-record.md` |
 | `rk-ai` | `references/leakage-and-splits.md`, `references/evaluation.md`<br>`assets/ml-eval-record.md` |
 
-*(Ghi chú: `rk-quantum-network` là một skill đặc tả khép kín, không có thư mục `references/` riêng. `rk-academic-slides` giữ nguyên bộ công cụ của tác giả gốc, gồm bộ sinh slide mẫu và test suite kiểm định chuẩn học thuật).*
+*(Ghi chú: `rk-quantum-network` là một skill đặc tả khép kín, không có thư mục `references/` riêng. `skills/rk-academic-visualize` đóng gói cẩm nang trực quan hóa khoa học cùng bộ sinh slide mẫu và test suite kiểm định chuẩn học thuật).*
 
 ---
 

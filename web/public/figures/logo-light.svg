@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 120" width="100%" height="100%" fill="none">
+  <defs>
+    <linearGradient id="rkLogoGradLight" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2563EB"/>
+      <stop offset="50%" stop-color="#0284C7"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </linearGradient>
+
+    <linearGradient id="rkLogoGradAltLight" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#059669"/>
+      <stop offset="50%" stop-color="#0284C7"/>
+      <stop offset="100%" stop-color="#4F46E5"/>
+    </linearGradient>
+
+    <radialGradient id="rkCoreGradLight" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#38BDF8"/>
+      <stop offset="60%" stop-color="#0284C7"/>
+      <stop offset="100%" stop-color="#1E3A8A"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Group Icon (Centered around 64, 60, scale 0.52) -->
+  <g transform="translate(64, 60) scale(0.52)">
+    <!-- Orbital Ring 1 -->
+    <ellipse cx="0" cy="0" rx="76" ry="28" transform="rotate(-32)"
+      stroke="url(#rkLogoGradLight)" stroke-width="4.5" stroke-linecap="round"/>
+    <!-- Orbital Ring 2 -->
+    <ellipse cx="0" cy="0" rx="76" ry="28" transform="rotate(32)"
+      stroke="url(#rkLogoGradAltLight)" stroke-width="4.5" stroke-linecap="round"/>
+
+    <!-- Calibrated Reticle -->
+    <circle cx="0" cy="0" r="42" stroke="url(#rkLogoGradLight)" stroke-width="3" stroke-dasharray="6 3.5" opacity="0.85"/>
+    <circle cx="0" cy="0" r="32" stroke="#0284C7" stroke-width="1.5" opacity="0.4"/>
+
+    <!-- Crosshairs -->
+    <line x1="0" y1="-50" x2="0" y2="-38" stroke="#0284C7" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="0" y1="38" x2="0" y2="50" stroke="#059669" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="-50" y1="0" x2="-38" y2="0" stroke="#2563EB" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="38" y1="0" x2="50" y2="0" stroke="#0D9488" stroke-width="2.5" stroke-linecap="round"/>
+
+    <!-- Agent Nodes -->
+    <circle cx="52" cy="-33" r="4" fill="#0284C7"/>
+    <circle cx="52" cy="33" r="4" fill="#059669"/>
+    <circle cx="-52" cy="33" r="3.5" fill="#4F46E5"/>
+    <circle cx="-52" cy="-33" r="3.5" fill="#2563EB"/>
+
+    <!-- Empirical Core -->
+    <circle cx="0" cy="0" r="16" fill="url(#rkCoreGradLight)"/>
+    <circle cx="0" cy="0" r="6" fill="#FFFFFF"/>
+  </g>
+
+  <!-- Typography -->
+  <g transform="translate(132, 0)">
+    <!-- Main Title -->
+    <text x="0" y="62" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="40" font-weight="700" letter-spacing="-0.5">
+      <tspan fill="#0F172A">Research </tspan>
+      <tspan fill="url(#rkLogoGradLight)">Kit</tspan>
+    </text>
+
+    <!-- Subtitle / Tagline -->
+    <text x="2" y="88" font-family="'JetBrains Mono', 'Fira Code', ui-monospace, Menlo, monospace" font-size="12" font-weight="600" fill="#475569" letter-spacing="1.8">
+      LEAN &amp; REPRODUCIBLE RESEARCH SKILLS FOR AI AGENTS
+    </text>
+
+    <!-- Version badge -->
+    <rect x="250" y="36" width="56" height="20" rx="10" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1"/>
+    <text x="278" y="50" font-family="system-ui, sans-serif" font-size="10.5" font-weight="600" fill="#0284C7" text-anchor="middle">v1.0</text>
+  </g>
+</svg>

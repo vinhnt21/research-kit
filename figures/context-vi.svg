@@ -1,13 +1,19 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2612 576" width="100%" height="auto">
   <defs>
+    <pattern id="scientific-grid" width="133" height="133" patternUnits="userSpaceOnUse">
+      <path d="M 133 0 L 0 0 0 133" fill="none" stroke="#e2e8f0" stroke-width="1.2" stroke-opacity="0.8" />
+    </pattern>
     <linearGradient id="card-bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#ffffff" />
-      <stop offset="100%" stop-color="#f8fafc" />
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95" />
+      <stop offset="100%" stop-color="#f8fafc" stop-opacity="0.95" />
     </linearGradient>
   </defs>
 
   <!-- Modern Card Background with rounded corners -->
   <rect x="5" y="5" width="2602" height="566" rx="28" fill="url(#card-bg)" />
+
+  <!-- Consistent Scientific Grid Pattern -->
+  <rect x="5" y="5" width="2602" height="566" rx="28" fill="url(#scientific-grid)" />
 
   <!-- Base Inactive Ambient Border (Subtle) -->
   <rect x="5" y="5" width="2602" height="566" rx="28" fill="none" stroke="#e2e8f0" stroke-width="3" />

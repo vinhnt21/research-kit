@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { content } from './data/content';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -11,8 +11,13 @@ import InstallSection from './components/InstallSection';
 import FAQSection from './components/FAQSection';
 import CTASection from './components/CTASection';
 import Footer from './components/Footer';
+import RoadmapPage from './components/RoadmapPage';
 
 export default function App() {
+  const currentPage = window.location.pathname.replace(/\/+$/, '') === '/roadmap'
+    ? 'roadmap'
+    : 'home';
+
   // Mặc định là Tiếng Việt ('vi'), lưu vào localStorage để ghi nhớ lựa chọn của người dùng
   const [lang, setLang] = useState(() => {
     try {
@@ -34,18 +39,30 @@ export default function App() {
   // Đồng bộ thuộc tính lang và lưu vào localStorage
   useEffect(() => {
     document.documentElement.lang = lang;
+    document.title = currentPage === 'roadmap'
+      ? `${content[lang]?.nav.roadmap || 'Roadmap'} | Research Kit`
+      : 'Research Kit — Lean Research Skills for AI Agents';
     try {
       localStorage.setItem('rk_lang', lang);
-    } catch (e) {}
-  }, [lang]);
+    } catch {}
+  }, [lang, currentPage]);
 
   // Đồng bộ data-theme trên html root và lưu vào localStorage
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
     try {
       localStorage.setItem('rk_theme', theme);
-    } catch (e) {}
+    } catch {}
   }, [theme]);
+
+  // Trên trang con, browser tải /#section trước khi React render section đích.
+  // Cuộn lại sau khi DOM của trang chủ đã sẵn sàng để deep link luôn tới đúng vị trí.
+  useLayoutEffect(() => {
+    if (currentPage !== 'home' || !window.location.hash) return;
+
+    const target = document.getElementById(window.location.hash.slice(1));
+    target?.scrollIntoView({ block: 'start' });
+  }, [currentPage]);
 
   // Scroll Reveal IntersectionObserver
   useEffect(() => {
@@ -79,12 +96,12 @@ export default function App() {
     return () => {
       observer.disconnect();
     };
-  }, [lang]);
+  }, [lang, currentPage]);
 
   const t = content[lang] || content.en;
 
   return (
-    <div className="app-wrapper">
+    <div className={`app-wrapper ${currentPage === 'roadmap' ? 'roadmap-view' : ''}`}>
       <div className="bg-grid" aria-hidden="true"></div>
       
       <Navbar 
@@ -93,49 +110,56 @@ export default function App() {
         theme={theme} 
         setTheme={setTheme} 
         t={t} 
+        currentPage={currentPage}
       />
       
       <main id="main-content" role="main">
-        {/* =================================================================
-            1. GIỚI THIỆU (Overview & Architecture)
-            - Hero: Định danh sản phẩm, 1-click install, quick stats
-            - Lifecycle: Vòng đời nghiên cứu 6 bước cốt lõi + 4 module mở rộng
-           ================================================================= */}
-        <section id="intro">
-          <Hero t={t} />
-          <LifecycleSection t={t} lang={lang} />
-        </section>
+        {currentPage === 'roadmap' ? (
+          <RoadmapPage t={t} />
+        ) : (
+          <>
+            {/* =================================================================
+                1. GIỚI THIỆU (Overview & Architecture)
+                - Hero: Định danh sản phẩm, 1-click install, quick stats
+                - Lifecycle: Vòng đời nghiên cứu 6 bước cốt lõi + 4 module mở rộng
+               ================================================================= */}
+            <section id="intro">
+              <Hero t={t} />
+              <LifecycleSection t={t} lang={lang} />
+            </section>
 
-        {/* =================================================================
-            2. ƯU ĐIỂM (Lean Mindset & Core Research Focus)
-            - Pillars: 4 trụ cột tư duy tinh gọn & giá trị cốt lõi
-            - Context: Hiệu năng tiết kiệm >13.000 token, chống FOMO số lượng
-            - Comparison: Bảng đối đầu trực diện: Tinh gọn vs. Cồng kềnh
-            - Multi-paper: Phân vùng Active Paper chống ô nhiễm chéo dữ liệu
-           ================================================================= */}
-        <section id="advantages">
-          <Pillars t={t} />
-          <ContextSection t={t} lang={lang} />
-          <ComparisonSection t={t} />
-          <MultiPaperSection t={t} lang={lang} />
-        </section>
+            {/* =================================================================
+                2. ƯU ĐIỂM (Lean Mindset & Core Research Focus)
+                - Pillars: 4 trụ cột tư duy tinh gọn & giá trị cốt lõi
+                - Context: Hiệu năng tiết kiệm >13.000 token, chống FOMO số lượng
+                - Comparison: Bảng đối đầu trực diện: Tinh gọn vs. Cồng kềnh
+                - Multi-paper: Phân vùng Active Paper chống ô nhiễm chéo dữ liệu
+               ================================================================= */}
+            <section id="advantages">
+              <Pillars t={t} />
+              <ContextSection t={t} lang={lang} />
+              <ComparisonSection t={t} />
+              <MultiPaperSection t={t} lang={lang} />
+            </section>
 
-        {/* =================================================================
-            3. CÀI ĐẶT (Installation Hub)
-            - Cách A: Tải ZIP & Agent tự cài đặt (Zero Terminal)
-            - Cách B: CLI commands (npx skills add, gh skill install, manual)
-            - Test suite verification
-           ================================================================= */}
-        <InstallSection t={t} />
+            {/* =================================================================
+                3. CÀI ĐẶT (Installation Hub)
+                - Cách A: Tải ZIP & Agent tự cài đặt (Zero Terminal)
+                - Cách B: CLI commands (npx skills add, gh skill install, manual)
+                - Test suite verification
+               ================================================================= */}
+            <InstallSection t={t} />
 
-        {/* =================================================================
-            4. FAQ (Hỏi đáp & Thắc mắc thường gặp)
-            - Accordion giải đáp rào cản nhận thức
-           ================================================================= */}
-        <FAQSection t={t} />
+            {/* =================================================================
+                4. FAQ (Hỏi đáp & Thắc mắc thường gặp)
+                - Accordion giải đáp rào cản nhận thức
+               ================================================================= */}
+            <FAQSection t={t} />
 
-        {/* CTA & Conversion Booster */}
-        <CTASection t={t} />
+            {/* CTA & Conversion Booster */}
+            <CTASection t={t} />
+          </>
+        )}
       </main>
 
       <Footer t={t} />

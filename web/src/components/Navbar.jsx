@@ -1,14 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { Microscope, Globe, Sun, Moon, Star, Menu, X } from 'lucide-react';
+import { Globe, Sun, Moon, Star, Menu, X } from 'lucide-react';
 
-export default function Navbar({ lang, setLang, theme, setTheme, t }) {
+export default function Navbar({ lang, setLang, theme, setTheme, t, currentPage }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState('lifecycle');
+  const [activeSection, setActiveSection] = useState(
+    currentPage === 'roadmap' ? 'roadmap' : 'lifecycle'
+  );
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 15);
+
+      if (currentPage === 'roadmap') {
+        setActiveSection('roadmap');
+        return;
+      }
 
       // Khi cuộn xuống sát đáy trang (CTA / Footer), kích hoạt mục cuối 'faq'
       const isBottom = window.innerHeight + Math.round(window.scrollY) >= document.documentElement.scrollHeight - 70;
@@ -43,7 +50,7 @@ export default function Navbar({ lang, setLang, theme, setTheme, t }) {
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [currentPage]);
 
   const toggleLang = () => {
     setLang(lang === 'en' ? 'vi' : 'en');
@@ -60,32 +67,34 @@ export default function Navbar({ lang, setLang, theme, setTheme, t }) {
   };
 
   const navItems = [
-    { id: 'lifecycle', label: t.nav.intro },
-    { id: 'advantages', label: t.nav.advantages },
-    { id: 'install', label: t.nav.install },
-    { id: 'faq', label: t.nav.faq },
+    { id: 'lifecycle', label: t.nav.intro, href: currentPage === 'home' ? '#lifecycle' : '/#lifecycle' },
+    { id: 'advantages', label: t.nav.advantages, href: currentPage === 'home' ? '#advantages' : '/#advantages' },
+    { id: 'roadmap', label: t.nav.roadmap, href: '/roadmap' },
+    { id: 'install', label: t.nav.install, href: currentPage === 'home' ? '#install' : '/#install' },
+    { id: 'faq', label: t.nav.faq, href: currentPage === 'home' ? '#faq' : '/#faq' },
   ];
 
   return (
     <>
       <header className={`navbar ${scrolled ? 'scrolled' : ''}`} role="banner">
         <div className="container">
-          <a href="#" className="brand" aria-label="Research Kit Home">
+          <a href="/" className="brand" aria-label="Research Kit Home">
             <div className="brand-icon-wrapper">
-              <Microscope size={22} strokeWidth={2.2} />
+              <img src="/brand/logo-icon.svg" alt="Research Kit" width="24" height="24" style={{ display: 'block' }} />
             </div>
             <span>Research Kit</span>
           </a>
 
-          {/* Desktop Navigation Links - Sắp xếp chuẩn 4 phần UX có highlight section đang xem */}
+          {/* Desktop Navigation Links - highlight section hoặc page đang xem */}
           <nav aria-label="Main Navigation">
             <ul className="nav-links">
               {navItems.map((item) => (
                 <li key={item.id}>
                   <a 
-                    href={`#${item.id}`} 
+                    href={item.href}
                     className={`nav-link ${activeSection === item.id ? 'active' : ''}`}
                     onClick={() => setActiveSection(item.id)}
+                    aria-current={activeSection === item.id ? (item.id === 'roadmap' ? 'page' : 'location') : undefined}
                   >
                     {item.label}
                   </a>
@@ -170,12 +179,13 @@ export default function Navbar({ lang, setLang, theme, setTheme, t }) {
           {navItems.map((item) => (
             <li key={item.id}>
               <a 
-                href={`#${item.id}`} 
+                href={item.href}
                 className={activeSection === item.id ? 'active' : ''}
                 onClick={() => {
                   setActiveSection(item.id);
                   closeMobileMenu();
                 }}
+                aria-current={activeSection === item.id ? (item.id === 'roadmap' ? 'page' : 'location') : undefined}
               >
                 {item.label}
               </a>

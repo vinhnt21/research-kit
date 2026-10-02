@@ -31,7 +31,8 @@ export default function Hero({ t }) {
         <div className="hero-badge-wrapper fade-in">
           <span className="eyebrow">
             <Terminal size={14} />
-            <span>{t.hero.badge}</span>
+            <span className="hero-badge-full">{t.hero.badge}</span>
+            <span className="hero-badge-compact">{t.hero.badgeShort}</span>
           </span>
         </div>
 

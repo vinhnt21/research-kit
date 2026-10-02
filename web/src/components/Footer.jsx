@@ -1,5 +1,5 @@
 import React from 'react';
-import { Microscope, ExternalLink } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
 
 export default function Footer({ t }) {
   return (
@@ -9,7 +9,7 @@ export default function Footer({ t }) {
           <div>
             <div className="brand">
               <div className="brand-icon-wrapper" style={{ width: '32px', height: '32px' }}>
-                <Microscope size={18} />
+                <img src="/brand/logo-icon.svg" alt="Research Kit" width="20" height="20" style={{ display: 'block' }} />
               </div>
               <span>Research Kit</span>
             </div>

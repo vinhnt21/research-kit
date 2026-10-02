@@ -1,6 +1,14 @@
 <div align="center">
 
-# 🔬 Research Kit: Lean & Reproducible Research Skills for AI Agents
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="figures/logo-dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="figures/logo-light.svg">
+    <img src="figures/logo-dark.svg" alt="Research Kit Logo" width="520">
+  </picture>
+</p>
+
+# Research Kit: Lean & Reproducible Research Skills for AI Agents
 
 **A lean, reproducible suite of research skills guiding AI agents through the complete scientific paper lifecycle—with empirical rigor, zero bloat, and <0.50% standing context overhead. The kit comprises a 6-skill core pipeline and 4 specialist extensions.**
 
@@ -49,7 +57,7 @@ These skills are tailored to the author's research domains and serve as practica
 | [`rk-quantum`](skills/rk-quantum/SKILL.md) | Quantum Computing | Local Hamiltonian/circuit simulation & variational algorithms | Local simulation default; QPU spend requires approval |
 | [`rk-quantum-network`](skills/rk-quantum-network/SKILL.md) | Quantum Networking | Entanglement distribution, repeater memory, routing & scheduling | Fidelity checks & protocol verification |
 | [`rk-ai`](skills/rk-ai/SKILL.md) | AI / Machine Learning | Train/val/test splits, leakage audit, baselines & generative eval | Zero data leakage & reproducible seed verification |
-| [`rk-academic-slides`](skills/rk-academic-slides/SKILL.md) | Academic Presentations | Source-grounded presentation deck generation & layout linting | Automated deck checks & slide style compliance |
+| [`rk-academic-visualize`](skills/rk-academic-visualize/SKILL.md) | Scientific Visualization & Slides | Publication-grade illustrations (LaTeX/TikZ, Mermaid) & source-grounded slide decks | Cognitive load filtering, anti-overlap arrow rules & deck checks |
 
 ---
 
@@ -72,6 +80,21 @@ gh skill install vinhnt21/research-kit --agent cursor
 # --agent codex
 # --agent antigravity
 ```
+
+#### Updating installed skills
+
+Both installers can refresh already-installed skills after their source changes. Use the same tool you originally used to install them:
+
+```bash
+# Skills CLI: check and update installed skills
+npx skills update
+
+# GitHub CLI: preview updates, then apply them interactively
+gh skill update --dry-run
+gh skill update
+```
+
+The Skills CLI also accepts `npx skills upgrade` as an alias for `update`; GitHub CLI uses `gh skill update`. For unattended updates, use `npx skills update -y` or `gh skill update --all`. Both CLIs also accept skill names to update only selected skills, for example `npx skills update rk-ai` or `gh skill update rk-ai`. A newly added skill is not an update to an existing installation; rerun the corresponding install command to add it. See the official [Skills CLI update guide](https://github.com/vercel-labs/skills#skills-update) and [`gh skill update` reference](https://cli.github.com/manual/gh_skill_update).
 
 ### 3. Agent-Assisted Installation (via ZIP)
 1. Download the repository ZIP: [research-kit-main.zip](https://github.com/vinhnt21/research-kit/archive/refs/heads/main.zip).
@@ -191,7 +214,7 @@ Each skill ships with localized procedural guidelines (`references/`) and produc
 | `rk-quantum` | `references/model-checks.md`, `references/execution-boundary.md`<br>`assets/quantum-run-record.md` |
 | `rk-ai` | `references/leakage-and-splits.md`, `references/evaluation.md`<br>`assets/ml-eval-record.md` |
 
-*(Note: `rk-quantum-network` operates as a self-contained skill specification. `skills/rk-academic-slides` preserves the author's verified package, including its template generator and deck verification test suite).*
+*(Note: `rk-quantum-network` operates as a self-contained skill specification. `skills/rk-academic-visualize` packages scientific visualization guidelines with the author's verified presentation templates and deck verification test suite).*
 
 ---
 
