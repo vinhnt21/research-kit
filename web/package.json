@@ -8,7 +8,7 @@
     "build": "vite build",
     "lint": "oxlint",
     "preview": "vite preview",
-    "deploy": "npm run build && npx wrangler pages deploy dist --project-name research-kit"
+    "deploy": "npm run build && npx wrangler pages deploy dist --project-name research-kit --commit-dirty=true"
   },
   "dependencies": {
     "lucide-react": "^1.49.0",
