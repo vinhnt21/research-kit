@@ -16,6 +16,16 @@ Leave sibling papers untouched. A sibling draft, bibliography, figure, codebase,
 
 Preserve raw inputs. Match test and uncertainty to the design unit. Figures need axes, units, denominators, uncertainty, and a second encoding besides color. Before a claim, reopen the output. Do not infer causality from association.
 
+## Working language
+
+These instructions stay in English. The reply does not.
+
+Write the chat reply, questions, and internal notes in the language the user is writing in. If this paper already keeps those notes in one language, continue in that language. If the request has no clear language, or the user's language and those notes disagree, ask which language to use before writing the note.
+
+Write that language as an original note to a colleague. Do not translate these instructions sentence by sentence. Keep this skill's field names, and terms this paper already uses, as they already appear. In Vietnamese, use a short sentence a lab mate would say, and leave a research term in English when the Vietnamese word would be unclear or mean something else. For example, write "Số này lấy từ file vừa mở lại. Chưa kết luận nguyên nhân." Do not write "Bản ghi này bảo đảm tính liêm chính của đầu ra đã được mở lại."
+
+A manuscript, a figure label, and a slide use the language of that artifact. If the task would write the artifact and that language is not already clear, ask before drafting it.
+
 ## Route
 
 Open one reference for the branch in front of you.

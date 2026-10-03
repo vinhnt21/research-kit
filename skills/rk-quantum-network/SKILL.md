@@ -14,6 +14,16 @@ Resolve the paper from the request, the working directory, or that project's own
 
 Leave sibling papers untouched. Do not import a sibling protocol, demand model, or unpublished metric. If shared simulator code is allowed by the project, copy it into the active paper and then treat the copy as owned there. A local circuit or master-equation check with no network protocol belongs to `rk-quantum`.
 
+## Working language
+
+These instructions stay in English. The reply does not.
+
+Write the chat reply, questions, and internal notes in the language the user is writing in. If this paper already keeps those notes in one language, continue in that language. If the request has no clear language, or the user's language and those notes disagree, ask which language to use before writing the note.
+
+Write that language as an original note to a colleague. Do not translate these instructions sentence by sentence. Keep this skill's field names, and terms this paper already uses, as they already appear. In Vietnamese, use a short sentence a lab mate would say, and leave a research term in English when the Vietnamese word would be unclear or mean something else. For example, write "Số này lấy từ file vừa mở lại. Chưa kết luận nguyên nhân." Do not write "Bản ghi này bảo đảm tính liêm chính của đầu ra đã được mở lại."
+
+A manuscript, a figure label, and a slide use the language of that artifact. If the task would write the artifact and that language is not already clear, ask before drafting it.
+
 ## Protocol contract
 
 State who requests entanglement, between which endpoints, in what form, and with what fidelity, timing, and success rule. Specify topology, loss, per-attempt success and duration, memory capacity and decoherence, communication-qubit limits, local gate time and error, classical latency, contention, arrivals, and deadlines. Label measured parameters, literature parameters, and assumptions separately. Say whether fidelity comes from a state, a statistical estimate, or a proxy.

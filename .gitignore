@@ -1,7 +1,8 @@
-# Local working archive and internal notes. Kept on disk, not part of the public repository.
+# Local notes, not the public site. Research notes go in /docs/. Plans go in /plans/.
 /archives/
 /docs/
 /.obsidian
 /plans/
 .DS_Store
 .venv/
+AGENTS.md

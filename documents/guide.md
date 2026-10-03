@@ -16,6 +16,7 @@
    - [2.1 Directory Blueprint](#21-directory-blueprint)
    - [2.2 Active Paper Resolution Protocol](#22-active-paper-resolution-protocol)
    - [2.3 Audited Read-Only Literature Shelf](#23-audited-read-only-literature-shelf)
+   - [2.4 Working Language](#24-working-language)
 3. [Per-Skill Operational Reference (10 Skills)](#3-per-skill-operational-reference-10-skills)
    - [Part 1: The 6-Stage Core Paper Pipeline](#part-1-the-6-stage-core-paper-pipeline)
      - [01. rk-survey: Literature Survey & Provenance](#01-rk-survey-literature-survey--provenance)
@@ -248,6 +249,16 @@ Every Research Kit skill strictly enforces the **Active Paper Resolution Rule**:
 The centralized `literature/` folder provides a shared repository of references, but:
 - It is strictly **read-only**.
 - Any reference retrieved from `literature/` must undergo independent provenance verification for the active paper's specific claims (via `rk-survey`).
+
+### 2.4 Working Language
+
+Skill files stay in English. That language is for the agent reading the procedure, not for the note it writes back.
+
+The chat reply, questions, and internal notes use the language the user is writing in. If the paper's notes are already in one language, continue in that language. If the request does not show a language, or the chat and the notes disagree, ask before writing the note.
+
+Write the note as you would say it to a colleague. Do not translate the skill sentence by sentence. Keep field names and terms the paper already uses. In Vietnamese, leave a research term in English when a Vietnamese word would be unclear or would mean something else (baseline, seed, preprint, leakage).
+
+A manuscript, a figure label, and a slide stay in the language of that artifact. Ask before drafting the artifact when that language is not already clear.
 
 ---
 

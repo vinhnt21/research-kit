@@ -16,6 +16,7 @@
    - [2.1 Sơ đồ tổ chức thư mục chuẩn](#21-sơ-đồ-tổ-chức-thư-mục-chuẩn)
    - [2.2 Giao thức xác định bài báo hiện hành (Active Paper Declaration)](#22-giao-thức-xác-định-bài-báo-hiện-hành-active-paper-declaration)
    - [2.3 Kệ tài liệu dùng chung ở chế độ Chỉ Đọc (Read-Only)](#23-kệ-tài-liệu-dùng-chung-ở-chế-độ-chỉ-đọc-read-only)
+   - [2.4 Ngôn ngữ khi làm việc](#24-ngôn-ngữ-khi-làm-việc)
 3. [Sổ Tay Vận Hành Chi Tiết 10 Kỹ Năng](#3-sổ-tay-vận-hành-chi-tiết-10-kỹ-năng)
    - [Phần 1: Quy trình cốt lõi 6 giai đoạn](#phần-1-quy-trình-cốt-lõi-6-giai-đoạn)
      - [01. rk-survey: Khảo sát tài liệu & Xác minh nguồn gốc](#01-rk-survey-khảo-sát-tài-liệu--xác-minh-nguồn-gốc)
@@ -246,6 +247,16 @@ Mọi kỹ năng trong Research Kit đều tuân thủ nguyên tắc **Active Pa
 Thư mục `literature/` là nguồn tham khảo chung cho toàn dự án, nhưng:
 - Luôn giữ ở chế độ **chỉ đọc**.
 - Bất kỳ tài liệu nào lấy từ `literature/` khi đưa vào bài báo hiện hành đều phải trải qua bước kiểm tra nguồn gốc độc lập (thông qua kỹ năng `rk-survey`).
+
+### 2.4 Ngôn ngữ khi làm việc
+
+File skill viết bằng tiếng Anh để agent đọc quy trình. Câu trả lời và ghi chú không đi theo tiếng Anh của file đó.
+
+Trả lời, câu hỏi, và ghi chú nội bộ theo ngôn ngữ người dùng đang viết. Bài báo đã ghi chú bằng một ngôn ngữ thì viết tiếp ngôn ngữ đó. Yêu cầu không cho thấy ngôn ngữ nào, hoặc ngôn ngữ trong chat và trong ghi chú không khớp, thì hỏi trước khi ghi.
+
+Viết như đang nói với đồng nghiệp. Đừng dịch từng câu trong skill. Tên trường trong biểu mẫu, và thuật ngữ bài báo đang dùng, giữ nguyên. Với tiếng Việt, từ nghiên cứu nào dịch ra sẽ khó hiểu hoặc đổi nghĩa thì để tiếng Anh, chẳng hạn baseline, seed, preprint, leakage.
+
+Bản thảo, nhãn hình, và slide theo ngôn ngữ của chính tài liệu đó. Chưa rõ ngôn ngữ của tài liệu thì hỏi trước khi soạn.
 
 ---
 

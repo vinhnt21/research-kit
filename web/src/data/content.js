@@ -108,6 +108,14 @@ export const content = {
             'A new technique enters the core only when it adds research depth without adding unnecessary choices or weakening human control.',
         },
       ],
+      devlogEyebrow: 'LOG',
+      devlogTitle: 'Development log',
+      devlogSubtitle: 'Only times the skill set got better. Newest first.',
+      devlogLabel: 'Development log',
+      entries: [
+        { date: '2026-10-03', title: 'Replies use your language', note: 'The how-to inside each skill stays in English. Replies and notes are written in the language you used. If that is not clear, the agent asks first. Vietnamese is written the way people talk, not word by word.' },
+        { date: '2026-10-02', title: 'The slide skill joined the figure skill', note: 'There used to be a separate slide skill. It now sits inside the figure skill. One skill handles figures in a paper and slides for a talk, with a short guide so the picture is easy to read.' },
+      ],
       explore: 'Explore the current skill set',
     },
     hero: {
@@ -650,6 +658,14 @@ export const content = {
           description:
             'Một kỹ thuật mới chỉ được đưa vào khi nó giúp nghiên cứu sâu hơn, không thêm lựa chọn thừa và không lấy mất quyền quyết định của nhà nghiên cứu.',
         },
+      ],
+      devlogEyebrow: 'NHẬT KÝ',
+      devlogTitle: 'Nhật ký phát triển',
+      devlogSubtitle: 'Chỉ ghi những lần bộ skill được sửa cho tốt hơn. Bài mới ở trên.',
+      devlogLabel: 'Nhật ký phát triển',
+      entries: [
+        { date: '2026-10-03', title: 'Trả lời bằng ngôn ngữ bạn đang dùng', note: 'Phần hướng dẫn trong skill vẫn là tiếng Anh. Câu trả lời và ghi chú viết theo ngôn ngữ bạn nhắn. Chưa rõ thì hỏi lại trước khi viết. Tiếng Việt viết xuôi, như đang nói, không dịch từng chữ.' },
+        { date: '2026-10-02', title: 'Gộp skill slide vào skill vẽ hình', note: 'Trước đây skill slide đứng riêng. Giờ nằm trong skill vẽ hình. Một skill lo cả hình trong bài báo và slide thuyết trình, có hướng dẫn ngắn để nhìn hình là hiểu.' },
       ],
       explore: 'Xem bộ skill hiện tại',
     },

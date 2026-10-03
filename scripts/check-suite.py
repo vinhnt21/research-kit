@@ -99,11 +99,11 @@ LINK = re.compile(r"\]\(([^)]+)\)")
 NAME_FIELD = re.compile(r"^name:\s*(\S+)\s*$", re.M)
 DESCRIPTION = re.compile(r'^description:\s*"(.*)"\s*$', re.M)
 
-NETWORK_HASH = "9847d5dbbc0691ae4949381aff996a79985aae7cdffd5b8498feacf60de54cf1"
+NETWORK_HASH = "06278251b844b94cb2f46a431bccd22256966c9959f62c4f1f838e1eab72e531"
 VISUALIZE = {
-    "skills/rk-academic-visualize/SKILL.md": "5fbb0d3d0bd02b855154fd1e31e86223fe1071be94d10f377312decc6f45cf63",
+    "skills/rk-academic-visualize/SKILL.md": "c69d3fd73f3a10bc0b55fc2be485370f71dd9e317ec40bca995b046b6c804a78",
     "skills/rk-academic-visualize/assets/academic-template.pptx": "de9ed2b7b8fd2e7adf54daa98eccbf2140fa7ff7cde010b9208500515f3229f1",
-    "skills/rk-academic-visualize/references/illustration-guide.md": "a37deecdde1a6944bdc20c7053968433e7c72c6e9e0cc036131a3b3a05190103",
+    "skills/rk-academic-visualize/references/illustration-guide.md": "2bbbe4c80824c3256c22fb3486ab19d2b97786744c2e8a1becbb0a68ad465b18",
     "skills/rk-academic-visualize/references/slide-plan.md": "348843e01a1bb964474448803a745abc24d81de93addae72fcc5f4578ceda78a",
     "skills/rk-academic-visualize/references/style-guide.md": "6d2725b166795b9b3b20136e3cfe25b74cad8e13d511cfcd85cf048cba02e222",
     "skills/rk-academic-visualize/scripts/check-deck.py": "25c2a6dd395535fcc9c710e10f5d85780f8aa0275cec2dc624d7c7bed3ca2f34",

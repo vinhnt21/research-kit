@@ -33,29 +33,50 @@ export default function RoadmapPage({ t }) {
       </div>
 
       <div className="container roadmap-content">
-        <header className="roadmap-timeline-header">
-          <span>{roadmap.timelineEyebrow}</span>
-          <h2>{roadmap.timelineTitle}</h2>
-          <p>{roadmap.timelineSubtitle}</p>
-        </header>
+        <div className="roadmap-split">
+          <div className="roadmap-timeline">
+            <header className="roadmap-timeline-header">
+              <span>{roadmap.timelineEyebrow}</span>
+              <h2>{roadmap.timelineTitle}</h2>
+              <p>{roadmap.timelineSubtitle}</p>
+            </header>
 
-        <ol className="roadmap-milestone-axis" aria-label={roadmap.sequenceLabel}>
-          {roadmap.milestones.map((milestone) => (
-            <li
-              className={`roadmap-milestone roadmap-milestone-${milestone.tone}`}
-              key={milestone.number}
-            >
-              <div className="roadmap-milestone-node" aria-hidden="true">
-                {milestone.number}
-              </div>
-              <article className="roadmap-milestone-copy">
-                <span>{milestone.phase}</span>
-                <h3>{milestone.title}</h3>
-                <p>{milestone.description}</p>
-              </article>
-            </li>
-          ))}
-        </ol>
+            <ol className="roadmap-milestone-axis" aria-label={roadmap.sequenceLabel}>
+              {roadmap.milestones.map((milestone) => (
+                <li
+                  className={`roadmap-milestone roadmap-milestone-${milestone.tone}`}
+                  key={milestone.number}
+                >
+                  <div className="roadmap-milestone-node" aria-hidden="true">
+                    {milestone.number}
+                  </div>
+                  <article className="roadmap-milestone-copy">
+                    <span>{milestone.phase}</span>
+                    <h3>{milestone.title}</h3>
+                    <p>{milestone.description}</p>
+                  </article>
+                </li>
+              ))}
+            </ol>
+          </div>
+
+          <section className="roadmap-devlog" aria-labelledby="roadmap-devlog-title">
+            <header className="roadmap-timeline-header">
+              <span>{roadmap.devlogEyebrow}</span>
+              <h2 id="roadmap-devlog-title">{roadmap.devlogTitle}</h2>
+              <p>{roadmap.devlogSubtitle}</p>
+            </header>
+            <ol className="roadmap-devlog-list" aria-label={roadmap.devlogLabel}>
+              {roadmap.entries.map((entry) => (
+                <li key={`${entry.date}-${entry.title}`}>
+                  <time dateTime={entry.date}>{entry.date}</time>
+                  <h3>{entry.title}</h3>
+                  <p>{entry.note}</p>
+                </li>
+              ))}
+            </ol>
+          </section>
+        </div>
 
         <a className="roadmap-explore-link roadmap-explore-link-simple" href="/#lifecycle">
           {roadmap.explore}

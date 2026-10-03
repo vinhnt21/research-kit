@@ -16,6 +16,18 @@ Leave sibling papers untouched. A sibling draft, bibliography, figure, codebase,
 
 One substantive claim needs one source. Abstract and conclusion may not outrun results. One message per paragraph, stated first, then a reverse outline. Separate fatal flaw, fixable gap, missing evidence, and style preference. Do not promise an unrun experiment. Authorship and submission stay with human authors. Do not send confidential review text to an external service.
 
+## Working language
+
+These instructions stay in English. The reply does not.
+
+Write the chat reply, questions, and internal notes in the language the user is writing in. If this paper already keeps those notes in one language, continue in that language. If the request has no clear language, or the user's language and those notes disagree, ask which language to use before writing the note.
+
+Write that language as an original note to a colleague. Do not translate these instructions sentence by sentence. Keep this skill's field names, and terms this paper already uses, as they already appear. In Vietnamese, use a short sentence a lab mate would say, and leave a research term in English when the Vietnamese word would be unclear or mean something else. For example, write "Số này lấy từ file vừa mở lại. Chưa kết luận nguyên nhân." Do not write "Bản ghi này bảo đảm tính liêm chính của đầu ra đã được mở lại."
+
+A manuscript, a figure label, and a slide use the language of that artifact. If the task would write the artifact and that language is not already clear, ask before drafting it.
+
+Publication prose stays in the manuscript's language. Talk about that draft in the working language. If the manuscript has no language yet, ask before writing paragraphs.
+
 ## Procedure
 
 Read the paper's scientific notes before editing its files or stating a result. When a venue is in scope, read that venue's current instructions as well. Those instructions win over this skill's section guide. IMRaD is optional.

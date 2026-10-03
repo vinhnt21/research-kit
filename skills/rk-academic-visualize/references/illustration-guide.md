@@ -1,89 +1,89 @@
-# Cẩm Nang Trực Quan Hóa Học Thuật (Academic Visualization Guide)
+# Academic visualization guide
 
-Tài liệu này cung cấp các nguyên lý thiết kế khoa học tổng quát, kèm theo phân tích các case study thực tế nhằm hỗ trợ tạo hình minh họa chất lượng cao (LaTeX TikZ, Mermaid, SVG, kiến trúc luồng) cho bài báo khoa học, báo cáo nghiên cứu và slide hội thảo.
-
----
-
-# PHẦN I: CÁC NGUYÊN LÝ THIẾT KẾ KHOA HỌC TỔNG QUÁT
-
-## 1. Trực Quan Hóa Hướng Nhận Thức & Lọc Thông Tin (Cognitive Clarity & Filtering)
-- **Quy tắc 5 giây**: Mỗi hình vẽ khoa học cần tập trung truyền đạt một thông điệp cơ chế (mechanism) hoặc so sánh (comparison) trọng tâm. Người đọc phải nắm được ý chính trong vòng 5 giây quan sát đầu tiên.
-- **Lọc chi tiết thứ yếu**: Tránh nhồi nhét mọi chi tiết kỹ thuật hay tham số triển khai vào hình vẽ. Hãy chuyển các dữ liệu thứ cấp, định nghĩa dài dòng hoặc bảng số liệu chi tiết sang phần chú thích hình (caption), văn bản chính (body text) hoặc phụ lục.
-- **Mật độ thông tin thích ứng**: Cân đối số lượng nút (nodes) và lượng chữ trên mỗi nút theo kích thước khung hình, đảm bảo tính súc tích và tránh gây quá tải thị giác.
-
-## 2. Bố Cục Không Gian & Phân Cấp Thị Giác (Spatial Hygiene & Visual Hierarchy)
-- **Căn chỉnh & Nhóm trực quan**: Nhóm các thực thể có mối liên hệ logic chặt chẽ lại gần nhau. Sử dụng khoảng cách (whitespace) và kích thước nhất quán để người xem nhận biết ngay cấu trúc phân cấp.
-- **Khoảng thở an toàn (Padding & Margins)**: Luôn duy trì khoảng cách đệm tối thiểu giữa nội dung chữ và đường biên của thẻ chứa để chống tràn chữ (text overflow) hoặc chạm viền gây tức mắt.
-
-## 3. Ngữ Nghĩa Dòng Chảy & Đường Nối (Flow Semantics & Connector Legibility)
-- **Phản ánh đúng bản chất tương tác**:
-  - Dùng **mũi tên 1 chiều** cho dòng dữ liệu tuần tự, truyền tin đơn hướng hoặc chuyển trạng thái tuyến tính.
-  - Dùng **mũi tên 2 chiều** cho các mắt xích có trao đổi phản hồi (feedback loop), đàm phán, cộng tác đa bên hoặc tương tác có sự can thiệp của con người (Human-in-the-loop).
-- **Nguyên tắc không che khuất (Zero Occlusion)**:
-  - Nhãn chú thích trên đường nối tuyệt đối không được đè bẹp hay cắt đứt thân mũi tên.
-  - Luôn định vị nhãn lệch lên trên hoặc sang bên với khoảng cách an toàn, duy trì tính liên tục và trọn vẹn của đường kết nối.
-
-## 4. Bảng Màu Ngữ Nghĩa & Khả Năng Tiếp Cận (Accessibility & Grayscale QA)
-- **Bảng màu có chủ đích**: Phân bổ màu sắc theo vai trò thông tin (ví dụ: cảnh báo/thất bại vs. module trung tính vs. thành công/kiểm chứng).
-- **Kiểm định in ấn thang xám (Grayscale QA)**:
-  - Không bao giờ chỉ dùng màu sắc đơn độc để mã hóa thông tin.
-  - Luôn kết hợp màu với các ký hiệu hình học độc lập (icon, hình dạng nút khác biệt, đường viền nét đứt/liền) để hình vẽ vẫn giữ nguyên 100% ngữ nghĩa khi in đen trắng hoặc đọc trên máy đọc sách E-ink.
-
-## 5. Tái Lập Từ Mã Nguồn (Code-First Reproducibility)
-- Ưu tiên mô tả hình ảnh bằng mã nguồn có thể lập trình và biên dịch lại tự động (XeLaTeX TikZ, Mermaid script, SVG vector).
-- Quản lý mã nguồn hình ảnh qua Git để thuận tiện cho việc tinh chỉnh, sửa đổi và bảo trì lâu dài cùng tài liệu bài báo.
+General rules for scientific figures, plus one worked case study. Use them for publication-grade illustrations (LaTeX TikZ, Mermaid, SVG, and flow architectures) in papers, reports, and talks.
 
 ---
 
-# PHẦN II: CASE STUDY THỰC TẾ & BÀI HỌC TINH CHỈNH
+# Part I: General design rules
 
-Phần này phân tích một bài toán thực tế: **Thiết kế sơ đồ so sánh quy trình nghiên cứu có sự hỗ trợ của AI (Comparative Human-Agent Pipeline)**.
+## 1. Cognitive clarity and filtering
+- **Five-second rule**: Each figure carries one mechanism or one comparison. A reader should see that point in the first five seconds.
+- **Drop secondary detail**: Do not pack implementation parameters, long definitions, or full numeric tables into the figure. Move them to the caption, the body text, or an appendix.
+- **Match density to the frame**: Size the number of nodes, and the text on each node, to the frame. Keep the figure short enough to read without visual overload.
+
+## 2. Spatial layout and visual hierarchy
+- **Align and group**: Place entities that belong together near each other. Use consistent gaps and sizes so the hierarchy is visible without a legend.
+- **Padding and margins**: Keep a minimum gap between text and the card border so type does not overflow or touch the edge.
+
+## 3. Flow meaning and readable connectors
+- **Match the interaction**:
+  - Use a **one-way arrow** for sequential data, one-direction messages, or a linear state change.
+  - Use a **two-way arrow** for feedback, negotiation, multi-party collaboration, or a human in the loop.
+- **Do not cover the stem**:
+  - A label on a connector must not sit on the arrow or cut it.
+  - Place the label above or beside the stem, with a clear gap, so the connector stays continuous.
+
+## 4. Semantic color and grayscale QA
+- **Color by role**: Assign color to an information role (for example warning or failure, a neutral module, or success and verification).
+- **Grayscale check**:
+  - Never encode a state with color alone.
+  - Pair color with an independent mark (an icon, a distinct node shape, or a solid versus dashed stroke) so the figure keeps its meaning in black-and-white print and on an e-ink screen.
+
+## 5. Rebuild from source
+- Prefer a source that can be edited and compiled again (XeLaTeX TikZ, a Mermaid script, or vector SVG).
+- Keep that source in version control with the paper so later edits stay reproducible.
+
+---
+
+# Part II: Worked case study
+
+This case is a real layout problem: **a side-by-side diagram of an AI-assisted research pipeline (comparative human–agent pipeline)**.
 
 ```
-[Researcher] <=====> [Skills Catalog] <=====> [Agent Execution] <=====> [Results & Review]
+[Researcher] <=====> [Skills catalog] <=====> [Agent execution] <=====> [Results and review]
 ```
 
-### 1. Bối cảnh & Yêu cầu bài toán
-- **Mục tiêu**: So sánh 2 tiếp cận:
-  - *Luồng 1 (Ad-hoc / Rối)*: Nhà nghiên cứu đối mặt danh mục hàng chục skill chưa phân loại $\rightarrow$ Agent gọi nhầm công cụ $\rightarrow$ Kết quả khó kiểm định.
-  - *Luồng 2 (Research Kit / Chuẩn hóa)*: Nhà nghiên cứu chọn skill theo 6 chặng chuẩn $\rightarrow$ Agent thực thi đúng phạm vi $\rightarrow$ Bàn giao có minh chứng rõ ràng.
-- **Bố cục lựa chọn**: Xếp 2 luồng song song trên dưới (Row 1 vs. Row 2) với cùng trục tọa độ hoành $x$, đồng nhất số lượng và kích thước thẻ để tạo sự đối xứng so sánh trực tiếp.
+### 1. Brief
+- **Goal**: Compare two approaches:
+  - *Flow 1 (ad hoc)*: The researcher faces a large ungrouped skill list → the agent calls the wrong tool → the result is hard to check.
+  - *Flow 2 (staged)*: The researcher picks a skill by stage → the agent stays inside that stage → the handoff cites its evidence.
+- **Layout**: Stack the two flows (row 1 and row 2) on the same horizontal axis. Use the same number of cards and the same card size so each step can be compared directly.
 
-### 2. Vấn đề thực tế 1: Nhãn đè che mất thân mũi tên
-- **Tình huống gặp phải**: Ban đầu, nhãn mô tả hành động đặt ở giữa đường nối với `node[midway, fill=white]`. Kết quả là hộp nền trắng của nhãn che gần hết thân mũi tên, chỉ lộ ra một mẩu đầu mũi tên, tạo cảm giác đường truyền bị đứt gãy.
-- **Giải pháp**:
-  - Nhấc nhãn **nổi hoàn toàn phía trên** đường nối với khoảng cách an toàn (ví dụ: `above=8pt` trong TikZ).
-  - Dùng thẻ nhãn pill badge có màu nền nhạt tương ứng (`dangerbg`, `greenbg`) và viền bo góc mỏng.
-  - Giữ khoảng hở $\sim 2\text{--}3\text{mm}$ không khí giữa đáy thẻ nhãn và đỉnh thân mũi tên. Thân mũi tên được vẽ liền mạch từ khối này sang khối kia.
+### 2. Problem: a label hides the arrow stem
+- **What happened**: Action labels were placed mid-connector with `node[midway, fill=white]`. The white label box covered most of the stem and left only the arrowhead, so the link looked broken.
+- **Fix**:
+  - Lift the label **fully above** the connector with a safe gap (for example `above=8pt` in TikZ).
+  - Use a pill badge with a light fill (`dangerbg`, `greenbg`) and a thin rounded stroke.
+  - Keep about $2\text{--}3\text{mm}$ of clear space between the bottom of the badge and the top of the stem. Draw the stem as one continuous line from card to card.
 
-### 3. Vấn đề thực tế 2: Tương tác Người - Agent cần mũi tên 2 chiều
-- **Tình huống gặp phải**: Ban đầu các mũi tên được vẽ 1 chiều ($A \rightarrow B \rightarrow C$). Tuy nhiên, quy trình nghiên cứu thực tế giữa con người và AI là quy trình cộng tác lặp (iterative feedback loop) chứ không phải đường ống một chiều.
-- **Giải pháp**:
-  - Chuyển toàn bộ các đường nối sang dạng **mũi tên 2 chiều** (`<--->`, `{Stealth}-{Stealth}`).
-  - Tăng khoảng cách giữa các khối (ví dụ: từ $1.6\text{cm}$ lên $2.4\text{cm}$) để thân mũi tên và 2 đầu mũi tên hiển thị thanh thoát, không bị co cụm.
+### 3. Problem: human–agent exchange needs two-way arrows
+- **What happened**: The first drawing used one-way arrows ($A \rightarrow B \rightarrow C$). The real loop between a person and an agent is repeated feedback, not a one-way pipe.
+- **Fix**:
+  - Switch the connectors to **two-way arrows** (`<--->`, `{Stealth}-{Stealth}`).
+  - Increase the gap between cards (for example from $1.6\text{cm}$ to $2.4\text{cm}$) so both heads and the stem stay readable.
 
-### 4. Vấn đề thực tế 3: Tràn viền chữ do căn giữa (Text Overflow)
-- **Tình huống gặp phải**: Khi thẻ có chiều rộng cố định (ví dụ: $4.0\text{cm}$), việc căn giữa (`align=center`) khiến các cụm từ dài hoặc in đậm (`\textbf{}`) bị nở đều sang 2 bên và chạm sát viền thẻ.
-- **Giải pháp**:
-  - Tăng chiều rộng thẻ lên mức hợp lý (ví dụ: $4.6\text{cm}$).
-  - Cắt ngắn các câu dài thành các bullet point dưới 26 ký tự.
-  - Đảm bảo padding trong tối thiểu $\ge 4\text{mm}$.
+### 4. Problem: centered text overflows a fixed card
+- **What happened**: On a fixed-width card (for example $4.0\text{cm}$), `align=center` spreads a long or bold phrase (`\textbf{}`) to both edges until it touches the border.
+- **Fix**:
+  - Widen the card to a size that fits (for example $4.6\text{cm}$).
+  - Break long sentences into bullets under about 26 characters.
+  - Keep inner padding at least $4\text{mm}$.
 
-### 5. Vấn đề thực tế 4: Câu chữ cộc lốc hoặc dịch máy
-- **Tình huống gặp phải**: Ban đầu sử dụng các nhãn rút gọn quá mức như *"Mơ hồ chọn"*, *"Lệch hướng"*, *"Log thô"*, gây khó hiểu cho người đọc.
-- **Giải pháp**:
-  - Dùng câu từ tiếng Việt tự nhiên và có tính đối xứng rõ ràng:
-    - *Khó chọn đúng skill* $\longleftrightarrow$ *Dễ chọn theo chặng*
-    - *Dễ gọi nhầm skill* $\longleftrightarrow$ *Đúng việc, đúng skill*
-    - *Log thô, thiếu nguồn* $\longleftrightarrow$ *Kèm minh chứng rõ*
-    - *Quá tải đối chiếu log* $\longleftrightarrow$ *Dễ đối chiếu nguồn*
+### 5. Problem: clipped or machine-translated labels
+- **What happened**: Over-short labels such as "Vague pick", "Off course", and "Raw log" were hard to read.
+- **Fix**:
+  - Use short, natural, paired phrases:
+    - *Hard to choose the right skill* $\longleftrightarrow$ *Easy to choose by stage*
+    - *Easy to call the wrong skill* $\longleftrightarrow$ *Right task, right skill*
+    - *Raw log, missing source* $\longleftrightarrow$ *Evidence attached*
+    - *Hard to check the log* $\longleftrightarrow$ *Easy to check the source*
 
 ---
 
-### 6. Mẫu triển khai mã nguồn tham khảo (Reference TikZ Pattern)
+### 6. Reference TikZ pattern
 
 ```latex
-% Thiết lập style thẻ và nhãn nổi
+% Card style and a label that sits above the arrow
 \tikzset{
   card/.style={
     draw=navy, rounded corners=6pt, fill=white,
@@ -98,6 +98,6 @@ Phần này phân tích một bài toán thực tế: **Thiết kế sơ đồ s
   }
 }
 
-% Vẽ đường nối 2 chiều với nhãn nổi không che mũi tên
-\draw[twoway] (cardA.east) -- node[arrowlabel] {Dễ chọn theo chặng} (cardB.west);
+% Two-way connector; the label does not cover the stem
+\draw[twoway] (cardA.east) -- node[arrowlabel] {Easy to choose by stage} (cardB.west);
 ```
