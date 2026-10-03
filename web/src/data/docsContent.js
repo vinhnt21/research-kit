@@ -3,7 +3,7 @@ export const docsContent = {
     hero: {
       eyebrow: "TECHNICAL HANDBOOK & REFERENCE",
       title: "Research Kit Documentation",
-      subtitle: "The comprehensive guide to installing, configuring, and conducting empirical research with the 10 procedural skills across AI agents (Cursor, Claude Code, Codex, Antigravity). Source Markdown lives in documents/.",
+      subtitle: "The comprehensive guide to installing, updating, managing multiple papers in one repo, and running empirical research with the 10 procedural skills across AI agents (Cursor, Claude Code, Codex, Antigravity). Source Markdown lives in documents/.",
       stats: [
         { label: "Pipeline", value: "6 Core Stages" },
         { label: "Extensions", value: "4 Domains" },
@@ -13,7 +13,7 @@ export const docsContent = {
     },
     nav: {
       lifecycle: "Installation & Lifecycle",
-      architecture: "Multi-Paper Workspace",
+      architecture: "Multiple Papers / One Repo",
       coreSkills: "Core Pipeline Skills (6)",
       domainSkills: "Domain Extensions (4)",
       playbook: "End-to-End Playbook",
@@ -28,7 +28,7 @@ export const docsContent = {
           id: "skills-cli",
           name: "Skills CLI (Recommended by Vercel Labs)",
           desc: "The standard agent skills manager with full CRUD support across popular coding agents.",
-          installCmd: "npx skills add vinhnt21/research-kit",
+          installCmd: "npx skills add vinhnt21/research-kit\n# Install a single skill only:\nnpx skills add vinhnt21/research-kit --skill rk-ai",
           updateCmd: "npx skills update            # Check & update all\nnpx skills update -y         # Unattended (CI/auto)\nnpx skills update rk-survey  # Update single skill",
           removeCmd: "npx skills remove            # Interactive selection\nnpx skills remove rk-ai -y   # Remove single skill",
         },
@@ -63,8 +63,8 @@ export const docsContent = {
       cacheWarning: "Important: Agents index skills into memory at session startup. Always restart your agent or start a new chat session after updating or removing skills.",
     },
     architecture: {
-      title: "Multi-Paper Repository Architecture & Isolation",
-      desc: "Scientific research frequently produces multiple drafts, sibling experiments, or exploratory ideas in a single lab repository. Without strict boundaries, AI agents trigger cross-contamination.",
+      title: "Multiple Papers in One Repo & Evidence Boundaries",
+      desc: "Scientific research frequently keeps multiple drafts, sibling experiments, or exploratory ideas in the same lab repository. Without strict boundaries, AI agents trigger cross-contamination.",
       principles: [
         {
           title: "Active Paper Resolution Rule",
@@ -93,7 +93,7 @@ export const docsContent = {
 │   │   ├── figures/            # Publication figures for Paper 1
 │   │   └── manuscript/         # LaTeX / Markdown manuscript sources
 │   │
-│   └── 2026-routing-protocol/  # [Active Paper 2] - Completely isolated
+│   └── 2026-routing-protocol/  # [Active Paper 2] - Separate workspace in same repo
 │       ├── AGENTS.md           # Active Paper Declaration for Paper 2
 │       ├── src/
 │       ├── data/
@@ -365,7 +365,7 @@ export const docsContent = {
         {
           name: "Multi-Paper Cross-Contamination",
           problem: "Agent working on Paper A accidentally imports exploratory baseline numbers from Paper B in the same repo.",
-          safeguard: "Active Paper Resolution via AGENTS.md strictly quarantines papers/<paper-id>/ workspaces.",
+          safeguard: "Active Paper Resolution via AGENTS.md keeps evidence boundaries between papers/<paper-id>/ workspaces in the same repo.",
         },
       ],
     },
@@ -374,7 +374,7 @@ export const docsContent = {
     hero: {
       eyebrow: "CẨM NANG KỸ THUẬT & HƯỚNG DẪN VẬN HÀNH",
       title: "Tài Liệu Hướng Dẫn Research Kit",
-      subtitle: "Cẩm nang hướng dẫn đầy đủ từ cài đặt, cập nhật, cách ly đa bài báo đến quy trình nghiên cứu thực nghiệm với 10 kỹ năng chuẩn hoá cho AI agent (Cursor, Claude Code, Codex, Antigravity). Nguồn Markdown nằm trong documents/.",
+      subtitle: "Cẩm nang hướng dẫn đầy đủ từ cài đặt, cập nhật, quản lý nhiều bài báo trong cùng một repo đến quy trình nghiên cứu thực nghiệm với 10 kỹ năng chuẩn hoá cho AI agent (Cursor, Claude Code, Codex, Antigravity). Nguồn Markdown nằm trong documents/.",
       stats: [
         { label: "Quy trình", value: "6 Giai đoạn lõi" },
         { label: "Mở rộng", value: "4 Chuyên ngành" },
@@ -384,7 +384,7 @@ export const docsContent = {
     },
     nav: {
       lifecycle: "Cài đặt & Vòng đời",
-      architecture: "Kiến trúc Đa Bài Báo",
+      architecture: "Nhiều bài báo / cùng repo",
       coreSkills: "6 Kỹ Năng Cốt Lõi",
       domainSkills: "4 Module Chuyên Ngành",
       playbook: "Kịch Bản Thực Chiến",
@@ -399,7 +399,7 @@ export const docsContent = {
           id: "skills-cli",
           name: "Skills CLI (Khuyên dùng từ Vercel Labs)",
           desc: "Trình quản lý kỹ năng tiêu chuẩn cho các AI coding agent với đầy đủ lệnh CRUD.",
-          installCmd: "npx skills add vinhnt21/research-kit",
+          installCmd: "npx skills add vinhnt21/research-kit\n# Cài lẻ một skill:\nnpx skills add vinhnt21/research-kit --skill rk-ai",
           updateCmd: "npx skills update            # Quét & cập nhật tất cả\nnpx skills update -y         # Tự động xác nhận (CI/auto)\nnpx skills update rk-survey  # Cập nhật riêng 1 skill",
           removeCmd: "npx skills remove            # Chọn skill cần gỡ bằng menu\nnpx skills remove rk-ai -y   # Gỡ bỏ trực tiếp 1 skill",
         },
@@ -434,8 +434,8 @@ export const docsContent = {
       cacheWarning: "Lưu ý quan trọng: Agent nạp kỹ năng vào RAM khi khởi tạo phiên chat. Luôn mở phiên chat mới hoặc khởi động lại Agent sau khi cập nhật hoặc xoá skill.",
     },
     architecture: {
-      title: "Kiến Trúc Repository Đa Bài Báo & Ranh Giới Cách Ly",
-      desc: "Nghiên cứu khoa học thường duy trì nhiều bản thảo, thí nghiệm thăm dò trong cùng một repo. Nếu không cách ly chặt chẽ, AI agent rất dễ gây ô nhiễm chéo dữ liệu.",
+      title: "Nhiều Bài Báo Trong Cùng Một Repo & Ranh Giới Bằng Chứng",
+      desc: "Nghiên cứu khoa học thường duy trì nhiều bản thảo, thí nghiệm thăm dò trong cùng một repo. Nếu không có ranh giới rõ ràng giữa các bài báo, AI agent rất dễ gây ô nhiễm chéo dữ liệu.",
       principles: [
         {
           title: "Quy tắc xác định bài báo hiện hành (Active Paper)",
@@ -464,7 +464,7 @@ export const docsContent = {
 │   │   ├── figures/            # Hình vẽ xuất bản riêng cho bài 1
 │   │   └── manuscript/         # Bản thảo bài báo (LaTeX / Markdown)
 │   │
-│   └── 2026-routing-protocol/  # [Bài báo đang làm 2] - Cách ly 100%
+│   └── 2026-routing-protocol/  # [Bài báo đang làm 2] - Không gian riêng trong cùng repo
 │       ├── AGENTS.md           # Tuyên bố Active Paper cho bài 2
 │       ├── src/
 │       ├── data/
@@ -736,7 +736,7 @@ export const docsContent = {
         {
           name: "Ô nhiễm chéo giữa các bài báo (Cross-Contamination)",
           problem: "Agent làm việc trên bài A nhưng vô tình lấy số liệu thử nghiệm của bài B trong cùng một repository.",
-          safeguard: "Cơ chế Active Paper Declaration qua AGENTS.md cách ly hoàn toàn dữ liệu và bản thảo giữa các công trình.",
+          safeguard: "Cơ chế Active Paper Declaration qua AGENTS.md giữ ranh giới dữ liệu và bản thảo giữa các bài báo trong cùng một repo.",
         },
       ],
     },

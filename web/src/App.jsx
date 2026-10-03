@@ -141,7 +141,7 @@ export default function App() {
                 - Pillars: 4 trụ cột tư duy tinh gọn & giá trị cốt lõi
                 - Context: Hiệu năng tiết kiệm >13.000 token, chống FOMO số lượng
                 - Comparison: Bảng đối đầu trực diện: Tinh gọn vs. Cồng kềnh
-                - Multi-paper: Phân vùng Active Paper chống ô nhiễm chéo dữ liệu
+                - Multi-paper: Nhiều bài báo trong cùng một repo, phân vùng Active Paper chống ô nhiễm chéo
                ================================================================= */}
             <section id="advantages">
               <Pillars t={t} />

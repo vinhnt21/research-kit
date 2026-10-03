@@ -42,7 +42,7 @@ export default function MultiPaperSection({ t, lang }) {
             src={papersImg}
             alt={t.multipaper.heading}
             label={t.multipaper.figureLabel || (lang === 'vi' ? 'Hình 02' : 'Figure 02')}
-            title={t.multipaper.figureTitle || (lang === 'vi' ? 'Kiến trúc phân lập Active Paper & Kệ tài liệu dùng chung' : 'Active Paper Isolation & Read-Only Shared Literature Architecture')}
+            title={t.multipaper.figureTitle || (lang === 'vi' ? 'Nhiều bài báo trong cùng một repo và kệ tài liệu dùng chung' : 'Multiple Papers in One Repo & Read-Only Shared Literature')}
             caption={t.multipaper.figureCaption || t.multipaper.subtitle}
             minReadableWidth={740}
             defaultMode="scroll"

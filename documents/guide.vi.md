@@ -12,7 +12,7 @@
    - [1.3 Gỡ bỏ & Cài đặt lại sạch sẽ (Uninstall)](#13-gỡ-bỏ--cài-đặt-lại-sạch-sẽ-uninstall)
    - [1.4 Kiểm tra tính toàn vẹn (Health Check)](#14-kiểm-tra-tính-toàn-vẹn-health-check)
    - [1.5 Bộ nhớ đệm của Agent & Khởi động lại phiên làm việc](#15-bộ-nhớ-đệm-của-agent--khởi-động-lại-phiên-làm-việc)
-2. [Kiến trúc Repository Đa Bài Báo & Quy Tắc Cách Ly](#2-kiến-trúc-repository-đa-bài-báo--quy-tắc-cách-ly)
+2. [Nhiều Bài Báo Trong Cùng Một Repo & Ranh Giới Bằng Chứng](#2-nhiều-bài-báo-trong-cùng-một-repo--ranh-giới-bằng-chứng)
    - [2.1 Sơ đồ tổ chức thư mục chuẩn](#21-sơ-đồ-tổ-chức-thư-mục-chuẩn)
    - [2.2 Giao thức xác định bài báo hiện hành (Active Paper Declaration)](#22-giao-thức-xác-định-bài-báo-hiện-hành-active-paper-declaration)
    - [2.3 Kệ tài liệu dùng chung ở chế độ Chỉ Đọc (Read-Only)](#23-kệ-tài-liệu-dùng-chung-ở-chế-độ-chỉ-đọc-read-only)
@@ -201,9 +201,9 @@ Theo quy chuẩn Agent Skills, các agent chỉ đọc metadata `name` và `desc
 
 ---
 
-## 2. Kiến trúc Repository Đa Bài Báo & Quy Tắc Cách Ly
+## 2. Nhiều Bài Báo Trong Cùng Một Repo & Ranh Giới Bằng Chứng
 
-Trong nghiên cứu thực tế, một repository thường lưu trữ nhiều hướng nghiên cứu song song, nhiều bài báo chị em hoặc các thí nghiệm thăm dò. Nếu không có ranh giới cách ly nghiêm ngặt, AI agent rất dễ gây ra **ô nhiễm chéo dữ liệu**: lấy số liệu nháp của bài A làm baseline cho bài B, trích dẫn bài chưa công bố hoặc nhập nhằng giữa các tập dữ liệu.
+Trong nghiên cứu thực tế, một repository thường lưu trữ nhiều hướng nghiên cứu song song, nhiều bài báo chị em hoặc các thí nghiệm thăm dò. Nếu không có ranh giới bằng chứng rõ ràng giữa các bài báo trong cùng repo, AI agent rất dễ gây ra **ô nhiễm chéo dữ liệu**: lấy số liệu nháp của bài A làm baseline cho bài B, trích dẫn bài chưa công bố hoặc nhập nhằng giữa các tập dữ liệu.
 
 ### 2.1 Sơ đồ tổ chức thư mục chuẩn
 
@@ -222,7 +222,7 @@ my-research-lab/                # Kho lưu trữ gốc của Lab (1 Repository d
 │   │   ├── figures/            # Hình vẽ xuất bản tạo ra riêng cho bài 1
 │   │   └── manuscript/         # Mã nguồn bản thảo bài báo (LaTeX / Markdown)
 │   │
-│   └── 2026-routing-protocol/  # [Bài báo đang làm 2] - Cách ly 100% với bài 1
+│   └── 2026-routing-protocol/  # [Bài báo đang làm 2] - Không gian riêng trong cùng repo
 │       ├── AGENTS.md           # Tuyên bố Active Paper riêng cho bài 2
 │       ├── src/
 │       ├── data/
@@ -237,9 +237,9 @@ my-research-lab/                # Kho lưu trữ gốc của Lab (1 Repository d
 Mọi kỹ năng trong Research Kit đều tuân thủ nguyên tắc **Active Paper Resolution**:
 1. **Xác định bài báo**: Agent phải nhận diện bài báo đang thực hiện thông qua câu lệnh của người dùng, thư mục làm việc hiện hành (`cwd`), hoặc file `AGENTS.md` tại thư mục con đó.
 2. **Hỏi lại khi chưa rõ**: Nếu repository có nhiều bài báo mà câu lệnh chưa xác định rõ đối tượng áp dụng, agent **bắt buộc phải dừng lại hỏi người dùng** trước khi sửa file, chạy code hoặc đưa ra nhận định khoa học.
-3. **Cách ly tuyệt đối**:
-   - File nháp, script và số liệu trong thư mục bài báo khác (`papers/2026-routing-protocol/`) **tuyệt đối không được dùng làm bằng chứng, baseline hay văn bản trích dẫn** cho bài báo hiện tại (`papers/2026-vqe-optimization/`).
-   - Không tự tiện sao chép số liệu chưa commit giữa các bài báo.
+3. **Ranh giới bằng chứng tuyệt đối**:
+   - File nháp, script và số liệu trong thư mục bài báo khác cùng repo (`papers/2026-routing-protocol/`) **tuyệt đối không được dùng làm bằng chứng, baseline hay văn bản trích dẫn** cho bài báo hiện tại (`papers/2026-vqe-optimization/`).
+   - Không tự tiện sao chép số liệu chưa commit giữa các bài báo trong cùng một repo.
 
 ### 2.3 Kệ tài liệu dùng chung ở chế độ Chỉ Đọc (Read-Only)
 
@@ -556,4 +556,4 @@ Tuần 6: Minh họa & Báo cáo bảo vệ
 
 ### Cạm bẫy 4: Ô nhiễm chéo giữa các bài báo (Cross-Contamination)
 * **Vấn đề**: Agent làm việc trên bài báo A nhưng vô tình đọc nhầm và lấy số liệu thử nghiệm chưa kiểm chứng của bài báo B trong cùng một repository.
-* **Phòng vệ của Research Kit**: Cơ chế **Active Paper Declaration** thông qua file `AGENTS.md` cục bộ tại từng thư mục con, cách ly hoàn toàn dữ liệu và bản thảo giữa các công trình.
+* **Phòng vệ của Research Kit**: Cơ chế **Active Paper Declaration** thông qua file `AGENTS.md` cục bộ tại từng thư mục con, giữ ranh giới dữ liệu và bản thảo giữa các bài báo trong cùng một repo.

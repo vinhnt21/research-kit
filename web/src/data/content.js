@@ -135,9 +135,10 @@ export const content = {
     },
     lifecycle: {
       eyebrow: 'EMPIRICAL WORKFLOW',
-      heading: 'A Six-Stage Scientific Research Lifecycle',
+      heading: 'From a Source Check to a Finished Paper',
       subtitle:
-        'Each stage defines its scope, working artifacts, and empirical verification gate—from source verification and method planning to data processing and clean reruns. AI supports execution within those boundaries; researchers retain control of scientific decisions.',
+        'Build the method frame together, then carry verified sources through a frozen protocol, a clean rerun, the manuscript, and a finished package. Step-by-step detail lives in the docs.',
+      docsLink: 'Details in the docs',
       figureLabel: 'Figure 01',
       figureTitle: '6-Stage Core Lifecycle & 4 Pluggable Domain Extensions',
       figureCaption:
@@ -151,7 +152,8 @@ export const content = {
         {
           id: 'rk-survey',
           iconKey: 'search',
-          stage: 'Stage 01',
+          stage: '01',
+          short: 'No fabricated sources',
           name: 'Literature Survey & Provenance',
           duty: 'Systematic literature search, evidence mapping, citation pedigree audit, and knowledge gap discovery.',
           gate: 'Recorded search boundary and citation verification checklist.',
@@ -160,7 +162,8 @@ export const content = {
         {
           id: 'rk-idea',
           iconKey: 'lightbulb',
-          stage: 'Stage 02',
+          stage: '02',
+          short: 'Question frame',
           name: 'Hypothesis & Rival Falsification',
           duty: 'Formulate research questions, build rival hypotheses matrix, and specify falsification criteria.',
           gate: 'Go / No-Go decision gate before implementation and compute allocation.',
@@ -169,7 +172,8 @@ export const content = {
         {
           id: 'rk-method',
           iconKey: 'flask',
-          stage: 'Stage 03',
+          stage: '03',
+          short: 'Method frame',
           name: 'Methodology & Protocol Freeze',
           duty: 'Experimental design, baseline controls, power & precision analysis, run budget calculation.',
           gate: 'Protocol recorded before analysis to limit post-hoc selection and p-hacking.',
@@ -178,7 +182,8 @@ export const content = {
         {
           id: 'rk-data',
           iconKey: 'barChart',
-          stage: 'Stage 04',
+          stage: '04',
+          short: 'Data and rerun',
           name: 'Raw Data & Rerun Verification',
           duty: 'Raw data inspection, statistical hypothesis testing, publication figures, and anomaly diagnosis.',
           gate: 'Clean rerun from raw data before reporting scientific findings.',
@@ -187,7 +192,8 @@ export const content = {
         {
           id: 'rk-write',
           iconKey: 'fileText',
-          stage: 'Stage 05',
+          stage: '05',
+          short: 'Manuscript',
           name: 'Structured Manuscript Drafting',
           duty: 'Academic paper authoring, one core idea per paragraph, formal rebuttal and reviewer response.',
           gate: 'Claim–evidence alignment review before submission.',
@@ -196,7 +202,8 @@ export const content = {
         {
           id: 'rk-report',
           iconKey: 'share2',
-          stage: 'Stage 06',
+          stage: '06',
+          short: 'Finished package',
           name: 'Dissemination & Reporting',
           duty: 'Progress debriefs, executive summaries, defense slides, and transparent stakeholder reporting.',
           gate: 'Reporting gate limited to verified empirical results.',
@@ -243,22 +250,50 @@ export const content = {
         {
           iconKey: 'zap',
           title: 'Small Persistent Footprint',
-          desc: 'The 10 skills use fewer than 1,000 persistent tokens, or less than 0.50% of a 200k context window. The remaining context stays available for literature, data, methods, and analysis.',
+          points: [
+            {
+              fear: 'Not running out of context mid-task',
+              fix: 'Ten skills stay under 0.50% of the window, leaving the rest for the paper and the data.',
+            },
+          ],
         },
         {
           iconKey: 'shield',
-          title: 'Literature, Method, and Data Verification',
-          desc: 'Search boundaries and citation checks keep fabricated references out of the literature record. Rival-hypothesis matrices and recorded protocols support method development; raw-data inspection and clean reruns support data processing and result verification.',
+          title: 'Literature, Method, and Data Checks',
+          points: [
+            {
+              fear: 'Not citing a wrong or fabricated paper',
+              fix: 'A source check and a recorded search boundary come before anything enters the survey.',
+            },
+            {
+              fear: 'Not leaving the method loose',
+              fix: 'The method frame is built with the researcher and frozen before the experiment runs.',
+            },
+            {
+              fear: 'Not reporting numbers before a clean rerun',
+              fix: 'Results are reported only after a clean rerun from the raw data.',
+            },
+          ],
         },
         {
           iconKey: 'layers',
           title: 'Paper-Level Evidence Boundaries',
-          desc: 'Active-paper resolution separates the evidence, drafts, and analysis associated with concurrent papers in one repository. Shared literature remains read-only and citations are checked for each manuscript.',
+          points: [
+            {
+              fear: 'Not mixing one paper’s numbers into another',
+              fix: 'Several papers can share one repo, each with its own evidence boundary.',
+            },
+          ],
         },
         {
           iconKey: 'unlock',
-          title: 'Portable Markdown Procedures',
-          desc: 'The skills are standard operating procedures written in Markdown. They add no bundled runtime scripts, automatic Git operations, or platform-specific dependencies; code, data, and scientific decisions remain under researcher control.',
+          title: 'Writing and Researcher Control',
+          points: [
+            {
+              fear: 'Not writing loosely or off the evidence',
+              fix: 'One idea per paragraph, and every claim stays tied to evidence that was already checked. Scientific decisions stay with the researcher.',
+            },
+          ],
         },
       ],
     },
@@ -334,7 +369,7 @@ export const content = {
           highlight: false,
         },
         {
-          criteria: 'Multi-Paper Repositories',
+          criteria: 'Multiple Papers in One Repo',
           comp1: 'General repository workflows',
           comp2: 'Single docs/ workspace model',
           kit: 'Active-paper resolution + read-only shared shelf',
@@ -362,9 +397,9 @@ export const content = {
       subtitle:
         'Research Kit defines paper-level boundaries so AI-assisted tasks use the intended sources, data, drafts, and analysis for each manuscript.',
       figureLabel: 'Figure 02',
-      figureTitle: 'Active Paper Isolation & Read-Only Shared Literature Architecture',
+      figureTitle: 'Multiple Papers in One Repo & Read-Only Shared Literature',
       figureCaption:
-        'Each manuscript workspace operates independently with dedicated data and draft directories, referencing shared literature in read-only mode.',
+        'Each manuscript keeps a separate workspace in the same repo, with dedicated data and drafts, referencing shared literature in read-only mode.',
       principles: [
         {
           num: '01',
@@ -615,9 +650,10 @@ export const content = {
     },
     lifecycle: {
       eyebrow: 'QUY TRÌNH THỰC NGHIỆM',
-      heading: 'Vòng Đời Nghiên Cứu Khoa Học Qua 6 Giai Đoạn',
+      heading: 'Từ kiểm nguồn đến bài báo hoàn chỉnh',
       subtitle:
-        'Mỗi giai đoạn xác định phạm vi, kết quả của bước đó và mốc kiểm chứng—từ kiểm tra nguồn, xây dựng phương pháp đến xử lý và chạy lại dữ liệu. AI hỗ trợ thực thi trong các ranh giới đó; nhà nghiên cứu kiểm soát các quyết định khoa học.',
+        'Cùng xây dựng khung phương pháp, rồi đi hết kiểm nguồn, khóa giao thức, chạy lại dữ liệu, soạn bản thảo và đóng gói bài báo. Chi tiết từng bước nằm trong tài liệu.',
+      docsLink: 'Chi tiết trong tài liệu',
       figureLabel: 'Hình 01',
       figureTitle: 'Quy trình thực thi 6 giai đoạn cốt lõi & 4 module mở rộng',
       figureCaption:
@@ -631,7 +667,8 @@ export const content = {
         {
           id: 'rk-survey',
           iconKey: 'search',
-          stage: 'Giai đoạn 01',
+          stage: '01',
+          short: 'Chống bịa nguồn',
           name: 'Khảo Sát Tài Liệu & Thẩm Định Nguồn Gốc',
           duty: 'Tìm kiếm có hệ thống, lập bản đồ bằng chứng, đối chiếu nguồn trích dẫn và phát hiện khoảng trống tri thức.',
           gate: 'Ghi nhận biên tìm kiếm và kiểm tra nguồn gốc trích dẫn theo checklist.',
@@ -640,7 +677,8 @@ export const content = {
         {
           id: 'rk-idea',
           iconKey: 'lightbulb',
-          stage: 'Giai đoạn 02',
+          stage: '02',
+          short: 'Khung câu hỏi',
           name: 'Hình Thành Ý Tưởng & Giả Thuyết Đối Lập',
           duty: 'Xác lập câu hỏi nghiên cứu, xây dựng ma trận giả thuyết đối lập và xác định tiêu chí để bác bỏ giả thuyết.',
           gate: 'Quyết định làm hoặc dừng trước khi triển khai và phân bổ tài nguyên tính toán.',
@@ -649,7 +687,8 @@ export const content = {
         {
           id: 'rk-method',
           iconKey: 'flask',
-          stage: 'Giai đoạn 03',
+          stage: '03',
+          short: 'Khung phương pháp',
           name: 'Thiết Kế Phương Pháp & Đóng Băng Giao Thức',
           duty: 'Thiết kế thực nghiệm, nhóm đối chứng, phân tích độ chuẩn xác, cỡ mẫu và ước tính ngân sách chạy máy.',
           gate: 'Ghi nhận giao thức trước khi phân tích để hạn chế việc thử nhiều phép đo rồi mới chọn kết quả có lợi.',
@@ -658,7 +697,8 @@ export const content = {
         {
           id: 'rk-data',
           iconKey: 'barChart',
-          stage: 'Giai đoạn 04',
+          stage: '04',
+          short: 'Dữ liệu & chạy lại',
           name: 'Xử Lý Dữ Liệu Thô & Chạy Lại Kiểm Chứng',
           duty: 'Kiểm tra dữ liệu thô, phân tích thống kê, kết xuất đồ thị xuất bản và xử lý số liệu bất thường.',
           gate: 'Chạy lại từ dữ liệu gốc, độc lập với lần phân tích trước, rồi mới báo cáo kết quả.',
@@ -667,7 +707,8 @@ export const content = {
         {
           id: 'rk-write',
           iconKey: 'fileText',
-          stage: 'Giai đoạn 05',
+          stage: '05',
+          short: 'Soạn bản thảo',
           name: 'Soạn Thảo Bản Thảo Khoa Học Chuẩn Mực',
           duty: 'Soạn thảo bài báo theo cấu trúc chuẩn, mỗi đoạn một ý cốt lõi, soạn bản phản hồi phản biện sắc sảo.',
           gate: 'Đối soát luận điểm với bằng chứng thực nghiệm trước khi nộp.',
@@ -676,7 +717,8 @@ export const content = {
         {
           id: 'rk-report',
           iconKey: 'share2',
-          stage: 'Giai đoạn 06',
+          stage: '06',
+          short: 'Đóng gói hoàn thiện',
           name: 'Báo Cáo Tiến Độ & Bảo Vệ Kết Quả',
           duty: 'Tóm tắt tiến độ, báo cáo tổng hợp kết quả nghiên cứu và chuẩn bị nội dung thuyết trình bảo vệ.',
           gate: 'Báo cáo chỉ đưa các kết quả thực nghiệm đã được kiểm chứng.',
@@ -723,22 +765,50 @@ export const content = {
         {
           iconKey: 'zap',
           title: 'Phần Nạp Sẵn Rất Nhỏ',
-          desc: 'Mười skill dùng dưới 1.000 token luôn được nạp sẵn, chưa đến 0,50% cửa sổ context 200k. Phần context còn lại dành cho tài liệu, dữ liệu, phương pháp và phân tích.',
+          points: [
+            {
+              fear: 'Không hết context giữa chừng',
+              fix: 'Mười skill chiếm dưới 0,50% cửa sổ, phần còn lại dành cho bài và số liệu.',
+            },
+          ],
         },
         {
           iconKey: 'shield',
           title: 'Kiểm Chứng Tài Liệu, Phương Pháp Và Dữ Liệu',
-          desc: 'Biên tìm kiếm và kiểm tra nguồn giúp ngăn tài liệu bịa đặt lọt vào khảo sát. Ma trận giả thuyết đối lập và giao thức được ghi nhận hỗ trợ xây dựng phương pháp; kiểm tra dữ liệu thô và chạy lại từ dữ liệu gốc hỗ trợ xử lý dữ liệu, kiểm chứng kết quả.',
+          points: [
+            {
+              fear: 'Không trích dẫn nhầm hoặc bịa tài liệu',
+              fix: 'Kiểm nguồn và ghi biên tìm kiếm trước khi một tài liệu vào khảo sát.',
+            },
+            {
+              fear: 'Không để phương pháp thiếu chặt chẽ',
+              fix: 'Cùng dựng khung phương pháp và khóa giao thức trước khi chạy thí nghiệm.',
+            },
+            {
+              fear: 'Không đưa số liệu chưa chạy lại được',
+              fix: 'Chỉ báo cáo sau khi chạy lại từ dữ liệu gốc.',
+            },
+          ],
         },
         {
           iconKey: 'layers',
           title: 'Ranh Giới Bằng Chứng Theo Bài Báo',
-          desc: 'Cơ chế xác định bài báo hiện hành tách bằng chứng, bản thảo và phân tích của nhiều công trình trong cùng một kho mã. Tài liệu dùng chung chỉ được đọc, và trích dẫn được kiểm tra theo từng bản thảo.',
+          points: [
+            {
+              fear: 'Không lấy nhầm số của bài bên cạnh',
+              fix: 'Nhiều bài trong cùng một repo, mỗi bài một ranh giới bằng chứng.',
+            },
+          ],
         },
         {
           iconKey: 'unlock',
-          title: 'Quy Trình Markdown Có Tính Di Động',
-          desc: 'Các skill là quy trình viết bằng Markdown. Không kèm script chạy sẵn, không tự thao tác Git và không phụ thuộc nền tảng; mã nguồn, dữ liệu và quyết định khoa học vẫn thuộc quyền kiểm soát của nhà nghiên cứu.',
+          title: 'Bài Viết Và Quyền Quyết Định',
+          points: [
+            {
+              fear: 'Không viết loãng hay lệch ý',
+              fix: 'Mỗi đoạn một ý, luận điểm bám bằng chứng đã được kiểm. Quyết định khoa học vẫn thuộc về nhà nghiên cứu.',
+            },
+          ],
         },
       ],
     },
@@ -813,7 +883,7 @@ export const content = {
           highlight: false,
         },
         {
-          criteria: 'Quản Lý Đa Bài Báo Trong Cùng Repo',
+          criteria: 'Nhiều Bài Báo Trong Cùng Một Repo',
           comp1: 'Workflow repository tổng quát',
           comp2: 'Mô hình một workspace docs/',
           kit: 'Xác định bài báo hiện hành + kệ tài liệu chỉ đọc',
@@ -841,9 +911,9 @@ export const content = {
       subtitle:
         'Research Kit xác định ranh giới theo từng bài báo để tác vụ có AI hỗ trợ sử dụng đúng nguồn, dữ liệu, bản thảo và phân tích của mỗi công trình.',
       figureLabel: 'Hình 02',
-      figureTitle: 'Tách bài báo đang làm và kệ tài liệu dùng chung',
+      figureTitle: 'Nhiều bài báo trong cùng một repo và kệ tài liệu dùng chung',
       figureCaption:
-        'Mỗi bài báo làm việc riêng, không lấy nhầm dữ liệu của bài khác, và chỉ đọc kệ tài liệu dùng chung.',
+        'Mỗi bài báo có không gian riêng trong cùng repo, không lấy nhầm dữ liệu của bài khác, và chỉ đọc kệ tài liệu dùng chung.',
       principles: [
         {
           num: '01',

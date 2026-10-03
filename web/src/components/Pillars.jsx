@@ -24,12 +24,18 @@ export default function Pillars({ t }) {
           {t.pillars.cards.map((card, idx) => {
             const IconComponent = iconMap[card.iconKey] || Zap;
             return (
-              <div className={`pillar-card fade-in stagger-${(idx % 4) + 1}`} key={idx}>
+              <div className={`pillar-card fade-in stagger-${(idx % 4) + 1}`} key={card.title}>
                 <div className="pillar-icon-box">
                   <IconComponent size={24} strokeWidth={2} />
                 </div>
                 <h3 className="pillar-title">{card.title}</h3>
-                <p className="pillar-desc">{card.desc}</p>
+                <ul className="pillar-points">
+                  {card.points.map((point) => (
+                    <li key={point.fear}>
+                      <strong>{point.fear}.</strong> {point.fix}
+                    </li>
+                  ))}
+                </ul>
               </div>
             );
           })}

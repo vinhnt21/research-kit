@@ -129,7 +129,7 @@ Tài liệu công khai nằm trong [`documents/`](documents/):
 
 | Tài liệu | Mô tả |
 | :--- | :--- |
-| [`documents/guide.md`](documents/guide.md) | Cẩm nang vận hành đầy đủ (tiếng Anh): cài đặt/cập nhật/gỡ bỏ, cô lập đa bài báo, sổ tay từng skill, playbook đầu-cuối, bảng quyết định và anti-patterns |
+| [`documents/guide.md`](documents/guide.md) | Cẩm nang vận hành đầy đủ (tiếng Anh): cài đặt/cập nhật/gỡ bỏ, quản lý nhiều bài báo trong cùng một repo, sổ tay từng skill, playbook đầu-cuối, bảng quyết định và anti-patterns |
 | [`documents/guide.vi.md`](documents/guide.vi.md) | Cùng cẩm nang bằng tiếng Việt |
 
 Xem bản tương tác trên website: [Tài liệu](https://research-kit.vinhnguyenthanh.com/docs).
@@ -152,7 +152,7 @@ Nghiên cứu khoa học với AI agent hiện nay gặp phải nhiều vấn đ
 | **Độ tập trung nghiên cứu** | **Scientific Agent Skills**: Agent dễ lạc vào ma trận tìm kiếm và cài đặt giữa 163 ứng viên | **Điều hướng 1:1 theo từng giai đoạn chuẩn** | **Tập trung tối đa vào nghiên cứu & bài báo cốt lõi** |
 | **Context thường trực** | **Scientific Agent Skills**: Chiếm 14.246 token (7,12% cửa sổ context) ngay từ đầu | **Chỉ tốn ~1.000 token (<0,50% cửa sổ context)** | **Dành trọn >99,5% context** cho dữ liệu thực nghiệm & lập luận |
 | **Rủi ro vận hành** | **Scientific Agent Skills & Superpowers**: Phụ thuộc 105 script bên ngoài & hook mở phiên | **0 script phụ (100% tài liệu quy trình chuẩn)** | **Không lỗi runtime**, độc lập với mọi môi trường agent |
-| **Ràng buộc framework & Cô lập** | **Science Superpowers**: Ép buộc `docs/science-superpowers/` và git freeze; thiếu cô lập bài báo | **Khai báo Active Paper, ranh giới bằng chứng rành mạch, layout linh hoạt** | **Bảo đảm tuyệt đối tính liêm chính** giữa các bài báo đồng thời mà không bị trói buộc |
+| **Ràng buộc framework & Nhiều bài trong 1 repo** | **Science Superpowers**: Ép buộc `docs/science-superpowers/` và git freeze; thiếu hỗ trợ nhiều bài báo trong cùng một repo | **Khai báo Active Paper, ranh giới bằng chứng rành mạch, layout linh hoạt** | **Bảo đảm tuyệt đối tính liêm chính** giữa các bài báo trong cùng repo mà không bị trói buộc |
 
 ### Các Ưu điểm & Luận chứng Kiến trúc
 
@@ -165,11 +165,11 @@ Theo [Đặc tả chuẩn Agent Skills](https://agentskills.io/specification), n
 #### 2. Định tuyến thông minh theo giai đoạn kế cận (Neighbor-Aware Routing)
 Mỗi skill phụ trách đúng một giai đoạn nghiên cứu và chỉ dẫn rõ ràng đến các bước kế tiếp. Tài liệu thuộc về `rk-survey`, phương pháp thuộc về `rk-method`, kiểm chứng số liệu thuộc về `rk-data`. Agent tự động định tuyến theo tỷ lệ 1:1 mà không rơi vào vòng lặp tìm kiếm hay chọn nhầm công cụ giữa hơn 160 lựa chọn.
 
-#### 3. Kiến trúc không gian làm việc đa bài báo & Quy tắc cô lập
+#### 3. Nhiều bài báo trong cùng một repo & Ranh giới bằng chứng
 Trong nghiên cứu thực tế, một repository thường chứa nhiều bài báo hoặc hướng nghiên cứu song song. Nếu thiếu cơ chế phân vùng, AI agent rất dễ gây ô nhiễm chéo: lấy số liệu thử nghiệm của ý tưởng này làm baseline cho ý tưởng khác.
 
 <p align="center">
-  <img src="figures/papers-vi.svg" alt="Kiến trúc nhiều bài báo với ranh giới cô lập không gian làm việc và thư viện đọc chung an toàn." width="920">
+  <img src="figures/papers-vi.svg" alt="Kiến trúc nhiều bài báo trong cùng một repo với ranh giới bằng chứng và thư viện đọc chung an toàn." width="920">
 </p>
 
 ```text
@@ -198,9 +198,9 @@ my-research-project/           # Đề tài nghiên cứu tổng thể (1 Reposi
 ```
 
 - **Xác định bài báo đang làm (Active Paper Resolution)**: Agent bắt buộc phải xác định rõ bài báo mục tiêu từ prompt, thư mục hiện hành (`cwd`) hoặc file `AGENTS.md` cạnh bài báo trước khi thao tác file hay chạy code. Nếu mơ hồ, agent phải hỏi lại người dùng.
-- **Ranh giới cô lập bằng chứng tuyệt đối**: Bản thảo nháp, script thử nghiệm hay số liệu chưa công bố của bài báo bên cạnh **tuyệt đối không được coi là bằng chứng, baseline hay tài liệu trích dẫn** cho bài báo hiện tại.
+- **Ranh giới bằng chứng tuyệt đối**: Bản thảo nháp, script thử nghiệm hay số liệu chưa công bố của bài báo bên cạnh trong cùng repo **tuyệt đối không được coi là bằng chứng, baseline hay tài liệu trích dẫn** cho bài báo hiện tại.
 - **Kệ tài liệu dùng chung ở chế độ Chỉ đọc**: Thư viện chung (`literature/`) phục vụ tra cứu toàn cục, nhưng mỗi trích dẫn đều phải được thẩm định độc lập đối với từng luận điểm của bài báo đang làm.
-- **Linh hoạt không áp đặt quy ước**: Phòng lab có thể đặt tên thư mục là `papers/`, `studies/`, `ideas/` tùy ý. Research Kit chỉ đòi hỏi nguyên tắc cốt lõi: mỗi bài báo là một phân vùng độc lập có khai báo Active Paper rành mạch.
+- **Linh hoạt không áp đặt quy ước**: Phòng lab có thể đặt tên thư mục là `papers/`, `studies/`, `ideas/` tùy ý. Research Kit chỉ đòi hỏi nguyên tắc cốt lõi: mỗi bài báo là một không gian riêng trong cùng repo, có khai báo Active Paper rành mạch.
 
 #### 4. Kỷ luật quy trình thuần túy (Không ràng buộc Framework)
 - **Không ép buộc cây thư mục**: Khác với **Science Superpowers** áp đặt thư mục cố định `docs/science-superpowers/`, các hook mở phiên ngầm, hay lệnh commit git freeze làm đứt gãy luồng nghiên cứu, Research Kit trao quyền kiểm soát cấu trúc và git 100% cho dự án.

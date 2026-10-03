@@ -12,7 +12,7 @@
    - [1.3 Uninstallation & Clean Reset](#13-uninstallation--clean-reset)
    - [1.4 Integrity Verification & Health Check](#14-integrity-verification--health-check)
    - [1.5 Agent Cache & Session Reloading](#15-agent-cache--session-reloading)
-2. [Multi-Paper Repository Architecture & Isolation Rules](#2-multi-paper-repository-architecture--isolation-rules)
+2. [Multiple Papers in One Repo & Evidence Boundaries](#2-multiple-papers-in-one-repo--evidence-boundaries)
    - [2.1 Directory Blueprint](#21-directory-blueprint)
    - [2.2 Active Paper Resolution Protocol](#22-active-paper-resolution-protocol)
    - [2.3 Audited Read-Only Literature Shelf](#23-audited-read-only-literature-shelf)
@@ -201,9 +201,9 @@ Under the Agent Skills specification, agents parse `SKILL.md` frontmatter (`name
 
 ---
 
-## 2. Multi-Paper Repository Architecture & Isolation Rules
+## 2. Multiple Papers in One Repo & Evidence Boundaries
 
-In scientific research, a single lab repository frequently hosts multiple concurrent investigations, sibling drafts, or exploratory experiments. Without rigorous isolation boundaries, AI agents routinely cause cross-contamination: citing draft numbers from an unrelated paper, confusing experimental baselines, or importing unverified claims.
+In scientific research, a single lab repository frequently hosts multiple concurrent investigations, sibling drafts, or exploratory experiments. Without clear evidence boundaries between papers in the same repo, AI agents routinely cause cross-contamination: citing draft numbers from an unrelated paper, confusing experimental baselines, or importing unverified claims.
 
 ### 2.1 Directory Blueprint
 
@@ -224,7 +224,7 @@ my-research-lab/                # Root Repository
 │   │   ├── figures/            # Generated publication figures for Paper 1
 │   │   └── manuscript/         # LaTeX / Markdown manuscript source files
 │   │
-│   └── 2026-routing-protocol/  # [Active Paper 2] - Completely isolated from Paper 1
+│   └── 2026-routing-protocol/  # [Active Paper 2] - Separate workspace in the same repo
 │       ├── AGENTS.md           # Active Paper Declaration for Paper 2
 │       ├── src/
 │       ├── data/
@@ -239,9 +239,9 @@ my-research-lab/                # Root Repository
 Every Research Kit skill strictly enforces the **Active Paper Resolution Rule**:
 1. **Resolution**: The agent must determine which paper is active from the user prompt, current working directory (`cwd`), or the local `AGENTS.md`.
 2. **Ambiguity Check**: If multiple papers exist and the task involves writing, running code, or making scientific claims, the agent **must ask for clarification** before proceeding.
-3. **Absolute Isolation**:
-   - Files, scripts, and drafts in sibling paper directories (`papers/2026-routing-protocol/`) are **strictly prohibited** from serving as baselines, citations, or evidence for `papers/2026-vqe-optimization/`.
-   - Never copy uncommitted exploratory data across papers.
+3. **Absolute Evidence Boundary**:
+   - Files, scripts, and drafts in sibling paper directories in the same repo (`papers/2026-routing-protocol/`) are **strictly prohibited** from serving as baselines, citations, or evidence for `papers/2026-vqe-optimization/`.
+   - Never copy uncommitted exploratory data across papers in the same repository.
 
 ### 2.3 Audited Read-Only Literature Shelf
 
@@ -559,4 +559,4 @@ Week 6: Presentation & Dissemination
 
 ### Anti-Pattern 4: Multi-Paper Cross-Contamination
 * **Problem**: AI agent working on Paper A accidentally reuses exploratory, uncommitted metrics from Paper B in the same git repository.
-* **Research Kit Safeguard**: Strict Active Paper Resolution via `AGENTS.md` and quarantined `papers/<paper-id>/` workspaces.
+* **Research Kit Safeguard**: Strict Active Paper Resolution via `AGENTS.md` keeps evidence boundaries between `papers/<paper-id>/` workspaces in the same repo.

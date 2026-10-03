@@ -129,7 +129,7 @@ Public guides live in [`documents/`](documents/):
 
 | Guide | Description |
 | :--- | :--- |
-| [`documents/guide.md`](documents/guide.md) | Full operational handbook (English): install/update/uninstall, multi-paper isolation, per-skill reference, end-to-end playbook, decision matrix, and anti-patterns |
+| [`documents/guide.md`](documents/guide.md) | Full operational handbook (English): install/update/uninstall, managing multiple papers in one repo, per-skill reference, end-to-end playbook, decision matrix, and anti-patterns |
 | [`documents/guide.vi.md`](documents/guide.vi.md) | Same handbook in Vietnamese |
 
 Browse the interactive version on the site: [Docs](https://research-kit.vinhnguyenthanh.com/docs).
@@ -152,7 +152,7 @@ Scientific inquiry using AI agents currently suffers from severe standing contex
 | **Research Focus** | **Scientific Agent Skills**: Agent gets lost in tool search & install loops across 163 candidates | **Deterministic stage-by-stage routing** | **100% focused on core scientific discovery** |
 | **Standing Token Overhead** | **Scientific Agent Skills**: 14,246 tokens (7.12% of context window) before reading files | **~1,000 tokens (<0.50% of context window)** | **Frees >99.5% of context** for raw data, papers, and deep reasoning |
 | **Operational Reliability** | **Scientific Agent Skills & Superpowers**: 105 external scripts & brittle session-start hooks | **0 external scripts (pure procedural specs)** | **Zero runtime drift**, transparent, and portable across all agents |
-| **Framework & Isolation** | **Science Superpowers**: Forces `docs/science-superpowers/` and git freeze; lacks multi-paper isolation | **Active Paper Declaration, strict evidence boundaries, and flexible layouts** | **Guaranteed data integrity** across concurrent manuscripts with zero forced lock-in |
+| **Framework & Multi-Paper Repo** | **Science Superpowers**: Forces `docs/science-superpowers/` and git freeze; lacks multi-paper-in-one-repo support | **Active Paper Declaration, strict evidence boundaries, and flexible layouts** | **Guaranteed data integrity** across manuscripts in the same repo with zero forced lock-in |
 
 ### Key Advantages & Architectural Principles
 
@@ -165,11 +165,11 @@ Under the [Agent Skills specification](https://agentskills.io/specification), an
 #### 2. Deterministic Stage-by-Stage Routing (Neighbor-Aware)
 Each skill owns exactly one well-defined research stage and explicitly references its neighboring steps. An agent working on literature remains within `rk-survey`. A locked methodology belongs to `rk-method`. A claim lacking a fresh execution checkpoint stays in `rk-data`. Routing happens naturally and conveniently without hallucinated tool searches across 160+ options.
 
-#### 3. Multi-Paper Workspace Architecture & Isolation Rules
-In empirical research, a single repository frequently hosts multiple related ideas, hypotheses, or manuscripts concurrently. Without rigorous isolation, AI agents easily trigger cross-contamination: reusing uncommitted exploratory numbers as baselines, or importing unverified claims across sister drafts.
+#### 3. Multiple Papers in One Repo & Evidence Boundaries
+In empirical research, a single repository frequently hosts multiple related ideas, hypotheses, or manuscripts concurrently. Without rigorous boundaries, AI agents easily trigger cross-contamination: reusing uncommitted exploratory numbers as baselines, or importing unverified claims across sister drafts.
 
 <p align="center">
-  <img src="figures/papers-en.svg" alt="Multi-paper repository isolation architecture and shared read-only literature." width="920">
+  <img src="figures/papers-en.svg" alt="Architecture for multiple papers in one repo with evidence boundaries and shared read-only literature." width="920">
 </p>
 
 ```text
@@ -180,14 +180,14 @@ my-research-project/           # Overall research topic (1 Repository / Root Wor
 │   └── pdfs/                  # Reference papers, PDFs, and preprints
 │
 ├── papers/                    # Partitioned workspaces for individual ideas/papers
-│   ├── 2026-quantum-routing/  # [Idea A / Paper 1] - Fully isolated workspace
+│   ├── 2026-quantum-routing/  # [Idea A / Paper 1] - Separate workspace in same repo
 │   │   ├── AGENTS.md          # Active Paper declaration: scope, questions, hypotheses
 │   │   ├── src/               # Dedicated experimental code for Paper 1
 │   │   ├── data/              # Dedicated data & independent rerun verification logs
 │   │   ├── figures/           # Rendered publication figures for Paper 1
 │   │   └── manuscript/        # Manuscript source files (LaTeX / Markdown)
 │   │
-│   └── 2026-repeater-sched/   # [Idea B / Paper 2] - Fully isolated workspace
+│   └── 2026-repeater-sched/   # [Idea B / Paper 2] - Separate workspace in same repo
 │       ├── AGENTS.md          # Active Paper declaration: scope, questions, hypotheses
 │       ├── src/               # Dedicated experimental code for Paper 2
 │       ├── data/              # Dedicated data & rerun logs for Paper 2
@@ -200,7 +200,7 @@ my-research-project/           # Overall research topic (1 Repository / Root Wor
 - **Target Paper Declaration (Active Paper Resolution)**: The agent must identify and declare the active paper from the prompt, `cwd`, or local `AGENTS.md` before reading files or running experiments. If ambiguous, the agent must ask for clarification.
 - **Strict Evidence Boundary**: A sibling draft, sister experiment folder, uncommitted script, or unpublished result from another paper is **never valid evidence, baseline data, or citation material** for the active paper.
 - **Audited Read-Only Literature Shelf**: Centralized literature (`literature/`) is shared for universal reference, but every cited reference must be independently audited against the active paper's specific claims.
-- **Zero Dogmatic Lock-In**: Labs may name directories `papers/`, `studies/`, `ideas/`, or `manuscripts/`. Research Kit requires only the core operational invariant: each paper is an isolated workspace with an unambiguous Active Paper declaration.
+- **Zero Dogmatic Lock-In**: Labs may name directories `papers/`, `studies/`, `ideas/`, or `manuscripts/`. Research Kit requires only the core operational invariant: each paper is a separate workspace in the same repo with an unambiguous Active Paper declaration.
 
 #### 4. Pure Procedural Rigor (Zero Framework Lock-In)
 - **No Forced Directory Trees**: Unlike **Science Superpowers** which mandates `docs/science-superpowers/`, session-start git hooks, and disruptive git freeze commits, Research Kit leaves directory structure and git control 100% to the project.

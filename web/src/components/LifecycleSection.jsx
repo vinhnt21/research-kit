@@ -1,19 +1,18 @@
 import React from 'react';
-import { 
-  Compass, 
-  Search, 
-  Lightbulb, 
-  FlaskConical, 
-  BarChart3, 
-  FileText, 
-  Share2, 
-  Cpu, 
-  Network, 
-  Brain, 
-  Presentation, 
-  ShieldCheck 
+import {
+  Compass,
+  Search,
+  Lightbulb,
+  FlaskConical,
+  BarChart3,
+  FileText,
+  Share2,
+  Cpu,
+  Network,
+  Brain,
+  Presentation,
+  ArrowUpRight,
 } from 'lucide-react';
-import FigureViewer from './FigureViewer';
 
 const iconMap = {
   search: Search,
@@ -28,8 +27,17 @@ const iconMap = {
   presentation: Presentation,
 };
 
-export default function LifecycleSection({ t, lang }) {
-  const workflowImg = `/figures/workflow-${lang}.svg`;
+function DocsLink({ href, label }) {
+  return (
+    <a className="lifecycle-docs-link" href={href}>
+      <span>{label}</span>
+      <ArrowUpRight size={16} strokeWidth={2.2} />
+    </a>
+  );
+}
+
+export default function LifecycleSection({ t }) {
+  const docsLabel = t.lifecycle.docsLink;
 
   return (
     <section className="section" id="lifecycle">
@@ -43,83 +51,55 @@ export default function LifecycleSection({ t, lang }) {
           <p className="section-subtitle">{t.lifecycle.subtitle}</p>
         </div>
 
-        {/* Vector SVG Diagram with Interactive Figure Viewer */}
-        <FigureViewer
-          src={workflowImg}
-          alt={t.lifecycle.heading}
-          label={t.lifecycle.figureLabel || (lang === 'vi' ? 'Hình 01' : 'Figure 01')}
-          title={t.lifecycle.figureTitle || (lang === 'vi' ? 'Quy trình 6 giai đoạn cốt lõi & 4 module mở rộng' : '6-Stage Core Research Lifecycle & 4 Pluggable Domain Extensions')}
-          caption={t.lifecycle.figureCaption || t.lifecycle.subtitle}
-          minReadableWidth={840}
-          defaultMode="scroll"
-          lang={lang}
-          viewerText={t.figureViewer}
-          className="fade-in-scale"
-        />
-
-        {/* Part 1: Core 6 Skills */}
-        <div className="fade-in" style={{ marginBottom: '40px' }}>
-          <h3 style={{ fontSize: '1.4rem', marginBottom: '8px' }}>{t.lifecycle.coreTitle}</h3>
-          <p style={{ color: 'var(--text-secondary)', marginBottom: '24px' }}>{t.lifecycle.coreSubtitle}</p>
-          
-          <div className="lifecycle-tabs">
-            {t.lifecycle.skills.map((skill, idx) => {
-              const IconComp = iconMap[skill.iconKey] || Search;
-              return (
-                <div className={`lifecycle-card fade-in stagger-${(idx % 3) + 1}`} key={skill.id}>
-                  <div>
-                    <span className="stage-badge">{skill.stage}</span>
-                    <div className="skill-code-wrapper">
-                      <div className="skill-icon-pill">
+        <div className="lifecycle-compact fade-in">
+          <div className="lifecycle-group">
+            <div className="lifecycle-group-head">
+              <h3>{t.lifecycle.coreTitle}</h3>
+              <DocsLink href="/docs#core-skills" label={docsLabel} />
+            </div>
+            <ol className="lifecycle-pipeline">
+              {t.lifecycle.skills.map((skill) => {
+                const IconComp = iconMap[skill.iconKey] || Search;
+                return (
+                  <li key={skill.id}>
+                    <a className="lifecycle-step" href={`/docs#skill-${skill.id}`}>
+                      <span className="lifecycle-step-top">
+                        <span className="lifecycle-step-num">{skill.stage}</span>
                         <IconComp size={16} strokeWidth={2} />
-                      </div>
-                      <span className="skill-code">@{skill.id}</span>
-                    </div>
-                  </div>
-                  <div>
-                    <div className="stage-name">{skill.name}</div>
-                    <div className="stage-duty">{skill.duty}</div>
-                    <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginTop: '8px', fontFamily: 'var(--font-mono)' }}>
-                      {skill.files}
-                    </div>
-                  </div>
-                  <div className="stage-gate">
-                    <div className="gate-label">
-                      <ShieldCheck size={14} strokeWidth={2.5} />
-                      <span>Verification Gate</span>
-                    </div>
-                    <div className="gate-text">{skill.gate}</div>
-                  </div>
-                </div>
-              );
-            })}
+                      </span>
+                      <span className="lifecycle-step-id">@{skill.id}</span>
+                      <span className="lifecycle-step-name">{skill.short || skill.name}</span>
+                    </a>
+                  </li>
+                );
+              })}
+            </ol>
           </div>
-        </div>
 
-        {/* Part 2: 4 Domain Modules */}
-        <div className="fade-in">
-          <h3 style={{ fontSize: '1.4rem', marginBottom: '8px' }}>{t.lifecycle.domainTitle}</h3>
-          <p style={{ color: 'var(--text-secondary)', marginBottom: '24px' }}>{t.lifecycle.domainSubtitle}</p>
-
-          <div className="domains-grid">
-            {t.lifecycle.domains.map((dom, idx) => {
-              const IconComp = iconMap[dom.iconKey] || Cpu;
-              return (
-                <div className={`domain-card fade-in stagger-${(idx % 4) + 1}`} key={dom.id}>
-                  <div className="domain-header">
-                    <div className="skill-icon-pill">
-                      <IconComp size={16} strokeWidth={2} />
-                    </div>
-                    <span className="domain-name">@{dom.id}</span>
-                  </div>
-                  <div className="domain-field">{dom.domain}</div>
-                  <div className="domain-desc">{dom.duty}</div>
-                  <div className="domain-gate">
-                    <strong>Gate:</strong> {dom.gate}
-                  </div>
-                </div>
-              );
-            })}
+          <div className="lifecycle-group">
+            <div className="lifecycle-group-head">
+              <h3>{t.lifecycle.domainTitle}</h3>
+              <DocsLink href="/docs#domain-skills" label={docsLabel} />
+            </div>
+            <ul className="lifecycle-domains">
+              {t.lifecycle.domains.map((dom) => {
+                const IconComp = iconMap[dom.iconKey] || Cpu;
+                return (
+                  <li key={dom.id}>
+                    <a className="lifecycle-domain" href={`/docs#skill-${dom.id}`}>
+                      <span className="skill-icon-pill">
+                        <IconComp size={16} strokeWidth={2} />
+                      </span>
+                      <span className="lifecycle-domain-copy">
+                        <span className="lifecycle-step-id">@{dom.id}</span>
+                        <span className="lifecycle-step-name">{dom.domain}</span>
+                      </span>
+                      <ArrowUpRight size={16} strokeWidth={2.2} />
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
           </div>
         </div>
       </div>

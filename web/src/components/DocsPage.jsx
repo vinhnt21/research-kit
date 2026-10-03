@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import {
   Copy,
   Check,
@@ -61,6 +61,12 @@ export default function DocsPage({ t, lang }) {
   const [tocOpen, setTocOpen] = useState(false);
   const { copy, copiedKey } = useCopy();
   const contentRef = useRef(null);
+
+  useLayoutEffect(() => {
+    const id = window.location.hash.slice(1);
+    if (!id) return;
+    document.getElementById(id)?.scrollIntoView({ block: 'start' });
+  }, [lang]);
 
   /* ── Active section highlight via IntersectionObserver ─── */
   useEffect(() => {
