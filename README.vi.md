@@ -21,6 +21,24 @@
 
 </div>
 
+## Mục lục
+
+- [Tổng quan & Kiến trúc Hệ thống](#tổng-quan--kiến-trúc-hệ-thống)
+  - [Phần 1: Quy trình Cốt lõi — 6 Skill cho Vòng đời Bài báo Khoa học](#phần-1-quy-trình-cốt-lõi--6-skill-cho-vòng-đời-bài-báo-khoa-học)
+  - [Phần 2: Mở rộng Chuyên ngành — 4 Skill theo Hướng nghiên cứu của Tác giả](#phần-2-mở-rộng-chuyên-ngành--4-skill-theo-hướng-nghiên-cứu-của-tác-giả)
+- [Hướng dẫn Cài đặt & Bắt đầu Nhanh](#hướng-dẫn-cài-đặt--bắt-đầu-nhanh)
+  - [1. Dùng Skills CLI (Khuyến nghị)](#1-dùng-skills-cli-khuyến-nghị)
+  - [2. Dùng GitHub CLI (từ bản v2.90.0)](#2-dùng-github-cli-từ-bản-v2900)
+  - [3. Tải file ZIP và nhờ Agent tự cài đặt (Agent-Assisted)](#3-tải-file-zip-và-nhờ-agent-tự-cài-đặt-agent-assisted)
+  - [4. Cài đặt thủ công](#4-cài-đặt-thủ-công)
+  - [5. Kiểm định & Bộ Test Suite](#5-kiểm-định--bộ-test-suite)
+- [Tài liệu](#tài-liệu)
+- [So sánh & Các Ưu điểm Cốt lõi](#so-sánh--các-ưu-điểm-cốt-lõi)
+  - [Bảng So sánh Trực diện: Scientific Agent Skills (v2.65.0) & Science Superpowers vs. Research Kit](#bảng-so-sánh-trực-diện-scientific-agent-skills-v2650--science-superpowers-vs-research-kit)
+  - [Các Ưu điểm & Luận chứng Kiến trúc](#các-ưu-điểm--luận-chứng-kiến-trúc)
+- [Tài liệu Quy trình & Biểu mẫu Nghiệp vụ](#tài-liệu-quy-trình--biểu-mẫu-nghiệp-vụ)
+- [Nguồn Tham Khảo & Kế Thừa](#nguồn-tham-khảo--kế-thừa)
+
 ## Tổng quan & Kiến trúc Hệ thống
 
 Research Kit là bộ công cụ mã nguồn mở gồm các **skill nghiên cứu theo quy trình**, được thiết kế để dẫn dắt các AI coding và research agent (Cursor, Claude Code, Codex, Antigravity) thực thi trọn vẹn vòng đời phát triển một bài báo khoa học. Từ khảo sát tài liệu, hình thành giả thuyết, đến đóng băng giao thức thực nghiệm, chạy lại kiểm chứng dữ liệu thô, và soạn thảo bản thảo — Research Kit đảm bảo tính nghiêm ngặt khoa học ở từng giai đoạn.
@@ -139,6 +157,10 @@ Xem bản tương tác trên website: [Tài liệu](https://research-kit.vinhngu
 ## So sánh & Các Ưu điểm Cốt lõi
 
 Nghiên cứu khoa học với AI agent hiện nay gặp phải nhiều vấn đề: context bị lãng phí nghiêm trọng, agent "ảo giác" khi tìm kiếm công cụ, và phụ thuộc vào các framework cứng nhắc. Research Kit được thiết kế để giải quyết trực tiếp các điểm nghẽn kiến trúc tồn tại ở các thư viện trước đó như **Scientific Agent Skills** (Kassis và cộng sự, 2026) và **Science Superpowers** (K-Dense-AI).
+
+<p align="center">
+  <img src="figures/human-agent-pipeline-vi.svg" alt="So sánh hai quy trình cộng tác: bộ skill tự do lớn (hơn 150 skill) khiến việc chọn skill và kiểm chứng khó, còn Research Kit (10 skill theo giai đoạn) giữ thực thi trong phạm vi và việc rà soát nhanh hơn." width="920">
+</p>
 
 <p align="center">
   <img src="figures/context-vi.svg" alt="So sánh chi phí context thường trực giữa Scientific Agent Skills v2.65.0 (14.246 token, 7,12%) và Research Kit (<0,50%)." width="920">

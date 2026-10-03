@@ -21,6 +21,24 @@
 
 </div>
 
+## Contents
+
+- [Overview & High-Level Architecture](#overview--high-level-architecture)
+  - [Part 1: Core Pipeline — 6 Skills for the Scientific Paper Lifecycle](#part-1-core-pipeline--6-skills-for-the-scientific-paper-lifecycle)
+  - [Part 2: Specialist Extensions — 4 Domain-Specific Skills (Author's Research Focus)](#part-2-specialist-extensions--4-domain-specific-skills-authors-research-focus)
+- [Installation & Quick Start](#installation--quick-start)
+  - [1. Using the Skills CLI (Recommended)](#1-using-the-skills-cli-recommended)
+  - [2. Using GitHub CLI (v2.90.0+)](#2-using-github-cli-v2900)
+  - [3. Agent-Assisted Installation (via ZIP)](#3-agent-assisted-installation-via-zip)
+  - [4. Manual Installation](#4-manual-installation)
+  - [5. Verification & Test Suite](#5-verification--test-suite)
+- [Documentation](#documentation)
+- [Comparison & Key Advantages](#comparison--key-advantages)
+  - [Direct Comparison: Scientific Agent Skills (v2.65.0) & Science Superpowers vs. Research Kit](#direct-comparison-scientific-agent-skills-v2650--science-superpowers-vs-research-kit)
+  - [Key Advantages & Architectural Principles](#key-advantages--architectural-principles)
+- [Companion References & Field Templates](#companion-references--field-templates)
+- [References & Prior Art](#references--prior-art)
+
 ## Overview & High-Level Architecture
 
 Research Kit is an open-source suite of procedural research skills designed to guide AI coding and research agents (Cursor, Claude Code, Codex, Antigravity) through end-to-end scientific paper development. From literature discovery and hypothesis formulation to experimental protocol freeze, fresh data rerun verification, and manuscript drafting, Research Kit enforces empirical rigor at every stage.
@@ -139,6 +157,10 @@ Browse the interactive version on the site: [Docs](https://research-kit.vinhnguy
 ## Comparison & Key Advantages
 
 Scientific inquiry using AI agents currently suffers from severe standing context bloat, routing hallucinations, and brittle framework dependencies. Research Kit was engineered specifically to solve the architectural bottlenecks found in earlier libraries like **Scientific Agent Skills** (Kassis et al., 2026) and **Science Superpowers** (K-Dense-AI).
+
+<p align="center">
+  <img src="figures/human-agent-pipeline-en.svg" alt="Comparison of two collaborative research pipelines: a large free skill set (over 150 skills) makes skill choice and audit hard, while Research Kit (10 stage-based skills) keeps execution in scope and makes review faster." width="920">
+</p>
 
 <p align="center">
   <img src="figures/context-en.svg" alt="Standing context overhead comparison between Scientific Agent Skills v2.65.0 (14,246 tokens, 7.12%) and Research Kit (<0.50%)." width="920">
