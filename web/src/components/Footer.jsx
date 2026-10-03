@@ -44,6 +44,11 @@ export default function Footer({ t }) {
                 {t.footer.issues}
               </a>
             </li>
+            <li>
+              <a href={t.footer.authorUrl} target="_blank" rel="noopener noreferrer">
+                {t.footer.authorLink}
+              </a>
+            </li>
           </ul>
         </div>
 

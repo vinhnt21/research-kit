@@ -236,8 +236,8 @@ export const content = {
           id: 'rk-academic-visualize',
           iconKey: 'presentation',
           domain: 'Scientific Visualization & Slides',
-          duty: 'Publication-grade illustrations (LaTeX TikZ, Mermaid, SVGs) with anti-overlap arrow geometry and source-grounded slide decks.',
-          gate: 'Cognitive load filtering, arrow clearance check & slide structure audit.',
+          duty: 'Publication-grade illustrations (LaTeX TikZ, Mermaid, SVGs) with arrows that do not cover text, and slides grounded in the paper.',
+          gate: 'Keep figures easy to read; no arrow over text; slides stay grounded in the paper.',
         },
       ],
     },
@@ -254,6 +254,14 @@ export const content = {
             {
               fear: 'Not running out of context mid-task',
               fix: 'Ten skills stay under 0.50% of the window, leaving the rest for the paper and the data.',
+            },
+            {
+              fear: 'Not drowning the agent in tool choice',
+              fix: 'Stage-by-stage routing points to the next skill instead of a catalog of 160+ options.',
+            },
+            {
+              fear: 'Not paying for unused standing instructions',
+              fix: 'Only the skills you need stay loaded; domain modules are added when the task needs them.',
             },
           ],
         },
@@ -283,6 +291,14 @@ export const content = {
               fear: 'Not mixing one paper’s numbers into another',
               fix: 'Several papers can share one repo, each with its own evidence boundary.',
             },
+            {
+              fear: 'Not treating a draft next door as evidence',
+              fix: 'Sibling drafts and unpublished scripts are never baselines or citations for the active paper.',
+            },
+            {
+              fear: 'Not sharing literature without a check',
+              fix: 'The shared literature shelf is read-only; each citation is verified for the active manuscript.',
+            },
           ],
         },
         {
@@ -291,7 +307,15 @@ export const content = {
           points: [
             {
               fear: 'Not writing loosely or off the evidence',
-              fix: 'One idea per paragraph, and every claim stays tied to evidence that was already checked. Scientific decisions stay with the researcher.',
+              fix: 'One idea per paragraph, and every claim stays tied to evidence that was already checked.',
+            },
+            {
+              fear: 'Not letting the agent own scientific decisions',
+              fix: 'Go / stop calls, protocol freezes, and final claims stay with the researcher.',
+            },
+            {
+              fear: 'Not locking the lab into one platform',
+              fix: 'Skills are portable Markdown procedures—no bundled runtime scripts and no forced Git automation.',
             },
           ],
         },
@@ -502,6 +526,8 @@ export const content = {
       meta: 'Free and Open Source • Local Markdown Procedures',
       starCallout: 'Support the continued development of Research Kit with a Star on GitHub.',
       starCalloutLink: 'Support with a Star',
+      authorLink: 'About the author',
+      authorUrl: 'https://vinhnguyenthanh.com',
     },
     footer: {
       tagline: 'Lean research procedures and empirical verification boundaries for AI agents.',
@@ -511,6 +537,8 @@ export const content = {
       guideUrl: 'https://github.com/vinhnt21/research-kit/blob/main/documents/guide.md',
       license: 'Apache-2.0 License',
       issues: 'Report Issue',
+      authorLink: 'About the author',
+      authorUrl: 'https://vinhnguyenthanh.com',
       copy: '© 2026 Research Kit Contributors. Open source under Apache-2.0.',
     },
   },
@@ -730,29 +758,29 @@ export const content = {
           id: 'rk-quantum',
           iconKey: 'cpu',
           domain: 'Tính Toán Lượng Tử',
-          duty: 'Mô phỏng mạch, Hamiltonian cục bộ, thuật toán biến phân (VQE, QAOA).',
-          gate: 'Mặc định mô phỏng tại máy; chạy trên máy tính lượng tử thật phải được duyệt ngân sách.',
+          duty: 'Mô hình Hamiltonian, mô phỏng mạch tại máy, thuật toán biến thiên (VQE, QAOA).',
+          gate: 'Mặc định chỉ mô phỏng tại máy; chạy chip lượng tử thật phải được duyệt chi phí trước.',
         },
         {
           id: 'rk-quantum-network',
           iconKey: 'network',
           domain: 'Mạng Lượng Tử',
-          duty: 'Phân phối liên đới lượng tử, trạm lặp bộ nhớ, chọn đường truyền và lập lịch gửi tin.',
-          gate: 'Kiểm tra giới hạn độ trung thực & xác thực trạng thái giao thức mạng.',
+          duty: 'Phân phối liên đới lượng tử, bộ nhớ trạm lặp, định tuyến và lập lịch mạng.',
+          gate: 'Kiểm tra độ trung thực và trạng thái giao thức trước khi kết luận thông lượng.',
         },
         {
           id: 'rk-ai',
           iconKey: 'brain',
           domain: 'Trí Tuệ Nhân Tạo & Học Máy',
-          duty: 'Chia tập huấn luyện, kiểm định và kiểm tra nghiêm ngặt, rà soát rò rỉ dữ liệu, cố định hạt ngẫu nhiên để chạy lại được.',
-          gate: 'Kiểm tra rò rỉ dữ liệu và tính tái lập ngẫu nhiên của thí nghiệm.',
+          duty: 'Chia tập train/val/test nghiêm ngặt, phát hiện rò rỉ dữ liệu, cố định hạt ngẫu nhiên.',
+          gate: 'Không rò rỉ dữ liệu; chuẩn hoá chỉ học trên tập train.',
         },
         {
           id: 'rk-academic-visualize',
           iconKey: 'presentation',
           domain: 'Trực Quan Hóa & Slide Học Thuật',
-          duty: 'Thiết kế hình minh họa khoa học (LaTeX TikZ, Mermaid, SVG) chống đè chữ/mũi tên và tạo slide bám sát nguồn tài liệu.',
-          gate: 'Giảm tải nhận thức, kiểm tra hở mũi tên & kiểm định tự động bố cục slide.',
+          duty: 'Vẽ hình khoa học (LaTeX TikZ, Mermaid, SVG) với mũi tên không đè chữ, và slide bám bài báo.',
+          gate: 'Giữ hình dễ đọc; mũi tên không đè chữ; slide bám sát luận điểm trong bài.',
         },
       ],
     },
@@ -769,6 +797,14 @@ export const content = {
             {
               fear: 'Không hết context giữa chừng',
               fix: 'Mười skill chiếm dưới 0,50% cửa sổ, phần còn lại dành cho bài và số liệu.',
+            },
+            {
+              fear: 'Không để agent lạc trong ma trận công cụ',
+              fix: 'Định tuyến theo giai đoạn dẫn đúng skill kế tiếp, thay vì chọn trong hơn 160 lựa chọn.',
+            },
+            {
+              fear: 'Không trả chi phí cho hướng dẫn thừa',
+              fix: 'Chỉ nạp skill đang cần; module chuyên ngành thêm khi đúng việc.',
             },
           ],
         },
@@ -798,6 +834,14 @@ export const content = {
               fear: 'Không lấy nhầm số của bài bên cạnh',
               fix: 'Nhiều bài trong cùng một repo, mỗi bài một ranh giới bằng chứng.',
             },
+            {
+              fear: 'Không coi bản nháp bên cạnh là bằng chứng',
+              fix: 'Bản thảo và script chưa công bố của bài khác không được dùng làm baseline hay trích dẫn.',
+            },
+            {
+              fear: 'Không dùng kệ tài liệu chung mà bỏ kiểm',
+              fix: 'Thư mục literature/ chỉ đọc; mỗi trích dẫn vẫn phải kiểm riêng cho bài đang làm.',
+            },
           ],
         },
         {
@@ -806,7 +850,15 @@ export const content = {
           points: [
             {
               fear: 'Không viết loãng hay lệch ý',
-              fix: 'Mỗi đoạn một ý, luận điểm bám bằng chứng đã được kiểm. Quyết định khoa học vẫn thuộc về nhà nghiên cứu.',
+              fix: 'Mỗi đoạn một ý, luận điểm bám bằng chứng đã được kiểm.',
+            },
+            {
+              fear: 'Không để agent quyết định thay nhà nghiên cứu',
+              fix: 'Quyết định làm tiếp hay dừng, khóa giao thức và kết luận cuối vẫn thuộc về nhà nghiên cứu.',
+            },
+            {
+              fear: 'Không bị khóa vào một nền tảng',
+              fix: 'Skill là quy trình Markdown di động—không kèm script chạy sẵn và không tự thao tác Git.',
             },
           ],
         },
@@ -1017,6 +1069,8 @@ export const content = {
       meta: 'Miễn phí và Mã nguồn mở • Quy trình Markdown cục bộ',
       starCallout: 'Star Research Kit trên GitHub để ủng hộ quá trình duy trì và phát triển dự án.',
       starCalloutLink: 'Ủng hộ bằng Star',
+      authorLink: 'Về tác giả',
+      authorUrl: 'https://vinhnguyenthanh.com',
     },
     footer: {
       tagline: 'Quy trình nghiên cứu tinh gọn và ranh giới kiểm chứng thực nghiệm cho AI Agent.',
@@ -1026,6 +1080,8 @@ export const content = {
       guideUrl: 'https://github.com/vinhnt21/research-kit/blob/main/documents/guide.vi.md',
       license: 'Giấy phép Apache-2.0',
       issues: 'Báo lỗi / Góp ý',
+      authorLink: 'Về tác giả',
+      authorUrl: 'https://vinhnguyenthanh.com',
       copy: '© 2026 Research Kit Contributors. Mã nguồn mở theo giấy phép Apache-2.0.',
     },
   },

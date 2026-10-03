@@ -474,7 +474,7 @@ flowchart LR
 * **Location**: [`skills/rk-academic-visualize/SKILL.md`](file:///Users/vinhnt/DATA/learning/research-skills/skills/rk-academic-visualize/SKILL.md)
 * **Domain**: Academic Graphics & Slides
 * **Scope & Duty**: Publication-grade LaTeX TikZ architecture diagrams, clean SVG/Mermaid flowcharts, anti-overlap arrow geometry, slide deck design.
-* **Key Invariant**: Cognitive load filtering, strict 2-bend arrow limits, collision-free geometry, and source-grounded slide content.
+* **Key Invariant**: Keep figures easy to read — few boxes and labels, orthogonal arrows with at most two bends, no arrow over text; slides may only state claims already grounded in the paper.
 * **Sample Trigger Prompts**:
   - **EN**: `"Use @rk-academic-visualize to generate a publication-grade LaTeX TikZ diagram illustrating our system architecture with clean orthogonal arrows."`
   - **VI**: `"Dùng @rk-academic-visualize để vẽ sơ đồ kiến trúc hệ thống bằng LaTeX TikZ chuẩn bài báo IEEE, đảm bảo mũi tên không đè lên khối."`

@@ -49,6 +49,15 @@ export default function CTASection({ t }) {
           </div>
 
           <div className="cta-meta">{t.cta.meta}</div>
+
+          <a
+            className="author-link"
+            href={t.cta.authorUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {t.cta.authorLink}
+          </a>
         </div>
       </div>
     </section>

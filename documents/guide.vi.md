@@ -281,8 +281,8 @@ flowchart LR
   - Bản ghi ranh giới tìm kiếm: `assets/search-record.md`
   - Phiếu kiểm tra trích dẫn từng bài: `assets/citation-checklist.md`
   - Bản đồ chứng cứ (Evidence Map).
-* **Cổng nghiệm thu cứng (Quality Gate)**:
-  - Khóa ranh giới tìm kiếm với quy tắc dừng (stop rule) rõ ràng. Mỗi tài liệu trích dẫn phải có DOI/venue/nguồn thật đã kiểm chứng. Tuyệt đối không có tài liệu ảo.
+* **Mốc kiểm chứng (Pass condition)**:
+  - Phạm vi tìm kiếm đã khóa kèm quy tắc dừng rõ ràng. Mỗi tài liệu trích dẫn phải có DOI hoặc tạp chí/hội nghị thật đã kiểm chứng. Tuyệt đối không có tài liệu ảo.
 * **Mẫu câu lệnh kích hoạt (Trigger Prompts)**:
   - **VI**: `"Gọi @rk-survey để khảo sát tài liệu về định tuyến mạng lượng tử. Lập search-record và kiểm tra citation cho 5 bài báo nền tảng."`
   - **EN**: `"Run @rk-survey to map recent literature on quantum network routing and audit citations for 5 foundation papers."`
@@ -296,7 +296,7 @@ flowchart LR
 #### 02. rk-idea: Xây dựng giả thuyết & Đối lập bác bỏ
 * **Đường dẫn**: [`skills/rk-idea/SKILL.md`](file:///Users/vinhnt/DATA/learning/research-skills/skills/rk-idea/SKILL.md)
 * **Giai đoạn**: Giai đoạn 02 (Hình thành giả thuyết)
-* **Mục đích & Ranh giới**: Định hình câu hỏi nghiên cứu, lập ma trận giả thuyết đối thủ, xác định điều kiện bác bỏ (falsification criteria) và rà soát thiên kiến nhận thức.
+* **Mục đích & Ranh giới**: Định hình câu hỏi nghiên cứu, so sánh với các giả thuyết cạnh tranh, nêu điều kiện bác bỏ và kiểm tra thiên kiến.
 * **Khi nào NÊN dùng**:
   - Khi cần biến một ý tưởng mơ hồ thành giả thuyết khoa học có thể kiểm chứng.
   - Khi cần phản biện và đối chiếu với các cách giải thích cạnh tranh khác.
@@ -307,12 +307,12 @@ flowchart LR
 * **Đầu vào cần chuẩn bị**: Bản đồ chứng cứ hoặc khoảng trống nghiên cứu rút ra từ `rk-survey`.
 * **Sản phẩm đầu ra**:
   - Hồ sơ giả thuyết: `assets/hypothesis-record.md`
-  - Ma trận giả thuyết đối thủ: `assets/rival-matrix.md`
-  - Biên bản quyết định Pursue / Kill.
-* **Cổng nghiệm thu cứng (Quality Gate)**:
-  - Bắt buộc phải xác định điều kiện bác bỏ (thế nào là thất bại) *trước khi* viết code. Ma trận quyết định phải được người nghiên cứu phê duyệt.
+  - Bảng giả thuyết cạnh tranh: `assets/rival-matrix.md`
+  - Biên bản quyết định Làm tiếp / Dừng.
+* **Mốc kiểm chứng (Pass condition)**:
+  - Điều kiện bác bỏ (thế nào là thất bại) phải được viết *trước khi* viết code. Quyết định Làm tiếp / Dừng phải do nhà nghiên cứu duyệt.
 * **Mẫu câu lệnh kích hoạt**:
-  - **VI**: `"Dùng @rk-idea để phản biện giả thuyết về thuật toán cắt tỉa mạng nơ-ron, lập ma trận đối thủ và chỉ rõ điều kiện bác bỏ."`
+  - **VI**: `"Dùng @rk-idea để phản biện giả thuyết về thuật toán cắt tỉa mạng nơ-ron, lập bảng giả thuyết cạnh tranh và chỉ rõ điều kiện bác bỏ."`
   - **EN**: `"Use @rk-idea to stress-test our neural pruning hypothesis against rival explanations and set explicit falsification rules."`
 * **Tài liệu tham chiếu đi kèm**:
   - [`references/framing.md`](file:///Users/vinhnt/DATA/learning/research-skills/skills/rk-idea/references/framing.md)
@@ -324,7 +324,7 @@ flowchart LR
 #### 03. rk-method: Phương pháp luận & Đóng băng giao thức
 * **Đường dẫn**: [`skills/rk-method/SKILL.md`](file:///Users/vinhnt/DATA/learning/research-skills/skills/rk-method/SKILL.md)
 * **Giai đoạn**: Giai đoạn 03 (Thiết kế thực nghiệm)
-* **Mục đích & Ranh giới**: Thiết kế thí nghiệm, lựa chọn baseline so sánh, phân tích thống kê độ mạnh (statistical power), tính toán ngân sách tính toán (compute budget) và **đóng băng giao thức (Protocol Freeze)** để chống p-hacking.
+* **Mục đích & Ranh giới**: Thiết kế thí nghiệm, chọn mốc so sánh, ước tính cỡ mẫu cần thiết, tính ngân sách máy chạy và **khóa giao thức** để tránh chỉnh thước đo sau khi đã có số liệu.
 * **Khi nào NÊN dùng**:
   - Thiết kế quy trình thí nghiệm, cấu hình bộ đo, baseline đối chứng.
   - Tính toán số lượng mẫu tối thiểu cần thiết để đạt ý nghĩa thống kê.
@@ -335,10 +335,10 @@ flowchart LR
 * **Đầu vào cần chuẩn bị**: Giả thuyết đã được nghiệm thu từ `rk-idea`.
 * **Sản phẩm đầu ra**:
   - Kế hoạch phương pháp & văn bản đóng băng: `assets/method-plan.md`
-* **Cổng nghiệm thu cứng (Quality Gate)**:
-  - **Đóng băng giao thức (Protocol Freeze)**: Các biến số, thước đo, phép kiểm định và tiêu chuẩn dừng phải được ghi nhận cố định trước khi chạy thực nghiệm.
+* **Mốc kiểm chứng (Pass condition)**:
+  - Khóa giao thức trước khi chạy: biến số, thước đo, phép kiểm định và điều kiện dừng phải được chốt cứng trước khi chạy thực nghiệm.
 * **Mẫu câu lệnh kích hoạt**:
-  - **VI**: `"Gọi @rk-method để thiết kế thí nghiệm so sánh benchmark, tính toán power analysis và đóng băng file method-plan.md."`
+  - **VI**: `"Gọi @rk-method để thiết kế thí nghiệm so sánh, ước tính cỡ mẫu cần thiết và khóa file method-plan.md."`
   - **EN**: `"Run @rk-method to specify our benchmark protocol, compute required sample size, and freeze method-plan.md."`
 * **Tài liệu tham chiếu đi kèm**:
   - [`references/design-choice.md`](file:///Users/vinhnt/DATA/learning/research-skills/skills/rk-method/references/design-choice.md)
@@ -363,8 +363,8 @@ flowchart LR
   - Bản ghi phân tích dữ liệu: `assets/analysis-record.md`
   - Log xác nhận chạy lại độc lập (Rerun verification log).
   - Các hình vẽ kết quả đạt chuẩn xuất bản khoa học.
-* **Cổng nghiệm thu cứng (Quality Gate)**:
-  - **Bắt buộc kiểm chứng chạy lại độc lập**: Mọi kết luận khoa học và bảng biểu chỉ được công nhận sau khi có file log chứng minh việc tái tạo độc lập từ dữ liệu thô thành công.
+* **Mốc kiểm chứng (Pass condition)**:
+  - Bắt buộc chạy lại từ dữ liệu gốc: mọi kết luận và bảng biểu chỉ được công nhận khi có log chứng minh tái tạo độc lập từ dữ liệu thô.
 * **Mẫu câu lệnh kích hoạt**:
   - **VI**: `"Dùng @rk-data kiểm tra phân phối dữ liệu thô tại data/run-01/, chạy kiểm định thống kê và thực hiện rerun độc lập."`
   - **EN**: `"Run @rk-data to inspect raw logs in data/run-01/, test statistical significance, and verify clean rerun reproducibility."`
@@ -392,8 +392,8 @@ flowchart LR
   - Các phần bản thảo (`manuscript/*.tex` hoặc `*.md`)
   - Bảng đối soát tuyên bố - bằng chứng: `assets/claim-evidence.md`
   - Văn bản phản hồi phản biện khoa học (Rebuttal response).
-* **Cổng nghiệm thu cứng (Quality Gate)**:
-  - **Kiểm toán 100% bằng chứng (Claim-to-Evidence Audit)**: Mỗi câu khẳng định, mỗi con số, mỗi phần trăm đưa vào bài báo phải dẫn xuất trực tiếp từ file log thực nghiệm đã rerun hoặc tài liệu trích dẫn thật.
+* **Mốc kiểm chứng (Pass condition)**:
+  - Mọi khẳng định và con số trong bài phải đối chiếu được với log chạy lại từ dữ liệu gốc hoặc tài liệu trích dẫn đã kiểm.
 * **Mẫu câu lệnh kích hoạt**:
   - **VI**: `"Gọi @rk-write để viết phần Kết quả (Section 4). Đảm bảo mỗi đoạn 1 ý chính và đối chiếu số liệu với analysis-record.md."`
   - **EN**: `"Use @rk-write to draft Section 4 (Results). Enforce 1 core idea per paragraph and audit every claim against analysis-record.md."`
@@ -420,10 +420,10 @@ flowchart LR
 * **Sản phẩm đầu ra**:
   - Báo cáo tiến độ: `assets/report-record.md`
   - Tóm tắt điều hành (Executive briefing).
-* **Cổng nghiệm thu cứng (Quality Gate)**:
-  - Cổng báo cáo chỉ chấp nhận các kết quả thực nghiệm đã được kiểm chứng. Mọi suy đoán phải được dán nhãn phân biệt rõ ràng.
+* **Mốc kiểm chứng (Pass condition)**:
+  - Báo cáo chỉ đưa kết quả thực nghiệm đã kiểm chứng. Mọi suy đoán phải được ghi rõ là suy đoán.
 * **Mẫu câu lệnh kích hoạt**:
-  - **VI**: `"Dùng @rk-report lập báo cáo tóm tắt 2 trang cho buổi họp lab tuần này, tập trung vào kết quả thực nghiệm đã verify."`
+  - **VI**: `"Dùng @rk-report lập báo cáo tóm tắt 2 trang cho buổi họp lab tuần này, tập trung vào kết quả thực nghiệm đã kiểm chứng."`
   - **EN**: `"Use @rk-report to prepare a 2-page progress debrief for our weekly lab meeting covering validated results only."`
 * **Tài liệu tham chiếu đi kèm**:
   - [`references/report-gate.md`](file:///Users/vinhnt/DATA/learning/research-skills/skills/rk-report/references/report-gate.md)
@@ -437,8 +437,8 @@ flowchart LR
 #### 07. rk-quantum: Mô phỏng điện toán lượng tử
 * **Đường dẫn**: [`skills/rk-quantum/SKILL.md`](file:///Users/vinhnt/DATA/learning/research-skills/skills/rk-quantum/SKILL.md)
 * **Lĩnh vực**: Thuật toán & Mô phỏng lượng tử
-* **Phạm vi**: Xây dựng mô hình Hamiltonian, mô phỏng mạch lượng tử, thuật toán biến thiên (VQE, QAOA), tomography trạng thái lượng tử.
-* **Nguyên tắc bất biến**: **Mặc định mô phỏng cục bộ (Local Simulation)**. Việc thực thi trên chip lượng tử vật lý (QPU) trên đám mây bắt buộc phải có sự phê duyệt chi phí rõ ràng từ nhà nghiên cứu.
+* **Phạm vi**: Xây dựng mô hình Hamiltonian, mô phỏng mạch lượng tử tại máy, thuật toán biến thiên (VQE, QAOA), tái dựng trạng thái lượng tử.
+* **Nguyên tắc bất biến**: **Mặc định chỉ mô phỏng trên máy cục bộ**. Muốn chạy chip lượng tử thật trên đám mây thì phải có phê duyệt chi phí trước.
 * **Mẫu câu lệnh**:
   - **VI**: `"Dùng @rk-quantum mô phỏng mạch VQE cho phân tử H2 bằng Qiskit chạy cục bộ trên máy."`
   - **EN**: `"Use @rk-quantum to build a local statevector simulation of a 12-qubit Hamiltonian."`
@@ -448,10 +448,10 @@ flowchart LR
 #### 08. rk-quantum-network: Giao thức mạng lượng tử
 * **Đường dẫn**: [`skills/rk-quantum-network/SKILL.md`](file:///Users/vinhnt/DATA/learning/research-skills/skills/rk-quantum-network/SKILL.md)
 * **Lĩnh vực**: Mạng lượng tử & Hệ thống phân tán
-* **Phạm vi**: Phân phối vướng víu lượng tử (entanglement distribution), quản lý bộ nhớ repeater, giao thức định tuyến và lập lịch mạng lượng tử, theo dõi fidelity trạng thái Bell.
-* **Nguyên tắc bất biến**: Kiểm tra giới hạn fidelity và trạng thái giao thức mạng trước khi đưa ra nhận định về thông lượng.
+* **Phạm vi**: Phân phối liên đới lượng tử (entanglement), quản lý bộ nhớ trạm lặp, định tuyến và lập lịch mạng lượng tử, theo dõi độ trung thực trạng thái Bell.
+* **Nguyên tắc bất biến**: Kiểm tra giới hạn độ trung thực và trạng thái giao thức trước khi kết luận về thông lượng mạng.
 * **Mẫu câu lệnh**:
-  - **VI**: `"Gọi @rk-quantum-network mô phỏng quá trình entanglement swapping qua chuỗi 4 repeater và tính toán fidelity suy giảm."`
+  - **VI**: `"Gọi @rk-quantum-network mô phỏng trao đổi liên đới qua chuỗi 4 trạm lặp và tính độ trung thực bị suy giảm."`
   - **EN**: `"Use @rk-quantum-network to simulate repeater entanglement distribution and verify state fidelity bounds."`
 
 ---
@@ -459,10 +459,10 @@ flowchart LR
 #### 09. rk-ai: Kiểm chuẩn học máy & Chống rò rỉ dữ liệu
 * **Đường dẫn**: [`skills/rk-ai/SKILL.md`](file:///Users/vinhnt/DATA/learning/research-skills/skills/rk-ai/SKILL.md)
 * **Lĩnh vực**: Trí tuệ nhân tạo & Học máy
-* **Phạm vi**: Phân tách nghiêm ngặt tập Train/Validation/Test, phát hiện rò rỉ dữ liệu (data leakage), cố định seed ngẫu nhiên để tái lập kết quả, kiểm chuẩn công bằng với baseline.
-* **Nguyên tắc bất biến**: **Tuyệt đối không rò rỉ dữ liệu**. Bất kỳ phép biến đổi/chuẩn hóa dữ liệu nào đều chỉ được fit trên tập train.
+* **Phạm vi**: Chia tập train/validation/test nghiêm ngặt, phát hiện rò rỉ dữ liệu, cố định hạt ngẫu nhiên để tái lập kết quả, so sánh công bằng với baseline.
+* **Nguyên tắc bất biến**: **Không được rò rỉ dữ liệu**. Chuẩn hoá, điền khuyết và các phép học tham số chỉ được làm trên tập train.
 * **Mẫu câu lệnh**:
-  - **VI**: `"Dùng @rk-ai kiểm toán pipeline tiền xử lý để phát hiện rò rỉ dữ liệu và kiểm tra tính xác định qua 5 lần chạy với seed cố định."`
+  - **VI**: `"Dùng @rk-ai kiểm tra quy trình tiền xử lý để phát hiện rò rỉ dữ liệu và kiểm tra tính xác định qua 5 lần chạy với seed cố định."`
   - **EN**: `"Run @rk-ai to audit our preprocessing pipeline for data leakage and verify deterministic random seed execution."`
 
 ---
@@ -471,7 +471,7 @@ flowchart LR
 * **Đường dẫn**: [`skills/rk-academic-visualize/SKILL.md`](file:///Users/vinhnt/DATA/learning/research-skills/skills/rk-academic-visualize/SKILL.md)
 * **Lĩnh vực**: Đồ họa học thuật & Bản trình chiếu
 * **Phạm vi**: Vẽ sơ đồ kiến trúc hệ thống bằng LaTeX TikZ chuẩn bài báo IEEE/ACM, lưu đồ SVG/Mermaid sạch sẽ, quy tắc hình học chống đè mũi tên (anti-overlap), thiết kế slide báo cáo khoa học.
-* **Nguyên tắc bất biến**: Lọc tải nhận thức (cognitive load), giới hạn tối đa 2 khúc gấp trên mũi tên, kiểm soát khoảng cách chống đè lấn hình khối.
+* **Nguyên tắc bất biến**: Giữ hình dễ đọc — ít khối và nhãn, mũi tên đi theo đường thẳng góc và gấp tối đa hai lần, không để mũi tên đè chữ; slide chỉ nêu luận điểm đã có trong bài báo.
 * **Mẫu câu lệnh**:
   - **VI**: `"Dùng @rk-academic-visualize vẽ sơ đồ kiến trúc hệ thống bằng LaTeX TikZ chuẩn xuất bản, đảm bảo mũi tên vuông góc không đè chữ."`
   - **EN**: `"Use @rk-academic-visualize to generate a publication-grade LaTeX TikZ diagram with collision-free orthogonal arrows."`

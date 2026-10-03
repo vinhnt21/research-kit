@@ -370,7 +370,7 @@ export default function DocsPage({ t, lang }) {
                 <div className="docs-gate">
                   <Shield size={14} className="docs-gate-icon" />
                   <div>
-                    <span className="docs-gate-label">{isVI ? 'Cổng nghiệm thu' : 'Quality Gate'}</span>
+                    <span className="docs-gate-label">{isVI ? 'Mốc kiểm chứng' : 'Pass condition'}</span>
                     <p>{sk.gate}</p>
                   </div>
                 </div>
@@ -414,7 +414,7 @@ export default function DocsPage({ t, lang }) {
 
                   <div className="docs-domain-invariant">
                     <span className="docs-domain-invariant-label">
-                      {isVI ? 'Quy tắc ranh giới' : 'Boundary Invariant'}
+                      {isVI ? 'Quy tắc cứng' : 'Hard rule'}
                     </span>
                     <p>{sk.invariant}</p>
                   </div>

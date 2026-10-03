@@ -2294,6 +2294,22 @@ a {
   color: var(--text-muted);
 }
 
+.author-link {
+  display: inline-block;
+  margin-top: 14px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 3px;
+  letter-spacing: 0.01em;
+}
+
+.author-link:hover {
+  color: var(--accent-blue);
+}
+
 /* ==========================================================================
    DEVELOPMENT ROADMAP PAGE
    ========================================================================== */
