@@ -62,10 +62,10 @@ export default function App() {
     } catch {}
   }, [theme]);
 
-  // Trên trang con, browser tải /#section trước khi React render section đích.
-  // Cuộn lại sau khi DOM của trang chủ đã sẵn sàng để deep link luôn tới đúng vị trí.
+  // Browser tải URL có hash trước khi React render section đích.
+  // Cuộn lại sau khi DOM đã sẵn sàng; trang docs tự xử lý anchor của nó.
   useLayoutEffect(() => {
-    if (currentPage !== 'home' || !window.location.hash) return;
+    if (currentPage === 'docs' || !window.location.hash) return;
 
     const target = document.getElementById(window.location.hash.slice(1));
     target?.scrollIntoView({ block: 'start' });

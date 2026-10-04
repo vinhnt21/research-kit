@@ -8,7 +8,7 @@ keywords: [academic-visualize, scientific-diagram, latex-tikz, mermaid, pipeline
 argument-hint: "<tagged files or diagram brief> [format: tikz|mermaid|svg|slides] [language]"
 metadata:
   author: vinhnt
-  version: "2.2.0"
+  version: "2.3.0"
 ---
 
 # Academic Visualize & Slides
@@ -31,6 +31,8 @@ A manuscript, a figure label, and a slide use the language of that artifact. If 
 
 When generating or refining figures, pipeline diagrams, system architectures, or comparative workflows:
 
+Read [references/illustration-guide.md](references/illustration-guide.md) before laying out the figure. It owns height budgets, return-wire corridors, container bounds, and the render–inspect–repair gate. Use [assets/two-pass-flow.tex](assets/two-pass-flow.tex) as a runnable geometry example for comparable two-pass flows; adapt its stages to the source algorithm.
+
 ### 1.1. Core principles
 1. **Cognitive Clarity & Information Filtering**:
    - Focus each figure on communicating a single core mechanism, comparison, or concept.
@@ -39,11 +41,12 @@ When generating or refining figures, pipeline diagrams, system architectures, or
 2. **Visual Hierarchy & Spatial Hygiene**:
    - Establish clear visual grouping through consistent spacing, alignment, and node dimensions.
    - Maintain ample breathing room (inner padding and margins) to prevent text from colliding with borders.
+   - Size vertical gaps from the full rendered node heights, including display math and padding. Reserve routing space before placing containers; align comparable functional tiers without inventing algorithm steps.
 3. **Flow Semantics & Connector Legibility**:
    - Choose connector styles that accurately reflect the underlying interaction:
      - Use directional arrows for unidirectional data flow or sequential state transitions.
      - Use bidirectional connectors for collaborative, human-in-the-loop, or feedback/negotiation cycles.
-   - **Connector clearance**: Labels must never obscure or break connector lines. Position labels with safe vertical or horizontal offset, preserving the continuous line stem.
+   - **Connector clearance**: Keep wires clear of text, headers, and borders. Place short labels off the stem; use sloped, staggered labels for narrow parallel return wires. A long inter-container label may use a white badge only when the visible path and arrowhead still identify its endpoints unambiguously.
 4. **Accessible Encodings & Grayscale QA**:
    - Use purposeful, restrained color palettes (e.g., distinguishing failure/bottlenecks vs. success/verification vs. neutral structure).
    - Never rely solely on color to convey state: combine colors with geometric glyphs, line dashes, or distinct shapes so the figure remains 100% interpretable in black-and-white print.
@@ -57,6 +60,12 @@ When generating or refining figures, pipeline diagrams, system architectures, or
 - **Human–agent interaction**: Use bidirectional arrows (`<--->`) when the researcher and the agent exchange feedback. A one-way chain misstates that loop.
 - **Natural wording**: Use short, natural, paired labels ("Hard to choose the right skill" vs. "Easy to choose by stage") instead of clipped fragments or machine-translated phrases.
 - Technical detail and a TikZ pattern are in [references/illustration-guide.md](references/illustration-guide.md).
+
+### 1.3. Verify figures before delivery
+
+Compile or export the actual TikZ, Mermaid, or SVG source with an available native renderer, then rasterize at about 300 dpi or an equivalent readable resolution. Open the resulting image with the runtime's image-viewing capability; compilation success alone does not verify the layout. Check all five criteria in the illustration guide: node gaps, wire/text clearance, label/border clearance, complete container bounds, and outer margins. Repair defects, render again, and reopen the changed image until all applicable checks pass. Also verify the source algorithm, final-size readability, and grayscale meaning.
+
+Deliver editable source, the requested vector/export format, and the inspected preview. Briefly report the visual checks and any unresolved issue. If rendering or image viewing is unavailable, preserve the source and explain that visual verification remains incomplete; do not describe the figure as visually checked or ready for publication.
 
 ---
 

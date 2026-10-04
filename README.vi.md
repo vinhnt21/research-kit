@@ -23,7 +23,8 @@
 
 ## 🎉 Nhật Ký Cải Tiến
 
-- **[2026.10.04]** 🎯 **[Công Thức Toán & Kiểm Tra Slide]**: Tích hợp công cụ `skills/rk-academic-visualize/scripts/inject-math.py` hỗ trợ biên dịch hàng loạt công thức LaTeX sang Office Math Markup Language (OMML trong DrawingML `a14:m`) chuẩn PowerPoint thông qua Pandoc. Cho phép đặt công thức inline mượt mà trong cùng một đoạn văn bản (`<a:p>`), tự động đồng bộ cỡ chữ (`sz`) và phông `Cambria Math`, đồng thời đóng gói bằng cơ chế tương thích `mc:AlternateContent` có fallback. Nâng cấp `scripts/check-deck.py` để trích xuất văn bản đa namespace (`a:t` và `m:t`) và kiểm tra tọa độ bounding box tránh tràn chữ.
+- **[2026.10.04]** 🎯 **[Diagram LaTeX v2.3.0]**: Cải thiện bố cục diagram nhiều luồng với khoảng cách theo chiều cao thực của khối, dây nối và nhãn rõ ràng, khung bao đủ nội dung. Render, xem ảnh và sửa lỗi trước khi bàn giao. Có [ví dụ hai pass chạy được](skills/rk-academic-visualize/assets/two-pass-flow.tex).
+- **[2026.10.04]** 🎯 **[Slide & Công Thức Toán Native]**: Cải thiện render slide với công thức LaTeX biên dịch sang OMML native chỉnh sửa được, không dùng ký tự đặc biệt thay thế. Hỗ trợ toán inline, đồng bộ cỡ chữ và kiểm tra tràn khung bằng OOXML. Xem [skill và bộ công cụ](skills/rk-academic-visualize/SKILL.md).
 - **[2026.10.03]** 🎯 **[Giao Tiếp Tự Nhiên]**: Nâng cấp toàn bộ 10 kỹ năng nghiên cứu để tự động trao đổi và tổng hợp theo ngôn ngữ làm việc của nhà nghiên cứu bằng văn phong đồng nghiệp tự nhiên ("như trao đổi cùng đồng nghiệp"), đồng thời giữ nguyên cấu trúc chỉ dẫn tiếng Anh nhằm bảo đảm tính ổn định thực thi và tránh làm loãng ngữ cảnh của agent.
 - **[2026.10.02]** 🎯 **[Phát Hành v1.0.0]**: Chính thức đóng gói phiên bản Research Kit v1.0.0 gồm 6 kỹ năng nghiên cứu tuần tự (`rk-survey` đến `rk-report`) và 4 module chuyên ngành, đi kèm bộ kiểm tra tính toàn vẹn bằng mã băm SHA-256 (`scripts/check-suite.py`).
 - **[2026.10.01]** 🎯 **[Cổng Thông Tin & Cẩm Nang Quy Trình]**: Ra mắt cổng thông tin học thuật song ngữ ([research-kit.vinhnguyenthanh.com](https://research-kit.vinhnguyenthanh.com)) và cẩm nang hướng dẫn quy trình nghiên cứu toàn diện (`documents/guide.md` và `documents/guide.vi.md`).
@@ -84,21 +85,24 @@ So với các thư viện quy mô lớn như **Scientific Agent Skills** (bản 
 | [`rk-quantum`](skills/rk-quantum/SKILL.md) | Tính toán lượng tử | Mô phỏng mạch & Hamiltonian cục bộ, thuật toán biến phân | Mặc định mô phỏng cục bộ; chạy QPU phải duyệt ngân sách |
 | [`rk-quantum-network`](skills/rk-quantum-network/SKILL.md) | Mạng lượng tử | Phân phối liên đới lượng tử, bộ nhớ trạm lặp, định tuyến & lập lịch | Kiểm tra độ trung thực & thẩm định giao thức |
 | [`rk-ai`](skills/rk-ai/SKILL.md) | AI / Học máy | Chia tập train/val/test, kiểm tra rò rỉ dữ liệu, baseline & đánh giá | Chặn rò rỉ dữ liệu & kiểm tra tái lập seed |
-| [`rk-academic-visualize`](skills/rk-academic-visualize/SKILL.md) | Trực quan hóa & Slide học thuật | Thiết kế hình minh họa khoa học (LaTeX/TikZ, Mermaid) & tạo slide bám nguồn | Giảm tải nhận thức, kiểm tra mũi tên nối & rà soát bố cục slide |
+| [`rk-academic-visualize`](skills/rk-academic-visualize/SKILL.md) | Trực quan hóa & Slide học thuật | Hình khoa học (LaTeX/TikZ, Mermaid, SVG) & slide bám nguồn | Render, mở ảnh, đạt năm tiêu chí trực quan; kiểm tra slide |
 
 ---
 
 ## 🛠️ Yêu Cầu Môi Trường & Thiết Lập Công Cụ
 
-Research Kit được xây dựng dựa trên triết lý tinh gọn, ưu tiên công cụ CLI tiêu chuẩn để bảo đảm tính tái lập độc lập với môi trường:
+Các SOP Markdown cốt lõi chỉ cần agent tương thích. Kiểm tra bộ skill, chèn toán vào slide và render hình dùng công cụ phù hợp với từng việc:
 
 | Công cụ | Phiên bản tối thiểu | Mục đích sử dụng | Mức độ cần thiết |
 |---|---|---|---|
-| **Python** | 3.9+ | Chạy bộ kiểm tra toàn vẹn, kiểm tra bố cục slide OOXML, xác thực hash suite | **Bắt buộc** (chỉ dùng thư viện chuẩn: `xml.etree`, `zipfile`, `hashlib`, `unittest`; không cần cài pip package ngoài) |
+| **Python** | 3.9+ | Chạy bộ kiểm tra toàn vẹn, kiểm tra bố cục slide OOXML, xác thực hash suite | **Cần cho các bước kiểm tra này** (chỉ dùng thư viện chuẩn: `xml.etree`, `zipfile`, `hashlib`, `unittest`; không cần cài pip package ngoài) |
 | **Pandoc** | 3.0+ | Biên dịch công thức LaTeX sang Office Math Markup Language (OMML `a14:m`) native cho slide | **Bắt buộc** khi dùng `rk-academic-visualize` để inject công thức toán (`inject-math.py`) |
-| **LaTeX / TikZ** | TeX Live 2022+ / MacTeX | Biên dịch sơ đồ kiến trúc hệ thống sang PDF/SVG vector | **Tùy chọn** (chỉ cần khi muốn biên dịch trực tiếp file mã nguồn TikZ `.tex`) |
+| **LaTeX / TikZ** | TeX Live 2022+ / MacTeX | Biên dịch mã nguồn TikZ `.tex` sang PDF vector | **Cần khi render TikZ trên máy**, tùy chọn với SOP cốt lõi |
+| **Công cụ render & xem ảnh** | Tùy định dạng | Chuyển PDF thành ảnh; render Mermaid/SVG; mở ảnh để kiểm tra trực quan | **Cần để xác nhận hình đã kiểm tra** (ví dụ Ghostscript, renderer Mermaid, trình duyệt/công cụ vector); tùy chọn với SOP cốt lõi |
 | **Git** | 2.30+ | Quản lý phiên bản bài báo và mã nguồn | **Bắt buộc** |
 | **PowerPoint / Office** | 2010+ | Mở xem và trực tiếp chỉnh sửa công thức toán OMML native | **Tùy chọn** (công thức tương thích đầy đủ với Office/Word/PowerPoint hiện đại) |
+
+Render bằng công cụ đúng định dạng, rồi mở ảnh raster để kiểm tra khoảng cách, dây nối, nhãn, khung bao và lề. Nếu chưa render hoặc chưa mở ảnh để kiểm tra được, ghi rõ hình chưa được xác minh. Lệnh dùng được trên các môi trường và các ngưỡng bố cục nằm trong [hướng dẫn minh họa](skills/rk-academic-visualize/references/illustration-guide.md). Xem [ảnh luồng hai pass và slide công thức native](https://research-kit.vinhnguyenthanh.com/roadmap#figure-layout) trong nhật ký cải tiến. Bấm thumbnail để mở ảnh đầy đủ ngay trong trang.
 
 ### Lệnh Kiểm Tra Môi Trường
 
@@ -224,7 +228,7 @@ Nghiên cứu khoa học với AI agent hiện nay gặp phải nhiều vấn đ
 | **Cấu trúc danh mục** | **Scientific Agent Skills**: 163 skill vụn vặt, chồng chéo chức năng trên 16 lĩnh vực | **10 skill bao hàm trọn vòng đời nghiên cứu** | **Tinh gọn & thuận tiện**, loại bỏ hoàn toàn ma trận lựa chọn công cụ |
 | **Độ tập trung nghiên cứu** | **Scientific Agent Skills**: Agent dễ lạc vào ma trận tìm kiếm và cài đặt giữa 163 ứng viên | **Điều hướng 1:1 theo từng giai đoạn chuẩn** | **Tập trung tối đa vào nghiên cứu & bài báo cốt lõi** |
 | **Context thường trực** | **Scientific Agent Skills**: Chiếm 14.246 token (7,12% cửa sổ context) ngay từ đầu | **Chỉ tốn ~1.000 token (<0,50% cửa sổ context)** | **Dành trọn >99,5% context** cho dữ liệu thực nghiệm & lập luận |
-| **Rủi ro vận hành** | **Scientific Agent Skills & Superpowers**: Phụ thuộc 105 script bên ngoài & hook mở phiên | **Quy trình chuẩn SOP + Công cụ CLI độc lập** (chỉ dùng Python stdlib, Pandoc) | **Không lỗi runtime**, độc lập với mọi môi trường agent |
+| **Rủi ro vận hành** | **Scientific Agent Skills & Superpowers**: Phụ thuộc 105 script bên ngoài & hook mở phiên | **SOP Markdown + công cụ CLI kiểm tra và renderer đúng định dạng hình** | Công cụ kiểm tra được và cổng xác minh rõ ràng; SOP cốt lõi không thêm phụ thuộc bắt buộc |
 | **Ràng buộc framework & Nhiều bài trong 1 repo** | **Science Superpowers**: Ép buộc `docs/science-superpowers/` và git freeze; thiếu hỗ trợ nhiều bài báo trong cùng một repo | **Khai báo Active Paper, ranh giới bằng chứng rành mạch, layout linh hoạt** | **Bảo đảm tuyệt đối tính liêm chính** giữa các bài báo trong cùng repo mà không bị trói buộc |
 
 ### Các Ưu điểm & Luận chứng Kiến trúc

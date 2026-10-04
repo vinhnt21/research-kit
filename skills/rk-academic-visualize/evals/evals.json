@@ -1,0 +1,39 @@
+{
+  "skill_name": "rk-academic-visualize",
+  "evals": [
+    {
+      "id": "two-pass-math-flow",
+      "split": "train",
+      "prompt": "Create a standalone English TikZ figure for a synthetic two-pass scheduling algorithm. Both passes contain six functional tiers: eligibility check, request selection, tree refinement, resource/effort update, success sampling, completion/queue update. Pass A uses planned budgets; Pass B uses residual resources. Include the display formula T^* = argmax_{T in F_i(R)} [sum_{e in E_T} log p_e / (1 + c_e)] in the refinement nodes, and three explicit state-update lines in the resource nodes. Each sampling failure returns to its own eligibility check; each completion also returns there to select the next request. Exhausted budgets transfer A to B with a long label; exhausted residual resources lead to a global End-of-slot update below both panels. Deliver editable source, PDF and a PNG preview. Use the loaded skill and finish the requested work.",
+      "expected_output": "A complete compiled and visually inspected two-pass diagram preserving all stages and branches, with readable math, loopback labels, card bounds and global termination.",
+      "assertions": [
+        {"id": "semantics", "text": "Both passes preserve the six supplied tiers, all return/transfer/exit edges and the global termination."},
+        {"id": "spacing", "text": "Measured node heights leave at least 14pt vertical clearance; display math and state updates do not overlap."},
+        {"id": "routing", "text": "Parallel return labels are sloped and staggered; long transition and exit labels fit reserved corridors without cutting borders or adjacent wires."},
+        {"id": "bounds", "text": "Both cards contain all local nodes, headers and return labels; shared termination is below both with at least 20pt clearance."},
+        {"id": "visual-inspection", "text": "Consumer compiles, renders, opens the actual preview, checks all five visual criteria, and rerenders any correction."}
+      ]
+    },
+    {
+      "id": "simple-comparison",
+      "split": "train",
+      "prompt": "Create an English SVG comparing two horizontal researcher-agent workflows. Each row has three cards: Researcher, Agent, Review. Researcher and Agent exchange feedback; Agent sends results to Review. Place the short labels Feedback and Results above their connector stems. Keep the figure readable in grayscale. Deliver editable SVG and an inspected PNG preview.",
+      "expected_output": "Aligned paired rows with correct arrow direction and off-stem labels; complex loopback geometry is not imposed on a simple flow.",
+      "assertions": [
+        {"id": "interaction", "text": "Feedback is bidirectional and results are unidirectional."},
+        {"id": "continuous-stems", "text": "Labels sit above continuous connector stems and do not touch card borders."},
+        {"id": "simple-visual-qa", "text": "Consumer renders and opens the PNG, checks fit and grayscale readability, and preserves editable source."}
+      ]
+    },
+    {
+      "id": "renderer-unavailable",
+      "split": "train",
+      "prompt": "Provide a short handoff for a TikZ draft after discovering that this runtime has neither a TeX renderer nor an image viewer. No renderer or viewer can be installed in this task. Explain the actual verification status and give reproducible next steps; do not generate an artifact or run tools for this scenario.",
+      "expected_output": "Explicitly unverified visual status, source preserved, portable compile/render/open-image checks for a capable runtime, no invented QA pass.",
+      "assertions": [
+        {"id": "honest-partial", "text": "Handoff states compilation and visual inspection remain unverified and does not claim the figure is complete or visually checked."},
+        {"id": "portable-recovery", "text": "Next steps use available-tool discovery rather than a hardcoded Homebrew path and include opening the rendered image and the five visual checks."}
+      ]
+    }
+  ]
+}

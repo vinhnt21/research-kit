@@ -122,6 +122,11 @@ export const content = {
       devlogLabel: 'Development log',
       entries: [
         {
+          date: '2026-10-04',
+          problem: 'Compiled figures could still have overlapping math blocks, crowded return labels, or incomplete card bounds.',
+          fix: 'rk-academic-visualize v2.3.0 uses actual node heights, clear routing corridors, and comparable-card alignment. The agent must render, open the raster image, check five visual criteria, and fix and rerender defects before completion.',
+        },
+        {
           date: '2026-10-03',
           problem: 'The agent answered in English, or translated word by word, so the reply was hard to read.',
           fix: 'Skill instructions stay in English. Replies and notes use the language you wrote in. If that is unclear, the agent asks first. Vietnamese is written the way people talk.',
@@ -165,11 +170,39 @@ export const content = {
       items: [
         {
           date: '2026.10.04',
-          badge: 'Math & Slide Audit',
+          badge: 'LaTeX Diagrams',
           badgeType: 'feature',
-          title: 'Native DrawingML OMML Inline Math Injection & OOXML Linter',
+          id: 'figure-layout',
+          title: 'Complex LaTeX diagram layouts',
           description:
-            'Integrated `skills/rk-academic-visualize/scripts/inject-math.py` enabling native Office Math Markup Language (OMML in DrawingML `a14:m`) formula compilation in presentation slides via `Pandoc`. Supports seamless inline formulas within paragraph text flows (`<a:p>`), automated font-metric matching (`Cambria Math` at surrounding `sz`), and robust `mc:AlternateContent` fallback wrapping. Enhanced `scripts/check-deck.py` with multi-namespace text extraction (`a:t` and `m:t`) and bounding-box layout verification.',
+            'Improved layout and rendering for LaTeX diagrams with complex flows. Spacing follows actual block heights, with aligned stages, clearer connectors and labels, and complete container bounds. The agent renders, inspects and repairs the figure before delivery.',
+          image: {
+            src: '/examples/academic-visualize/two-pass-flow.png',
+            width: 1851,
+            height: 1665,
+            alt: 'Illustrative two-pass TikZ workflow with six aligned stages, return paths and a shared final update.',
+            openLabel: 'View the two-pass workflow at full size',
+            caption: 'Two-pass example · Click to view full size',
+          },
+          link: 'https://github.com/vinhnt21/research-kit/blob/main/skills/rk-academic-visualize/references/illustration-guide.md',
+          linkText: 'View Layout & Rendering Guide',
+        },
+        {
+          date: '2026.10.04',
+          badge: 'Slides & Native Math',
+          badgeType: 'feature',
+          id: 'native-math',
+          title: 'Slide rendering with native equations',
+          description:
+            'Improved slide rendering with native, editable equations inserted directly, without special-character substitutes. LaTeX is compiled to OMML, keeping inline equations in the text flow with matched font sizes. OOXML checks help detect content outside slide bounds.',
+          image: {
+            src: '/examples/academic-visualize/native-equation-slide.png',
+            width: 3444,
+            height: 2044,
+            alt: 'Reference PowerPoint screenshot with a change-of-basis example and a native equation being edited.',
+            openLabel: 'View the native-equation slide screenshot at full size',
+            caption: 'Reference screenshot · Click to view full size',
+          },
           link: 'https://github.com/vinhnt21/research-kit/tree/main/skills/rk-academic-visualize',
           linkText: 'View Skill & Tooling',
         },
@@ -308,8 +341,8 @@ export const content = {
           id: 'rk-academic-visualize',
           iconKey: 'presentation',
           domain: 'Scientific Visualization & Slides',
-          duty: 'Publication-grade illustrations (LaTeX TikZ, Mermaid, SVGs) with arrows that do not cover text, and slides grounded in the paper.',
-          gate: 'Keep figures easy to read; no arrow over text; slides stay grounded in the paper.',
+          duty: 'Scientific figures (LaTeX TikZ, Mermaid, SVG) with height-aware spacing, readable loopbacks, complete bounds, and slides grounded in the paper.',
+          gate: 'Render and open the raster image; pass five visual checks after fixes, or report unverified. Slides stay grounded in the paper.',
         },
       ],
     },
@@ -447,14 +480,14 @@ export const content = {
           criteria: 'Bundled Runtime Components',
           comp1: '105 Python scripts + 29 env vars',
           comp2: 'Harness hooks + automated Git scripts',
-          kit: 'Standalone CLI utilities (OMML/OOXML); Markdown SOPs',
+          kit: 'OMML/OOXML CLI + native-renderer guidance; Markdown SOPs',
           highlight: true,
         },
         {
           criteria: 'Operating Model',
           comp1: 'Broad free collection with helper scripts',
           comp2: 'Hook-supported automated workflow',
-          kit: 'Instruction-based sequential workflow + CLI checks',
+          kit: 'Instruction-based steps + rerun and visual inspection gates',
           highlight: true,
         },
         {
@@ -574,7 +607,7 @@ export const content = {
         },
         {
           q: 'How does Research Kit manage computational and compilation tooling?',
-          a: 'Research Kit establishes verifiable boundaries. Core skills are authored as portable Markdown SOPs that run in any LLM environment, while specialized operations requiring mathematical rendering (OMML/LaTeX compilation via Pandoc) or layout linting (OOXML bounds checking) are handled by auditable, standalone CLI utilities with strict SHA-256 integrity verification.',
+          a: 'Core Markdown SOPs need only a compatible agent. Slide math injection uses Pandoc and Python standard-library utilities; deck and suite checks also use Python. Figure work uses the format’s native renderer, then an image viewer to inspect raster output. The skill requires fixes and rerendering before a figure passes; if rendering or image inspection is unavailable, it remains explicitly unverified.',
         },
         {
           q: 'How much persistent context does Research Kit use?',
@@ -738,6 +771,11 @@ export const content = {
       devlogLabel: 'Nhật ký cải tiến',
       entries: [
         {
+          date: '2026-10-04',
+          problem: 'Hình đã biên dịch vẫn có thể đè khối chứa toán, chật nhãn loopback hoặc có khung bao thiếu nội dung.',
+          fix: 'rk-academic-visualize v2.3.0 tính khoảng cách theo chiều cao thực, chừa hành lang đi dây và căn các thẻ so sánh. Agent phải render, mở ảnh raster, kiểm tra năm tiêu chí, rồi sửa và render lại khi có lỗi trước khi báo hoàn thành.',
+        },
+        {
           date: '2026-10-03',
           problem: 'Agent trả lời tiếng Anh, hoặc dịch từng chữ, nên câu khó đọc.',
           fix: 'Hướng dẫn trong skill vẫn là tiếng Anh. Câu trả lời và ghi chú viết theo ngôn ngữ bạn nhắn. Chưa rõ thì hỏi lại. Tiếng Việt viết như đang nói.',
@@ -781,11 +819,39 @@ export const content = {
       items: [
         {
           date: '2026.10.04',
-          badge: 'Công Thức Toán & Kiểm Tra Slide',
+          badge: 'Diagram LaTeX',
           badgeType: 'feature',
-          title: 'Biên Dịch OMML Native Cho Slide & Công Cụ Kiểm Tra Bố Cục OOXML',
+          id: 'figure-layout',
+          title: 'Bố cục diagram LaTeX nhiều luồng',
           description:
-            'Tích hợp công cụ `skills/rk-academic-visualize/scripts/inject-math.py` hỗ trợ biên dịch hàng loạt công thức LaTeX sang Office Math Markup Language (OMML trong DrawingML `a14:m`) chuẩn PowerPoint thông qua `Pandoc`. Cho phép đặt công thức inline mượt mà trong cùng một đoạn văn bản (`<a:p>`), tự động đồng bộ cỡ chữ (`sz`) và phông `Cambria Math`, đồng thời đóng gói bằng cơ chế tương thích `mc:AlternateContent` có fallback. Nâng cấp `scripts/check-deck.py` để trích xuất văn bản đa namespace (`a:t` và `m:t`) và kiểm tra tọa độ bounding box tránh tràn chữ.',
+            'Cải thiện bố cục và render diagram LaTeX với nhiều luồng phức tạp. Tính khoảng cách theo chiều cao thực của khối, căn các tầng, đi dây và đặt nhãn rõ ràng, bảo đảm khung bao đủ nội dung. Agent render, xem ảnh và sửa lỗi bố cục trước khi bàn giao.',
+          image: {
+            src: '/examples/academic-visualize/two-pass-flow.png',
+            width: 1851,
+            height: 1665,
+            alt: 'Luồng TikZ hai pass minh hoạ với sáu tầng căn thẳng, đường quay lại và khối cập nhật cuối chung.',
+            openLabel: 'Xem ảnh luồng hai pass đầy đủ',
+            caption: 'Ví dụ hai pass · Bấm để xem đầy đủ',
+          },
+          link: 'https://github.com/vinhnt21/research-kit/blob/main/skills/rk-academic-visualize/references/illustration-guide.md',
+          linkText: 'Xem Hướng Dẫn Bố Cục & Render',
+        },
+        {
+          date: '2026.10.04',
+          badge: 'Slide & Công Thức Toán',
+          badgeType: 'feature',
+          id: 'native-math',
+          title: 'Render slide với công thức toán native',
+          description:
+            'Cải thiện khả năng render slide và chèn công thức toán native chỉnh sửa được, không dùng ký tự đặc biệt thay thế. Biên dịch LaTeX sang OMML, giữ công thức trong dòng văn bản và đồng bộ phông, cỡ chữ. Kiểm tra OOXML giúp phát hiện nội dung tràn khung slide.',
+          image: {
+            src: '/examples/academic-visualize/native-equation-slide.png',
+            width: 3444,
+            height: 2044,
+            alt: 'Ảnh PowerPoint tham chiếu với ví dụ đổi cơ sở và công thức native đang được chỉnh sửa.',
+            openLabel: 'Xem ảnh slide công thức native đầy đủ',
+            caption: 'Ảnh tham chiếu · Bấm để xem đầy đủ',
+          },
           link: 'https://github.com/vinhnt21/research-kit/tree/main/skills/rk-academic-visualize',
           linkText: 'Xem Skill & Bộ Công Cụ',
         },
@@ -924,8 +990,8 @@ export const content = {
           id: 'rk-academic-visualize',
           iconKey: 'presentation',
           domain: 'Trực Quan Hóa & Slide Học Thuật',
-          duty: 'Vẽ hình khoa học (LaTeX TikZ, Mermaid, SVG) với mũi tên không đè chữ, và slide bám bài báo.',
-          gate: 'Giữ hình dễ đọc; mũi tên không đè chữ; slide bám sát luận điểm trong bài.',
+          duty: 'Vẽ hình khoa học (LaTeX TikZ, Mermaid, SVG) với khoảng cách theo chiều cao thực, loopback dễ đọc, khung bao đủ nội dung và slide bám bài báo.',
+          gate: 'Render và mở ảnh raster; sửa đến khi đạt năm tiêu chí trực quan hoặc ghi rõ chưa xác minh. Slide bám luận điểm trong bài.',
         },
       ],
     },
@@ -1062,14 +1128,14 @@ export const content = {
           criteria: 'Thành Phần Runtime Đi Kèm',
           comp1: '105 script Python + 29 biến môi trường',
           comp2: 'Script tự chạy khi mở phiên + commit Git tự động',
-          kit: 'Công cụ CLI độc lập (biên dịch OMML, linter OOXML); quy trình Markdown',
+          kit: 'CLI OMML/OOXML + hướng dẫn renderer đúng định dạng; SOP Markdown',
           highlight: true,
         },
         {
           criteria: 'Mô Hình Vận Hành',
           comp1: 'Bộ skill rộng, có script hỗ trợ',
           comp2: 'Quy trình tự chạy kèm script',
-          kit: 'Quy trình tuần tự dựa trên hướng dẫn + kiểm tra qua CLI',
+          kit: 'Các bước theo hướng dẫn + cổng chạy lại và kiểm tra trực quan',
           highlight: true,
         },
         {
@@ -1190,7 +1256,7 @@ export const content = {
         },
         {
           q: 'Research Kit quản lý các công cụ tính toán và biên dịch như thế nào?',
-          a: 'Research Kit phân định rõ ranh giới nghiên cứu. Các skill cốt lõi được cấu trúc thành quy trình thao tác chuẩn (SOP) bằng Markdown di động, tương thích tự nhiên với mọi AI agent. Các tác vụ chuyên sâu như biên dịch công thức toán học (LaTeX sang OMML qua Pandoc) hay kiểm tra bố cục slide (OOXML) được đảm nhiệm bởi các công cụ CLI độc lập, chạy bằng thư viện chuẩn Python và được bảo vệ tính toàn vẹn bằng mã băm SHA-256.',
+          a: 'Các SOP Markdown cốt lõi chỉ cần agent tương thích. Chèn toán vào slide dùng Pandoc và công cụ chạy bằng thư viện chuẩn Python; kiểm tra slide và bộ skill cũng dùng Python. Vẽ hình dùng renderer đúng định dạng, rồi mở ảnh raster để soi bố cục. Skill yêu cầu sửa và render lại trước khi xác nhận hình đạt; chưa render hoặc chưa mở ảnh để kiểm tra được thì ghi rõ hình chưa được xác minh.',
         },
         {
           q: 'Research Kit nạp sẵn bao nhiêu context?',

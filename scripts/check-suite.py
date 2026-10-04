@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Check the eight rewritten suite skills and the two frozen packages."""
+"""Check the suite inventory, metadata, links, and pinned package hashes."""
 
 import hashlib
 import re
@@ -101,9 +101,11 @@ DESCRIPTION = re.compile(r'^description:\s*"(.*)"\s*$', re.M)
 
 NETWORK_HASH = "06278251b844b94cb2f46a431bccd22256966c9959f62c4f1f838e1eab72e531"
 VISUALIZE = {
-    "skills/rk-academic-visualize/SKILL.md": "8cf79debca1796393dd0633f7d92870a6e75c42fc3c8eb6080c6702ecc55a6c6",
+    "skills/rk-academic-visualize/SKILL.md": "1dd8bc65dda513aaabb81b123137e5288c1a5be680d7b32bff452ea6a9c5e204",
     "skills/rk-academic-visualize/assets/academic-template.pptx": "de9ed2b7b8fd2e7adf54daa98eccbf2140fa7ff7cde010b9208500515f3229f1",
-    "skills/rk-academic-visualize/references/illustration-guide.md": "2bbbe4c80824c3256c22fb3486ab19d2b97786744c2e8a1becbb0a68ad465b18",
+    "skills/rk-academic-visualize/assets/two-pass-flow.tex": "5cefa1ce2ee72c353f00d24c24d3c690180913d2d0d2b732be561378a4e37853",
+    "skills/rk-academic-visualize/evals/evals.json": "ac86455fc95d3b74243675853690c643fed4f193851614f6bb82f704b8fe9983",
+    "skills/rk-academic-visualize/references/illustration-guide.md": "fe61888fda5bf13f14b11e671d92ce9478eae98c4fe3f822237b189ee7b80893",
     "skills/rk-academic-visualize/references/slide-plan.md": "348843e01a1bb964474448803a745abc24d81de93addae72fcc5f4578ceda78a",
     "skills/rk-academic-visualize/references/style-guide.md": "b26c97895da9f144b25ba05a5a78a8ce6418f0c2c66c58f276768c6c8ac97831",
     "skills/rk-academic-visualize/scripts/check-deck.py": "2beea0d467d308d1a18abf07e391cd155a7196affacc2ac9f7cfeafeb7e985a8",

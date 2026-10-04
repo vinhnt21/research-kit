@@ -43,13 +43,14 @@ Research Kit tuân thủ quy chuẩn [Agent Skills specification](https://agents
 
 ### 1.1 Yêu cầu môi trường & Thiết lập công cụ
 
-Research Kit được xây dựng dựa trên triết lý tinh gọn, ưu tiên công cụ CLI tiêu chuẩn để bảo đảm tính tái lập độc lập với môi trường:
+Các SOP Markdown cốt lõi chỉ cần agent tương thích. Kiểm tra bộ skill, chèn toán vào slide và render hình dùng công cụ phù hợp với từng việc:
 
 | Công cụ | Phiên bản tối thiểu | Mục đích sử dụng | Mức độ cần thiết |
 |---|---|---|---|
-| **Python** | 3.9+ | Chạy bộ kiểm tra toàn vẹn, kiểm tra bố cục slide OOXML, xác thực hash suite | **Bắt buộc** (chỉ dùng thư viện chuẩn: `xml.etree`, `zipfile`, `hashlib`, `unittest`; không cần cài pip package ngoài) |
+| **Python** | 3.9+ | Chạy bộ kiểm tra toàn vẹn, kiểm tra bố cục slide OOXML, xác thực hash suite | **Cần cho các bước kiểm tra này** (chỉ dùng thư viện chuẩn: `xml.etree`, `zipfile`, `hashlib`, `unittest`; không cần cài pip package ngoài) |
 | **Pandoc** | 3.0+ | Biên dịch công thức LaTeX sang Office Math Markup Language (OMML `a14:m`) native cho slide | **Bắt buộc** khi dùng `rk-academic-visualize` để inject công thức toán (`inject-math.py`) |
-| **LaTeX / TikZ** | TeX Live 2022+ / MacTeX | Biên dịch sơ đồ kiến trúc hệ thống sang PDF/SVG vector | **Tùy chọn** (chỉ cần khi muốn biên dịch trực tiếp file mã nguồn TikZ `.tex`) |
+| **LaTeX / TikZ** | TeX Live 2022+ / MacTeX | Biên dịch mã nguồn TikZ `.tex` sang PDF vector | **Cần khi render TikZ trên máy**, tùy chọn với SOP cốt lõi |
+| **Công cụ render & xem ảnh** | Tùy định dạng | Chuyển PDF thành ảnh; render Mermaid/SVG; mở ảnh raster để kiểm tra trực quan | **Cần để xác nhận hình đã kiểm tra** (ví dụ Ghostscript/Poppler, renderer Mermaid, trình duyệt/công cụ vector); tùy chọn với SOP cốt lõi |
 | **Git** | 2.30+ | Quản lý phiên bản bài báo và mã nguồn | **Bắt buộc** |
 | **PowerPoint / Office** | 2010+ | Mở xem và trực tiếp chỉnh sửa công thức toán OMML native | **Tùy chọn** (công thức tương thích đầy đủ với Office/Word/PowerPoint hiện đại) |
 
@@ -65,6 +66,16 @@ pandoc --version
 # Chạy bộ test suite độc lập cho slide và toán học
 python3 -m unittest discover skills/rk-academic-visualize/scripts/tests
 ```
+
+Khi vẽ hình, tìm renderer và công cụ chuyển PDF thành ảnh đã cài bằng `command -v pdflatex`, `command -v xelatex`, `command -v gs` hoặc `command -v pdftoppm`. Nếu có `pdflatex` và Ghostscript, chạy ví dụ TikZ từ thư mục gốc của repository:
+
+```bash
+mkdir -p figure-output
+pdflatex -interaction=nonstopmode -halt-on-error -output-directory=figure-output skills/rk-academic-visualize/assets/two-pass-flow.tex
+gs -dSAFER -dNOPAUSE -dBATCH -sDEVICE=pngalpha -r300 -sOutputFile=figure-output/two-pass-flow.png figure-output/two-pass-flow.pdf
+```
+
+Sau đó mở `figure-output/two-pass-flow.png` bằng khả năng xem ảnh của agent. Mermaid cần renderer riêng (ví dụ CLI đã cài: `mmdc -i figure.mmd -o figure.png`); SVG cần trình duyệt/công cụ vector có thể xuất ảnh raster. Xem [hướng dẫn minh họa](../skills/rk-academic-visualize/references/illustration-guide.md) để chọn lệnh thay thế và kiểm tra trực quan. Các công cụ này chỉ cần cho tác vụ tương ứng; SOP cốt lõi không thêm phụ thuộc bắt buộc.
 
 ### 1.2 Các phương thức cài đặt
 
@@ -519,13 +530,16 @@ flowchart LR
 ---
 
 #### 10. rk-academic-visualize: Minh họa khoa học & Slide thuyết trình
-* **Đường dẫn**: [`skills/rk-academic-visualize/SKILL.md`](file:///Users/vinhnt/DATA/learning/research-skills/skills/rk-academic-visualize/SKILL.md)
+* **Đường dẫn**: [`skills/rk-academic-visualize/SKILL.md`](../skills/rk-academic-visualize/SKILL.md)
 * **Lĩnh vực**: Đồ họa học thuật & Bản trình chiếu
-* **Phạm vi**: Vẽ sơ đồ kiến trúc hệ thống bằng LaTeX TikZ chuẩn bài báo IEEE/ACM, lưu đồ SVG/Mermaid sạch sẽ, quy tắc hình học chống đè mũi tên (anti-overlap), thiết kế slide báo cáo khoa học với cơ chế inject công thức inline native OMML.
-* **Nguyên tắc bất biến**: Giữ hình dễ đọc — ít khối và nhãn, mũi tên đi theo đường thẳng góc và gấp tối đa hai lần, không để mũi tên đè chữ; render công thức toán dưới dạng native OMML có thể chỉnh sửa, không dùng ảnh chụp hay ký tự unicode giả lập; slide chỉ nêu luận điểm đã có trong bài báo.
+* **Ví dụ trực quan**: [Nhật ký cải tiến trên web](https://research-kit.vinhnguyenthanh.com/roadmap#figure-layout) có ảnh render từ `two-pass-flow.tex` và ảnh PowerPoint người dùng cung cấp, minh hoạ chỉnh sửa công thức native. Bấm thumbnail để xem ảnh đầy đủ ngay trong trang, cuộn khi cần và đóng bằng nút hoặc phím Esc.
+* **Phạm vi**: Vẽ hình khoa học bằng LaTeX TikZ, SVG và Mermaid với khoảng cách theo chiều cao thực của khối, nhãn loopback dễ đọc, khung bao đủ nội dung; làm slide với công thức inline native OMML.
+* **Nguyên tắc bất biến**: Giữ đúng các bước thuật toán trong nguồn. Đi dây thẳng góc dễ đọc, chủ động ngắt dòng công thức nhiều dòng; chỉ dùng thẻ đồng kích thước và căn các tầng chức năng khi hai pass có thể so sánh. Khoảng hở phải theo chiều cao thực của khối; tọa độ khởi đầu chưa đủ để kết luận hình đạt. Công thức trong slide là OMML native chỉnh sửa được, không dùng ảnh hay ký tự unicode giả lập; slide chỉ nêu luận điểm đã có trong bài báo.
+* **Cổng hoàn thành hình**: Biên dịch/render bằng công cụ đúng định dạng, mở ảnh raster và kiểm tra đủ năm tiêu chí: khoảng cách giữa các khối, dây nối không đè chữ, nhãn không chạm viền, khung bao đủ nội dung và thẻ so sánh căn đúng, lề ngoài thoáng. Có lỗi thì sửa, render lại và mở lại ảnh trước khi báo hoàn thành. Nếu chưa render hoặc chưa mở ảnh để kiểm tra được, ghi rõ hình chưa được xác minh.
+* **Tham chiếu bố cục & render**: [Hướng dẫn minh họa](../skills/rk-academic-visualize/references/illustration-guide.md) quy định các ngưỡng khoảng cách, nhãn loopback xoay nghiêng và so le, hành lang giữa/ngoài thẻ, badge nền trắng giữ hướng mũi tên rõ ràng, và vị trí khối kết thúc chung. Có thể bắt đầu từ [mã TikZ minh họa hai pass](../skills/rk-academic-visualize/assets/two-pass-flow.tex), rồi sửa các bước theo đúng thuật toán đang vẽ.
 * **Mẫu câu lệnh**:
-  - **VI**: `"Dùng @rk-academic-visualize vẽ sơ đồ kiến trúc hệ thống bằng LaTeX TikZ và inject công thức inline native OMML vào slide thuyết trình."`
-  - **EN**: `"Use @rk-academic-visualize to design academic slides with native inline OMML equations and collision-free TikZ diagrams."`
+  - **VI**: `"Dùng @rk-academic-visualize vẽ luồng hai pass bằng TikZ từ [nguồn]. Giữ đúng các bước thuật toán, tính khoảng cách theo chiều cao thực của khối, bố trí dây và nhãn loopback dễ đọc, rồi biên dịch, render, mở ảnh và sửa đủ năm tiêu chí trước khi bàn giao."`
+  - **EN**: `"Use @rk-academic-visualize to draw a two-pass TikZ workflow from [source]. Preserve the algorithm stages, space nodes by actual heights, route and label loopbacks clearly, then compile, render, open the image, and fix all five visual checks before delivery."`
 
 ---
 
@@ -567,7 +581,7 @@ Tuần 5: Viết bản thảo bài báo
 Tuần 6: Minh họa & Báo cáo bảo vệ
 └── @rk-academic-visualize phối hợp cùng @rk-report
     ├── Thực hiện: Vẽ sơ đồ kiến trúc bằng LaTeX TikZ và làm slide báo cáo
-    └── Cổng hoàn thành: Bản trình bày trực quan, bám sát các số liệu đã thẩm định
+    └── Cổng hoàn thành: Hình đã render và kiểm tra trực quan; slide bám số liệu đã thẩm định
 ```
 
 ---
@@ -587,7 +601,7 @@ Tuần 6: Minh họa & Báo cáo bảo vệ
 | Mô phỏng thuật toán lượng tử biến thiên VQE | `rk-quantum` | `"@rk-quantum mô phỏng cục bộ thuật toán VQE cho Hamiltonian [Công thức]"` |
 | Mô phỏng định tuyến mạng lượng tử | `rk-quantum-network` | `"@rk-quantum-network đánh giá fidelity phân phối vướng víu qua mạng repeater"` |
 | Kiểm tra rò rỉ dữ liệu học máy (Data leakage) | `rk-ai` | `"@rk-ai rà soát pipeline tiền xử lý để phát hiện data leakage train/test"` |
-| Vẽ sơ đồ kiến trúc bài báo chuẩn IEEE/ACM | `rk-academic-visualize` | `"@rk-academic-visualize vẽ sơ đồ khối hệ thống bằng LaTeX TikZ không đè mũi tên"` |
+| Vẽ luồng hai pass bằng TikZ | `rk-academic-visualize` | `"@rk-academic-visualize vẽ luồng hai pass từ [nguồn], giữ đúng các bước, tính khoảng cách theo chiều cao thực, render và mở ảnh rồi sửa đủ năm tiêu chí trực quan"` |
 
 ---
 

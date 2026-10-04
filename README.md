@@ -23,7 +23,8 @@
 
 ## 🎉 News & Updates
 
-- **[2026.10.04]** 🎯 **[Native Math & Slide Linter]**: Implemented `skills/rk-academic-visualize/scripts/inject-math.py` for batch compilation of LaTeX mathematical formulas into native PowerPoint Office Math Markup Language (OMML / DrawingML `a14:m`) via Pandoc. Supports seamless inline formulas within paragraph text flows, automated font-metric matching (`Cambria Math` at surrounding `sz`), and robust `mc:AlternateContent` fallback wrapping. Enhanced `scripts/check-deck.py` with multi-namespace text extraction (`a:t` and `m:t`) and AlternateContent bounding box audits.
+- **[2026.10.04]** 🎯 **[LaTeX Diagrams v2.3.0]**: Improved complex diagram layouts with spacing based on actual block heights, clearer routing and labels, and complete container bounds. Render, inspect and repair before delivery. Includes a runnable [two-pass example](skills/rk-academic-visualize/assets/two-pass-flow.tex).
+- **[2026.10.04]** 🎯 **[Slides & Native Math]**: Improved slide rendering with editable equations compiled from LaTeX to native OMML, without special-character substitutes. Supports inline math, matched font sizes and OOXML bounds checks. See [math and slide tooling](skills/rk-academic-visualize/SKILL.md).
 - **[2026.10.03]** 🎯 **[Dynamic Language Adaptation]**: Upgraded all 10 procedural skills to automatically interact and synthesize in the researcher's active language with natural peer-colleague terminology ("như trao đổi cùng đồng nghiệp"), while strictly preserving English instructions for execution consistency and prompt stability.
 - **[2026.10.02]** 🎯 **[Release v1.0.0]**: Formalized Research Kit v1.0.0 comprising 6 sequential scientific lifecycle skills (`rk-survey` through `rk-report`) and 4 specialist modules, reinforced by automated SHA-256 cryptographic check-suite verification (`scripts/check-suite.py`).
 - **[2026.10.01]** 🎯 **[Documentation & Portal]**: Launched dual-language academic web portal ([research-kit.vinhnguyenthanh.com](https://research-kit.vinhnguyenthanh.com)) and comprehensive operational guides (`documents/guide.md` & `documents/guide.vi.md`).
@@ -84,21 +85,24 @@ These skills are tailored to the author's research domains and serve as practica
 | [`rk-quantum`](skills/rk-quantum/SKILL.md) | Quantum Computing | Local Hamiltonian/circuit simulation & variational algorithms | Local simulation default; QPU spend requires approval |
 | [`rk-quantum-network`](skills/rk-quantum-network/SKILL.md) | Quantum Networking | Entanglement distribution, repeater memory, routing & scheduling | Fidelity checks & protocol verification |
 | [`rk-ai`](skills/rk-ai/SKILL.md) | AI / Machine Learning | Train/val/test splits, leakage audit, baselines & generative eval | Zero data leakage & reproducible seed verification |
-| [`rk-academic-visualize`](skills/rk-academic-visualize/SKILL.md) | Scientific Visualization & Slides | Publication-grade illustrations (LaTeX/TikZ, Mermaid) & source-grounded slide decks | Cognitive load filtering, anti-overlap arrow rules & deck checks |
+| [`rk-academic-visualize`](skills/rk-academic-visualize/SKILL.md) | Scientific Visualization & Slides | Scientific illustrations (LaTeX/TikZ, Mermaid, SVG) & source-grounded slide decks | Render, open image, pass five visual checks; deck checks |
 
 ---
 
 ## 🛠️ Prerequisites & Toolchain Setup
 
-Research Kit relies on lightweight, standard CLI tooling to maintain reproducibility across environments without external package bloat:
+Core Markdown SOPs need only a compatible agent. Verification, slide math, and figure rendering use the tools relevant to that task:
 
 | Tool | Minimum Version | Purpose | Necessity |
 |---|---|---|---|
-| **Python** | 3.9+ | Test suites, OOXML inspection, slide linting, suite hash verification | **Required** (uses standard library: `xml.etree`, `zipfile`, `hashlib`, `unittest`; zero external pip bloat) |
+| **Python** | 3.9+ | Test suites, OOXML inspection, slide linting, suite hash verification | **Required for these checks** (uses standard library: `xml.etree`, `zipfile`, `hashlib`, `unittest`; zero external pip bloat) |
 | **Pandoc** | 3.0+ | Compiles LaTeX mathematical formulas into native PowerPoint OMML (`a14:m`) | **Required** for `rk-academic-visualize` math injection (`inject-math.py`) |
-| **LaTeX / TikZ** | TeX Live 2022+ / MacTeX | Compiles publication-grade architecture figures to vector PDF/SVG | **Optional** (only needed when rendering `.tex` TikZ source locally) |
+| **LaTeX / TikZ** | TeX Live 2022+ / MacTeX | Compiles `.tex` TikZ source to vector PDF | **Required for local TikZ rendering**, optional for core SOPs |
+| **Figure renderer & image viewer** | Format-dependent | Rasterize PDF; render Mermaid/SVG; open images for visual inspection | **Required for verified figures** (e.g. Ghostscript, Mermaid renderer, browser/vector renderer); optional for core SOPs |
 | **Git** | 2.30+ | Workspace and version tracking | **Required** |
 | **PowerPoint / Office** | 2010+ | Viewing and natively editing rendered OMML equations | **Optional** (equations remain editable in modern Office/Word/PowerPoint) |
+
+Use the figure's native renderer, then open the rendered raster image and inspect spacing, connectors, labels, container bounds, and margins. If rendering or image inspection is unavailable, report the figure as unverified. Portable commands and layout thresholds live in the [illustration guide](skills/rk-academic-visualize/references/illustration-guide.md). See the [rendered two-pass figure and native-equation slide screenshot](https://research-kit.vinhnguyenthanh.com/roadmap#figure-layout) in the development log. Click a thumbnail to open a full image preview inside the page.
 
 ### Environment Verification Commands
 
@@ -224,7 +228,7 @@ Scientific inquiry using AI agents currently suffers from severe standing contex
 | **Catalog Architecture** | **Scientific Agent Skills**: 163 fragmented, overlapping mini-skills across 16 domains | **10 end-to-end lifecycle skills** | **Streamlined & convenient**; eliminates tool choice overload |
 | **Research Focus** | **Scientific Agent Skills**: Agent gets lost in tool search & install loops across 163 candidates | **Deterministic stage-by-stage routing** | **100% focused on core scientific discovery** |
 | **Standing Token Overhead** | **Scientific Agent Skills**: 14,246 tokens (7.12% of context window) before reading files | **~1,000 tokens (<0.50% of context window)** | **Frees >99.5% of context** for raw data, papers, and deep reasoning |
-| **Operational Reliability** | **Scientific Agent Skills & Superpowers**: 105 external scripts & brittle session-start hooks | **Auditable Markdown SOPs + Standalone CLI utilities** (Python stdlib, Pandoc) | **Zero runtime drift**, transparent, and portable across all agents |
+| **Operational Reliability** | **Scientific Agent Skills & Superpowers**: 105 external scripts & brittle session-start hooks | **Markdown SOPs + focused CLI checks and native figure renderers** | Inspectable tools and explicit verification gates; core SOPs add no required dependencies |
 | **Framework & Multi-Paper Repo** | **Science Superpowers**: Forces `docs/science-superpowers/` and git freeze; lacks multi-paper-in-one-repo support | **Active Paper Declaration, strict evidence boundaries, and flexible layouts** | **Guaranteed data integrity** across manuscripts in the same repo with zero forced lock-in |
 
 ### Key Advantages & Architectural Principles

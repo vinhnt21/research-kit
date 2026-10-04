@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { 
   Calendar, 
   Sparkles, 
@@ -8,7 +8,8 @@ import {
   FileCode, 
   ArrowUpRight, 
   ArrowRight,
-  Compass
+  Compass,
+  X
 } from 'lucide-react';
 
 const badgeIconMap = {
@@ -41,6 +42,17 @@ export default function RoadmapPage({ t, lang }) {
   const roadmap = t.roadmap;
   const news = t.news;
   const isVI = lang === 'vi';
+  const [preview, setPreview] = useState(null);
+  const previewDialog = useRef(null);
+
+  useEffect(() => {
+    if (!preview) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    previewDialog.current.showModal();
+    previewDialog.current.scrollTop = 0;
+    return () => { document.body.style.overflow = previousOverflow; };
+  }, [preview]);
 
   return (
     <div className="roadmap-page">
@@ -67,7 +79,7 @@ export default function RoadmapPage({ t, lang }) {
             {news?.items?.map((item, index) => {
               const IconComp = badgeIconMap[item.badgeType] || Sparkles;
               return (
-                <article key={index} className="roadmap-log-card">
+                <article key={index} id={item.id} className="roadmap-log-card">
                   <div className="roadmap-log-card-header">
                     <div className="roadmap-log-meta-left">
                       <div className="roadmap-log-date">
@@ -94,9 +106,35 @@ export default function RoadmapPage({ t, lang }) {
                   </div>
 
                   <h2 className="roadmap-log-title">{item.title}</h2>
-                  <p className="roadmap-log-desc">
-                    <FormattedText text={item.description} />
-                  </p>
+                  <div className="roadmap-log-body">
+                    <p className="roadmap-log-desc">
+                      <FormattedText text={item.description} />
+                    </p>
+                    {item.image && (
+                      <figure className="roadmap-log-thumbnail">
+                        <a
+                          href={item.image.src}
+                          aria-label={item.image.openLabel}
+                          title={item.image.openLabel}
+                          onClick={(event) => {
+                            if (typeof previewDialog.current?.showModal !== 'function') return;
+                            event.preventDefault();
+                            setPreview(item.image);
+                          }}
+                        >
+                          <img
+                            src={item.image.src}
+                            alt={item.image.alt}
+                            width={item.image.width}
+                            height={item.image.height}
+                            loading="lazy"
+                            decoding="async"
+                          />
+                        </a>
+                        <figcaption>{item.image.caption}</figcaption>
+                      </figure>
+                    )}
+                  </div>
                 </article>
               );
             })}
@@ -139,6 +177,30 @@ export default function RoadmapPage({ t, lang }) {
           <ArrowRight size={18} strokeWidth={2} aria-hidden="true" />
         </a>
       </div>
+
+      <dialog
+        ref={previewDialog}
+        className="roadmap-image-dialog"
+        aria-label={preview?.openLabel}
+        onClose={() => setPreview(null)}
+      >
+        {preview && (
+          <>
+            <div className="roadmap-image-dialog-header">
+              <span>{preview.openLabel}</span>
+              <button
+                type="button"
+                aria-label={isVI ? 'Đóng' : 'Close'}
+                title={isVI ? 'Đóng' : 'Close'}
+                onClick={() => previewDialog.current.close()}
+              >
+                <X size={20} aria-hidden="true" />
+              </button>
+            </div>
+            <img src={preview.src} alt={preview.alt} width={preview.width} height={preview.height} />
+          </>
+        )}
+      </dialog>
     </div>
   );
 }

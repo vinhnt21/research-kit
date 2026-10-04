@@ -43,13 +43,14 @@ Research Kit strictly complies with the [Agent Skills specification](https://age
 
 ### 1.1 System Prerequisites & Toolchain Setup
 
-Research Kit relies on lightweight, standard CLI tooling to maintain reproducibility across environments without external package bloat:
+Core Markdown SOPs need only a compatible agent. Verification, slide math, and figure rendering use the tools relevant to that task:
 
 | Tool | Minimum Version | Purpose | Necessity |
 |---|---|---|---|
-| **Python** | 3.9+ | Test suites, OOXML inspection, slide linting, suite hash verification | **Required** (standard library: `xml.etree`, `zipfile`, `hashlib`, `unittest`; zero pip dependencies) |
+| **Python** | 3.9+ | Test suites, OOXML inspection, slide linting, suite hash verification | **Required for these checks** (standard library: `xml.etree`, `zipfile`, `hashlib`, `unittest`; zero pip dependencies) |
 | **Pandoc** | 3.0+ | Compiles LaTeX mathematical formulas into native PowerPoint OMML (`a14:m`) | **Required** for `rk-academic-visualize` math injection (`inject-math.py`) |
-| **LaTeX / TikZ** | TeX Live 2022+ / MacTeX | Compiles publication-grade architecture figures to vector PDF/SVG | **Optional** (only needed when rendering `.tex` TikZ source locally) |
+| **LaTeX / TikZ** | TeX Live 2022+ / MacTeX | Compiles `.tex` TikZ source to vector PDF | **Required for local TikZ rendering**, optional for core SOPs |
+| **Figure renderer & image viewer** | Format-dependent | Rasterize PDF; render Mermaid/SVG; open raster images for visual inspection | **Required for verified figures** (e.g. Ghostscript/Poppler, Mermaid renderer, browser/vector renderer); optional for core SOPs |
 | **Git** | 2.30+ | Workspace and version tracking | **Required** |
 | **PowerPoint / Office** | 2010+ | Viewing and natively editing rendered OMML equations | **Optional** (equations remain editable in modern Office/Word/PowerPoint) |
 
@@ -65,6 +66,16 @@ pandoc --version
 # Run standalone slide and math test suites
 python3 -m unittest discover skills/rk-academic-visualize/scripts/tests
 ```
+
+For figure work, discover the installed native renderer and PDF rasterizer with `command -v pdflatex`, `command -v xelatex`, `command -v gs`, or `command -v pdftoppm`. Run this TikZ example from the repository root when `pdflatex` and Ghostscript are available:
+
+```bash
+mkdir -p figure-output
+pdflatex -interaction=nonstopmode -halt-on-error -output-directory=figure-output skills/rk-academic-visualize/assets/two-pass-flow.tex
+gs -dSAFER -dNOPAUSE -dBATCH -sDEVICE=pngalpha -r300 -sOutputFile=figure-output/two-pass-flow.png figure-output/two-pass-flow.pdf
+```
+
+Then open `figure-output/two-pass-flow.png` with the agent's image-viewing capability. Mermaid needs its own renderer (for example an installed CLI: `mmdc -i figure.mmd -o figure.png`); SVG needs a browser/vector renderer that exports a raster image. Follow the [illustration guide](../skills/rk-academic-visualize/references/illustration-guide.md) for alternatives and the visual inspection checklist. These tools are task-specific; core SOPs add no mandatory dependencies.
 
 ### 1.2 Installation Methods
 
@@ -522,13 +533,16 @@ flowchart LR
 ---
 
 #### 10. rk-academic-visualize: Scientific Figures & Presentations
-* **Location**: [`skills/rk-academic-visualize/SKILL.md`](file:///Users/vinhnt/DATA/learning/research-skills/skills/rk-academic-visualize/SKILL.md)
+* **Location**: [`skills/rk-academic-visualize/SKILL.md`](../skills/rk-academic-visualize/SKILL.md)
 * **Domain**: Academic Graphics & Slides
-* **Scope & Duty**: Publication-grade LaTeX TikZ architecture diagrams, clean SVG/Mermaid flowcharts, anti-overlap arrow geometry, slide deck design with native inline OMML equation injection.
-* **Key Invariant**: Keep figures easy to read — few boxes and labels, orthogonal arrows with at most two bends, no arrow over text; render equations as native editable OMML without rasterization or unicode approximations; slides may only state claims already grounded in the paper.
+* **Visual examples**: The [development log](https://research-kit.vinhnguyenthanh.com/roadmap#figure-layout) shows the rendered `two-pass-flow.tex` and a user-provided PowerPoint screenshot demonstrating native equation editing. Click a thumbnail to view the full image inside the page; scroll if needed, then close with the button or Esc.
+* **Scope & Duty**: Scientific figures in LaTeX TikZ, SVG, and Mermaid with height-aware spacing, readable loopback labels, complete container bounds, and slide decks with native inline OMML equation injection.
+* **Key Invariant**: Preserve the source's algorithm stages. Use readable orthogonal routing, explicit line breaks for multiline math, and matched dimensions/aligned functional tiers only for comparable passes. Actual node heights govern clear gaps; coordinate starting points are not a completion check. Render slide equations as native editable OMML without rasterization or unicode approximations; slides may only state claims grounded in the paper.
+* **Figure completion gate**: Compile/render with the format's native renderer, open the raster image, and check all five criteria: node spacing, connector/text clearance, labels clear of borders, complete container bounds and comparable-card alignment, and outer margins. Fix defects, rerender, and reopen the image before declaring completion. If rendering or image inspection is unavailable, explicitly mark the figure as unverified.
+* **Layout & rendering reference**: [Illustration guide](../skills/rk-academic-visualize/references/illustration-guide.md) owns spacing thresholds, sloped/staggered loopback labels, central/outer corridors, white label badges that preserve clear arrow continuity, and global termination placement. Start from the [illustrative two-pass TikZ source](../skills/rk-academic-visualize/assets/two-pass-flow.tex) and adapt its stages to the actual algorithm.
 * **Sample Trigger Prompts**:
-  - **EN**: `"Use @rk-academic-visualize to generate presentation slides with native inline OMML equations and orthogonal TikZ diagrams."`
-  - **VI**: `"Dùng @rk-academic-visualize để làm slide thuyết trình học thuật với công thức inline native OMML chuẩn DrawingML và sơ đồ TikZ."`
+  - **EN**: `"Use @rk-academic-visualize to draw a two-pass TikZ workflow from [source]. Preserve the algorithm stages, space nodes by actual heights, route and label loopbacks clearly, then compile, render, open the image, and fix all five visual checks before delivery."`
+  - **VI**: `"Dùng @rk-academic-visualize vẽ luồng hai pass bằng TikZ từ [nguồn]. Giữ đúng các bước thuật toán, tính khoảng cách theo chiều cao thực của khối, bố trí dây và nhãn loopback dễ đọc, rồi biên dịch, render, mở ảnh và sửa đủ năm tiêu chí trước khi bàn giao."`
 
 ---
 
@@ -570,7 +584,7 @@ Week 5: Manuscript Drafting
 Week 6: Presentation & Dissemination
 └── @rk-academic-visualize + @rk-report
     ├── Action: Generates TikZ architecture figures and defense slide decks
-    └── Gate Passed: Clear presentation grounded solely in audited results
+    └── Gate Passed: Figures rendered and visually checked; slides grounded in audited results
 ```
 
 ---
@@ -590,7 +604,7 @@ Week 6: Presentation & Dissemination
 | Simulate a quantum circuit or VQE locally | `rk-quantum` | `"@rk-quantum run local statevector simulation of [Hamiltonian]"` |
 | Simulate repeater routing & fidelity | `rk-quantum-network` | `"@rk-quantum-network evaluate entanglement distribution fidelity"` |
 | Audit ML data splits for data leakage | `rk-ai` | `"@rk-ai audit dataset preprocessing for train/test leakage"` |
-| Draw a publication-grade TikZ/SVG architecture | `rk-academic-visualize` | `"@rk-academic-visualize create LaTeX TikZ diagram with orthogonal arrows"` |
+| Draw a two-pass TikZ workflow | `rk-academic-visualize` | `"@rk-academic-visualize draw a two-pass flow from [source], preserve its stages, use actual node heights, render and open the image, then fix all five visual checks"` |
 
 ---
 

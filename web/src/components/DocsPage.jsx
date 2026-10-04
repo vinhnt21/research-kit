@@ -514,6 +514,8 @@ export default function DocsPage({ t, lang }) {
                     <p>{sk.invariant}</p>
                   </div>
 
+                  {sk.examples && <p><a href="/roadmap#figure-layout">{sk.examples}</a></p>}
+
                   <div className="docs-prompt docs-prompt--sm">
                     <div className="docs-prompt-header">
                       <span>{isVI ? 'Prompt mẫu' : 'Sample prompt'}</span>
