@@ -2,6 +2,7 @@ import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { content } from './data/content';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+import PageToc from './components/PageToc';
 import LifecycleSection from './components/LifecycleSection';
 import Pillars from './components/Pillars';
 import ContextSection from './components/ContextSection';
@@ -121,23 +122,23 @@ export default function App() {
       
       <main id="main-content" role="main">
         {currentPage === 'roadmap' ? (
-          <RoadmapPage t={t} />
+          <RoadmapPage t={t} lang={lang} />
         ) : currentPage === 'docs' ? (
           <DocsPage t={t} lang={lang} />
         ) : (
           <>
             {/* =================================================================
-                1. GIỚI THIỆU (Overview & Architecture)
+                GIỚI THIỆU (Overview & Architecture)
                 - Hero: Định danh sản phẩm, 1-click install, quick stats
                 - Lifecycle: Vòng đời nghiên cứu 6 bước cốt lõi + 4 module mở rộng
                ================================================================= */}
             <section id="intro">
-              <Hero t={t} />
+              <Hero t={t} lang={lang} />
               <LifecycleSection t={t} lang={lang} />
             </section>
 
             {/* =================================================================
-                2. ƯU ĐIỂM (Lean Mindset & Core Research Focus)
+                ƯU ĐIỂM (Lean Mindset & Core Research Focus)
                 - Pillars: 4 trụ cột tư duy tinh gọn & giá trị cốt lõi
                 - Context: Hiệu năng tiết kiệm >13.000 token, chống FOMO số lượng
                 - Comparison: Bảng đối đầu trực diện: Tinh gọn vs. Cồng kềnh
@@ -151,7 +152,7 @@ export default function App() {
             </section>
 
             {/* =================================================================
-                3. CÀI ĐẶT (Installation Hub)
+                CÀI ĐẶT (Installation Hub)
                 - Cách A: Tải ZIP & Agent tự cài đặt (Zero Terminal)
                 - Cách B: CLI commands (npx skills add, gh skill install, manual)
                 - Test suite verification
@@ -159,13 +160,16 @@ export default function App() {
             <InstallSection t={t} />
 
             {/* =================================================================
-                4. FAQ (Hỏi đáp & Thắc mắc thường gặp)
+                FAQ (Hỏi đáp & Thắc mắc thường gặp)
                 - Accordion giải đáp rào cản nhận thức
                ================================================================= */}
             <FAQSection t={t} />
 
             {/* CTA & Conversion Booster */}
             <CTASection t={t} />
+
+            {/* Mục lục di động & Quick Jump cho Landing Page */}
+            <PageToc t={t} lang={lang} />
           </>
         )}
       </main>

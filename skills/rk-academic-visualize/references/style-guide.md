@@ -44,8 +44,7 @@ The TOC's five entries and the closing slide's two bullets are examples. Add or 
 
 - Diagram nodes, edges, flow arrows, and labels must represent the actual model. For a graph, distinguish logical requested connections from physical links and show only the construction claimed by the source.
 - Use color sparingly and encode every series or edge class with a second cue: square/triangle/circle markers, solid/dashed lines, or patterns. Test a grayscale rendering. Legends must match the marks drawn in the plot.
-- Save the plotting/diagram script beside the delivered deck and make its inputs traceable. Use vector output when supported or high-resolution raster. Ordinary text remains editable; an embedded technical figure is reproducible from its script. Inspect exported PDF, where label clipping or line overlaps can differ from the editor.
-- Insert formulas as rendered LaTeX (native equation or clean image). Compare the PDF result with the LaTeX source.
+- Insert formulas as editable native OMML equations via DrawingML (`a14:m`). For inline equations (e.g. `$Ax=b$`), use `<a14:m><m:oMath>...</m:oMath></a14:m>` within the same paragraph (`<a:p>`), with `Cambria Math` typeface and font size matching the surrounding run (`<a:rPr sz="...">`). Wrap the shape in `mc:AlternateContent` with fallback to preserve compatibility across presentation viewers. For block/display equations, use `<a14:m><m:oMathPara><m:oMath>...</m:oMath></m:oMathPara></a14:m>`. Never use rasterized equation images or unicode approximations for text formulas. Compare the exported PDF result with the LaTeX source.
 - Brief attribution sits near each sourced figure, number, or claim; full citation or document/code location and caveat go into speaker notes. Do not allow notes to carry the only explanation needed to read a slide.
 
 ## Final visual inspection

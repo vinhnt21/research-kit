@@ -4,58 +4,17 @@ import { Globe, Sun, Moon, Star, Menu, X } from 'lucide-react';
 export default function Navbar({ lang, setLang, theme, setTheme, t, currentPage }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState(
-    currentPage === 'roadmap' ? 'roadmap' : currentPage === 'docs' ? 'docs' : 'lifecycle'
-  );
+  const activeId = currentPage === 'roadmap' ? 'roadmap' : currentPage === 'docs' ? 'docs' : 'intro';
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 15);
-
-      if (currentPage === 'roadmap') {
-        setActiveSection('roadmap');
-        return;
-      }
-
-      if (currentPage === 'docs') {
-        setActiveSection('docs');
-        return;
-      }
-
-      // Khi cuộn xuống sát đáy trang (CTA / Footer), kích hoạt mục cuối 'faq'
-      const isBottom = window.innerHeight + Math.round(window.scrollY) >= document.documentElement.scrollHeight - 70;
-      if (isBottom) {
-        setActiveSection('faq');
-        return;
-      }
-
-      // Kiểm tra lần lượt từ section dưới lên trên
-      const navSections = [
-        { id: 'faq', threshold: 120 },
-        { id: 'install', threshold: 120 },
-        { id: 'advantages', threshold: 120 },
-        { id: 'lifecycle', threshold: 120 },
-      ];
-
-      for (const sec of navSections) {
-        const el = document.getElementById(sec.id);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          if (rect.top <= sec.threshold) {
-            setActiveSection(sec.id);
-            return;
-          }
-        }
-      }
-
-      // Mặc định ở phần đầu trang (Hero) là 'lifecycle' (Giới thiệu)
-      setActiveSection('lifecycle');
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [currentPage]);
+  }, []);
 
   const toggleLang = () => {
     setLang(lang === 'en' ? 'vi' : 'en');
@@ -72,13 +31,29 @@ export default function Navbar({ lang, setLang, theme, setTheme, t, currentPage 
   };
 
   const navItems = [
-    { id: 'lifecycle', label: t.nav.intro, href: currentPage === 'home' ? '#lifecycle' : '/#lifecycle' },
-    { id: 'advantages', label: t.nav.advantages, href: currentPage === 'home' ? '#advantages' : '/#advantages' },
-    { id: 'roadmap', label: t.nav.roadmap, href: '/roadmap' },
-    { id: 'docs', label: t.nav.docs || (lang === 'vi' ? 'Tài liệu' : 'Docs'), href: '/docs' },
-    { id: 'install', label: t.nav.install, href: currentPage === 'home' ? '#install' : '/#install' },
-    { id: 'faq', label: t.nav.faq, href: currentPage === 'home' ? '#faq' : '/#faq' },
+    { 
+      id: 'intro', 
+      label: t.nav.intro, 
+      href: currentPage === 'home' ? '#intro' : '/' 
+    },
+    { 
+      id: 'roadmap', 
+      label: t.nav.roadmap, 
+      href: '/roadmap' 
+    },
+    { 
+      id: 'docs', 
+      label: t.nav.docs, 
+      href: '/docs' 
+    },
   ];
+
+  const handleNavClick = (item) => {
+    if (item.id === 'intro' && currentPage === 'home') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    closeMobileMenu();
+  };
 
   return (
     <>
@@ -91,16 +66,16 @@ export default function Navbar({ lang, setLang, theme, setTheme, t, currentPage 
             <span>Research Kit</span>
           </a>
 
-          {/* Desktop Navigation Links - highlight section hoặc page đang xem */}
+          {/* Desktop Navigation Links - Giới thiệu, Nhật ký phát triển, Tài liệu */}
           <nav aria-label="Main Navigation">
             <ul className="nav-links">
               {navItems.map((item) => (
                 <li key={item.id}>
                   <a 
                     href={item.href}
-                    className={`nav-link ${activeSection === item.id ? 'active' : ''}`}
-                    onClick={() => setActiveSection(item.id)}
-                    aria-current={activeSection === item.id ? (item.id === 'roadmap' || item.id === 'docs' ? 'page' : 'location') : undefined}
+                    className={`nav-link ${activeId === item.id ? 'active' : ''}`}
+                    onClick={() => handleNavClick(item)}
+                    aria-current={activeId === item.id ? 'page' : undefined}
                   >
                     {item.label}
                   </a>
@@ -186,12 +161,9 @@ export default function Navbar({ lang, setLang, theme, setTheme, t, currentPage 
             <li key={item.id}>
               <a 
                 href={item.href}
-                className={activeSection === item.id ? 'active' : ''}
-                onClick={() => {
-                  setActiveSection(item.id);
-                  closeMobileMenu();
-                }}
-                aria-current={activeSection === item.id ? (item.id === 'roadmap' || item.id === 'docs' ? 'page' : 'location') : undefined}
+                className={activeId === item.id ? 'active' : ''}
+                onClick={() => handleNavClick(item)}
+                aria-current={activeId === item.id ? 'page' : undefined}
               >
                 {item.label}
               </a>

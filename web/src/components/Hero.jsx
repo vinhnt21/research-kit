@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Copy, Check, Terminal, ArrowRight, Download, Star } from 'lucide-react';
+import FigureViewer from './FigureViewer';
 
 import cursorLogo from '../assets/logos/cursor.png';
 import claudeLogo from '../assets/logos/claude-code.png';
@@ -15,8 +16,9 @@ const agentLogos = [
   { name: 'GitHub Copilot', logo: copilotLogo, url: 'https://github.com/features/copilot' },
 ];
 
-export default function Hero({ t }) {
+export default function Hero({ t, lang = 'vi' }) {
   const [copied, setCopied] = useState(false);
+  const roadmap = t.roadmap;
   const command = 'npx skills add vinhnt21/research-kit';
 
   const handleCopy = () => {
@@ -26,6 +28,7 @@ export default function Hero({ t }) {
   };
 
   return (
+    <>
     <section className="hero-section" id="hero">
       <div className="container">
         <div className="hero-badge-wrapper fade-in">
@@ -40,8 +43,7 @@ export default function Hero({ t }) {
         
         <p className="hero-subtitle fade-in stagger-2">{t.hero.subtitle}</p>
 
-        {/* Interactive Terminal */}
-        <div className="terminal-box fade-in stagger-3" role="region" aria-label="Terminal installation widget">
+        <div className="terminal-box fade-in stagger-3" role="region" aria-label={t.hero.installLabel}>
           <div className="terminal-header">
             <div className="terminal-dots">
               <span className="dot red"></span>
@@ -56,12 +58,12 @@ export default function Hero({ t }) {
               <span className="prompt-sym">$</span>
               <span className="cmd-text">{command}</span>
             </div>
-            <button 
+            <button
               type="button"
-              className={`btn-copy ${copied ? 'copied' : ''}`} 
+              className={`btn-copy ${copied ? 'copied' : ''}`}
               onClick={handleCopy}
               id="hero-copy-command-btn"
-              title="Copy installation command"
+              title={t.hero.copyBtn}
               aria-label={t.hero.copyBtn}
             >
               {copied ? (
@@ -141,5 +143,28 @@ export default function Hero({ t }) {
         </div>
       </div>
     </section>
+
+    <section className="hero-compare" aria-labelledby="why-existing-skills">
+      <div className="container">
+        <header className="roadmap-intro-header">
+          <h2 id="why-existing-skills">{roadmap.title}</h2>
+          <p className="roadmap-intro-subtitle">
+            {roadmap.explanation} {roadmap.subtitle}
+          </p>
+        </header>
+        <FigureViewer
+          src={roadmap.figure.src}
+          alt={roadmap.figure.alt}
+          label={roadmap.figure.label}
+          title={roadmap.title}
+          caption={roadmap.figure.caption}
+          minReadableWidth={880}
+          defaultMode="scroll"
+          lang={lang}
+          viewerText={t.figureViewer}
+        />
+      </div>
+    </section>
+    </>
   );
 }

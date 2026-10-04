@@ -223,6 +223,33 @@ class CheckDeckTests(unittest.TestCase):
             self.assertNotEqual(0, result.returncode)
             self.assertTrue(any("exceeds slide bounds" in e for e in json.loads(result.stdout)["errors"]))
 
+    def test_math_omml_and_alternate_content(self):
+        root = ET.Element(P + "sld")
+        tree = ET.SubElement(ET.SubElement(root, P + "cSld"), P + "spTree")
+        alt = ET.SubElement(tree, check_deck.MC + "AlternateContent" if hasattr(check_deck, "MC") else "{http://schemas.openxmlformats.org/markup-compatibility/2006}AlternateContent")
+        choice = ET.SubElement(alt, "{http://schemas.openxmlformats.org/markup-compatibility/2006}Choice", {"Requires": "a14"})
+        sp_choice = ET.SubElement(choice, P + "sp")
+        xfrm = ET.SubElement(ET.SubElement(sp_choice, P + "spPr"), A + "xfrm")
+        ET.SubElement(xfrm, A + "off", {"x": "100", "y": "100"})
+        ET.SubElement(xfrm, A + "ext", {"cx": "100000", "cy": "10000"})
+        p_elem = ET.SubElement(ET.SubElement(sp_choice, P + "txBody"), A + "p")
+        ET.SubElement(ET.SubElement(p_elem, A + "r"), A + "t").text = "Phép toán → "
+        m_elem = ET.SubElement(p_elem, "{http://schemas.microsoft.com/office/drawing/2010/main}m")
+        omath = ET.SubElement(m_elem, "{http://schemas.openxmlformats.org/officeDocument/2006/math}oMath")
+        ET.SubElement(ET.SubElement(omath, "{http://schemas.openxmlformats.org/officeDocument/2006/math}r"), "{http://schemas.openxmlformats.org/officeDocument/2006/math}t").text = "Ax=b"
+        ET.SubElement(ET.SubElement(p_elem, A + "r"), A + "t").text = " → span"
+
+        fallback = ET.SubElement(alt, "{http://schemas.openxmlformats.org/markup-compatibility/2006}Fallback")
+        sp_fb = ET.SubElement(fallback, P + "sp")
+        p_fb = ET.SubElement(ET.SubElement(sp_fb, P + "txBody"), A + "p")
+        ET.SubElement(ET.SubElement(p_fb, A + "r"), A + "t").text = "Phép toán → Ax=b → span"
+
+        paragraphs = check_deck.slide_paragraphs(root)
+        self.assertEqual(["Phép toán → Ax=b → span"], paragraphs)
+        bounds_errors = check_deck.check_shape_bounds(root, 1000000, 600000, 1)
+        self.assertEqual([], bounds_errors)
+
 
 if __name__ == "__main__":
     unittest.main()
+

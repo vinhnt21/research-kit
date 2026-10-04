@@ -8,7 +8,7 @@ export const docsContent = {
         { label: "Pipeline", value: "6 Core Stages" },
         { label: "Extensions", value: "4 Domains" },
         { label: "Standing Context", value: "<0.50%" },
-        { label: "Runtime Scripts", value: "0 (Pure SOP)" },
+        { label: "Toolchain Architecture", value: "Auditable SOPs & CLI" },
       ],
     },
     nav: {
@@ -22,7 +22,7 @@ export const docsContent = {
     },
     lifecycle: {
       title: "Lifecycle Management: Install, Update & Remove",
-      desc: "Research Kit skills are pure Markdown Standard Operating Procedures (SOPs) complying with the Agent Skills specification. They run with zero persistent daemon processes and zero external scripts.",
+      desc: "Research Kit skills are pure Markdown Standard Operating Procedures (SOPs) complying with the Agent Skills specification. They run with zero persistent daemon processes and rely on deterministic standalone CLI tools (Python 3.9+ standard library, Pandoc for OMML compilation) protected by SHA-256 integrity checks—never opaque background daemons or unprompted Git automation.",
       methods: [
         {
           id: "skills-cli",
@@ -55,6 +55,61 @@ export const docsContent = {
           installCmd: "git clone https://github.com/vinhnt21/research-kit.git\ncp -r research-kit/skills/rk-* ~/.cursor/skills/        # Cursor\n# cp -r research-kit/skills/rk-* ~/.claude/skills/        # Claude Code\n# cp -r research-kit/skills/rk-* ~/.agents/skills/        # Antigravity\n# cp -r research-kit/skills/rk-* ~/.codex/skills/         # Codex",
           updateCmd: "cd research-kit && git pull\ncp -r skills/rk-* ~/.cursor/skills/",
           removeCmd: "rm -rf ~/.cursor/skills/rk-*",
+        },
+      ],
+      prerequisitesTitle: "Environment & Toolchain Prerequisites",
+      prerequisitesDesc: "Research Kit minimizes dependencies. Core SOPs require only Markdown-capable agents, while presentation math injection and suite verification rely exclusively on Python standard library and Pandoc:",
+      prerequisitesHeaders: ["Tool / Runtime", "Version", "Role in Pipeline", "Requirement & Footprint"],
+      prerequisites: [
+        {
+          tool: "Python",
+          version: "3.9+",
+          role: "Test suites, OOXML inspection, slide linting, suite hash verification",
+          status: "Required",
+          note: "Standard library only (xml.etree, zipfile, hashlib, unittest); zero pip dependencies",
+        },
+        {
+          tool: "Pandoc",
+          version: "3.0+",
+          role: "Compiles LaTeX formulas into native PowerPoint OMML (a14:m)",
+          status: "Required for rk-academic-visualize",
+          note: "Standalone CLI tool, invoked deterministically",
+        },
+        {
+          tool: "LaTeX / TikZ",
+          version: "TeX Live 2022+ / MacTeX",
+          role: "Compiles publication-grade architecture figures to vector PDF/SVG",
+          status: "Optional",
+          note: "Only needed when rendering local .tex TikZ figures",
+        },
+        {
+          tool: "Git",
+          version: "2.30+",
+          role: "Workspace and revision control",
+          status: "Required",
+          note: "Standard version control",
+        },
+        {
+          tool: "PowerPoint / Office",
+          version: "2010+",
+          role: "Viewing and natively editing rendered OMML equations",
+          status: "Optional",
+          note: "Equations remain native DrawingML/XML and fully editable",
+        },
+      ],
+      verificationCmdsTitle: "Environment Verification Commands",
+      verificationCmds: [
+        {
+          label: "Verify Python & Cryptographic Suite Check",
+          cmd: "python3 scripts/check-suite.py",
+        },
+        {
+          label: "Verify Pandoc Availability for Math Injection",
+          cmd: "pandoc --version",
+        },
+        {
+          label: "Run Slide & Math Injection Unit Tests",
+          cmd: "python3 -m unittest discover skills/rk-academic-visualize/scripts/tests",
         },
       ],
       healthCheckTitle: "Integrity Verification (Health Check)",
@@ -379,7 +434,7 @@ export const docsContent = {
         { label: "Quy trình", value: "6 Giai đoạn lõi" },
         { label: "Mở rộng", value: "4 Chuyên ngành" },
         { label: "Chiếm dụng Context", value: "<0,50%" },
-        { label: "Script chạy ngầm", value: "0 (chỉ Markdown)" },
+        { label: "Kiến trúc công cụ", value: "SOP chuẩn & CLI độc lập" },
       ],
     },
     nav: {
@@ -393,7 +448,7 @@ export const docsContent = {
     },
     lifecycle: {
       title: "Quản Trị Vòng Đời: Cài Đặt, Cập Nhật & Gỡ Bỏ",
-      desc: "Toàn bộ kỹ năng Research Kit là quy trình viết bằng Markdown, tuân thủ quy chuẩn Agent Skills. Không có chương trình chạy ngầm, không script phụ thuộc.",
+      desc: "Toàn bộ kỹ năng Research Kit là quy trình chuẩn hoá (SOP) viết bằng Markdown, tuân thủ quy chuẩn Agent Skills. Hệ thống không sử dụng daemon chạy ngầm, kết hợp cùng các công cụ dòng lệnh (CLI) độc lập viết bằng thư viện chuẩn Python 3.9+ và Pandoc (biên dịch công thức OMML), được khóa mã băm SHA-256 bảo đảm toàn vẹn và không tự ý can thiệp Git.",
       methods: [
         {
           id: "skills-cli",
@@ -426,6 +481,61 @@ export const docsContent = {
           installCmd: "git clone https://github.com/vinhnt21/research-kit.git\ncp -r research-kit/skills/rk-* ~/.cursor/skills/        # Cursor\n# cp -r research-kit/skills/rk-* ~/.claude/skills/        # Claude Code\n# cp -r research-kit/skills/rk-* ~/.agents/skills/        # Antigravity\n# cp -r research-kit/skills/rk-* ~/.codex/skills/         # Codex",
           updateCmd: "cd research-kit && git pull\ncp -r skills/rk-* ~/.cursor/skills/",
           removeCmd: "rm -rf ~/.cursor/skills/rk-*",
+        },
+      ],
+      prerequisitesTitle: "Môi Trường & Công Cụ Thực Thi Cần Thiết",
+      prerequisitesDesc: "Research Kit triệt để tối giản phụ thuộc. Các SOP cốt lõi chỉ cần agent đọc được Markdown; tính năng biên dịch công thức toán vào slide và kiểm tra tính toàn vẹn bộ skill chỉ dựa vào thư viện chuẩn của Python và Pandoc:",
+      prerequisitesHeaders: ["Công cụ / Runtime", "Phiên bản", "Vai trò trong quy trình", "Mức độ yêu cầu & Dung lượng"],
+      prerequisites: [
+        {
+          tool: "Python",
+          version: "3.9+",
+          role: "Chạy test suite, kiểm tra cấu trúc OOXML, linter slide, xác thực mã băm",
+          status: "Bắt buộc",
+          note: "Chỉ dùng thư viện chuẩn (xml.etree, zipfile, hashlib, unittest); 0 thư viện ngoài (zero pip)",
+        },
+        {
+          tool: "Pandoc",
+          version: "3.0+",
+          role: "Biên dịch công thức toán LaTeX sang Office Math Markup Language (OMML a14:m) native",
+          status: "Cần cho rk-academic-visualize",
+          note: "Công cụ dòng lệnh độc lập, không daemon chạy ngầm",
+        },
+        {
+          tool: "LaTeX / TikZ",
+          version: "TeX Live 2022+ / MacTeX",
+          role: "Biên dịch sơ đồ kiến trúc bài báo sang PDF/SVG vector chất lượng xuất bản",
+          status: "Tùy chọn",
+          note: "Chỉ cần khi biên dịch trực tiếp file .tex TikZ trên máy",
+        },
+        {
+          tool: "Git",
+          version: "2.30+",
+          role: "Quản lý workspace và theo dõi phiên bản",
+          status: "Bắt buộc",
+          note: "Công cụ quản lý mã nguồn tiêu chuẩn",
+        },
+        {
+          tool: "PowerPoint / Office",
+          version: "2010+",
+          role: "Xem và chỉnh sửa trực tiếp công thức toán OMML trong slide",
+          status: "Tùy chọn",
+          note: "Công thức lưu dưới dạng XML chuẩn, sửa mượt mà trên Office/Word/PowerPoint",
+        },
+      ],
+      verificationCmdsTitle: "Lệnh Kiểm Tra Môi Trường & Công Cụ",
+      verificationCmds: [
+        {
+          label: "Kiểm tra Python và xác thực tính toàn vẹn mã băm",
+          cmd: "python3 scripts/check-suite.py",
+        },
+        {
+          label: "Kiểm tra sự hiện diện của Pandoc phục vụ chèn toán vào slide",
+          cmd: "pandoc --version",
+        },
+        {
+          label: "Chạy trọn bộ kiểm thử đơn vị cho slide và chèn toán OMML",
+          cmd: "python3 -m unittest discover skills/rk-academic-visualize/scripts/tests",
         },
       ],
       healthCheckTitle: "Kiểm Tra Tính Toàn Vẹn (Health Check)",
@@ -678,7 +788,7 @@ export const docsContent = {
           prompt: "@rk-data kiểm định thống kê và chạy rerun độc lập từ thư mục [data/raw-path]",
         },
         {
-          task: "Viết phần bài báo kèm kiểm toán số liệu",
+          task: "Viết phần bài báo kèm đối soát số liệu",
           skill: "rk-write",
           prompt: "@rk-write viết Section 4 (Kết quả) theo nguyên tắc 1 ý/đoạn, đối chiếu với analysis-record.md",
         },
@@ -705,7 +815,7 @@ export const docsContent = {
         {
           task: "Kiểm tra rò rỉ dữ liệu học máy (Data leakage)",
           skill: "rk-ai",
-          prompt: "@rk-ai kiểm toán pipeline tiền xử lý để phát hiện data leakage train/test",
+          prompt: "@rk-ai rà soát pipeline tiền xử lý để phát hiện data leakage train/test",
         },
         {
           task: "Vẽ sơ đồ kiến trúc bài báo chuẩn IEEE/ACM",

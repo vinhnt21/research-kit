@@ -6,12 +6,13 @@
 
 ## Table of Contents
 
-1. [Lifecycle Management: Installation, Updating & Uninstallation](#1-lifecycle-management-installation-updating--uninstallation)
-   - [1.1 Installation Methods](#11-installation-methods)
-   - [1.2 Updating Skills](#12-updating-skills)
-   - [1.3 Uninstallation & Clean Reset](#13-uninstallation--clean-reset)
-   - [1.4 Integrity Verification & Health Check](#14-integrity-verification--health-check)
-   - [1.5 Agent Cache & Session Reloading](#15-agent-cache--session-reloading)
+1. [Lifecycle Management: Prerequisites, Installation, Updating & Uninstallation](#1-lifecycle-management-prerequisites-installation-updating--uninstallation)
+   - [1.1 System Prerequisites & Toolchain Setup](#11-system-prerequisites--toolchain-setup)
+   - [1.2 Installation Methods](#12-installation-methods)
+   - [1.3 Updating Skills](#13-updating-skills)
+   - [1.4 Uninstallation & Clean Reset](#14-uninstallation--clean-reset)
+   - [1.5 Integrity Verification & Health Check](#15-integrity-verification--health-check)
+   - [1.6 Agent Cache & Session Reloading](#16-agent-cache--session-reloading)
 2. [Multiple Papers in One Repo & Evidence Boundaries](#2-multiple-papers-in-one-repo--evidence-boundaries)
    - [2.1 Directory Blueprint](#21-directory-blueprint)
    - [2.2 Active Paper Resolution Protocol](#22-active-paper-resolution-protocol)
@@ -36,11 +37,36 @@
 
 ---
 
-## 1. Lifecycle Management: Installation, Updating & Uninstallation
+## 1. Lifecycle Management: Prerequisites, Installation, Updating & Uninstallation
 
-Research Kit strictly complies with the [Agent Skills specification](https://agentskills.io/specification). Skills are pure procedural Markdown instructions—adding zero third-party Python dependencies, background daemons, or brittle session hooks.
+Research Kit strictly complies with the [Agent Skills specification](https://agentskills.io/specification). Skills are pure procedural Markdown instructions—designed as reproducible standard operating procedures supported by focused, auditable CLI utilities, with zero background daemons or brittle session hooks.
 
-### 1.1 Installation Methods
+### 1.1 System Prerequisites & Toolchain Setup
+
+Research Kit relies on lightweight, standard CLI tooling to maintain reproducibility across environments without external package bloat:
+
+| Tool | Minimum Version | Purpose | Necessity |
+|---|---|---|---|
+| **Python** | 3.9+ | Test suites, OOXML inspection, slide linting, suite hash verification | **Required** (standard library: `xml.etree`, `zipfile`, `hashlib`, `unittest`; zero pip dependencies) |
+| **Pandoc** | 3.0+ | Compiles LaTeX mathematical formulas into native PowerPoint OMML (`a14:m`) | **Required** for `rk-academic-visualize` math injection (`inject-math.py`) |
+| **LaTeX / TikZ** | TeX Live 2022+ / MacTeX | Compiles publication-grade architecture figures to vector PDF/SVG | **Optional** (only needed when rendering `.tex` TikZ source locally) |
+| **Git** | 2.30+ | Workspace and version tracking | **Required** |
+| **PowerPoint / Office** | 2010+ | Viewing and natively editing rendered OMML equations | **Optional** (equations remain editable in modern Office/Word/PowerPoint) |
+
+#### Environment Verification Commands
+```bash
+# Verify Python version and cryptographic suite check
+python3 --version
+python3 scripts/check-suite.py
+
+# Verify Pandoc availability for math injection
+pandoc --version
+
+# Run standalone slide and math test suites
+python3 -m unittest discover skills/rk-academic-visualize/scripts/tests
+```
+
+### 1.2 Installation Methods
 
 #### Method A: Skills CLI (Recommended by Vercel Labs)
 The official Skills CLI manages skills in standard agent environments with automatic detection:
@@ -93,7 +119,7 @@ cp -r research-kit/skills/rk-* ~/.agents/skills/
 
 ---
 
-### 1.2 Updating Skills
+### 1.3 Updating Skills
 
 When upstream skills receive improvements, bug fixes, or new empirical checks, refresh your local copies using the tool you originally installed with:
 
@@ -132,7 +158,7 @@ cp -r skills/rk-* ~/.cursor/skills/  # Adjust for your agent
 
 ---
 
-### 1.3 Uninstallation & Clean Reset
+### 1.4 Uninstallation & Clean Reset
 
 #### With Skills CLI
 Skills CLI provides built-in removal commands:
@@ -179,7 +205,7 @@ rm -rf ~/.agents/skills/rk-*
 
 ---
 
-### 1.4 Integrity Verification & Health Check
+### 1.5 Integrity Verification & Health Check
 
 Research Kit includes a deterministic test suite to verify skill integrity, frontmatter bounds, and local link graphs. Run this anytime after installing, updating, or editing skills:
 ```bash
@@ -194,7 +220,7 @@ No broken relative references detected.
 
 ---
 
-### 1.5 Agent Cache & Session Reloading
+### 1.6 Agent Cache & Session Reloading
 
 Under the Agent Skills specification, agents parse `SKILL.md` frontmatter (`name` and `description`) **once during session initialization**.
 * **After updating or deleting skills**, your active agent conversation may still retain the old instructions in memory.
@@ -410,7 +436,7 @@ flowchart LR
   - *Hard Stop*: 100% claim-to-evidence audit. Every claim, number, and percentage in the manuscript must map directly to a verified rerun artifact or cited reference.
 * **Sample Trigger Prompts**:
   - **EN**: `"Use @rk-write to draft Section 4 (Results). Ensure each paragraph has exactly one core idea and audit claims against analysis-record.md."`
-  - **VI**: `"Dùng @rk-write soạn thảo phần Kết quả (Results). Tuân thủ nguyên tắc 1 ý/đoạn và kiểm toán 100% số liệu so với bằng chứng thực nghiệm."`
+  - **VI**: `"Dùng @rk-write soạn thảo phần Kết quả (Results). Tuân thủ nguyên tắc 1 ý/đoạn và đối soát 100% số liệu so với bằng chứng thực nghiệm."`
 * **Companion References**:
   - [`references/claim-evidence.md`](file:///Users/vinhnt/DATA/learning/research-skills/skills/rk-write/references/claim-evidence.md)
   - [`references/section-roles.md`](file:///Users/vinhnt/DATA/learning/research-skills/skills/rk-write/references/section-roles.md)
@@ -477,18 +503,18 @@ flowchart LR
 * **Key Invariant**: Zero data leakage. Any transformation or normalization must be fit strictly on training data alone.
 * **Sample Trigger Prompts**:
   - **EN**: `"Run @rk-ai to audit our data preprocessing pipeline for temporal leakage and verify fixed seed reproducibility across 5 runs."`
-  - **VI**: `"Dùng @rk-ai kiểm toán pipeline tiền xử lý để đảm bảo không bị data leakage giữa tập train/test và kiểm tra seed cố định."`
+  - **VI**: `"Dùng @rk-ai rà soát pipeline tiền xử lý để đảm bảo không bị data leakage giữa tập train/test và kiểm tra seed cố định."`
 
 ---
 
 #### 10. rk-academic-visualize: Scientific Figures & Presentations
 * **Location**: [`skills/rk-academic-visualize/SKILL.md`](file:///Users/vinhnt/DATA/learning/research-skills/skills/rk-academic-visualize/SKILL.md)
 * **Domain**: Academic Graphics & Slides
-* **Scope & Duty**: Publication-grade LaTeX TikZ architecture diagrams, clean SVG/Mermaid flowcharts, anti-overlap arrow geometry, slide deck design.
-* **Key Invariant**: Keep figures easy to read — few boxes and labels, orthogonal arrows with at most two bends, no arrow over text; slides may only state claims already grounded in the paper.
+* **Scope & Duty**: Publication-grade LaTeX TikZ architecture diagrams, clean SVG/Mermaid flowcharts, anti-overlap arrow geometry, slide deck design with native inline OMML equation injection.
+* **Key Invariant**: Keep figures easy to read — few boxes and labels, orthogonal arrows with at most two bends, no arrow over text; render equations as native editable OMML without rasterization or unicode approximations; slides may only state claims already grounded in the paper.
 * **Sample Trigger Prompts**:
-  - **EN**: `"Use @rk-academic-visualize to generate a publication-grade LaTeX TikZ diagram illustrating our system architecture with clean orthogonal arrows."`
-  - **VI**: `"Dùng @rk-academic-visualize để vẽ sơ đồ kiến trúc hệ thống bằng LaTeX TikZ chuẩn bài báo IEEE, đảm bảo mũi tên không đè lên khối."`
+  - **EN**: `"Use @rk-academic-visualize to generate presentation slides with native inline OMML equations and orthogonal TikZ diagrams."`
+  - **VI**: `"Dùng @rk-academic-visualize để làm slide thuyết trình học thuật với công thức inline native OMML chuẩn DrawingML và sơ đồ TikZ."`
 
 ---
 

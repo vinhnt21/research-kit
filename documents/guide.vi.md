@@ -6,12 +6,13 @@
 
 ## Mục Lục
 
-1. [Quản trị vòng đời: Cài đặt, Cập nhật & Gỡ bỏ](#1-quản-trị-vòng-đời-cài-đặt-cập-nhật--gỡ-bỏ)
-   - [1.1 Các phương thức cài đặt](#11-các-phương-thức-cài-đặt)
-   - [1.2 Cập nhật kỹ năng](#12-cập-nhật-kỹ-năng)
-   - [1.3 Gỡ bỏ & Cài đặt lại sạch sẽ (Uninstall)](#13-gỡ-bỏ--cài-đặt-lại-sạch-sẽ-uninstall)
-   - [1.4 Kiểm tra tính toàn vẹn (Health Check)](#14-kiểm-tra-tính-toàn-vẹn-health-check)
-   - [1.5 Bộ nhớ đệm của Agent & Khởi động lại phiên làm việc](#15-bộ-nhớ-đệm-của-agent--khởi-động-lại-phiên-làm-việc)
+1. [Quản trị vòng đời: Yêu cầu môi trường, Cài đặt, Cập nhật & Gỡ bỏ](#1-quản-trị-vòng-đời-yêu-cầu-môi-trường-cài-đặt-cập-nhật--gỡ-bỏ)
+   - [1.1 Yêu cầu môi trường & Thiết lập công cụ](#11-yêu-cầu-môi-trường--thiết-lập-công-cụ)
+   - [1.2 Các phương thức cài đặt](#12-các-phương-thức-cài-đặt)
+   - [1.3 Cập nhật kỹ năng](#13-cập-nhật-kỹ-năng)
+   - [1.4 Gỡ bỏ & Cài đặt lại sạch sẽ (Uninstall)](#14-gỡ-bỏ--cài-đặt-lại-sạch-sẽ-uninstall)
+   - [1.5 Kiểm tra tính toàn vẹn (Health Check)](#15-kiểm-tra-tính-toàn-vẹn-health-check)
+   - [1.6 Bộ nhớ đệm của Agent & Khởi động lại phiên làm việc](#16-bộ-nhớ-đệm-của-agent--khởi-động-lại-phiên-làm-việc)
 2. [Nhiều Bài Báo Trong Cùng Một Repo & Ranh Giới Bằng Chứng](#2-nhiều-bài-báo-trong-cùng-một-repo--ranh-giới-bằng-chứng)
    - [2.1 Sơ đồ tổ chức thư mục chuẩn](#21-sơ-đồ-tổ-chức-thư-mục-chuẩn)
    - [2.2 Giao thức xác định bài báo hiện hành (Active Paper Declaration)](#22-giao-thức-xác-định-bài-báo-hiện-hành-active-paper-declaration)
@@ -36,11 +37,36 @@
 
 ---
 
-## 1. Quản trị vòng đời: Cài đặt, Cập nhật & Gỡ bỏ
+## 1. Quản trị vòng đời: Yêu cầu môi trường, Cài đặt, Cập nhật & Gỡ bỏ
 
-Research Kit tuân thủ tuyệt đối quy chuẩn [Agent Skills specification](https://agentskills.io/specification). Toàn bộ kỹ năng là quy trình vận hành chuẩn (SOP) thuần văn bản Markdown—hoàn toàn không cài cắm script chạy ngầm, không yêu cầu biến môi trường API bí mật, không làm nặng máy.
+Research Kit tuân thủ quy chuẩn [Agent Skills specification](https://agentskills.io/specification). Toàn bộ kỹ năng được xây dựng dưới dạng quy trình vận hành chuẩn (SOP) bằng Markdown di động, kết hợp các công cụ CLI độc lập có thể kiểm tra toàn diện, không dùng daemon nền và không tự động can thiệp mã nguồn ngoài phạm vi cho phép.
 
-### 1.1 Các phương thức cài đặt
+### 1.1 Yêu cầu môi trường & Thiết lập công cụ
+
+Research Kit được xây dựng dựa trên triết lý tinh gọn, ưu tiên công cụ CLI tiêu chuẩn để bảo đảm tính tái lập độc lập với môi trường:
+
+| Công cụ | Phiên bản tối thiểu | Mục đích sử dụng | Mức độ cần thiết |
+|---|---|---|---|
+| **Python** | 3.9+ | Chạy bộ kiểm tra toàn vẹn, kiểm tra bố cục slide OOXML, xác thực hash suite | **Bắt buộc** (chỉ dùng thư viện chuẩn: `xml.etree`, `zipfile`, `hashlib`, `unittest`; không cần cài pip package ngoài) |
+| **Pandoc** | 3.0+ | Biên dịch công thức LaTeX sang Office Math Markup Language (OMML `a14:m`) native cho slide | **Bắt buộc** khi dùng `rk-academic-visualize` để inject công thức toán (`inject-math.py`) |
+| **LaTeX / TikZ** | TeX Live 2022+ / MacTeX | Biên dịch sơ đồ kiến trúc hệ thống sang PDF/SVG vector | **Tùy chọn** (chỉ cần khi muốn biên dịch trực tiếp file mã nguồn TikZ `.tex`) |
+| **Git** | 2.30+ | Quản lý phiên bản bài báo và mã nguồn | **Bắt buộc** |
+| **PowerPoint / Office** | 2010+ | Mở xem và trực tiếp chỉnh sửa công thức toán OMML native | **Tùy chọn** (công thức tương thích đầy đủ với Office/Word/PowerPoint hiện đại) |
+
+#### Lệnh Kiểm Tra Môi Trường
+```bash
+# Kiểm tra phiên bản Python và kiểm định toàn vẹn mã băm
+python3 --version
+python3 scripts/check-suite.py
+
+# Kiểm tra Pandoc cho việc inject công thức toán
+pandoc --version
+
+# Chạy bộ test suite độc lập cho slide và toán học
+python3 -m unittest discover skills/rk-academic-visualize/scripts/tests
+```
+
+### 1.2 Các phương thức cài đặt
 
 #### Cách A: Skills CLI (Khuyên dùng từ Vercel Labs)
 Bộ công cụ chuẩn hoá kỹ năng cho các AI coding agent:
@@ -93,7 +119,7 @@ cp -r research-kit/skills/rk-* ~/.agents/skills/
 
 ---
 
-### 1.2 Cập nhật kỹ năng
+### 1.3 Cập nhật kỹ năng
 
 Khi bộ kỹ năng có cập nhật mới (sửa lỗi, bổ sung tiêu chuẩn kiểm chứng), bạn cập nhật bằng đúng công cụ đã dùng để cài:
 
@@ -132,7 +158,7 @@ cp -r skills/rk-* ~/.cursor/skills/  # Đổi theo agent bạn đang dùng
 
 ---
 
-### 1.3 Gỡ bỏ & Cài đặt lại sạch sẽ (Uninstall)
+### 1.4 Gỡ bỏ & Cài đặt lại sạch sẽ (Uninstall)
 
 #### Với Skills CLI
 Skills CLI hỗ trợ sẵn lệnh gỡ bỏ chính thức:
@@ -179,7 +205,7 @@ rm -rf ~/.agents/skills/rk-*
 
 ---
 
-### 1.4 Kiểm tra tính toàn vẹn (Health Check)
+### 1.5 Kiểm tra tính toàn vẹn (Health Check)
 
 Dự án tích hợp sẵn bộ kiểm tra tự động để xác minh cấu trúc frontmatter, định dạng liên kết và tính toàn vẹn của các file tham chiếu:
 ```bash
@@ -194,7 +220,7 @@ No broken relative references detected.
 
 ---
 
-### 1.5 Bộ nhớ đệm của Agent & Khởi động lại phiên làm việc
+### 1.6 Bộ nhớ đệm của Agent & Khởi động lại phiên làm việc
 
 Theo quy chuẩn Agent Skills, các agent chỉ đọc metadata `name` và `description` từ file `SKILL.md` **một lần duy nhất khi khởi tạo phiên làm việc (Session Initialization)**.
 * **Sau khi cập nhật hoặc xoá skill**, cửa sổ chat đang mở của agent vẫn có thể lưu giữ chỉ dẫn cũ trong bộ nhớ RAM.
@@ -481,11 +507,11 @@ flowchart LR
 #### 10. rk-academic-visualize: Minh họa khoa học & Slide thuyết trình
 * **Đường dẫn**: [`skills/rk-academic-visualize/SKILL.md`](file:///Users/vinhnt/DATA/learning/research-skills/skills/rk-academic-visualize/SKILL.md)
 * **Lĩnh vực**: Đồ họa học thuật & Bản trình chiếu
-* **Phạm vi**: Vẽ sơ đồ kiến trúc hệ thống bằng LaTeX TikZ chuẩn bài báo IEEE/ACM, lưu đồ SVG/Mermaid sạch sẽ, quy tắc hình học chống đè mũi tên (anti-overlap), thiết kế slide báo cáo khoa học.
-* **Nguyên tắc bất biến**: Giữ hình dễ đọc — ít khối và nhãn, mũi tên đi theo đường thẳng góc và gấp tối đa hai lần, không để mũi tên đè chữ; slide chỉ nêu luận điểm đã có trong bài báo.
+* **Phạm vi**: Vẽ sơ đồ kiến trúc hệ thống bằng LaTeX TikZ chuẩn bài báo IEEE/ACM, lưu đồ SVG/Mermaid sạch sẽ, quy tắc hình học chống đè mũi tên (anti-overlap), thiết kế slide báo cáo khoa học với cơ chế inject công thức inline native OMML.
+* **Nguyên tắc bất biến**: Giữ hình dễ đọc — ít khối và nhãn, mũi tên đi theo đường thẳng góc và gấp tối đa hai lần, không để mũi tên đè chữ; render công thức toán dưới dạng native OMML có thể chỉnh sửa, không dùng ảnh chụp hay ký tự unicode giả lập; slide chỉ nêu luận điểm đã có trong bài báo.
 * **Mẫu câu lệnh**:
-  - **VI**: `"Dùng @rk-academic-visualize vẽ sơ đồ kiến trúc hệ thống bằng LaTeX TikZ chuẩn xuất bản, đảm bảo mũi tên vuông góc không đè chữ."`
-  - **EN**: `"Use @rk-academic-visualize to generate a publication-grade LaTeX TikZ diagram with collision-free orthogonal arrows."`
+  - **VI**: `"Dùng @rk-academic-visualize vẽ sơ đồ kiến trúc hệ thống bằng LaTeX TikZ và inject công thức inline native OMML vào slide thuyết trình."`
+  - **EN**: `"Use @rk-academic-visualize to design academic slides with native inline OMML equations and collision-free TikZ diagrams."`
 
 ---
 
@@ -522,7 +548,7 @@ Tuần 5: Viết bản thảo bài báo
 └── @rk-write
     ├── Đầu vào: Bản ghi phân tích kết quả + phương pháp đã đóng băng
     ├── Thực hiện: Soạn từng phần của bài báo (kỷ luật 1 ý chính / 1 đoạn văn)
-    └── Cổng hoàn thành: Kiểm toán 100% số liệu trong assets/claim-evidence.md
+    └── Điểm kiểm soát: Đối soát 100% số liệu trong assets/claim-evidence.md
 
 Tuần 6: Minh họa & Báo cáo bảo vệ
 └── @rk-academic-visualize phối hợp cùng @rk-report
@@ -546,7 +572,7 @@ Tuần 6: Minh họa & Báo cáo bảo vệ
 | Làm báo cáo tiến độ tuần cho Lab | `rk-report` | `"@rk-report lập tóm tắt tiến độ 2 trang dựa trên các kết quả đã kiểm chứng"` |
 | Mô phỏng thuật toán lượng tử biến thiên VQE | `rk-quantum` | `"@rk-quantum mô phỏng cục bộ thuật toán VQE cho Hamiltonian [Công thức]"` |
 | Mô phỏng định tuyến mạng lượng tử | `rk-quantum-network` | `"@rk-quantum-network đánh giá fidelity phân phối vướng víu qua mạng repeater"` |
-| Kiểm tra rò rỉ dữ liệu học máy (Data leakage) | `rk-ai` | `"@rk-ai kiểm toán pipeline tiền xử lý để phát hiện data leakage train/test"` |
+| Kiểm tra rò rỉ dữ liệu học máy (Data leakage) | `rk-ai` | `"@rk-ai rà soát pipeline tiền xử lý để phát hiện data leakage train/test"` |
 | Vẽ sơ đồ kiến trúc bài báo chuẩn IEEE/ACM | `rk-academic-visualize` | `"@rk-academic-visualize vẽ sơ đồ khối hệ thống bằng LaTeX TikZ không đè mũi tên"` |
 
 ---

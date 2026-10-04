@@ -21,11 +21,20 @@
 
 </div>
 
+## 🎉 News & Updates
+
+- **[2026.10.04]** 🎯 **[Native Math & Slide Linter]**: Implemented `skills/rk-academic-visualize/scripts/inject-math.py` for batch compilation of LaTeX mathematical formulas into native PowerPoint Office Math Markup Language (OMML / DrawingML `a14:m`) via Pandoc. Supports seamless inline formulas within paragraph text flows, automated font-metric matching (`Cambria Math` at surrounding `sz`), and robust `mc:AlternateContent` fallback wrapping. Enhanced `scripts/check-deck.py` with multi-namespace text extraction (`a:t` and `m:t`) and AlternateContent bounding box audits.
+- **[2026.10.03]** 🎯 **[Dynamic Language Adaptation]**: Upgraded all 10 procedural skills to automatically interact and synthesize in the researcher's active language with natural peer-colleague terminology ("như trao đổi cùng đồng nghiệp"), while strictly preserving English instructions for execution consistency and prompt stability.
+- **[2026.10.02]** 🎯 **[Release v1.0.0]**: Formalized Research Kit v1.0.0 comprising 6 sequential scientific lifecycle skills (`rk-survey` through `rk-report`) and 4 specialist modules, reinforced by automated SHA-256 cryptographic check-suite verification (`scripts/check-suite.py`).
+- **[2026.10.01]** 🎯 **[Documentation & Portal]**: Launched dual-language academic web portal ([research-kit.vinhnguyenthanh.com](https://research-kit.vinhnguyenthanh.com)) and comprehensive operational guides (`documents/guide.md` & `documents/guide.vi.md`).
+
 ## Contents
 
+- [News & Updates](#-news--updates)
 - [Overview & High-Level Architecture](#overview--high-level-architecture)
   - [Part 1: Core Pipeline — 6 Skills for the Scientific Paper Lifecycle](#part-1-core-pipeline--6-skills-for-the-scientific-paper-lifecycle)
   - [Part 2: Specialist Extensions — 4 Domain-Specific Skills (Author's Research Focus)](#part-2-specialist-extensions--4-domain-specific-skills-authors-research-focus)
+- [Prerequisites & Toolchain Setup](#️-prerequisites--toolchain-setup)
 - [Installation & Quick Start](#installation--quick-start)
   - [1. Using the Skills CLI (Recommended)](#1-using-the-skills-cli-recommended)
   - [2. Using GitHub CLI (v2.90.0+)](#2-using-github-cli-v2900)
@@ -76,6 +85,34 @@ These skills are tailored to the author's research domains and serve as practica
 | [`rk-quantum-network`](skills/rk-quantum-network/SKILL.md) | Quantum Networking | Entanglement distribution, repeater memory, routing & scheduling | Fidelity checks & protocol verification |
 | [`rk-ai`](skills/rk-ai/SKILL.md) | AI / Machine Learning | Train/val/test splits, leakage audit, baselines & generative eval | Zero data leakage & reproducible seed verification |
 | [`rk-academic-visualize`](skills/rk-academic-visualize/SKILL.md) | Scientific Visualization & Slides | Publication-grade illustrations (LaTeX/TikZ, Mermaid) & source-grounded slide decks | Cognitive load filtering, anti-overlap arrow rules & deck checks |
+
+---
+
+## 🛠️ Prerequisites & Toolchain Setup
+
+Research Kit relies on lightweight, standard CLI tooling to maintain reproducibility across environments without external package bloat:
+
+| Tool | Minimum Version | Purpose | Necessity |
+|---|---|---|---|
+| **Python** | 3.9+ | Test suites, OOXML inspection, slide linting, suite hash verification | **Required** (uses standard library: `xml.etree`, `zipfile`, `hashlib`, `unittest`; zero external pip bloat) |
+| **Pandoc** | 3.0+ | Compiles LaTeX mathematical formulas into native PowerPoint OMML (`a14:m`) | **Required** for `rk-academic-visualize` math injection (`inject-math.py`) |
+| **LaTeX / TikZ** | TeX Live 2022+ / MacTeX | Compiles publication-grade architecture figures to vector PDF/SVG | **Optional** (only needed when rendering `.tex` TikZ source locally) |
+| **Git** | 2.30+ | Workspace and version tracking | **Required** |
+| **PowerPoint / Office** | 2010+ | Viewing and natively editing rendered OMML equations | **Optional** (equations remain editable in modern Office/Word/PowerPoint) |
+
+### Environment Verification Commands
+
+```bash
+# Verify Python version and suite integrity
+python3 --version
+python3 scripts/check-suite.py
+
+# Verify Pandoc availability for math injection
+pandoc --version
+
+# Run standalone slide and math test suites
+python3 -m unittest discover skills/rk-academic-visualize/scripts/tests
+```
 
 ---
 
@@ -173,7 +210,7 @@ Scientific inquiry using AI agents currently suffers from severe standing contex
 | **Catalog Architecture** | **Scientific Agent Skills**: 163 fragmented, overlapping mini-skills across 16 domains | **10 end-to-end lifecycle skills** | **Streamlined & convenient**; eliminates tool choice overload |
 | **Research Focus** | **Scientific Agent Skills**: Agent gets lost in tool search & install loops across 163 candidates | **Deterministic stage-by-stage routing** | **100% focused on core scientific discovery** |
 | **Standing Token Overhead** | **Scientific Agent Skills**: 14,246 tokens (7.12% of context window) before reading files | **~1,000 tokens (<0.50% of context window)** | **Frees >99.5% of context** for raw data, papers, and deep reasoning |
-| **Operational Reliability** | **Scientific Agent Skills & Superpowers**: 105 external scripts & brittle session-start hooks | **0 external scripts (pure procedural specs)** | **Zero runtime drift**, transparent, and portable across all agents |
+| **Operational Reliability** | **Scientific Agent Skills & Superpowers**: 105 external scripts & brittle session-start hooks | **Auditable Markdown SOPs + Standalone CLI utilities** (Python stdlib, Pandoc) | **Zero runtime drift**, transparent, and portable across all agents |
 | **Framework & Multi-Paper Repo** | **Science Superpowers**: Forces `docs/science-superpowers/` and git freeze; lacks multi-paper-in-one-repo support | **Active Paper Declaration, strict evidence boundaries, and flexible layouts** | **Guaranteed data integrity** across manuscripts in the same repo with zero forced lock-in |
 
 ### Key Advantages & Architectural Principles
@@ -259,7 +296,7 @@ Research Kit synthesizes proven scientific methodologies while eliminating frame
 
 | Prior Art / Source | Citation / Version | Bottleneck in Prior Work | Principle Retained in Research Kit | How Research Kit Resolves It |
 | :--- | :--- | :--- | :--- | :--- |
-| **[Scientific Agent Skills](https://github.com/K-Dense-AI/scientific-agent-skills)** | `v2.65.0`<br>[arXiv:2609.00065](https://arxiv.org/abs/2609.00065) | 163 fragmented skills consuming 14,246 standing tokens (7.12% of context); 105 external scripts; 29 credentialed env vars; context overflow in 29/46 workflows. | Clear functional decomposition across research concerns: literature, methodology, empirical data, writing, quantum, and ML eval. | Condensed into **10 neighbor-aware skills** (<1,000 tokens, <0.50% footprint); 0 external scripts; 0 credentialed APIs; 100% focused on research workflows. |
+| **[Scientific Agent Skills](https://github.com/K-Dense-AI/scientific-agent-skills)** | `v2.65.0`<br>[arXiv:2609.00065](https://arxiv.org/abs/2609.00065) | 163 fragmented skills consuming 14,246 standing tokens (7.12% of context); 105 external scripts; 29 credentialed env vars; context overflow in 29/46 workflows. | Clear functional decomposition across research concerns: literature, methodology, empirical data, writing, quantum, and ML eval. | Condensed into **10 neighbor-aware skills** (<1,000 tokens, <0.50% footprint); standalone CLI utilities (OMML/OOXML); 0 credentialed APIs; 100% focused on research workflows. |
 | **[Science Superpowers](https://github.com/K-Dense-AI/science-superpowers)** | Commit [`0374bdf`](https://github.com/K-Dense-AI/science-superpowers/commit/0374bdf) | Dogmatic "Iron Law" of mandatory pre-registration for everything; automated git freeze scripts; harness-specific startup hooks; forced `docs/science-superpowers/` directory layout. | Rigorous sequential quality gates: question framing, search boundary, protocol design, anomaly investigation, and rerun check before claiming. | Preserves all empirical quality gates without dogma: pre-registration is a method choice for confirmatory trials; 0 forced hooks/commits; project-owned directory layouts. |
 | **[Research Paper Writing Skills](https://github.com/Master-cai/Research-Paper-Writing-Skills)** | Commit [`77e7c2c`](https://github.com/Master-cai/Research-Paper-Writing-Skills/commit/77e7c2c) | Single skill tightly coupled to a rigid ML/CV/NLP manuscript outline; lacks domain-specific experimental checks. | Structural writing discipline: single core idea per paragraph, strict 100% claim-to-evidence alignment, and structured rebuttal workflows. | Decoupled into `rk-write` for universal scientific manuscript drafting; domain-specific checks are delegated to modular extensions (`rk-quantum`, `rk-ai`, etc.). |
 | **[NVIDIA Skills](https://github.com/NVIDIA/skills)** | Commit [`d8519c5`](https://github.com/NVIDIA/skills/commit/d8519c5) | Large, vendor-specific product catalog with static CLI instructions and risk of accidental spend on cloud QPU backends. | Strict execution boundary discipline: local simulation is default; physical hardware/QPU execution requires explicit authorization. | Integrated safe local simulation defaults into `rk-quantum` with live documentation queries; physical QPU spend strictly requires explicit user approval. |

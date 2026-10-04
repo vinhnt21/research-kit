@@ -101,13 +101,15 @@ DESCRIPTION = re.compile(r'^description:\s*"(.*)"\s*$', re.M)
 
 NETWORK_HASH = "06278251b844b94cb2f46a431bccd22256966c9959f62c4f1f838e1eab72e531"
 VISUALIZE = {
-    "skills/rk-academic-visualize/SKILL.md": "c69d3fd73f3a10bc0b55fc2be485370f71dd9e317ec40bca995b046b6c804a78",
+    "skills/rk-academic-visualize/SKILL.md": "8cf79debca1796393dd0633f7d92870a6e75c42fc3c8eb6080c6702ecc55a6c6",
     "skills/rk-academic-visualize/assets/academic-template.pptx": "de9ed2b7b8fd2e7adf54daa98eccbf2140fa7ff7cde010b9208500515f3229f1",
     "skills/rk-academic-visualize/references/illustration-guide.md": "2bbbe4c80824c3256c22fb3486ab19d2b97786744c2e8a1becbb0a68ad465b18",
     "skills/rk-academic-visualize/references/slide-plan.md": "348843e01a1bb964474448803a745abc24d81de93addae72fcc5f4578ceda78a",
-    "skills/rk-academic-visualize/references/style-guide.md": "6d2725b166795b9b3b20136e3cfe25b74cad8e13d511cfcd85cf048cba02e222",
-    "skills/rk-academic-visualize/scripts/check-deck.py": "25c2a6dd395535fcc9c710e10f5d85780f8aa0275cec2dc624d7c7bed3ca2f34",
-    "skills/rk-academic-visualize/scripts/tests/test_check_deck.py": "4844451c7675a7b7448719741026a08cdfddf07b5d72936f1af0221ab76fae1f",
+    "skills/rk-academic-visualize/references/style-guide.md": "b26c97895da9f144b25ba05a5a78a8ce6418f0c2c66c58f276768c6c8ac97831",
+    "skills/rk-academic-visualize/scripts/check-deck.py": "2beea0d467d308d1a18abf07e391cd155a7196affacc2ac9f7cfeafeb7e985a8",
+    "skills/rk-academic-visualize/scripts/inject-math.py": "72926ce1ac9cf2cc4b3b2bcfb1d3f249ffe76bc9d97c4c5769e055b7c9a4b700",
+    "skills/rk-academic-visualize/scripts/tests/test_check_deck.py": "07b008f66b85634afc531450cea2cdc4ff576f19856bc89ade8a965477492e57",
+    "skills/rk-academic-visualize/scripts/tests/test_inject_math.py": "d4747ab35381f588afa1dda9c26152c6a076bbe44c3f473b7a0e7804b20f0f40",
 }
 
 

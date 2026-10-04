@@ -10,7 +10,7 @@
 
 # 🔬 Research Kit: Bộ Skill Nghiên Cứu Khoa Học Tinh Gọn Cho AI Agent
 
-**Bộ skill nghiên cứu khoa học tinh gọn, chuẩn mực và có thể tái lập dành cho AI Agent — đảm bảo tính nghiêm ngặt thực nghiệm, không phình tải, và chiếm chưa đầy <0,50% context thường trực. Bộ kit gồm 6 skill quy trình cốt lõi và 4 skill chuyên ngành mở rộng.**
+**Bộ skill nghiên cứu khoa học tinh gọn, chuẩn mực và có thể tái lập dành cho AI Agent — đảm bảo tính nghiêm ngặt thực nghiệm, không làm phình context, và chỉ chiếm dưới 0,50% context thường trực. Bộ kit gồm 6 skill quy trình cốt lõi và 4 skill chuyên ngành mở rộng.**
 
 <p align="center">
   <a href="README.md"><img src="https://img.shields.io/badge/🇺🇸%20English-2563eb?style=for-the-badge" alt="English"></a>
@@ -21,11 +21,20 @@
 
 </div>
 
+## 🎉 Nhật Ký Cải Tiến
+
+- **[2026.10.04]** 🎯 **[Công Thức Toán & Kiểm Tra Slide]**: Tích hợp công cụ `skills/rk-academic-visualize/scripts/inject-math.py` hỗ trợ biên dịch hàng loạt công thức LaTeX sang Office Math Markup Language (OMML trong DrawingML `a14:m`) chuẩn PowerPoint thông qua Pandoc. Cho phép đặt công thức inline mượt mà trong cùng một đoạn văn bản (`<a:p>`), tự động đồng bộ cỡ chữ (`sz`) và phông `Cambria Math`, đồng thời đóng gói bằng cơ chế tương thích `mc:AlternateContent` có fallback. Nâng cấp `scripts/check-deck.py` để trích xuất văn bản đa namespace (`a:t` và `m:t`) và kiểm tra tọa độ bounding box tránh tràn chữ.
+- **[2026.10.03]** 🎯 **[Giao Tiếp Tự Nhiên]**: Nâng cấp toàn bộ 10 kỹ năng nghiên cứu để tự động trao đổi và tổng hợp theo ngôn ngữ làm việc của nhà nghiên cứu bằng văn phong đồng nghiệp tự nhiên ("như trao đổi cùng đồng nghiệp"), đồng thời giữ nguyên cấu trúc chỉ dẫn tiếng Anh nhằm bảo đảm tính ổn định thực thi và tránh làm loãng ngữ cảnh của agent.
+- **[2026.10.02]** 🎯 **[Phát Hành v1.0.0]**: Chính thức đóng gói phiên bản Research Kit v1.0.0 gồm 6 kỹ năng nghiên cứu tuần tự (`rk-survey` đến `rk-report`) và 4 module chuyên ngành, đi kèm bộ kiểm tra tính toàn vẹn bằng mã băm SHA-256 (`scripts/check-suite.py`).
+- **[2026.10.01]** 🎯 **[Cổng Thông Tin & Cẩm Nang Quy Trình]**: Ra mắt cổng thông tin học thuật song ngữ ([research-kit.vinhnguyenthanh.com](https://research-kit.vinhnguyenthanh.com)) và cẩm nang hướng dẫn quy trình nghiên cứu toàn diện (`documents/guide.md` và `documents/guide.vi.md`).
+
 ## Mục lục
 
+- [Nhật Ký Cải Tiến](#-nhật-ký-cải-tiến)
 - [Tổng quan & Kiến trúc Hệ thống](#tổng-quan--kiến-trúc-hệ-thống)
   - [Phần 1: Quy trình Cốt lõi — 6 Skill cho Vòng đời Bài báo Khoa học](#phần-1-quy-trình-cốt-lõi--6-skill-cho-vòng-đời-bài-báo-khoa-học)
   - [Phần 2: Mở rộng Chuyên ngành — 4 Skill theo Hướng nghiên cứu của Tác giả](#phần-2-mở-rộng-chuyên-ngành--4-skill-theo-hướng-nghiên-cứu-của-tác-giả)
+- [Yêu Cầu Môi Trường & Thiết Lập Công Cụ](#️-yêu-cầu-môi-trường--thiết-lập-công-cụ)
 - [Hướng dẫn Cài đặt & Bắt đầu Nhanh](#hướng-dẫn-cài-đặt--bắt-đầu-nhanh)
   - [1. Dùng Skills CLI (Khuyến nghị)](#1-dùng-skills-cli-khuyến-nghị)
   - [2. Dùng GitHub CLI (từ bản v2.90.0)](#2-dùng-github-cli-từ-bản-v2900)
@@ -41,13 +50,13 @@
 
 ## Tổng quan & Kiến trúc Hệ thống
 
-Research Kit là bộ công cụ mã nguồn mở gồm các **skill nghiên cứu theo quy trình**, được thiết kế để dẫn dắt các AI coding và research agent (Cursor, Claude Code, Codex, Antigravity) thực thi trọn vẹn vòng đời phát triển một bài báo khoa học. Từ khảo sát tài liệu, hình thành giả thuyết, đến đóng băng giao thức thực nghiệm, chạy lại kiểm chứng dữ liệu thô, và soạn thảo bản thảo — Research Kit đảm bảo tính nghiêm ngặt khoa học ở từng giai đoạn.
+Research Kit là bộ công cụ mã nguồn mở gồm các **skill nghiên cứu theo quy trình**, được thiết kế để dẫn dắt các AI coding và research agent (Cursor, Claude Code, Codex, Antigravity) thực thi trọn vẹn vòng đời phát triển một bài báo khoa học. Từ khảo sát tài liệu, hình thành giả thuyết, đến đóng băng giao thức thực nghiệm, chạy lại kiểm chứng dữ liệu thô, và hoàn thiện bản thảo — Research Kit đảm bảo tính nghiêm ngặt khoa học ở từng giai đoạn.
 
 Bộ kit được tổ chức thành **hai phần chính**:
 - **Phần 1 — Quy trình Cốt lõi (6 skill)**: Bao quát toàn bộ vòng đời bài báo khoa học — từ khảo sát tài liệu đến phổ biến kết quả — tạo thành một pipeline thực thi tuần tự, rành mạch từng giai đoạn.
 - **Phần 2 — Mở rộng Chuyên ngành (4 skill)**: Các module chuyên sâu phản ánh hướng nghiên cứu của tác giả (tính toán lượng tử, mạng lượng tử, AI/ML, và trình bày học thuật). Đây là các skill tham khảo — bạn có thể sử dụng, điều chỉnh hoặc thay thế cho phù hợp với lĩnh vực nghiên cứu của mình.
 
-So với các thư viện quy mô lớn như **Scientific Agent Skills** (bản v2.65.0, chứa 163 skill chưa qua sàng lọc, chiếm tới 14.246 token thường trực ngay khi mở phiên), Research Kit chỉ chiếm chưa đầy **<0,50%** cửa sổ context tiêu chuẩn.
+So với các thư viện quy mô lớn như **Scientific Agent Skills** (bản v2.65.0, chứa 163 skill chưa qua sàng lọc, chiếm tới 14.246 token thường trực ngay khi mở phiên), Research Kit chỉ chiếm **dưới 0,50%** cửa sổ context tiêu chuẩn.
 
 <p align="center">
   <img src="figures/workflow-vi.svg" alt="Quy trình thực thi nghiên cứu 6 giai đoạn cốt lõi và 4 module mở rộng chuyên sâu của Research Kit." width="920">
@@ -75,7 +84,35 @@ So với các thư viện quy mô lớn như **Scientific Agent Skills** (bản 
 | [`rk-quantum`](skills/rk-quantum/SKILL.md) | Tính toán lượng tử | Mô phỏng mạch & Hamiltonian cục bộ, thuật toán biến phân | Mặc định mô phỏng cục bộ; chạy QPU phải duyệt ngân sách |
 | [`rk-quantum-network`](skills/rk-quantum-network/SKILL.md) | Mạng lượng tử | Phân phối liên đới lượng tử, bộ nhớ trạm lặp, định tuyến & lập lịch | Kiểm tra độ trung thực & thẩm định giao thức |
 | [`rk-ai`](skills/rk-ai/SKILL.md) | AI / Học máy | Chia tập train/val/test, kiểm tra rò rỉ dữ liệu, baseline & đánh giá | Chặn rò rỉ dữ liệu & kiểm tra tái lập seed |
-| [`rk-academic-visualize`](skills/rk-academic-visualize/SKILL.md) | Trực quan hóa & Slide học thuật | Thiết kế hình minh họa khoa học (LaTeX/TikZ, Mermaid) & tạo slide bám nguồn | Giảm tải nhận thức, kiểm tra hở mũi tên & kiểm định cấu trúc slide |
+| [`rk-academic-visualize`](skills/rk-academic-visualize/SKILL.md) | Trực quan hóa & Slide học thuật | Thiết kế hình minh họa khoa học (LaTeX/TikZ, Mermaid) & tạo slide bám nguồn | Giảm tải nhận thức, kiểm tra mũi tên nối & rà soát bố cục slide |
+
+---
+
+## 🛠️ Yêu Cầu Môi Trường & Thiết Lập Công Cụ
+
+Research Kit được xây dựng dựa trên triết lý tinh gọn, ưu tiên công cụ CLI tiêu chuẩn để bảo đảm tính tái lập độc lập với môi trường:
+
+| Công cụ | Phiên bản tối thiểu | Mục đích sử dụng | Mức độ cần thiết |
+|---|---|---|---|
+| **Python** | 3.9+ | Chạy bộ kiểm tra toàn vẹn, kiểm tra bố cục slide OOXML, xác thực hash suite | **Bắt buộc** (chỉ dùng thư viện chuẩn: `xml.etree`, `zipfile`, `hashlib`, `unittest`; không cần cài pip package ngoài) |
+| **Pandoc** | 3.0+ | Biên dịch công thức LaTeX sang Office Math Markup Language (OMML `a14:m`) native cho slide | **Bắt buộc** khi dùng `rk-academic-visualize` để inject công thức toán (`inject-math.py`) |
+| **LaTeX / TikZ** | TeX Live 2022+ / MacTeX | Biên dịch sơ đồ kiến trúc hệ thống sang PDF/SVG vector | **Tùy chọn** (chỉ cần khi muốn biên dịch trực tiếp file mã nguồn TikZ `.tex`) |
+| **Git** | 2.30+ | Quản lý phiên bản bài báo và mã nguồn | **Bắt buộc** |
+| **PowerPoint / Office** | 2010+ | Mở xem và trực tiếp chỉnh sửa công thức toán OMML native | **Tùy chọn** (công thức tương thích đầy đủ với Office/Word/PowerPoint hiện đại) |
+
+### Lệnh Kiểm Tra Môi Trường
+
+```bash
+# Kiểm tra Python và bộ kiểm định toàn vẹn
+python3 --version
+python3 scripts/check-suite.py
+
+# Kiểm tra Pandoc cho việc inject công thức toán
+pandoc --version
+
+# Chạy bộ test suite độc lập cho slide và toán học
+python3 -m unittest discover skills/rk-academic-visualize/scripts/tests
+```
 
 ---
 
@@ -173,16 +210,16 @@ Nghiên cứu khoa học với AI agent hiện nay gặp phải nhiều vấn đ
 | **Cấu trúc danh mục** | **Scientific Agent Skills**: 163 skill vụn vặt, chồng chéo chức năng trên 16 lĩnh vực | **10 skill bao hàm trọn vòng đời nghiên cứu** | **Tinh gọn & thuận tiện**, loại bỏ hoàn toàn ma trận lựa chọn công cụ |
 | **Độ tập trung nghiên cứu** | **Scientific Agent Skills**: Agent dễ lạc vào ma trận tìm kiếm và cài đặt giữa 163 ứng viên | **Điều hướng 1:1 theo từng giai đoạn chuẩn** | **Tập trung tối đa vào nghiên cứu & bài báo cốt lõi** |
 | **Context thường trực** | **Scientific Agent Skills**: Chiếm 14.246 token (7,12% cửa sổ context) ngay từ đầu | **Chỉ tốn ~1.000 token (<0,50% cửa sổ context)** | **Dành trọn >99,5% context** cho dữ liệu thực nghiệm & lập luận |
-| **Rủi ro vận hành** | **Scientific Agent Skills & Superpowers**: Phụ thuộc 105 script bên ngoài & hook mở phiên | **0 script phụ (100% tài liệu quy trình chuẩn)** | **Không lỗi runtime**, độc lập với mọi môi trường agent |
+| **Rủi ro vận hành** | **Scientific Agent Skills & Superpowers**: Phụ thuộc 105 script bên ngoài & hook mở phiên | **Quy trình chuẩn SOP + Công cụ CLI độc lập** (chỉ dùng Python stdlib, Pandoc) | **Không lỗi runtime**, độc lập với mọi môi trường agent |
 | **Ràng buộc framework & Nhiều bài trong 1 repo** | **Science Superpowers**: Ép buộc `docs/science-superpowers/` và git freeze; thiếu hỗ trợ nhiều bài báo trong cùng một repo | **Khai báo Active Paper, ranh giới bằng chứng rành mạch, layout linh hoạt** | **Bảo đảm tuyệt đối tính liêm chính** giữa các bài báo trong cùng repo mà không bị trói buộc |
 
 ### Các Ưu điểm & Luận chứng Kiến trúc
 
-#### 1. Tiết kiệm tối đa Context thường trực (<0,50% chiếm dụng)
+#### 1. Tiết kiệm tối đa dung lượng context (chiếm dưới 0,50%)
 Theo [Đặc tả chuẩn Agent Skills](https://agentskills.io/specification), nền tảng agent nạp sẵn `name` và `description` của toàn bộ skill vào system prompt khi khởi động phiên.
 - **Mức chiếm dụng của Scientific Agent Skills (v2.65.0)**: 163 phần mô tả chiếm tới **14.246 token**—tương đương **7,12%** cửa sổ context 200.000 token trước khi agent đọc bất kỳ dòng dữ liệu nào (Kassis và cộng sự, 2026).
-- **Mức tiêu thụ tối ưu của Research Kit**: Đúng 10 skill tinh gọn với 2.335 ký tự và 327 từ, chiếm chưa đầy **<0,50%** (<1.000 token).
-- **Lợi ích thực tiễn**: Tiết kiệm hơn **13.000 token** trên mỗi lượt prompt, dành trọn không gian cho dữ liệu thực nghiệm, tài liệu học thuật và lý giải chuyên sâu.
+- **Mức tiêu thụ tối ưu của Research Kit**: Đúng 10 skill tinh gọn với 2.335 ký tự và 327 từ, chiếm chưa tới **0,50%** (<1.000 token).
+- **Lợi ích thực tiễn**: Tiết kiệm hơn **13.000 token** trên mỗi lượt prompt, dành trọn không gian cho dữ liệu thực nghiệm, tài liệu học thuật và lập luận khoa học.
 
 #### 2. Định tuyến thông minh theo giai đoạn kế cận (Neighbor-Aware Routing)
 Mỗi skill phụ trách đúng một giai đoạn nghiên cứu và chỉ dẫn rõ ràng đến các bước kế tiếp. Tài liệu thuộc về `rk-survey`, phương pháp thuộc về `rk-method`, kiểm chứng số liệu thuộc về `rk-data`. Agent tự động định tuyến theo tỷ lệ 1:1 mà không rơi vào vòng lặp tìm kiếm hay chọn nhầm công cụ giữa hơn 160 lựa chọn.
@@ -259,8 +296,8 @@ Research Kit chắt lọc các phương pháp luận khoa học đã được ki
 
 | Công trình / Nguồn tham khảo | Phiên bản / Trích dẫn | Hạn chế ở công trình trước | Nguyên lý cốt lõi được kế thừa | Giải pháp cải tiến của Research Kit |
 | :--- | :--- | :--- | :--- | :--- |
-| **[Scientific Agent Skills](https://github.com/K-Dense-AI/scientific-agent-skills)** | `v2.65.0`<br>[arXiv:2609.00065](https://arxiv.org/abs/2609.00065) | 163 skill vụn vặt, chiếm 14.246 token thường trực (7,12% context); 105 script phụ; 29 biến môi trường credentials; tràn context ở 29/46 workflow. | Phân tách rành mạch các khâu nghiên cứu: tài liệu, phương pháp, dữ liệu thực nghiệm, viết bài, động lực học lượng tử, và đánh giá ML. | Cô đọng thành **10 skill tự định tuyến** (<1.000 token, <0,50% chiếm dụng); 0 script phụ; 0 API khóa kín; tập trung 100% vào luồng nghiên cứu cốt lõi. |
-| **[Science Superpowers](https://github.com/K-Dense-AI/science-superpowers)** | Commit [`0374bdf`](https://github.com/K-Dense-AI/science-superpowers/commit/0374bdf) | Áp đặt "Luật thép" bắt buộc pre-registration cho mọi thứ; script tự động đóng băng git commit; hook mở phiên ngầm; ép buộc thư mục `docs/science-superpowers/`. | Chuỗi cổng kiểm định chất lượng: đặt câu hỏi, khóa biên tìm kiếm, thiết kế giao thức, điều tra dị thường, và rerun kiểm chứng trước khi kết luận. | Giữ trọn các cổng kiểm định thực chứng mà không áp đặt: pre-registration là lựa chọn cho thử nghiệm khẳng định; 0 hook/commit tự động; người dùng sở hữu cấu trúc thư mục. |
+| **[Scientific Agent Skills](https://github.com/K-Dense-AI/scientific-agent-skills)** | `v2.65.0`<br>[arXiv:2609.00065](https://arxiv.org/abs/2609.00065) | 163 skill vụn vặt, chiếm 14.246 token thường trực (7,12% context); 105 script phụ; 29 biến môi trường credentials; tràn context ở 29/46 workflow. | Phân tách rành mạch các khâu nghiên cứu: tài liệu, phương pháp, dữ liệu thực nghiệm, viết bài, động lực học lượng tử, và đánh giá ML. | Cô đọng thành **10 skill tự định tuyến** (<1.000 token, <0,50% dung lượng); công cụ CLI độc lập (OMML/OOXML); 0 API khóa kín; tập trung 100% vào luồng nghiên cứu cốt lõi. |
+| **[Science Superpowers](https://github.com/K-Dense-AI/science-superpowers)** | Commit [`0374bdf`](https://github.com/K-Dense-AI/science-superpowers/commit/0374bdf) | Áp đặt "Luật thép" bắt buộc pre-registration cho mọi thứ; script tự động đóng băng git commit; hook mở phiên ngầm; ép buộc thư mục `docs/science-superpowers/`. | Chuỗi kiểm soát chất lượng: đặt câu hỏi, khóa biên tìm kiếm, thiết kế giao thức, xử lý số liệu bất thường và chạy lại kiểm chứng trước khi kết luận. | Giữ trọn các bước kiểm chứng thực nghiệm mà không áp đặt: pre-registration là lựa chọn cho thử nghiệm khẳng định; 0 hook/commit tự động; người dùng sở hữu cấu trúc thư mục. |
 | **[Research Paper Writing Skills](https://github.com/Master-cai/Research-Paper-Writing-Skills)** | Commit [`77e7c2c`](https://github.com/Master-cai/Research-Paper-Writing-Skills/commit/77e7c2c) | Một skill đơn lẻ gắn chặt với khung mẫu bài báo học máy ML/CV/NLP; thiếu các kiểm tra thực nghiệm cho các ngành đặc thù khác. | Kỷ luật viết bài khoa học: mỗi đoạn một ý cốt lõi, khớp 100% giữa kết luận và bằng chứng thực nghiệm, quy trình giải trình phản biện chuẩn. | Tách thành `rk-write` dùng cho soạn thảo bài báo khoa học tổng quát; các kiểm định thực nghiệm chuyên ngành chuyển giao cho các module chuyên biệt (`rk-quantum`, `rk-ai`,...). |
 | **[NVIDIA Skills](https://github.com/NVIDIA/skills)** | Commit [`d8519c5`](https://github.com/NVIDIA/skills/commit/d8519c5) | Danh mục sản phẩm lớn đặc thù của hãng với câu lệnh CLI tĩnh và nguy cơ phát sinh chi phí ngoài ý muốn trên backend QPU đám mây. | Ranh giới thực thi an toàn nghiêm ngặt: mặc định mô phỏng cục bộ; chạy trên phần cứng QPU vật lý bắt buộc phải có sự phê duyệt rõ ràng. | Tích hợp mặc định mô phỏng cục bộ an toàn vào `rk-quantum` và tra cứu tài liệu CUDA-Q trực tuyến; chạy QPU trả phí bắt buộc phải được người dùng phê duyệt ngân sách. |
 | **[Đặc tả Agent Skills](https://agentskills.io/specification)** | Bản 1/10/2026 | Danh mục skill chưa chọn lọc dễ làm tràn cửa sổ context thường trực của client khi khởi tạo phiên làm việc. | Cấu trúc module chuẩn hóa: một thư mục, một file `SKILL.md`, `name` và `description` nạp trước ở mức siêu nhẹ, nạp động tài nguyên khi cần. | Giới hạn nghiêm ngặt ở 10 skill với metadata cực nhẹ (~100 token/skill), tuân thủ 100% đặc tả chuẩn và giữ mức chiếm dụng <0,50% context. |

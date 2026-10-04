@@ -2,15 +2,25 @@ export const content = {
   en: {
     nav: {
       intro: 'Overview',
-      advantages: 'Principles',
-      roadmap: 'Roadmap',
+      roadmap: 'Development Log',
       docs: 'Docs',
-      install: 'Install',
-      faq: 'FAQ',
       starGitHub: 'GitHub Star',
       toggleTheme: 'Toggle Theme',
       menu: 'Menu',
       close: 'Close',
+    },
+    toc: {
+      button: 'Contents',
+      title: 'Table of Contents',
+      subtitle: 'Quickly jump to section',
+      close: 'Close',
+      items: [
+        { id: 'hero', label: 'Top', desc: 'Hero & Quick Start', icon: 'top' },
+        { id: 'lifecycle', label: 'Research Lifecycle', desc: '6 Stages & 4 Modules', icon: 'lifecycle' },
+        { id: 'advantages', label: 'Lean Mindset', desc: 'Pillars & Context Footprint', icon: 'advantages' },
+        { id: 'install', label: 'Installation', desc: 'ZIP File & CLI Hub', icon: 'install' },
+        { id: 'faq', label: 'FAQ', desc: 'Common Questions', icon: 'faq' },
+      ],
     },
     figureViewer: {
       zoom: 'Zoom in',
@@ -108,13 +118,19 @@ export const content = {
             'A new technique enters the core only when it adds research depth without adding unnecessary choices or weakening human control.',
         },
       ],
-      devlogEyebrow: 'LOG',
       devlogTitle: 'Development log',
-      devlogSubtitle: 'Only times the skill set got better. Newest first.',
       devlogLabel: 'Development log',
       entries: [
-        { date: '2026-10-03', title: 'Replies use your language', note: 'The how-to inside each skill stays in English. Replies and notes are written in the language you used. If that is not clear, the agent asks first. Vietnamese is written the way people talk, not word by word.' },
-        { date: '2026-10-02', title: 'The slide skill joined the figure skill', note: 'There used to be a separate slide skill. It now sits inside the figure skill. One skill handles figures in a paper and slides for a talk, with a short guide so the picture is easy to read.' },
+        {
+          date: '2026-10-03',
+          problem: 'The agent answered in English, or translated word by word, so the reply was hard to read.',
+          fix: 'Skill instructions stay in English. Replies and notes use the language you wrote in. If that is unclear, the agent asks first. Vietnamese is written the way people talk.',
+        },
+        {
+          date: '2026-10-02',
+          problem: 'A separate slide skill sat next to the figure skill, so it was easy to open the wrong one.',
+          fix: 'The slide skill now lives inside the figure skill. One skill handles paper figures and talk slides, with a short guide so the picture is easy to read.',
+        },
       ],
       explore: 'Explore the current skill set',
     },
@@ -137,8 +153,56 @@ export const content = {
       stats: [
         { label: 'Context Footprint', value: '<0.50%', sub: '<1,000 persistent tokens' },
         { label: 'Core Workflow', value: '6 Stages', sub: '+ 4 domain modules' },
-        { label: 'Bundled Runtime', value: '0 Scripts', sub: 'Markdown-based SOPs' },
+        { label: 'Toolchain Architecture', value: 'Auditable SOPs', sub: 'Focused standalone CLI tools' },
         { label: 'License', value: 'Apache-2.0', sub: 'Free and open source' },
+      ],
+    },
+    news: {
+      eyebrow: 'PROVENANCE & UPDATES',
+      title: 'Engineering Log & Recent Releases',
+      subtitle:
+        'Reverse-chronological record of mathematical toolchains, architectural milestones, and protocol refinements.',
+      items: [
+        {
+          date: '2026.10.04',
+          badge: 'Math & Slide Audit',
+          badgeType: 'feature',
+          title: 'Native DrawingML OMML Inline Math Injection & OOXML Linter',
+          description:
+            'Integrated `skills/rk-academic-visualize/scripts/inject-math.py` enabling native Office Math Markup Language (OMML in DrawingML `a14:m`) formula compilation in presentation slides via `Pandoc`. Supports seamless inline formulas within paragraph text flows (`<a:p>`), automated font-metric matching (`Cambria Math` at surrounding `sz`), and robust `mc:AlternateContent` fallback wrapping. Enhanced `scripts/check-deck.py` with multi-namespace text extraction (`a:t` and `m:t`) and bounding-box layout verification.',
+          link: 'https://github.com/vinhnt21/research-kit/tree/main/skills/rk-academic-visualize',
+          linkText: 'View Skill & Tooling',
+        },
+        {
+          date: '2026.10.03',
+          badge: 'Skill Adaptation',
+          badgeType: 'protocol',
+          title: 'Dynamic Working Language Adaptation Across All 10 Skills',
+          description:
+            'Enhanced all 10 procedural skills to automatically converse and synthesize in the researcher\'s active language using natural peer-colleague dialogue ("như trao đổi cùng đồng nghiệp"), while strictly preserving English instructions for execution consistency and prompt stability across AI agents.',
+          link: 'https://github.com/vinhnt21/research-kit/tree/main/skills',
+          linkText: 'Explore Skills Suite',
+        },
+        {
+          date: '2026.10.02',
+          badge: 'Release v1.0.0',
+          badgeType: 'release',
+          title: 'Formal Release of the 10-Skill Scientific Lifecycle Suite',
+          description:
+            'Frozen baseline encompassing 6 core sequential research stages (`rk-survey` through `rk-report`) and 4 specialist domain modules, fortified with automated SHA-256 cryptographic check-suite verification (`scripts/check-suite.py`).',
+          link: 'https://github.com/vinhnt21/research-kit/releases/tag/v1.0.0',
+          linkText: 'Release Notes',
+        },
+        {
+          date: '2026.10.01',
+          badge: 'Portal & Guides',
+          badgeType: 'docs',
+          title: 'Dual-Language Academic Web Portal & Comprehensive Empirical Guides',
+          description:
+            'Launched the Research Kit web portal with interactive architecture lifecycle explorer, context footprint benchmarks, multi-paper isolation guides, and bilingual empirical playbooks (`documents/guide.md` and `documents/guide.vi.md`).',
+          link: 'https://github.com/vinhnt21/research-kit/blob/main/documents/guide.md',
+          linkText: 'Explore Guides',
+        },
       ],
     },
     lifecycle: {
@@ -151,10 +215,10 @@ export const content = {
       figureTitle: '6-Stage Core Lifecycle & 4 Pluggable Domain Extensions',
       figureCaption:
         'Structured flow from literature survey to final reporting with empirical quality gates and four pluggable specialist modules.',
-      coreTitle: 'Part 1: 6 Core Workflow Stages',
+      coreTitle: '6 Core Workflow Stages',
       coreSubtitle:
         'Source verification, research-method design, data processing, writing, and reporting in one sequential workflow:',
-      domainTitle: 'Part 2: 4 Domain Modules',
+      domainTitle: '4 Domain Modules',
       domainSubtitle: 'Additional guidance for computational research and academic presentation:',
       skills: [
         {
@@ -323,7 +387,7 @@ export const content = {
             },
             {
               fear: 'Not locking the lab into one platform',
-              fix: 'Skills are portable Markdown procedures—no bundled runtime scripts and no forced Git automation.',
+              fix: 'Skills operate as portable Markdown SOPs accompanied by standalone verification tools—no opaque runtime daemons and no forced Git automation.',
             },
           ],
         },
@@ -349,7 +413,7 @@ export const content = {
       kitTokens: '<1,000 Tokens',
       kitPercent: '<0.50% of 200k Window',
       kitDesc:
-        'A focused collection of 10 skills: 6 sequential research stages and 4 domain modules, implemented as Markdown procedures without bundled runtime scripts.',
+        'A focused collection of 10 skills: 6 sequential research stages and 4 domain modules, designed as transparent Markdown SOPs with deterministic, standalone verification utilities.',
       savingsHeadline:
         'The measured persistent-footprint difference is greater than 13,000 tokens.',
     },
@@ -383,14 +447,14 @@ export const content = {
           criteria: 'Bundled Runtime Components',
           comp1: '105 Python scripts + 29 env vars',
           comp2: 'Harness hooks + automated Git scripts',
-          kit: 'No bundled runtime scripts; Markdown SOPs',
+          kit: 'Standalone CLI utilities (OMML/OOXML); Markdown SOPs',
           highlight: true,
         },
         {
           criteria: 'Operating Model',
           comp1: 'Broad free collection with helper scripts',
           comp2: 'Hook-supported automated workflow',
-          kit: 'Instruction-based sequential workflow',
+          kit: 'Instruction-based sequential workflow + CLI checks',
           highlight: true,
         },
         {
@@ -508,8 +572,8 @@ export const content = {
           a: 'Yes. Research Kit is distributed under the Apache-2.0 license and can be used in academic, personal, and commercial research workflows under that license.',
         },
         {
-          q: 'Why are no external Python scripts bundled?',
-          a: 'Research Kit describes research procedures in Markdown and leaves execution to the libraries already selected for a project. Version-specific API usage can then be checked against official documentation for the active environment.',
+          q: 'How does Research Kit manage computational and compilation tooling?',
+          a: 'Research Kit establishes verifiable boundaries. Core skills are authored as portable Markdown SOPs that run in any LLM environment, while specialized operations requiring mathematical rendering (OMML/LaTeX compilation via Pandoc) or layout linting (OOXML bounds checking) are handled by auditable, standalone CLI utilities with strict SHA-256 integrity verification.',
         },
         {
           q: 'How much persistent context does Research Kit use?',
@@ -553,15 +617,25 @@ export const content = {
   vi: {
     nav: {
       intro: 'Giới thiệu',
-      advantages: 'Nguyên tắc',
-      roadmap: 'Lộ trình',
+      roadmap: 'Nhật ký cải tiến',
       docs: 'Tài liệu',
-      install: 'Cài đặt',
-      faq: 'Hỏi đáp',
       starGitHub: 'GitHub Star',
       toggleTheme: 'Đổi Giao diện',
       menu: 'Danh mục',
       close: 'Đóng',
+    },
+    toc: {
+      button: 'Mục lục',
+      title: 'Mục Lục Trang',
+      subtitle: 'Chuyển nhanh đến phần nội dung',
+      close: 'Đóng',
+      items: [
+        { id: 'hero', label: 'Đầu trang', desc: 'Tổng quan & Giới thiệu', icon: 'top' },
+        { id: 'lifecycle', label: 'Vòng đời nghiên cứu', desc: '6 giai đoạn & 4 module', icon: 'lifecycle' },
+        { id: 'advantages', label: 'Tư duy tinh gọn', desc: 'Trụ cột & So sánh context', icon: 'advantages' },
+        { id: 'install', label: 'Cài đặt & Bắt đầu', desc: 'File ZIP & Dòng lệnh CLI', icon: 'install' },
+        { id: 'faq', label: 'Hỏi đáp thường gặp', desc: 'Giải đáp thắc mắc', icon: 'faq' },
+      ],
     },
     figureViewer: {
       zoom: 'Phóng to',
@@ -659,13 +733,19 @@ export const content = {
             'Một kỹ thuật mới chỉ được đưa vào khi nó giúp nghiên cứu sâu hơn, không thêm lựa chọn thừa và không lấy mất quyền quyết định của nhà nghiên cứu.',
         },
       ],
-      devlogEyebrow: 'NHẬT KÝ',
-      devlogTitle: 'Nhật ký phát triển',
-      devlogSubtitle: 'Chỉ ghi những lần bộ skill được sửa cho tốt hơn. Bài mới ở trên.',
-      devlogLabel: 'Nhật ký phát triển',
+      devlogTitle: 'Nhật ký cải tiến',
+      devlogLabel: 'Nhật ký cải tiến',
       entries: [
-        { date: '2026-10-03', title: 'Trả lời bằng ngôn ngữ bạn đang dùng', note: 'Phần hướng dẫn trong skill vẫn là tiếng Anh. Câu trả lời và ghi chú viết theo ngôn ngữ bạn nhắn. Chưa rõ thì hỏi lại trước khi viết. Tiếng Việt viết xuôi, như đang nói, không dịch từng chữ.' },
-        { date: '2026-10-02', title: 'Gộp skill slide vào skill vẽ hình', note: 'Trước đây skill slide đứng riêng. Giờ nằm trong skill vẽ hình. Một skill lo cả hình trong bài báo và slide thuyết trình, có hướng dẫn ngắn để nhìn hình là hiểu.' },
+        {
+          date: '2026-10-03',
+          problem: 'Agent trả lời tiếng Anh, hoặc dịch từng chữ, nên câu khó đọc.',
+          fix: 'Hướng dẫn trong skill vẫn là tiếng Anh. Câu trả lời và ghi chú viết theo ngôn ngữ bạn nhắn. Chưa rõ thì hỏi lại. Tiếng Việt viết như đang nói.',
+        },
+        {
+          date: '2026-10-02',
+          problem: 'Skill slide đứng riêng cạnh skill vẽ hình, dễ mở nhầm.',
+          fix: 'Skill slide được gộp vào skill vẽ hình. Một skill lo cả hình trong bài báo và slide thuyết trình, có hướng dẫn ngắn để nhìn hình là hiểu.',
+        },
       ],
       explore: 'Xem bộ skill hiện tại',
     },
@@ -688,8 +768,56 @@ export const content = {
       stats: [
         { label: 'Chiếm Dụng Context', value: '<0,50%', sub: '<1.000 token luôn được nạp' },
         { label: 'Quy Trình Cốt Lõi', value: '6 Giai Đoạn', sub: '+ 4 module chuyên ngành' },
-        { label: 'Script Đi Kèm', value: '0 Script', sub: 'Quy trình viết bằng Markdown' },
+        { label: 'Kiến Trúc Công Cụ', value: 'Quy Trình Chuẩn SOP', sub: 'Công cụ CLI độc lập, minh bạch' },
         { label: 'Giấy Phép', value: 'Apache-2.0', sub: 'Miễn phí và mã nguồn mở' },
+      ],
+    },
+    news: {
+      eyebrow: 'LỊCH SỬ PHÁT TRIỂN & CẬP NHẬT',
+      title: 'Nhật Ký Cải Tiến',
+      subtitle:
+        'Ghi chép tuần tự theo thời gian về những bước nâng cấp công cụ toán học, kiểm tra slide và chuẩn hóa quy trình học thuật.',
+      items: [
+        {
+          date: '2026.10.04',
+          badge: 'Công Thức Toán & Kiểm Tra Slide',
+          badgeType: 'feature',
+          title: 'Biên Dịch OMML Native Cho Slide & Công Cụ Kiểm Tra Bố Cục OOXML',
+          description:
+            'Tích hợp công cụ `skills/rk-academic-visualize/scripts/inject-math.py` hỗ trợ biên dịch hàng loạt công thức LaTeX sang Office Math Markup Language (OMML trong DrawingML `a14:m`) chuẩn PowerPoint thông qua `Pandoc`. Cho phép đặt công thức inline mượt mà trong cùng một đoạn văn bản (`<a:p>`), tự động đồng bộ cỡ chữ (`sz`) và phông `Cambria Math`, đồng thời đóng gói bằng cơ chế tương thích `mc:AlternateContent` có fallback. Nâng cấp `scripts/check-deck.py` để trích xuất văn bản đa namespace (`a:t` và `m:t`) và kiểm tra tọa độ bounding box tránh tràn chữ.',
+          link: 'https://github.com/vinhnt21/research-kit/tree/main/skills/rk-academic-visualize',
+          linkText: 'Xem Skill & Bộ Công Cụ',
+        },
+        {
+          date: '2026.10.03',
+          badge: 'Giao Tiếp Tự Nhiên',
+          badgeType: 'protocol',
+          title: 'Giao Tiếp Tự Nhiên Bằng Ngôn Ngữ Của Người Dùng Trên Cả 10 Skill',
+          description:
+            'Nâng cấp toàn bộ 10 kỹ năng nghiên cứu để tự động trao đổi và tổng hợp theo ngôn ngữ làm việc của nhà nghiên cứu bằng văn phong đồng nghiệp tự nhiên ("như trao đổi cùng đồng nghiệp"), đồng thời giữ nguyên cấu trúc chỉ dẫn tiếng Anh nhằm bảo đảm tính ổn định thực thi và tránh làm loãng ngữ cảnh của agent.',
+          link: 'https://github.com/vinhnt21/research-kit/tree/main/skills',
+          linkText: 'Khám Phá Bộ Skill',
+        },
+        {
+          date: '2026.10.02',
+          badge: 'Phát Hành v1.0.0',
+          badgeType: 'release',
+          title: 'Chính Thức Phát Hành Bộ 10 Skill Nghiên Cứu Khoa Học',
+          description:
+            'Đóng gói phiên bản v1.0.0 hoàn chỉnh gồm 6 kỹ năng tuần tự theo vòng đời bài báo (`rk-survey` đến `rk-report`) và 4 module chuyên sâu, đi kèm bộ kiểm tra tính toàn vẹn bằng mã băm SHA-256 (`scripts/check-suite.py`).',
+          link: 'https://github.com/vinhnt21/research-kit/releases/tag/v1.0.0',
+          linkText: 'Ghi Chú Phát Hành',
+        },
+        {
+          date: '2026.10.01',
+          badge: 'Cổng Thông Tin & Cẩm Nang Quy Trình',
+          badgeType: 'docs',
+          title: 'Ra Mắt Cổng Thông Tin Nghiên Cứu Song Ngữ & Cẩm Nang Quy Trình',
+          description:
+            'Khởi chạy cổng thông tin web Research Kit ([research-kit.vinhnguyenthanh.com](https://research-kit.vinhnguyenthanh.com)) với sơ đồ tương tác vòng đời nghiên cứu, số liệu đo lường mức chiếm dụng context, hướng dẫn phân vùng nhiều bài báo trong cùng repo và cẩm nang quy trình thực nghiệm chi tiết (`documents/guide.md` và `documents/guide.vi.md`).',
+          link: 'https://github.com/vinhnt21/research-kit/blob/main/documents/guide.vi.md',
+          linkText: 'Đọc Cẩm Nang',
+        },
       ],
     },
     lifecycle: {
@@ -702,10 +830,10 @@ export const content = {
       figureTitle: 'Quy trình thực thi 6 giai đoạn cốt lõi & 4 module mở rộng',
       figureCaption:
         'Luồng tuần tự từ khảo sát tài liệu đến báo cáo kết quả kèm tiêu chuẩn kiểm chứng và 4 module chuyên sâu.',
-      coreTitle: 'Phần 1: 6 Giai Đoạn Cốt Lõi',
+      coreTitle: '6 Giai Đoạn Cốt Lõi',
       coreSubtitle:
         'Thẩm định nguồn, xây dựng phương pháp, xử lý dữ liệu, viết bài và báo cáo trong một quy trình tuần tự:',
-      domainTitle: 'Phần 2: 4 Module Chuyên Ngành',
+      domainTitle: '4 Module Chuyên Ngành',
       domainSubtitle: 'Hướng dẫn bổ sung cho nghiên cứu tính toán và trình bày học thuật:',
       skills: [
         {
@@ -874,7 +1002,7 @@ export const content = {
             },
             {
               fear: 'Không bị khóa vào một nền tảng',
-              fix: 'Skill là quy trình Markdown di động—không kèm script chạy sẵn và không tự thao tác Git.',
+              fix: 'Skill hoạt động như quy trình SOP chuẩn bằng Markdown kết hợp công cụ kiểm tra độc lập—không dùng daemon nền và không tự ý can thiệp Git.',
             },
           ],
         },
@@ -900,7 +1028,7 @@ export const content = {
       kitTokens: '<1.000 Tokens',
       kitPercent: '<0,50% của Cửa sổ 200k',
       kitDesc:
-        'Một bộ tập trung gồm 10 skill: 6 giai đoạn nghiên cứu tuần tự và 4 module chuyên ngành, viết bằng Markdown và không kèm script chạy sẵn.',
+        'Một bộ công cụ tập trung gồm 10 skill: 6 giai đoạn nghiên cứu tuần tự và 4 module chuyên ngành, thiết kế dưới dạng SOP chuẩn bằng Markdown kèm công cụ kiểm tra độc lập.',
       savingsHeadline: 'Phần luôn được nạp chênh nhau hơn 13.000 token.',
     },
     comparison: {
@@ -933,14 +1061,14 @@ export const content = {
           criteria: 'Thành Phần Runtime Đi Kèm',
           comp1: '105 script Python + 29 biến môi trường',
           comp2: 'Script tự chạy khi mở phiên + commit Git tự động',
-          kit: 'Không kèm script chạy sẵn; quy trình Markdown',
+          kit: 'Công cụ CLI độc lập (biên dịch OMML, linter OOXML); quy trình Markdown',
           highlight: true,
         },
         {
           criteria: 'Mô Hình Vận Hành',
           comp1: 'Bộ skill rộng, có script hỗ trợ',
           comp2: 'Quy trình tự chạy kèm script',
-          kit: 'Quy trình tuần tự dựa trên hướng dẫn',
+          kit: 'Quy trình tuần tự dựa trên hướng dẫn + kiểm tra qua CLI',
           highlight: true,
         },
         {
@@ -1059,8 +1187,8 @@ export const content = {
           a: 'Có. Research Kit được phát hành theo giấy phép Apache-2.0 và có thể được sử dụng trong quy trình nghiên cứu học thuật, cá nhân hoặc thương mại theo các điều khoản của giấy phép.',
         },
         {
-          q: 'Vì sao không có script Python bên ngoài đi kèm?',
-          a: 'Research Kit mô tả quy trình nghiên cứu bằng Markdown và để phần thực thi cho các thư viện đã được chọn trong từng dự án. Cách dùng API theo phiên bản có thể được kiểm tra với tài liệu chính thức của môi trường đang hoạt động.',
+          q: 'Research Kit quản lý các công cụ tính toán và biên dịch như thế nào?',
+          a: 'Research Kit phân định rõ ranh giới nghiên cứu. Các skill cốt lõi được cấu trúc thành quy trình thao tác chuẩn (SOP) bằng Markdown di động, tương thích tự nhiên với mọi AI agent. Các tác vụ chuyên sâu như biên dịch công thức toán học (LaTeX sang OMML qua Pandoc) hay kiểm tra bố cục slide (OOXML) được đảm nhiệm bởi các công cụ CLI độc lập, chạy bằng thư viện chuẩn Python và được bảo vệ tính toàn vẹn bằng mã băm SHA-256.',
         },
         {
           q: 'Research Kit nạp sẵn bao nhiêu context?',

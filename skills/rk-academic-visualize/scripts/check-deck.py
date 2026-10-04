@@ -224,6 +224,11 @@ def check_shape_bounds(slide: ET.Element, width: int, height: int, number: int) 
     def visit(parent: ET.Element, transform: tuple[float, ...]) -> None:
         for element in parent:
             kind = element.tag.rsplit("}", 1)[-1]
+            if kind == "AlternateContent":
+                for choice in element:
+                    if choice.tag.rsplit("}", 1)[-1] == "Choice":
+                        visit(choice, transform)
+                continue
             if kind not in {"sp", "pic", "cxnSp", "graphicFrame", "grpSp"}:
                 continue
             xfrm = shape_xfrm(element)
@@ -253,10 +258,30 @@ def check_shape_bounds(slide: ET.Element, width: int, height: int, number: int) 
     return errors
 
 
+M = "{http://schemas.openxmlformats.org/officeDocument/2006/math}"
+
+
 def slide_paragraphs(root: ET.Element) -> list[str]:
-    return [text for paragraph in root.iter(A + "p") if (
-        text := "".join(run.text or "" for run in paragraph.iter(A + "t")).strip()
-    )]
+    paragraphs: list[str] = []
+
+    def collect(parent: ET.Element) -> None:
+        for elem in parent:
+            kind = elem.tag.rsplit("}", 1)[-1]
+            if kind == "Fallback":
+                continue
+            if elem.tag == A + "p":
+                parts = [
+                    node.text for node in elem.iter()
+                    if node.tag in {A + "t", M + "t"} and node.text
+                ]
+                text = "".join(parts).strip()
+                if text:
+                    paragraphs.append(text)
+            else:
+                collect(elem)
+
+    collect(root)
+    return paragraphs
 
 
 def slide_order(parts: dict[str, ET.Element], members: set[str]) -> list[str]:

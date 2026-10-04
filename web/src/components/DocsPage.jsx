@@ -231,6 +231,95 @@ export default function DocsPage({ t, lang }) {
             <h2 className="docs-section-title">{d.lifecycle.title}</h2>
             <p className="docs-section-lead">{d.lifecycle.desc}</p>
 
+            {/* Prerequisites & Toolchain table */}
+            {d.lifecycle.prerequisites && (
+              <div className="docs-lifecycle-prereqs" style={{ marginTop: '24px', marginBottom: '32px' }}>
+                <h3 style={{ fontSize: '1.05rem', fontWeight: 700, marginBottom: '8px', color: 'var(--text-primary)' }}>
+                  {d.lifecycle.prerequisitesTitle}
+                </h3>
+                <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', marginBottom: '16px', lineHeight: 1.6 }}>
+                  {d.lifecycle.prerequisitesDesc}
+                </p>
+                <div className="docs-table-wrap">
+                  <table className="docs-table">
+                    <thead>
+                      <tr>
+                        {d.lifecycle.prerequisitesHeaders.map((h, i) => (
+                          <th key={i}>{h}</th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {d.lifecycle.prerequisites.map((p, idx) => (
+                        <tr key={idx}>
+                          <td>
+                            <strong>{p.tool}</strong>
+                          </td>
+                          <td>
+                            <code className="docs-skill-chip">{p.version}</code>
+                          </td>
+                          <td>{p.role}</td>
+                          <td>
+                            <span
+                              style={{
+                                display: 'inline-block',
+                                fontSize: '0.72rem',
+                                fontWeight: 700,
+                                textTransform: 'uppercase',
+                                letterSpacing: '0.04em',
+                                padding: '2px 8px',
+                                borderRadius: '4px',
+                                marginBottom: '4px',
+                                background:
+                                  p.status.includes('Bắt buộc') || p.status.includes('Required')
+                                    ? 'rgba(16, 185, 129, 0.15)'
+                                    : 'rgba(59, 130, 246, 0.15)',
+                                color:
+                                  p.status.includes('Bắt buộc') || p.status.includes('Required')
+                                    ? 'var(--accent-emerald)'
+                                    : 'var(--accent-blue)',
+                              }}
+                            >
+                              {p.status}
+                            </span>
+                            <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', lineHeight: 1.4 }}>
+                              {p.note}
+                            </div>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+
+                {d.lifecycle.verificationCmds && (
+                  <div style={{ marginTop: '16px' }}>
+                    <h4 style={{ fontSize: '0.88rem', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '8px' }}>
+                      {d.lifecycle.verificationCmdsTitle}
+                    </h4>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                      {d.lifecycle.verificationCmds.map((vc, idx) => (
+                        <div key={idx} className="docs-inline-cmd" style={{ justifyContent: 'space-between' }}>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', overflow: 'hidden' }}>
+                            <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', whiteSpace: 'nowrap' }}>
+                              {vc.label}:
+                            </span>
+                            <code style={{ fontSize: '0.82rem' }}>{vc.cmd}</code>
+                          </div>
+                          <CopyBtn
+                            text={vc.cmd}
+                            id={`vc-${idx}`}
+                            copiedKey={copiedKey}
+                            copy={copy}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+
             {/* Method tabs */}
             <div className="docs-tabs" role="tablist">
               {d.lifecycle.methods.map((m) => (

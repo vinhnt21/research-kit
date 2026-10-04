@@ -8,7 +8,7 @@ keywords: [academic-visualize, scientific-diagram, latex-tikz, mermaid, pipeline
 argument-hint: "<tagged files or diagram brief> [format: tikz|mermaid|svg|slides] [language]"
 metadata:
   author: vinhnt
-  version: "2.1.0"
+  version: "2.2.0"
 ---
 
 # Academic Visualize & Slides
@@ -80,14 +80,15 @@ Read [references/slide-plan.md](references/slide-plan.md) and generate `slide-pl
 1. Inspect `assets/academic-template.pptx` and read [references/style-guide.md](references/style-guide.md). Adapt its 14 layout patterns.
 2. Maintain white backgrounds, dark navy titles, black body text, and at most two restrained accent colors.
 3. For complex topologies or data flows, generate visual figures following Section 1 guidelines and insert as high-resolution images.
-4. Render equations from LaTeX directly; never use unicode approximations.
+4. Render equations from LaTeX directly as editable native OMML; never use unicode approximations or rasterized equations for text runs. Author formulas using `$math$` (inline) and `$$math$$` (display) or `{{MATH:...}}` placeholders, then inject native Office Math Markup Language (OMML in DrawingML via `a14:m`) using `scripts/inject-math.py`. Keep inline equations in the same `<a:p>` paragraph text flow with matched font size (`sz`) and Cambria Math typeface, wrapped in `mc:AlternateContent` with fallback for compatibility.
 5. Include brief source tags on slides and full citations/paths in speaker notes.
 
 ### 2.4. Verify and Deliver
-Run the bundled structural check:
+Run the math injection and structural check:
 
 ```bash
-python3 scripts/check-deck.py <deck.pptx> <slide-plan.json>
+python3 scripts/inject-math.py <deck.pptx> [output.pptx]
+python3 scripts/check-deck.py <output.pptx> <slide-plan.json>
 ```
 
 Fix all reported structural warnings. Export to PDF and visually inspect slides for overlap, clipping, or contrast defects. Deliver PPTX, PDF, `slide-plan.json`, and all diagram source scripts.
