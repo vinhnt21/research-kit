@@ -341,6 +341,12 @@ export default function DocsPage({ t, lang }) {
               .map((m) => (
                 <div key={m.id} className="docs-tab-panel">
                   <p className="docs-tab-desc">{m.desc}</p>
+                  {m.note && (
+                    <div className="docs-callout docs-callout--amber" style={{ marginTop: '12px', marginBottom: '16px' }}>
+                      <strong>{isVI ? 'Lưu ý về Antigravity' : 'Antigravity Scope Note'}</strong>
+                      <p>{m.note}</p>
+                    </div>
+                  )}
                   <CodeBlock
                     label={isVI ? '1. Cài đặt (Install)' : '1. Install'}
                     code={m.installCmd}

@@ -124,6 +124,15 @@ Install the entire suite directly into your active project or agent environment 
 npx skills add vinhnt21/research-kit
 ```
 
+> [!NOTE]
+> **Antigravity Scope Note**:
+> - **Workspace Scope (Recommended)**: Running `npx skills add vinhnt21/research-kit` inside your project root installs skills into `.agents/skills/`, which Antigravity automatically discovers for that workspace.
+> - **Global Scope**: Do **not** use `npx skills add -g` for Antigravity. `npx skills` places global skills in `~/.agents/skills/`, but Google Antigravity IDE strictly discovers machine-global skills from `~/.gemini/config/skills/` (and CLI from `~/.gemini/antigravity/skills/`). For global Antigravity installation, use GitHub CLI:
+>   ```bash
+>   gh skill install vinhnt21/research-kit --dir ~/.gemini/config/skills --all
+>   ```
+>   or manually copy: `cp -r skills/rk-* ~/.gemini/config/skills/`.
+
 ### 2. Using GitHub CLI (v2.90.0+)
 Target specific AI agent environments with native GitHub CLI commands:
 ```bash
@@ -134,6 +143,9 @@ gh skill install vinhnt21/research-kit --agent cursor
 # --agent claude-code
 # --agent codex
 # --agent antigravity
+
+# Antigravity IDE Global Scope:
+gh skill install vinhnt21/research-kit --dir ~/.gemini/config/skills --all
 ```
 
 #### Updating installed skills
@@ -163,7 +175,9 @@ Copy the `skills/rk-*` folders directly into your target agent's skill directory
 - **Cursor**: `~/.cursor/skills/`
 - **Claude Code**: `~/.claude/skills/`
 - **Codex**: `${CODEX_HOME:-$HOME/.codex}/skills/`
-- **Antigravity / Universal Agents**: `~/.agents/skills/`
+- **Antigravity (Global IDE)**: `~/.gemini/config/skills/` *(or `~/.gemini/antigravity/skills/` for CLI)*
+- **Antigravity (Workspace)**: `.agents/skills/` *(inside project root)*
+- **Universal Agents**: `~/.agents/skills/`
 
 ### 5. Verification & Test Suite
 Verify skill integrity, frontmatter bounds, and link graphs:

@@ -146,6 +146,11 @@ export default function InstallSection({ t }) {
             </div>
             <div className="code-snippet">{currentTab.cmd}</div>
           </div>
+          {currentTab.note && (
+            <p className="tab-note" style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginTop: '12px', background: 'rgba(56, 189, 248, 0.06)', borderLeft: '3px solid var(--accent-blue)', padding: '8px 12px', borderRadius: '4px' }}>
+              💡 {currentTab.note}
+            </p>
+          )}
         </div>
 
         {/* Suite Verification Box */}

@@ -124,6 +124,15 @@ Cài đặt trực tiếp toàn bộ bộ kit vào dự án hoặc môi trườn
 npx skills add vinhnt21/research-kit
 ```
 
+> [!NOTE]
+> **Lưu ý đặc biệt với Antigravity**:
+> - **Phạm vi Dự án (Project Scope - Khuyến nghị)**: Khi đứng tại thư mục gốc của dự án và chạy `npx skills add vinhnt21/research-kit`, các skill sẽ được cài vào thư mục `.agents/skills/`. Antigravity sẽ tự động nhận diện các skill này cho workspace hiện tại.
+> - **Phạm vi Toàn cục (Global Scope)**: **Không** dùng `npx skills add -g` cho Antigravity. Lý do là `npx skills` sẽ đưa các skill vào `~/.agents/skills/` (thư mục home), trong khi Google Antigravity IDE quản lý cấu hình toàn cục tại `~/.gemini/config/skills/` (và Antigravity CLI tại `~/.gemini/antigravity/skills/`). Để cài đặt toàn cục cho Antigravity, vui lòng dùng GitHub CLI:
+>   ```bash
+>   gh skill install vinhnt21/research-kit --dir ~/.gemini/config/skills --all
+>   ```
+>   hoặc sao chép thủ công: `cp -r skills/rk-* ~/.gemini/config/skills/`.
+
 ### 2. Dùng GitHub CLI (từ bản v2.90.0)
 Cài đặt trực tiếp cho từng môi trường agent cụ thể:
 ```bash
@@ -134,6 +143,9 @@ gh skill install vinhnt21/research-kit --agent cursor
 # --agent claude-code
 # --agent codex
 # --agent antigravity
+
+# Cài đặt toàn cục cho Antigravity IDE:
+gh skill install vinhnt21/research-kit --dir ~/.gemini/config/skills --all
 ```
 
 #### Cập nhật các skill đã cài
@@ -163,7 +175,9 @@ Sao chép thư mục `skills/rk-*` trực tiếp vào thư mục kỹ năng củ
 - **Cursor**: `~/.cursor/skills/`
 - **Claude Code**: `~/.claude/skills/`
 - **Codex**: `${CODEX_HOME:-$HOME/.codex}/skills/`
-- **Antigravity / Agent thông dụng**: `~/.agents/skills/`
+- **Antigravity (Toàn cục - Global IDE)**: `~/.gemini/config/skills/` *(hoặc `~/.gemini/antigravity/skills/` cho CLI)*
+- **Antigravity (Theo dự án - Workspace)**: `.agents/skills/` *(tại thư mục gốc dự án)*
+- **Agent thông dụng (Universal Agents)**: `~/.agents/skills/`
 
 ### 5. Kiểm định & Bộ Test Suite
 Kiểm tra tính toàn vẹn của skill, metadata và liên kết nội bộ:

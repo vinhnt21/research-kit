@@ -78,6 +78,11 @@ npx skills add vinhnt21/research-kit
 npx skills add vinhnt21/research-kit --skill rk-ai
 ```
 
+> [!NOTE]
+> **Lưu ý đặc biệt với Antigravity**:
+> - **Phạm vi Dự án (Project Scope - Khuyến nghị)**: Khi đứng tại thư mục gốc của dự án và chạy `npx skills add vinhnt21/research-kit`, các skill sẽ được lưu vào `.agents/skills/`. Antigravity sẽ tự động nhận diện cho workspace hiện tại.
+> - **Phạm vi Toàn cục (Global Scope)**: **Không** dùng `npx skills add -g` cho Antigravity. Lý do là `npx skills` sẽ đặt skill tại `~/.agents/skills/`, trong khi Antigravity IDE quản lý cấu hình toàn cục tại `~/.gemini/config/skills/` (và Antigravity CLI tại `~/.gemini/antigravity/skills/`). Để cài toàn cục cho Antigravity, vui lòng dùng Cách B (`--dir ~/.gemini/config/skills --all`) hoặc Cách D (sao chép thủ công).
+
 #### Cách B: GitHub CLI (`gh skill` — v2.90.0+)
 Tích hợp trực tiếp vào hồ sơ của từng Agent:
 ```bash
@@ -88,6 +93,9 @@ gh skill install vinhnt21/research-kit --agent cursor
 gh skill install vinhnt21/research-kit --agent claude-code
 gh skill install vinhnt21/research-kit --agent codex
 gh skill install vinhnt21/research-kit --agent antigravity
+
+# Cài đặt toàn cục cho Antigravity IDE:
+gh skill install vinhnt21/research-kit --dir ~/.gemini/config/skills --all
 
 # Tùy chọn phạm vi: --scope user (mặc định, toàn cục) hoặc --scope project (cục bộ trong repo)
 ```
@@ -113,7 +121,13 @@ cp -r research-kit/skills/rk-* ~/.claude/skills/
 # Cho Codex
 cp -r research-kit/skills/rk-* ${CODEX_HOME:-$HOME/.codex}/skills/
 
-# Cho Antigravity / Gemini CLI / Universal Agent
+# Cho Antigravity (Toàn cục - Global IDE)
+cp -r research-kit/skills/rk-* ~/.gemini/config/skills/
+
+# Cho Antigravity (Theo dự án - Workspace)
+cp -r research-kit/skills/rk-* .agents/skills/
+
+# Cho Universal Agent
 cp -r research-kit/skills/rk-* ~/.agents/skills/
 ```
 
