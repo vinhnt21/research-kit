@@ -122,6 +122,11 @@ export const content = {
       devlogLabel: 'Development log',
       entries: [
         {
+          date: '2026-10-20',
+          problem: 'Source-grounded slides suffered from text overload, while decorative icons failed to explain scientific claims.',
+          fix: 'rk-academic-visualize v2.4.0 elevates slide visualization: every new content slide records a source-grounded visual decision (prioritizing empirical charts and code-generated diagrams; accepting concise text-only slides). Adds per-asset license/credit tracking, text-density plan linting, and safe SVG-to-PNG sanitization.',
+        },
+        {
           date: '2026-10-04',
           problem: 'Compiled figures could still have overlapping math blocks, crowded return labels, or incomplete card bounds.',
           fix: 'rk-academic-visualize v2.3.0 uses actual node heights, clear routing corridors, and comparable-card alignment. The agent must render, open the raster image, check five visual criteria, and fix and rerender defects before completion.',
@@ -168,6 +173,17 @@ export const content = {
       subtitle:
         'Reverse-chronological record of mathematical toolchains, architectural milestones, and protocol refinements.',
       items: [
+        {
+          date: '2026.10.20',
+          badge: 'Academic Visuals',
+          badgeType: 'feature',
+          id: 'visual-assets',
+          title: 'Enhanced slide visualization & licensed asset provenance',
+          description:
+            'Every new content slide now defines an explicit visual decision grounded in the paper (prioritizing data charts and editable diagrams over decorative icons). Selected external assets carry individual license and credit records, supported by safe SVG-to-PNG sanitization and automated visual-plan checks.',
+          link: 'https://github.com/vinhnt21/research-kit/blob/main/skills/rk-academic-visualize/references/visual-assets.md',
+          linkText: 'View Visual Asset Guide',
+        },
         {
           date: '2026.10.04',
           badge: 'LaTeX Diagrams',
@@ -341,8 +357,8 @@ export const content = {
           id: 'rk-academic-visualize',
           iconKey: 'presentation',
           domain: 'Scientific Visualization & Slides',
-          duty: 'Scientific figures (LaTeX TikZ, Mermaid, SVG) with height-aware spacing, readable loopbacks, complete bounds, and slides grounded in the paper.',
-          gate: 'Render and open the raster image; pass five visual checks after fixes, or report unverified. Slides stay grounded in the paper.',
+          duty: 'Scientific figures with verified layout, plus source-grounded slides with explicit visual decisions and per-asset provenance.',
+          gate: 'Render and inspect figures against five visual checks, or report unverified. Check new slide visual decisions and selected asset provenance; keep claims grounded in the paper.',
         },
       ],
     },
@@ -480,7 +496,7 @@ export const content = {
           criteria: 'Bundled Runtime Components',
           comp1: '105 Python scripts + 29 env vars',
           comp2: 'Harness hooks + automated Git scripts',
-          kit: 'OMML/OOXML CLI + native-renderer guidance; Markdown SOPs',
+          kit: 'OMML/OOXML, visual-plan lint and SVG-sanitizer CLIs + native-renderer guidance; Markdown SOPs',
           highlight: true,
         },
         {
@@ -771,6 +787,11 @@ export const content = {
       devlogLabel: 'Nhật ký cải tiến',
       entries: [
         {
+          date: '2026-10-20',
+          problem: 'Slide thuyết trình bám sát bài báo nhưng vẫn bị quá tải chữ, hoặc lạm dụng icon trang trí vô nghĩa.',
+          fix: 'rk-academic-visualize v2.4.0 nâng cấp khả năng trực quan hóa: mỗi slide nội dung đều có quyết định visual bám sát luận điểm (ưu tiên chart số liệu và diagram quy trình; chấp nhận slide thuần chữ khi cần diễn giải cô đọng). Bổ sung sổ theo dõi bản quyền/credit từng asset, linter rà soát mật độ chữ và công cụ làm sạch SVG sang PNG an toàn.',
+        },
+        {
           date: '2026-10-04',
           problem: 'Hình đã biên dịch vẫn có thể đè khối chứa toán, chật nhãn loopback hoặc có khung bao thiếu nội dung.',
           fix: 'rk-academic-visualize v2.3.0 tính khoảng cách theo chiều cao thực, chừa hành lang đi dây và căn các thẻ so sánh. Agent phải render, mở ảnh raster, kiểm tra năm tiêu chí, rồi sửa và render lại khi có lỗi trước khi báo hoàn thành.',
@@ -817,6 +838,17 @@ export const content = {
       subtitle:
         'Ghi chép tuần tự theo thời gian về những bước nâng cấp công cụ toán học, kiểm tra slide và chuẩn hóa quy trình học thuật.',
       items: [
+        {
+          date: '2026.10.20',
+          badge: 'Visual Học Thuật',
+          badgeType: 'feature',
+          id: 'visual-assets',
+          title: 'Nâng cấp trực quan hóa slide & quản lý bản quyền asset',
+          description:
+            'Mỗi slide nội dung mới đều có quyết định visual gắn liền với luận điểm khoa học (ưu tiên biểu đồ số liệu hoặc sơ đồ sinh bằng mã, tránh icon trang trí không cần thiết). Bổ sung sổ theo dõi xuất xứ/license asset ngoài, quy trình chuyển đổi SVG an toàn sang PNG và linter kiểm tra mật độ chữ.',
+          link: 'https://github.com/vinhnt21/research-kit/blob/main/skills/rk-academic-visualize/references/visual-assets.md',
+          linkText: 'Xem Hướng Dẫn Visual Asset',
+        },
         {
           date: '2026.10.04',
           badge: 'Diagram LaTeX',
@@ -990,8 +1022,8 @@ export const content = {
           id: 'rk-academic-visualize',
           iconKey: 'presentation',
           domain: 'Trực Quan Hóa & Slide Học Thuật',
-          duty: 'Vẽ hình khoa học (LaTeX TikZ, Mermaid, SVG) với khoảng cách theo chiều cao thực, loopback dễ đọc, khung bao đủ nội dung và slide bám bài báo.',
-          gate: 'Render và mở ảnh raster; sửa đến khi đạt năm tiêu chí trực quan hoặc ghi rõ chưa xác minh. Slide bám luận điểm trong bài.',
+          duty: 'Vẽ hình khoa học có bố cục đã kiểm tra; làm slide bám nguồn với quyết định visual rõ và nguồn gốc theo từng asset.',
+          gate: 'Render và xem hình theo năm tiêu chí, hoặc ghi rõ chưa xác minh. Kiểm tra quyết định visual và nguồn gốc asset của slide mới; giữ luận điểm bám bài báo.',
         },
       ],
     },
@@ -1128,7 +1160,7 @@ export const content = {
           criteria: 'Thành Phần Runtime Đi Kèm',
           comp1: '105 script Python + 29 biến môi trường',
           comp2: 'Script tự chạy khi mở phiên + commit Git tự động',
-          kit: 'CLI OMML/OOXML + hướng dẫn renderer đúng định dạng; SOP Markdown',
+          kit: 'CLI OMML/OOXML, visual-plan lint và làm sạch SVG + hướng dẫn renderer; SOP Markdown',
           highlight: true,
         },
         {

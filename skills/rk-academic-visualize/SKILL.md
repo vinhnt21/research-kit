@@ -8,7 +8,7 @@ keywords: [academic-visualize, scientific-diagram, latex-tikz, mermaid, pipeline
 argument-hint: "<tagged files or diagram brief> [format: tikz|mermaid|svg|slides] [language]"
 metadata:
   author: vinhnt
-  version: "2.3.0"
+  version: "2.4.0"
 ---
 
 # Academic Visualize & Slides
@@ -32,6 +32,8 @@ A manuscript, a figure label, and a slide use the language of that artifact. If 
 When generating or refining figures, pipeline diagrams, system architectures, or comparative workflows:
 
 Read [references/illustration-guide.md](references/illustration-guide.md) before laying out the figure. It owns height budgets, return-wire corridors, container bounds, and the render–inspect–repair gate. Use [assets/two-pass-flow.tex](assets/two-pass-flow.tex) as a runnable geometry example for comparable two-pass flows; adapt its stages to the source algorithm.
+
+When an external icon or illustration clarifies a real scientific object, read [references/visual-assets.md](references/visual-assets.md) before acquisition. Preserve the figure's source-grounded geometry and the five visual checks; an asset does not replace them.
 
 ### 1.1. Core principles
 1. **Cognitive Clarity & Information Filtering**:
@@ -85,12 +87,15 @@ Read [references/slide-plan.md](references/slide-plan.md) and generate `slide-pl
 3. Exactly one section title slide per TOC section, followed by content slides (1 clear takeaway, 1–3 main ideas each).
 4. Short closing section and Q&A slide.
 
+For every new content or recap slide, record a source-backed `visual` decision in the plan, including a reason when text or an equation is the clearest choice. Read [references/visual-assets.md](references/visual-assets.md) before selecting an online asset. Prefer a chart or editable/code-generated diagram for data, mechanisms, and relationships; use an icon only when it helps identify an object or action. Older plans without `visual` remain valid.
+
 ### 2.3. Build and Style
 1. Inspect `assets/academic-template.pptx` and read [references/style-guide.md](references/style-guide.md). Adapt its 14 layout patterns.
 2. Maintain white backgrounds, dark navy titles, black body text, and at most two restrained accent colors.
 3. For complex topologies or data flows, generate visual figures following Section 1 guidelines and insert as high-resolution images.
 4. Render equations from LaTeX directly as editable native OMML; never use unicode approximations or rasterized equations for text runs. Author formulas using `$math$` (inline) and `$$math$$` (display) or `{{MATH:...}}` placeholders, then inject native Office Math Markup Language (OMML in DrawingML via `a14:m`) using `scripts/inject-math.py`. Keep inline equations in the same `<a:p>` paragraph text flow with matched font size (`sz`) and Cambria Math typeface, wrapped in `mc:AlternateContent` with fallback for compatibility.
 5. Include brief source tags on slides and full citations/paths in speaker notes.
+6. For external assets, cache only selected files beside the deck and record URL, creator, license, version or access date, changes, hash, usage, and visible credit in `visual-ledger.json`. Validate an untrusted SVG with `scripts/sanitize-svg.py`, render the sanitized SVG to PNG with an available renderer, and insert the PNG; do not pass raw SVG to `python-pptx`. Keep raw and sanitized SVG for audit. Apply the source's actual attribution terms in the exported PDF.
 
 ### 2.4. Verify and Deliver
 Run the math injection and structural check:
@@ -98,6 +103,7 @@ Run the math injection and structural check:
 ```bash
 python3 scripts/inject-math.py <deck.pptx> [output.pptx]
 python3 scripts/check-deck.py <output.pptx> <slide-plan.json>
+python3 scripts/check-visual-plan.py <slide-plan.json> [visual-ledger.json] --require-visual
 ```
 
-Fix all reported structural warnings. Export to PDF and visually inspect slides for overlap, clipping, or contrast defects. Deliver PPTX, PDF, `slide-plan.json`, and all diagram source scripts.
+Use `--require-visual` for a new deck; omit it for a legacy plan. Fix structural and visual-contract errors; treat text-density and text-only warnings as prompts for review, not icon quotas. Export to PDF and inspect every slide for meaning, attribution, overlap, clipping, grayscale, and projection readability. Deliver PPTX, PDF, `slide-plan.json`, any `visual-ledger.json` and cached licensed assets used, and all diagram source scripts.

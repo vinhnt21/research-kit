@@ -23,6 +23,7 @@
 
 ## 🎉 Nhật Ký Cải Tiến
 
+- **[2026.10.20]** 🎯 **[Visual học thuật v2.4.0]**: Nâng cấp khả năng trực quan hóa slide — mỗi slide nội dung đều có quyết định visual gắn liền với luận điểm khoa học (ưu tiên biểu đồ số liệu hoặc sơ đồ quy trình thay vì lạm dụng icon trang trí; chấp nhận slide thuần chữ khi cần diễn giải cô đọng). Bổ sung sổ theo dõi bản quyền/credit asset minh bạch (`visual-ledger.json`), quy trình làm sạch SVG sang PNG an toàn, và linter kiểm tra mật độ chữ. Xem [hướng dẫn visual asset](skills/rk-academic-visualize/references/visual-assets.md).
 - **[2026.10.04]** 🎯 **[Diagram LaTeX v2.3.0]**: Cải thiện bố cục diagram nhiều luồng với khoảng cách theo chiều cao thực của khối, dây nối và nhãn rõ ràng, khung bao đủ nội dung. Render, xem ảnh và sửa lỗi trước khi bàn giao. Có [ví dụ hai pass chạy được](skills/rk-academic-visualize/assets/two-pass-flow.tex).
 - **[2026.10.04]** 🎯 **[Slide & Công Thức Toán Native]**: Cải thiện render slide với công thức LaTeX biên dịch sang OMML native chỉnh sửa được, không dùng ký tự đặc biệt thay thế. Hỗ trợ toán inline, đồng bộ cỡ chữ và kiểm tra tràn khung bằng OOXML. Xem [skill và bộ công cụ](skills/rk-academic-visualize/SKILL.md).
 - **[2026.10.03]** 🎯 **[Giao Tiếp Tự Nhiên]**: Nâng cấp toàn bộ 10 kỹ năng nghiên cứu để tự động trao đổi và tổng hợp theo ngôn ngữ làm việc của nhà nghiên cứu bằng văn phong đồng nghiệp tự nhiên ("như trao đổi cùng đồng nghiệp"), đồng thời giữ nguyên cấu trúc chỉ dẫn tiếng Anh nhằm bảo đảm tính ổn định thực thi và tránh làm loãng ngữ cảnh của agent.
@@ -85,7 +86,7 @@ So với các thư viện quy mô lớn như **Scientific Agent Skills** (bản 
 | [`rk-quantum`](skills/rk-quantum/SKILL.md) | Tính toán lượng tử | Mô phỏng mạch & Hamiltonian cục bộ, thuật toán biến phân | Mặc định mô phỏng cục bộ; chạy QPU phải duyệt ngân sách |
 | [`rk-quantum-network`](skills/rk-quantum-network/SKILL.md) | Mạng lượng tử | Phân phối liên đới lượng tử, bộ nhớ trạm lặp, định tuyến & lập lịch | Kiểm tra độ trung thực & thẩm định giao thức |
 | [`rk-ai`](skills/rk-ai/SKILL.md) | AI / Học máy | Chia tập train/val/test, kiểm tra rò rỉ dữ liệu, baseline & đánh giá | Chặn rò rỉ dữ liệu & kiểm tra tái lập seed |
-| [`rk-academic-visualize`](skills/rk-academic-visualize/SKILL.md) | Trực quan hóa & Slide học thuật | Hình khoa học (LaTeX/TikZ, Mermaid, SVG) & slide bám nguồn | Render, mở ảnh, đạt năm tiêu chí trực quan; kiểm tra slide |
+| [`rk-academic-visualize`](skills/rk-academic-visualize/SKILL.md) | Trực quan hóa & Slide học thuật | Minh họa khoa học chuẩn xác và slide thuyết trình trực quan, rõ nguồn gốc asset | Render & đối chiếu 5 tiêu chí trực quan; kiểm tra cấu trúc slide và credit |
 
 ---
 
@@ -95,14 +96,16 @@ Các SOP Markdown cốt lõi chỉ cần agent tương thích. Kiểm tra bộ s
 
 | Công cụ | Phiên bản tối thiểu | Mục đích sử dụng | Mức độ cần thiết |
 |---|---|---|---|
-| **Python** | 3.9+ | Chạy bộ kiểm tra toàn vẹn, kiểm tra bố cục slide OOXML, xác thực hash suite | **Cần cho các bước kiểm tra này** (chỉ dùng thư viện chuẩn: `xml.etree`, `zipfile`, `hashlib`, `unittest`; không cần cài pip package ngoài) |
+| **Python** | 3.9+ | Chạy test, kiểm tra OOXML và visual plan, làm sạch SVG, xác thực hash suite | **Cần cho các bước kiểm tra này** (chỉ dùng thư viện chuẩn; không cần pip package ngoài) |
 | **Pandoc** | 3.0+ | Biên dịch công thức LaTeX sang Office Math Markup Language (OMML `a14:m`) native cho slide | **Bắt buộc** khi dùng `rk-academic-visualize` để inject công thức toán (`inject-math.py`) |
 | **LaTeX / TikZ** | TeX Live 2022+ / MacTeX | Biên dịch mã nguồn TikZ `.tex` sang PDF vector | **Cần khi render TikZ trên máy**, tùy chọn với SOP cốt lõi |
-| **Công cụ render & xem ảnh** | Tùy định dạng | Chuyển PDF thành ảnh; render Mermaid/SVG; mở ảnh để kiểm tra trực quan | **Cần để xác nhận hình đã kiểm tra** (ví dụ Ghostscript, renderer Mermaid, trình duyệt/công cụ vector); tùy chọn với SOP cốt lõi |
+| **Công cụ render & xem ảnh** | Tùy định dạng | Chuyển PDF thành ảnh; render Mermaid/SVG, gồm SVG asset đã làm sạch; mở ảnh để kiểm tra | **Cần cho hình đã xác minh và asset SVG sang PNG**; tùy chọn với SOP cốt lõi |
 | **Git** | 2.30+ | Quản lý phiên bản bài báo và mã nguồn | **Bắt buộc** |
 | **PowerPoint / Office** | 2010+ | Mở xem và trực tiếp chỉnh sửa công thức toán OMML native | **Tùy chọn** (công thức tương thích đầy đủ với Office/Word/PowerPoint hiện đại) |
 
 Render bằng công cụ đúng định dạng, rồi mở ảnh raster để kiểm tra khoảng cách, dây nối, nhãn, khung bao và lề. Nếu chưa render hoặc chưa mở ảnh để kiểm tra được, ghi rõ hình chưa được xác minh. Lệnh dùng được trên các môi trường và các ngưỡng bố cục nằm trong [hướng dẫn minh họa](skills/rk-academic-visualize/references/illustration-guide.md). Xem [ảnh luồng hai pass và slide công thức native](https://research-kit.vinhnguyenthanh.com/roadmap#figure-layout) trong nhật ký cải tiến. Bấm thumbnail để mở ảnh đầy đủ ngay trong trang.
+
+Khi tạo deck slide mới, chạy `python3 skills/rk-academic-visualize/scripts/check-visual-plan.py slide-plan.json --require-visual` cùng bộ kiểm tra deck. Nếu có dùng asset bên ngoài, bổ sung `visual-ledger.json` trước `--require-visual`. Tham khảo [hướng dẫn visual asset](skills/rk-academic-visualize/references/visual-assets.md) để kiểm tra bản quyền, ghi nhận credit và chuyển đổi SVG an toàn sang PNG. Linter giúp rà soát mật độ chữ để tối ưu khả năng truyền đạt trực quan, đồng thời chấp nhận các slide thuần chữ có lý do xác đáng.
 
 ### Lệnh Kiểm Tra Môi Trường
 
@@ -314,7 +317,7 @@ Research Kit chắt lọc các phương pháp luận khoa học đã được ki
 
 | Công trình / Nguồn tham khảo | Phiên bản / Trích dẫn | Hạn chế ở công trình trước | Nguyên lý cốt lõi được kế thừa | Giải pháp cải tiến của Research Kit |
 | :--- | :--- | :--- | :--- | :--- |
-| **[Scientific Agent Skills](https://github.com/K-Dense-AI/scientific-agent-skills)** | `v2.65.0`<br>[arXiv:2609.00065](https://arxiv.org/abs/2609.00065) | 163 skill vụn vặt, chiếm 14.246 token thường trực (7,12% context); 105 script phụ; 29 biến môi trường credentials; tràn context ở 29/46 workflow. | Phân tách rành mạch các khâu nghiên cứu: tài liệu, phương pháp, dữ liệu thực nghiệm, viết bài, động lực học lượng tử, và đánh giá ML. | Cô đọng thành **10 skill tự định tuyến** (<1.000 token, <0,50% dung lượng); công cụ CLI độc lập (OMML/OOXML); 0 API khóa kín; tập trung 100% vào luồng nghiên cứu cốt lõi. |
+| **[Scientific Agent Skills](https://github.com/K-Dense-AI/scientific-agent-skills)** | `v2.65.0`<br>[arXiv:2609.00065](https://arxiv.org/abs/2609.00065) | 163 skill vụn vặt, chiếm 14.246 token thường trực (7,12% context); 105 script phụ; 29 biến môi trường credentials; tràn context ở 29/46 workflow. | Phân tách rành mạch các khâu nghiên cứu: tài liệu, phương pháp, dữ liệu thực nghiệm, viết bài, động lực học lượng tử, và đánh giá ML. | Cô đọng thành **10 skill tự định tuyến** (<1.000 token, <0,50% dung lượng); CLI độc lập (OMML/OOXML, visual lint, làm sạch SVG); 0 API khóa kín; tập trung 100% vào luồng nghiên cứu cốt lõi. |
 | **[Science Superpowers](https://github.com/K-Dense-AI/science-superpowers)** | Commit [`0374bdf`](https://github.com/K-Dense-AI/science-superpowers/commit/0374bdf) | Áp đặt "Luật thép" bắt buộc pre-registration cho mọi thứ; script tự động đóng băng git commit; hook mở phiên ngầm; ép buộc thư mục `docs/science-superpowers/`. | Chuỗi kiểm soát chất lượng: đặt câu hỏi, khóa biên tìm kiếm, thiết kế giao thức, xử lý số liệu bất thường và chạy lại kiểm chứng trước khi kết luận. | Giữ trọn các bước kiểm chứng thực nghiệm mà không áp đặt: pre-registration là lựa chọn cho thử nghiệm khẳng định; 0 hook/commit tự động; người dùng sở hữu cấu trúc thư mục. |
 | **[Research Paper Writing Skills](https://github.com/Master-cai/Research-Paper-Writing-Skills)** | Commit [`77e7c2c`](https://github.com/Master-cai/Research-Paper-Writing-Skills/commit/77e7c2c) | Một skill đơn lẻ gắn chặt với khung mẫu bài báo học máy ML/CV/NLP; thiếu các kiểm tra thực nghiệm cho các ngành đặc thù khác. | Kỷ luật viết bài khoa học: mỗi đoạn một ý cốt lõi, khớp 100% giữa kết luận và bằng chứng thực nghiệm, quy trình giải trình phản biện chuẩn. | Tách thành `rk-write` dùng cho soạn thảo bài báo khoa học tổng quát; các kiểm định thực nghiệm chuyên ngành chuyển giao cho các module chuyên biệt (`rk-quantum`, `rk-ai`,...). |
 | **[NVIDIA Skills](https://github.com/NVIDIA/skills)** | Commit [`d8519c5`](https://github.com/NVIDIA/skills/commit/d8519c5) | Danh mục sản phẩm lớn đặc thù của hãng với câu lệnh CLI tĩnh và nguy cơ phát sinh chi phí ngoài ý muốn trên backend QPU đám mây. | Ranh giới thực thi an toàn nghiêm ngặt: mặc định mô phỏng cục bộ; chạy trên phần cứng QPU vật lý bắt buộc phải có sự phê duyệt rõ ràng. | Tích hợp mặc định mô phỏng cục bộ an toàn vào `rk-quantum` và tra cứu tài liệu CUDA-Q trực tuyến; chạy QPU trả phí bắt buộc phải được người dùng phê duyệt ngân sách. |

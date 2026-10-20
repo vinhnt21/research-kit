@@ -34,6 +34,39 @@
         {"id": "honest-partial", "text": "Handoff states compilation and visual inspection remain unverified and does not claim the figure is complete or visually checked."},
         {"id": "portable-recovery", "text": "Next steps use available-tool discovery rather than a hardcoded Homebrew path and include opening the rendered image and the five visual checks."}
       ]
+    },
+    {
+      "id": "source-grounded-slide-visuals",
+      "split": "train",
+      "prompt": "Plan a short English research deck from a source ledger with one trust boundary, one matched numerical comparison, one equation, and three short limitations. Give each content slide a visual decision, purpose and source or a reason for text-only. Do not invent data or add icons as decoration. Preserve the exact visible idea phrases in the plan and deck.",
+      "expected_output": "A slide-plan.json with meaningful diagram/chart/equation choices, justified text-only limitations, and source-backed idea wording that can be displayed at projection size.",
+      "assertions": [
+        {"id": "visual-intent", "text": "Every new content slide has a visual type with source-backed purpose, or none with a concrete reason."},
+        {"id": "semantic-choice", "text": "The trust boundary is a diagram and the numeric comparison is a chart from source values; the equation and caveats do not gain decorative icons."},
+        {"id": "exact-ideas", "text": "Short source-faithful ideas appear verbatim in the visible deck and pass the unchanged check-deck contract."}
+      ]
+    },
+    {
+      "id": "pinned-icon-provenance",
+      "split": "train",
+      "prompt": "A source-backed deck would benefit from one Tabler icon naming a package. Select one icon from a pinned official release over HTTPS, preserve the license, create an auditable asset record, sanitize its SVG before local PNG rendering, and show any required credit in the exported PDF. Do not download an icon library or use a latest URL.",
+      "expected_output": "Only the selected asset is cached; visual-ledger.json records its release, URL, creator, license, changes, usage and hashes; sanitized SVG and PNG are retained and visually checked.",
+      "assertions": [
+        {"id": "pin-and-license", "text": "The asset URL identifies a concrete Tabler release and records MIT copyright/license information."},
+        {"id": "safe-bridge", "text": "Raw SVG is never inserted or rendered first; active/external content is rejected, sanitized SVG is rasterized to PNG, and the result is inspected."},
+        {"id": "credit-and-ledger", "text": "The selected asset has complete per-file provenance, SHA-256, slide mapping and visible PDF credit when required."}
+      ]
+    },
+    {
+      "id": "text-only-and-vector-regression",
+      "split": "holdout",
+      "prompt": "Review a deck plan with an editable vector process slide, a native equation slide, and two consecutive content slides containing short limitations. The vector slide has no embedded bitmap. Run visual-plan review without adding an icon quota or changing the existing check-deck JSON output.",
+      "expected_output": "The vector diagram and equation remain valid visual decisions; text-only choices get non-blocking review warnings; no bitmap-presence test or hard icon quota is used.",
+      "assertions": [
+        {"id": "vector-not-bitmap", "text": "A vector diagram is not called text-only merely because the PPTX contains no p:pic."},
+        {"id": "warnings-not-errors", "text": "Justified consecutive text-only slides produce review warnings with exit 0, not a demand for filler icons."},
+        {"id": "legacy-json", "text": "check-deck.py retains its default JSON keys ok, slide_count and errors, with no new warnings field."}
+      ]
     }
   ]
 }

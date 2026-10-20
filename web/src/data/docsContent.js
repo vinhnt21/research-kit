@@ -22,7 +22,7 @@ export const docsContent = {
     },
     lifecycle: {
       title: "Lifecycle Management: Install, Update & Remove",
-      desc: "Research Kit skills are portable Markdown SOPs. Core SOPs need only a compatible agent; suite and deck checks use Python standard-library CLI tools, slide math injection uses Pandoc, and figure verification uses native renderers plus image inspection. Skill assets and utilities are covered by SHA-256 integrity checks.",
+      desc: "Research Kit skills are portable Markdown SOPs. Core SOPs need only a compatible agent; suite, deck and optional visual-plan checks use Python standard-library CLI tools, slide math injection uses Pandoc, and figure verification uses native renderers plus image inspection. Selected external SVG assets need sanitization and an installed renderer for PNG output. Skill assets and utilities are covered by SHA-256 integrity checks.",
       methods: [
         {
           id: "skills-cli",
@@ -59,13 +59,13 @@ export const docsContent = {
         },
       ],
       prerequisitesTitle: "Environment & Toolchain Prerequisites",
-      prerequisitesDesc: "Core SOPs require only a compatible Markdown-capable agent. Use Python for suite/deck checks, Pandoc for slide math injection, and the figure format's native renderer plus a raster image viewer for verified figures:",
+      prerequisitesDesc: "Core SOPs require only a compatible Markdown-capable agent. Use Python for suite/deck and optional visual-plan checks, Pandoc for slide math injection, and an installed native renderer plus a raster image viewer for verified figures or selected SVG assets:",
       prerequisitesHeaders: ["Tool / Runtime", "Version", "Role in Pipeline", "Requirement & Footprint"],
       prerequisites: [
         {
           tool: "Python",
           version: "3.9+",
-          role: "Test suites, OOXML inspection, slide linting, suite hash verification",
+          role: "Test suites, OOXML inspection, optional visual-plan linting, SVG sanitization, suite hash verification",
           status: "Required for suite and deck checks",
           note: "Standard library only (xml.etree, zipfile, hashlib, unittest); zero pip dependencies",
         },
@@ -118,6 +118,14 @@ export const docsContent = {
         {
           label: "Run Slide & Math Injection Unit Tests",
           cmd: "python3 -m unittest discover skills/rk-academic-visualize/scripts/tests",
+        },
+        {
+          label: "Check Visual Decisions and External Asset Provenance",
+          cmd: "python3 skills/rk-academic-visualize/scripts/check-visual-plan.py slide-plan.json --require-visual\n# If external assets are used, insert visual-ledger.json before --require-visual.",
+        },
+        {
+          label: "Sanitize a Selected SVG Before PNG Rendering",
+          cmd: "python3 skills/rk-academic-visualize/scripts/sanitize-svg.py assets/raw/icon.svg assets/sanitized/icon.svg\n# Render the sanitized SVG to PNG with an installed renderer, then inspect the deck PDF.",
         },
         {
           label: "Discover Figure Renderers & PDF Rasterizers",
@@ -302,11 +310,11 @@ export const docsContent = {
           id: "rk-academic-visualize",
           domain: "Scientific Visualization & Slides",
           examples: "View the TikZ figure and native-equation slide in the development log; click an image to enlarge it",
-          duty: "Scientific TikZ, Mermaid, and SVG figures with height-aware spacing, readable loopback labels, complete container bounds, and source-grounded talk slides with native inline OMML math.",
-          invariant: "Preserve source algorithm stages; actual heights govern spacing. Use readable orthogonal routing and aligned tiers for comparable passes. Render, open the raster image, check spacing, connectors, labels, bounds/alignment, and margins; fix and rerender defects. Unavailable rendering or image inspection means unverified.",
+          duty: "Scientific TikZ, Mermaid, and SVG figures with verified layout; source-grounded talk slides with native inline OMML math, explicit visual decisions, and per-asset provenance.",
+          invariant: "Preserve source algorithm stages and five figure checks. For each new content slide, choose a source-backed chart, diagram, selected licensed asset, or justified text-only layout. Sanitize external SVG before PNG rendering and inspect visible credit in the exported PDF. Unavailable rendering or image inspection means unverified.",
           promptVi: "Dùng @rk-academic-visualize vẽ luồng hai pass bằng TikZ từ [nguồn]. Giữ đúng các bước, tính khoảng cách theo chiều cao thực, bố trí dây và nhãn loopback dễ đọc, rồi render, mở ảnh và sửa đủ năm tiêu chí trực quan.",
           promptEn: "Use @rk-academic-visualize to draw a two-pass TikZ flow from [source]. Preserve its stages, use actual node heights, route and label loopbacks clearly, then render, open the image, and fix all five visual checks.",
-          files: "references/illustration-guide.md, assets/two-pass-flow.tex, assets/academic-template.pptx",
+          files: "references/illustration-guide.md, references/visual-assets.md, scripts/check-visual-plan.py, scripts/sanitize-svg.py, assets/academic-template.pptx",
         },
       ],
     },
@@ -469,7 +477,7 @@ export const docsContent = {
     },
     lifecycle: {
       title: "Quản Trị Vòng Đời: Cài Đặt, Cập Nhật & Gỡ Bỏ",
-      desc: "Các skill Research Kit là SOP Markdown dùng được trên nhiều môi trường. SOP cốt lõi chỉ cần agent tương thích; kiểm tra bộ skill và slide dùng công cụ CLI chạy bằng thư viện chuẩn Python, chèn toán vào slide dùng Pandoc, còn xác minh hình dùng renderer đúng định dạng rồi mở ảnh để kiểm tra. Tài nguyên và công cụ của skill được kiểm tra toàn vẹn bằng mã băm SHA-256.",
+      desc: "Các skill Research Kit là SOP Markdown dùng được trên nhiều môi trường. SOP cốt lõi chỉ cần agent tương thích; kiểm tra bộ skill, deck và visual plan tùy chọn dùng CLI thư viện chuẩn Python, chèn toán vào slide dùng Pandoc, còn xác minh hình dùng renderer đúng định dạng rồi mở ảnh. SVG ngoài được làm sạch trước khi render thành PNG bằng công cụ đã cài. Tài nguyên và công cụ của skill được kiểm tra toàn vẹn bằng SHA-256.",
       methods: [
         {
           id: "skills-cli",
@@ -506,13 +514,13 @@ export const docsContent = {
         },
       ],
       prerequisitesTitle: "Môi Trường & Công Cụ Thực Thi Cần Thiết",
-      prerequisitesDesc: "SOP cốt lõi chỉ cần agent tương thích đọc được Markdown. Dùng Python để kiểm tra bộ skill/slide, Pandoc để chèn toán vào slide, renderer đúng định dạng và công cụ mở ảnh raster để xác minh hình:",
+      prerequisitesDesc: "SOP cốt lõi chỉ cần agent tương thích đọc được Markdown. Dùng Python để kiểm tra bộ skill/deck và visual plan tùy chọn, Pandoc để chèn toán vào slide, renderer đã cài và công cụ mở ảnh raster để xác minh hình hoặc SVG được chọn:",
       prerequisitesHeaders: ["Công cụ / Runtime", "Phiên bản", "Vai trò trong quy trình", "Mức độ yêu cầu & Dung lượng"],
       prerequisites: [
         {
           tool: "Python",
           version: "3.9+",
-          role: "Chạy test suite, kiểm tra cấu trúc OOXML, linter slide, xác thực mã băm",
+          role: "Chạy test suite, kiểm tra OOXML, linter visual plan tùy chọn, làm sạch SVG, xác thực mã băm",
           status: "Cần cho kiểm tra bộ skill và slide",
           note: "Chỉ dùng thư viện chuẩn (xml.etree, zipfile, hashlib, unittest); 0 thư viện ngoài (zero pip)",
         },
@@ -565,6 +573,14 @@ export const docsContent = {
         {
           label: "Chạy trọn bộ kiểm thử đơn vị cho slide và chèn toán OMML",
           cmd: "python3 -m unittest discover skills/rk-academic-visualize/scripts/tests",
+        },
+        {
+          label: "Kiểm tra quyết định visual và nguồn gốc asset ngoài",
+          cmd: "python3 skills/rk-academic-visualize/scripts/check-visual-plan.py slide-plan.json --require-visual\n# Nếu dùng asset ngoài, chèn visual-ledger.json trước --require-visual.",
+        },
+        {
+          label: "Làm sạch SVG đã chọn trước khi render PNG",
+          cmd: "python3 skills/rk-academic-visualize/scripts/sanitize-svg.py assets/raw/icon.svg assets/sanitized/icon.svg\n# Render SVG đã làm sạch sang PNG bằng công cụ sẵn có, rồi kiểm tra PDF của deck.",
         },
         {
           label: "Tìm Renderer Hình & Công Cụ Chuyển PDF Thành Ảnh",
@@ -749,11 +765,11 @@ export const docsContent = {
           id: "rk-academic-visualize",
           domain: "Minh Họa Khoa Học & Slide",
           examples: "Xem hình TikZ và slide công thức native trong nhật ký cải tiến; bấm ảnh để phóng to",
-          duty: "Vẽ hình khoa học TikZ, Mermaid và SVG với khoảng cách theo chiều cao thực, nhãn loopback dễ đọc, khung bao đủ nội dung; làm slide bám nguồn với toán inline native OMML.",
-          invariant: "Giữ đúng các bước thuật toán trong nguồn; tính khoảng cách theo chiều cao thực. Đi dây thẳng góc dễ đọc, căn tầng cho các pass có thể so sánh. Render, mở ảnh raster, kiểm tra khoảng cách, dây nối, nhãn, khung/căn thẻ và lề; có lỗi thì sửa và render lại. Chưa render hoặc chưa mở ảnh để kiểm tra được thì ghi rõ chưa xác minh.",
+          duty: "Vẽ hình khoa học TikZ, Mermaid và SVG có bố cục đã kiểm tra; làm slide bám nguồn với toán inline native OMML, quyết định visual rõ và nguồn gốc theo từng asset.",
+          invariant: "Giữ đúng các bước thuật toán trong nguồn và năm tiêu chí kiểm tra hình. Mỗi slide nội dung mới chọn chart/diagram bám nguồn, asset có license hoặc bố cục chỉ có chữ với lý do rõ. Làm sạch SVG ngoài trước khi render PNG và kiểm tra credit hiện trên PDF. Chưa render hoặc chưa mở ảnh thì ghi rõ chưa xác minh.",
           promptVi: "Dùng @rk-academic-visualize vẽ luồng hai pass bằng TikZ từ [nguồn]. Giữ đúng các bước, tính khoảng cách theo chiều cao thực, bố trí dây và nhãn loopback dễ đọc, rồi render, mở ảnh và sửa đủ năm tiêu chí trực quan.",
           promptEn: "Use @rk-academic-visualize to draw a two-pass TikZ flow from [source]. Preserve its stages, use actual node heights, route and label loopbacks clearly, then render, open the image, and fix all five visual checks.",
-          files: "references/illustration-guide.md, assets/two-pass-flow.tex, assets/academic-template.pptx",
+          files: "references/illustration-guide.md, references/visual-assets.md, scripts/check-visual-plan.py, scripts/sanitize-svg.py, assets/academic-template.pptx",
         },
       ],
     },

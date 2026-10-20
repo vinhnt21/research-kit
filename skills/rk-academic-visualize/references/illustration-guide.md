@@ -32,6 +32,7 @@ Use these rules for publication-grade illustrations (LaTeX TikZ, Mermaid, SVG, a
 ## 5. Rebuild from source
 - Prefer a source that can be edited and compiled again (XeLaTeX TikZ, a Mermaid script, or vector SVG).
 - Keep that source in version control with the paper so later edits stay reproducible.
+- If a figure uses an external icon or illustration to identify a real object, follow `references/visual-assets.md` for per-file source, license, cache, and SVG safety. Keep the source algorithm and the geometric checks below authoritative; an asset cannot stand in for an unsupported mechanism or result.
 
 ---
 

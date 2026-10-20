@@ -13,6 +13,7 @@ The top level has a deck_type of research_talk, lecture, or internal_report, and
 | section | Exact TOC section name for section/content/recap/conclusion slides; null for cover, TOC, Q&A. |
 | ideas | Zero to three main visible idea phrases. Content and recap slides have one to three. The closing slide has one or two for a research talk and one to three for a lecture or internal report. |
 | sections | On the TOC item only, ordered section names ending with the closing section in the chosen language. Omit on other items. |
+| visual | Optional for older plans. For each new content or recap slide, record the visual decision described below. |
 
 Example (replace every phrase with source-backed talk content):
 
@@ -22,9 +23,9 @@ Example (replace every phrase with source-backed talk content):
         {"kind":"cover","title":"Study title","section":null,"ideas":[]},
         {"kind":"toc","title":"Outline","section":null,"ideas":[],"sections":["Context and gap","Method","Conclusion"]},
         {"kind":"section","title":"Context and gap","section":"Context and gap","ideas":[]},
-        {"kind":"content","title":"A measured constraint motivates the study","section":"Context and gap","ideas":["Observed constraint","Open question"]},
+        {"kind":"content","title":"A measured constraint motivates the study","section":"Context and gap","ideas":["Observed constraint","Open question"],"visual":{"type":"chart","purpose":"Show the measured constraint","source":"source-ledger:result-1"}},
         {"kind":"section","title":"Method","section":"Method","ideas":[]},
-        {"kind":"content","title":"The model makes resource limits explicit","section":"Method","ideas":["Input and assumptions","Decision rule"]},
+        {"kind":"content","title":"The model makes resource limits explicit","section":"Method","ideas":["Input and assumptions","Decision rule"],"visual":{"type":"diagram","purpose":"Show how the decision rule uses the inputs","source":"source-ledger:method-1"}},
         {"kind":"section","title":"Conclusion","section":"Conclusion","ideas":[]},
         {"kind":"conclusion","title":"Conclusion","section":"Conclusion","ideas":["Supported finding"]},
         {"kind":"qa","title":"Q&A","section":null,"ideas":[]}
@@ -32,6 +33,12 @@ Example (replace every phrase with source-backed talk content):
     }
 
 Use the exact visible title and idea wording in both plan and PPTX. Do not add a claim to the plan until the source ledger identifies its support. TOC entries each have one matching divider, in order; a Roman ordinal may be added to the divider and recorded in its visible title. Place a recap after a long sequence within its section. The final TOC section ends with exactly one closing slide (kind conclusion). A research talk uses a short closing section with only that slide. A lecture or internal report may put other content slides in its final section before the closing slide. If present, Q&A is the last slide and contains only Q&A.
+
+## Visual decision
+
+Set `visual.type` to `diagram`, `chart`, `table`, `icon`, `image`, `illustration`, `equation`, or `none`. A semantic visual needs a one-sentence `purpose` and a `source` pointing to a source-ledger claim, data, or code location. Add `asset_ids` only for externally acquired files; every ID must resolve in `visual-ledger.json` and include that slide number. For `none`, write a concrete `reason`, such as “Three short caveats are clearer as text”; no `purpose`, `source`, or asset is required. An equation can be the visual decision without adding an icon. Legacy plans lacking `visual` still pass the structural checker.
+
+Write short, source-faithful `ideas` that can actually appear on the slide. If replacing prose cards with a diagram, revise the copied plan's idea phrases to the visible labels while retaining each supported claim. The structural checker requires the exact phrases to appear in PPTX text; speaker notes alone do not satisfy that contract. Use `scripts/check-visual-plan.py` for the separate visual-intent and asset-ledger check.
 
 For example, a lecture can set deck_type to lecture, name its final TOC section “Key takeaways”, end with a conclusion-kind slide titled “Key takeaways” containing up to three ideas, and omit Q&A. An internal report can set deck_type to internal_report and use “Next steps” as its final section, with documented action content before its closing slide.
 

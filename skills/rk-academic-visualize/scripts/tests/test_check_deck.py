@@ -98,6 +98,23 @@ class CheckDeckTests(unittest.TestCase):
         self.assertEqual([], errors)
         self.assertEqual([], check_deck.compare_deck(plan, slides))
 
+    def test_optional_visual_decision_preserves_existing_deck_contract(self):
+        plan = valid_plan()
+        plan["slides"][3]["visual"] = {
+            "type": "diagram", "purpose": "Show resource contention",
+            "source": "source-ledger:method",
+        }
+        self.assertEqual([], check_deck.validate_plan(plan))
+        with tempfile.TemporaryDirectory() as directory:
+            deck_path = Path(directory) / "slides.pptx"
+            plan_path = Path(directory) / "slide-plan.json"
+            deck_path.write_bytes(make_pptx(plan))
+            plan_path.write_text(json.dumps(plan), encoding="utf-8")
+            result = subprocess.run([sys.executable, str(SCRIPT), str(deck_path), str(plan_path), "--json"],
+                                    capture_output=True, text=True, check=False)
+        self.assertEqual(0, result.returncode)
+        self.assertEqual({"ok": True, "slide_count": 7, "errors": []}, json.loads(result.stdout))
+
     def test_toc_divider_and_orphan_checks(self):
         plan = valid_plan()
         plan["slides"][1]["sections"] = ["Conclusion", "Introduction"]

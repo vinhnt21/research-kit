@@ -101,17 +101,22 @@ DESCRIPTION = re.compile(r'^description:\s*"(.*)"\s*$', re.M)
 
 NETWORK_HASH = "06278251b844b94cb2f46a431bccd22256966c9959f62c4f1f838e1eab72e531"
 VISUALIZE = {
-    "skills/rk-academic-visualize/SKILL.md": "1dd8bc65dda513aaabb81b123137e5288c1a5be680d7b32bff452ea6a9c5e204",
+    "skills/rk-academic-visualize/SKILL.md": "e7e6d06d5b89a95be9cd0832fdb736702518a342e007265dc2aef6b539851302",
     "skills/rk-academic-visualize/assets/academic-template.pptx": "de9ed2b7b8fd2e7adf54daa98eccbf2140fa7ff7cde010b9208500515f3229f1",
     "skills/rk-academic-visualize/assets/two-pass-flow.tex": "5cefa1ce2ee72c353f00d24c24d3c690180913d2d0d2b732be561378a4e37853",
-    "skills/rk-academic-visualize/evals/evals.json": "ac86455fc95d3b74243675853690c643fed4f193851614f6bb82f704b8fe9983",
-    "skills/rk-academic-visualize/references/illustration-guide.md": "fe61888fda5bf13f14b11e671d92ce9478eae98c4fe3f822237b189ee7b80893",
-    "skills/rk-academic-visualize/references/slide-plan.md": "348843e01a1bb964474448803a745abc24d81de93addae72fcc5f4578ceda78a",
-    "skills/rk-academic-visualize/references/style-guide.md": "b26c97895da9f144b25ba05a5a78a8ce6418f0c2c66c58f276768c6c8ac97831",
+    "skills/rk-academic-visualize/evals/evals.json": "739bcefa33081a745a7c4d71cebb3b65f1c7ae5ef49ab8fb1b7ca0a7ac106bd7",
+    "skills/rk-academic-visualize/references/illustration-guide.md": "1599e010df6cd9f0b66fe52d47b714610a1683756a6a49a374c4fc6d9db0fc91",
+    "skills/rk-academic-visualize/references/slide-plan.md": "8c1d704108bfa90518ddcf3df9a025a805eddd16955c1249e7b0c82cd3b9c366",
+    "skills/rk-academic-visualize/references/style-guide.md": "e1380e38124a21a17addfa0b4ef42107d69a2cfbcc4a5b673472ea9c2bbc7a74",
+    "skills/rk-academic-visualize/references/visual-assets.md": "eb5013f9ad481392611d6b43203c3941fe217fe9f7000178c62b6e0c797b0e63",
     "skills/rk-academic-visualize/scripts/check-deck.py": "2beea0d467d308d1a18abf07e391cd155a7196affacc2ac9f7cfeafeb7e985a8",
+    "skills/rk-academic-visualize/scripts/check-visual-plan.py": "13243bcb00c9bf886e3d3818161a007759bf4ff77527b2fe0e4396e42730cc1b",
     "skills/rk-academic-visualize/scripts/inject-math.py": "72926ce1ac9cf2cc4b3b2bcfb1d3f249ffe76bc9d97c4c5769e055b7c9a4b700",
-    "skills/rk-academic-visualize/scripts/tests/test_check_deck.py": "07b008f66b85634afc531450cea2cdc4ff576f19856bc89ade8a965477492e57",
+    "skills/rk-academic-visualize/scripts/sanitize-svg.py": "fb80c545ec6b0316e3829879a593e4f59bc97eb3c77ad6ff56fc336ff05f8e8e",
+    "skills/rk-academic-visualize/scripts/tests/test_check_deck.py": "b9956010370cfbcc704884b13f702bf5922d31561bc0c58012bfbbebd596bf28",
+    "skills/rk-academic-visualize/scripts/tests/test_check_visual_plan.py": "88e3ab6bd00829c076fdccf1ffc7c7099255b4ba440a0f585a39ebfb171df20f",
     "skills/rk-academic-visualize/scripts/tests/test_inject_math.py": "d4747ab35381f588afa1dda9c26152c6a076bbe44c3f473b7a0e7804b20f0f40",
+    "skills/rk-academic-visualize/scripts/tests/test_sanitize_svg.py": "d9a65c999920a82ee06dadc6be9780d054f3c3442fa7a512474b5eb733716b15",
 }
 
 
