@@ -160,12 +160,15 @@ gh skill install vinhnt21/research-kit --dir ~/.gemini/config/skills --all
 Both installers can refresh already-installed skills after their source changes. Use the same tool you originally used to install them:
 
 ```bash
-# Skills CLI: check and update installed skills
+# Skills CLI: check and update installed skills in active project (Workspace scope)
 npx skills update
 
 # GitHub CLI: preview updates, then apply them interactively
 gh skill update --dry-run
 gh skill update
+
+# Google Antigravity / Gemini (Update Machine-Global scope from local clone):
+cd path/to/research-kit && git pull && cp -r skills/rk-* ~/.gemini/config/skills/
 ```
 
 The Skills CLI also accepts `npx skills upgrade` as an alias for `update`; GitHub CLI uses `gh skill update`. For unattended updates, use `npx skills update -y` or `gh skill update --all`. Both CLIs also accept skill names to update only selected skills, for example `npx skills update rk-ai` or `gh skill update rk-ai`. A newly added skill is not an update to an existing installation; rerun the corresponding install command to add it. See the official [Skills CLI update guide](https://github.com/vercel-labs/skills#skills-update) and [`gh skill update` reference](https://cli.github.com/manual/gh_skill_update).

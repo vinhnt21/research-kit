@@ -231,6 +231,47 @@ export default function DocsPage({ t, lang }) {
             <h2 className="docs-section-title">{d.lifecycle.title}</h2>
             <p className="docs-section-lead">{d.lifecycle.desc}</p>
 
+            {/* Scopes & Directories Overview Matrix */}
+            {d.lifecycle.scopes && (
+              <div className="docs-lifecycle-scopes" style={{ marginTop: '24px', marginBottom: '32px' }}>
+                <h3 style={{ fontSize: '1.05rem', fontWeight: 700, marginBottom: '8px', color: 'var(--text-primary)' }}>
+                  {d.lifecycle.scopesTitle}
+                </h3>
+                <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', marginBottom: '16px', lineHeight: 1.6 }}>
+                  {d.lifecycle.scopesDesc}
+                </p>
+                <div className="docs-table-wrap">
+                  <table className="docs-table">
+                    <thead>
+                      <tr>
+                        {d.lifecycle.scopesHeaders.map((h, i) => (
+                          <th key={i}>{h}</th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {d.lifecycle.scopes.map((s, idx) => (
+                        <tr key={idx}>
+                          <td>
+                            <strong>{s.agent}</strong>
+                          </td>
+                          <td>
+                            <code className="docs-skill-chip">{s.workspace}</code>
+                          </td>
+                          <td>
+                            <code className="docs-skill-chip">{s.global}</code>
+                          </td>
+                          <td style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
+                            {s.update}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            )}
+
             {/* Prerequisites & Toolchain table */}
             {d.lifecycle.prerequisites && (
               <div className="docs-lifecycle-prereqs" style={{ marginTop: '24px', marginBottom: '32px' }}>
